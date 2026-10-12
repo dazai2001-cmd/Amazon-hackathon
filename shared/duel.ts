@@ -47,7 +47,12 @@ export class SwordDuel {
   private physicalForward: number | null = null;
   private crouchAim = 0;
   private resuming = false;
-  constructor(public equipment: DuelEquipment = starter) {}
+  private damageBonus: number;
+  private recoveryBonus: number;
+  constructor(public equipment: DuelEquipment = starter, training: { damageBonus: number; recoveryBonus: number } = { damageBonus: 0, recoveryBonus: 0 }) {
+    this.damageBonus = Number.isFinite(training.damageBonus) ? clamp(training.damageBonus, 0, .08) : 0;
+    this.recoveryBonus = Number.isFinite(training.recoveryBonus) ? clamp(training.recoveryBonus, 0, .10) : 0;
+  }
   start() { this.phase('guard', 1.25); }
   suspend(input: BladeInput, freezePose = false) {
     this.sequence = input.sequence;
@@ -101,7 +106,7 @@ export class SwordDuel {
     const covering = s.shielding && coversAttack(s.shieldPoint, s.attackLane);
     if (covering && !this.covering) this.coverAt = resumed ? -10 : s.elapsed;
     this.covering = covering;
-    s.stamina = clamp(s.stamina + (s.shielding ? -(this.equipment.shield === 'heater' ? .14 : .095) : .25) * dt, 0, 1);
+    s.stamina = clamp(s.stamina + (s.shielding ? -(this.equipment.shield === 'heater' ? .14 : .095) : .25 * (1 + this.recoveryBonus)) * dt, 0, 1);
     s.rivalStamina = clamp(s.rivalStamina + (s.phase === 'guard' || s.phase === 'reset' ? .17 : .035) * dt, 0, 1);
     const slash = input.pose ? input.weaponSlash : input.slash;
 
@@ -111,7 +116,7 @@ export class SwordDuel {
       if (slash && s.elapsed - s.swingAt >= .55 && s.stamina >= cost) {
         s.swingAt = s.elapsed; s.swingDirection = slash.to.x >= slash.from.x ? 1 : -1;
         this.swingLane = attackLane(slash.from, slash.to);
-        this.swingPower = 9 + Math.round(clamp((slash.speed - .55) / 2, 0, 1) * 4) + (this.equipment.sword === 'steel' ? 2 : 0);
+        this.swingPower = (9 + Math.round(clamp((slash.speed - .55) / 2, 0, 1) * 4) + (this.equipment.sword === 'steel' ? 2 : 0)) * (1 + this.damageBonus);
         s.stamina -= cost; s.cuts++;
         this.swingResolved = false;
         this.event('cut', s.phase === 'recover' ? 'Cut across her centre while the opening lasts.' : 'Your cut needs an opening. Watch her shoulder.');
@@ -128,7 +133,7 @@ export class SwordDuel {
         if (!this.hitThisOpening && reachesRival && inReach && !guarded && s.phase !== 'reset') {
           this.hitThisOpening = true; this.swingResolved = true; s.playerHits++;
           const counter = s.phase === 'recover' && s.elapsed <= s.riposteUntil;
-          const damage = Math.min(25, this.swingPower + (s.phase === 'recover' ? 4 : 0) + (counter ? 5 : 0) + (head ? 3 : 0));
+          const damage = Math.round(Math.min(25, this.swingPower + (s.phase === 'recover' ? 4 : 0) + (counter ? 5 : 0) + (head ? 3 : 0)));
           const dealt = Math.min(s.rivalHealth, damage); s.rivalHealth -= dealt; s.damageDealt += dealt;
           s.rivalStamina = Math.max(0, s.rivalStamina - .1);
           this.event('touch', `${counter ? 'Riposte' : head ? 'High cut' : 'Clean cut'} · ${dealt} damage. Recover your stance.`);

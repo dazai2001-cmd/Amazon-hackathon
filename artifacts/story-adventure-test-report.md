@@ -4,7 +4,7 @@ Updated 12 October 2026. This report distinguishes recorded human inputs, simula
 
 ## Automated checks and builds
 
-- `npm test`: **54 passed, 0 failed**. Checks cover dialogue branches, saved checkpoints, collision-safe routes, all 108 voice files and 15 sound assets, health combat, directional defence, stamina, timed ripostes/evasion, reach, rewards and authenticated relay roles.
+- `npm test`: **69 passed, 0 failed** after the anytime training update. Checks cover dialogue branches, saved checkpoints, collision-safe routes, all 133 voice files and 15 sound assets, health combat, directional defence, stamina, timed ripostes/evasion, reach, rewards and authenticated relay roles. The additional 15 training checks and final exercise UI walkthrough are detailed in the [training report](training-test-report.md). Browser and emulator combat results below were recorded before that update.
 - Tracking checks cover adaptive filtering, confidence preservation, 3D packet validation and relay delivery, independent hands, forearm direction, depth-source changes, whole-body movement without phantom cuts, bounded footwork, seated controls, late crouching, tracking gaps, hidden elbows and viewport changes without phantom strikes.
 - `npm run build`: TypeScript and Vite pass. Vite reports harmless `use client` warnings from Lucide in this browser application.
 - `npm run android:build`: APK build passes; output is `artifacts/MoveRoom-debug.apk`. The native wrapper loads the frontend from the included server, rather than embedding a separate game build.

@@ -1,6 +1,6 @@
 # MoveRoom
 
-A Fire TV movement playground powered by an Android phone camera. **The Ashen Gate** now has a complete first-chapter story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Orbit Arena** and **Reach & Reset** remain available from the playground.
+A Fire TV movement playground powered by an Android phone camera. **The Ashen Gate** now has a complete first-chapter story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available from the title, chapter header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **Orbit Arena** and **Reach & Reset** remain available from the playground.
 
 The TV runs a native Android/Fire OS APK with a landscape WebView, D-pad navigation, Select/Back/Play-Pause support, and a Leanback launcher. The phone runs MediaPipe Pose Landmarker locally in Chrome. A small Node server serves both interfaces and relays landmarks over WebSockets. A TV camera is not required.
 
@@ -76,7 +76,7 @@ npm run build
 npm run android:build
 ~~~
 
-The 54 automated tests cover calibrated/mirrored controls, wrist and sword-tip sweeps, independent hands and forearm orientation, dropouts, frame-rate consistency, coached holds and resets, and authenticated relay roles. Chapter checks cover dialogue branches and motive callbacks, checkpoint validation, collision-safe guided routes, all audio assets, health damage, directional guards and parries, perfect blocks and ripostes, stamina, timed evasion, combat reach, tracking/pause freezes, gear and once-only rewards. See the [chapter test report](artifacts/story-adventure-test-report.md) for manual browser and emulator checks.
+The 69 automated tests cover calibrated/mirrored controls, wrist and sword-tip sweeps, independent hands and forearm orientation, dropouts, frame-rate consistency, coached holds and resets, and authenticated relay roles. Chapter checks cover dialogue branches and motive callbacks, checkpoint validation, collision-safe guided routes, all audio assets, health damage, directional guards and parries, perfect blocks and ripostes, stamina, timed evasion, combat reach, tracking/pause freezes, gear and once-only rewards. Fifteen training tests cover exercise views, calibration, complete rep cycles, sets/rest, visible corrections, personalization and bounded XP/stat rewards. See the [chapter test report](artifacts/story-adventure-test-report.md) for manual browser and emulator checks.
 
 For recorded-input vision testing, run npm run test:vision:fixtures, then npm run build. Open http://localhost:8787/diagnostics and click Run recorded vision test. It checks a human image, 24 samples from a squat video, blank frames, and reacquisition using the phone's model and confidence settings. GPU and CPU can be tested separately. Fixtures have verified SHA-256 hashes and are ignored by Git; sources are listed in THIRD_PARTY.md.
 
@@ -119,11 +119,11 @@ See docs/DEMO.md for the presentation sequence and THIRD_PARTY.md for asset attr
 
 ## Scope
 
-The medieval prototype includes one explorable first-person courtyard and one computer-controlled rival, with the chapter's narrative through the Ironbridge quest hook. Bodyweight repetition detectors, exercise-driven stats, live multiplayer, Orders contests and later regions remain planned. The current models and animations need further art and performance work for a polished release. A single camera estimates wrist placement and forearm direction with bounded depth; it does not measure a physical sword's exact position or rotation. Hit tests use projected sword-tip sweeps and attack lines, rather than full 3D weapon-contact physics. The native app needs the included server. Physical Fire TV performance and live phone play still need testing.
+The medieval prototype includes one explorable first-person courtyard and one computer-controlled rival, with the chapter's narrative through the Ironbridge quest hook. Squat and push-up detection, sets/rest and exercise-driven stats are implemented in the anytime training hall. Live multiplayer, family profiles, Orders contests and later regions remain planned. The current models and animations need further art and performance work for a polished release. A single camera estimates wrist placement and forearm direction with bounded depth; it does not measure a physical sword's exact position or rotation. Hit tests use projected sword-tip sweeps and attack lines, rather than full 3D weapon-contact physics. The native app needs the included server. Physical Fire TV performance and live phone play still need testing.
 
 ## Chapter audio assets
 
-The game ships finished MP3 files under public/assets/medieval/audio, including 93 chapter lines, 15 prepared exercise cues and 15 music/ambience/effect assets. Exercise cues are ready for the future bodyweight circuit; they do not imply that rep counting is implemented. The manifest records cast presets, durations and provenance. Playback needs no speech service or browser text-to-speech.
+The game ships finished MP3 files under public/assets/medieval/audio, including 93 chapter lines, 15 earlier exercise cues, 25 active training/count cues and 15 music/ambience/effect assets. Alden’s training cues play during calibration, visible corrections, counts, rest and completion. The manifest records cast presets, durations and provenance. Playback needs no speech service or browser text-to-speech.
 
 To regenerate audio, use scripts/generate-chapter-audio.py with a build-time Python environment containing kokoro-onnx, numpy and soundfile, plus FFmpeg. Put kokoro-v1.0.int8.onnx and voices-v1.0.bin in .local/audio-model; run python scripts/generate-chapter-audio.py. Model files and Python dependencies stay out of the running game. See THIRD_PARTY.md for source and license records.
 
@@ -138,3 +138,11 @@ In standing mode, changes in apparent shoulder width provide an approximate appr
 This is first-person camera and arm control, not retargeted full-body motion capture. World coordinates are monocular estimates, and camera distance is inferred from body scale rather than measured in metres. Finger articulation, precise sword roll, footstep animation on a player rig and a third-person body are future refinements. Camera framing, live latency and physical play accuracy still require testing on the Android phone.
 
 Sources: [MediaPipe pose models and 3D output](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker), [1 Euro filter](https://gery.casiez.net/1euro/).
+
+## Anytime fitness training
+
+Open **Enter training hall**, or **Train** inside the chapter. Choose a pace, squat variation and wall/knee/floor push-ups. Alden assigns the circuit, calibrates each exercise from the side, and starts counting automatically after the start/lower/return setup. Reps require a controlled full cycle; missing joints, tracking gaps and visibly invalid movement reset the attempt. Sets include a 45-second rest and can be paused. Change routine returns to the plan without awarding an incomplete circuit.
+
+A completed camera circuit earns 60 XP once per day; Strength and Endurance improve the next story duel’s base damage and stamina recovery, with bounded bonuses. Preview practice uses **B** to lower and release to return, and earns no XP. Completed camera practice and your effort feedback inform the next recommendation. Existing gear, coins and story saves are preserved.
+
+See [training implementation and limits](docs/TRAINING.md). These side-view checks need live phone validation; they do not certify every aspect of exercise form or demonstrate long-term fitness gains. **69 automated tests pass**, including 15 training tests and the exercise relay contract. The hackathon submission still needs a recording on a physical Fire TV or Fire TV/Vega simulator.

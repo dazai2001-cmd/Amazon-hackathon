@@ -57,9 +57,9 @@ test('the guided story walk reaches the forge, board and gate without crossing f
   assert.ok(goalDistance(spawn, 'alden') > 2.9);
 });
 
-test('the sound pack contains all 108 cast lines and playable files for every cue', () => {
+test('the sound pack contains all story and training cast lines and playable files for every cue', () => {
   const manifest = JSON.parse(readFileSync('public/assets/medieval/audio/manifest.json', 'utf8'));
-  const entries = [...catalogue.dialogue, ...catalogue.exerciseCues];
+  const entries = [...catalogue.dialogue, ...catalogue.exerciseCues, ...catalogue.trainingCues];
   assert.equal(Object.keys(manifest.voices).length, entries.length);
   for (const entry of entries) {
     const clip = manifest.voices[entry.id]; assert.ok(clip, `missing clip ${entry.id}`);

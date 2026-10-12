@@ -39,7 +39,7 @@ export class PoseCamera {
           const worldLandmarks = this.worldFilter.update(normalize(result.worldLandmarks[0] || []), now);
           result.close();
           this.times.push(now); this.times = this.times.filter(t => now - t < 1000);
-          this.onFrame({ type: 'pose', seq: this.sequence++, t: now, landmarks: points, worldLandmarks, fps: this.times.length, tracking: { model: loaded.model, delegate: loaded.delegate, inferenceMs: Math.min(2000, Math.round(inferenceMs)) } });
+          this.onFrame({ type: 'pose', seq: this.sequence++, t: now, landmarks: points, imageAspect: this.video.videoWidth / this.video.videoHeight, worldLandmarks, fps: this.times.length, tracking: { model: loaded.model, delegate: loaded.delegate, inferenceMs: Math.min(2000, Math.round(inferenceMs)) } });
           this.draw(points, facingMode === 'user');
         } catch (e) { this.onStatus(`Tracking paused: ${(e as Error).message}`); }
       }

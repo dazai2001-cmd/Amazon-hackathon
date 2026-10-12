@@ -998,5 +998,157 @@
       "trigger": "Half of tracked active target time completed",
       "sourceLine": 491
     }
+  ],
+  "trainingCues": [
+    {
+      "id": "TRAIN_top",
+      "speaker": "ALDEN",
+      "text": "Begin from your starting position. Hold while I set the view.",
+      "trigger": "top"
+    },
+    {
+      "id": "TRAIN_bottom",
+      "speaker": "ALDEN",
+      "text": "Show one comfortable lower position. Hold it briefly for calibration.",
+      "trigger": "bottom"
+    },
+    {
+      "id": "TRAIN_return",
+      "speaker": "ALDEN",
+      "text": "Return to your starting position before the next.",
+      "trigger": "return"
+    },
+    {
+      "id": "TRAIN_down",
+      "speaker": "ALDEN",
+      "text": "Lower with control, then return to your starting position.",
+      "trigger": "down"
+    },
+    {
+      "id": "TRAIN_view",
+      "speaker": "ALDEN",
+      "text": "Set the view from your side for this lesson.",
+      "trigger": "view"
+    },
+    {
+      "id": "TRAIN_missing",
+      "speaker": "ALDEN",
+      "text": "Hold there. We’ll continue when the view is clear.",
+      "trigger": "missing"
+    },
+    {
+      "id": "TRAIN_range",
+      "speaker": "ALDEN",
+      "text": "You haven’t reached the range we set. Reset, then try again.",
+      "trigger": "range"
+    },
+    {
+      "id": "TRAIN_speed",
+      "speaker": "ALDEN",
+      "text": "A little slower. Give me time to see the movement.",
+      "trigger": "speed"
+    },
+    {
+      "id": "TRAIN_alignment",
+      "speaker": "ALDEN",
+      "text": "Your hips have drifted from the starting line. Reset.",
+      "trigger": "alignment"
+    },
+    {
+      "id": "TRAIN_feet",
+      "speaker": "ALDEN",
+      "text": "Your support point moved. Reset before the next repetition.",
+      "trigger": "feet"
+    },
+    {
+      "id": "TRAIN_torso",
+      "speaker": "ALDEN",
+      "text": "Your torso moved beyond the range set for this lesson. Reset.",
+      "trigger": "torso"
+    },
+    {
+      "id": "TRAIN_gap",
+      "speaker": "ALDEN",
+      "text": "The view paused. Begin again from your starting position.",
+      "trigger": "gap"
+    },
+    {
+      "id": "TRAIN_rest",
+      "speaker": "ALDEN",
+      "text": "That’s your set. Rest before we continue.",
+      "trigger": "rest"
+    },
+    {
+      "id": "TRAIN_complete",
+      "speaker": "ALDEN",
+      "text": "Training complete. Your discipline is growing, squire.",
+      "trigger": "complete"
+    },
+    {
+      "id": "TRAIN_paused",
+      "speaker": "ALDEN",
+      "text": "Take your time. Tell me when you’re ready.",
+      "trigger": "paused"
+    },
+    {
+      "id": "TRAIN_count_1",
+      "speaker": "ALDEN",
+      "text": "One.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_2",
+      "speaker": "ALDEN",
+      "text": "Two.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_3",
+      "speaker": "ALDEN",
+      "text": "Three.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_4",
+      "speaker": "ALDEN",
+      "text": "Four.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_5",
+      "speaker": "ALDEN",
+      "text": "Five.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_6",
+      "speaker": "ALDEN",
+      "text": "Six.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_7",
+      "speaker": "ALDEN",
+      "text": "Seven.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_8",
+      "speaker": "ALDEN",
+      "text": "Eight.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_9",
+      "speaker": "ALDEN",
+      "text": "Nine.",
+      "trigger": "Completed calibrated repetition"
+    },
+    {
+      "id": "TRAIN_count_10",
+      "speaker": "ALDEN",
+      "text": "Ten.",
+      "trigger": "Completed calibrated repetition"
+    }
   ]
 }

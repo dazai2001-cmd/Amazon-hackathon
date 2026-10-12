@@ -864,6 +864,206 @@
       "voice": "bm_george",
       "name": "Sir Alden Vale",
       "hash": "dc281d444e7fc69f7640fa239a631c5cc8b0585c171f40bb398835fa465c87e9"
+    },
+    "TRAIN_top": {
+      "url": "/assets/medieval/audio/voice/TRAIN_top.mp3",
+      "duration": 4.306,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "fd39cf7f7fe8577c7a1a6d756b451fa88efb17d767983bef04d34cbd1d2e8a80"
+    },
+    "TRAIN_bottom": {
+      "url": "/assets/medieval/audio/voice/TRAIN_bottom.mp3",
+      "duration": 5.181,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c9b4b15045b1405bb0ad0b342083482b9cc80db0b8b0ee4b1a82916489cb01d5"
+    },
+    "TRAIN_return": {
+      "url": "/assets/medieval/audio/voice/TRAIN_return.mp3",
+      "duration": 3.666,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "a24d56abfce63207b8355fd97e9be3c4f56f45bfe363ed58cfd2e2f6fdffb6d6"
+    },
+    "TRAIN_down": {
+      "url": "/assets/medieval/audio/voice/TRAIN_down.mp3",
+      "duration": 4.221,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "d03e1344fe7bef332d13543a32595892459f76128496107aafffde90ec536e1b"
+    },
+    "TRAIN_view": {
+      "url": "/assets/medieval/audio/voice/TRAIN_view.mp3",
+      "duration": 3.133,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "ef2c2b0a5030cb766908481dc222dab27aa488fadef50b54ec83094b4d5cadf0"
+    },
+    "TRAIN_missing": {
+      "url": "/assets/medieval/audio/voice/TRAIN_missing.mp3",
+      "duration": 3.346,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "3b836ac1bfc7bca949ba12b6a23956a67323c118bc6e66a7899fa8444995a6a6"
+    },
+    "TRAIN_range": {
+      "url": "/assets/medieval/audio/voice/TRAIN_range.mp3",
+      "duration": 4.562,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1f7d9c4a66832821fed1b6a41c39fd115745b7a93a273d3c1716ed3612d45c3e"
+    },
+    "TRAIN_speed": {
+      "url": "/assets/medieval/audio/voice/TRAIN_speed.mp3",
+      "duration": 3.389,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "bc1f0384a32fc8de6f5a3b5bf3c34f093c963a6fd74e7d5e909b22a1a1cb039f"
+    },
+    "TRAIN_alignment": {
+      "url": "/assets/medieval/audio/voice/TRAIN_alignment.mp3",
+      "duration": 3.815,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "2e866e2eb698e47cef2aea36db5dc40139d594c5675c4461862374e53e034be1"
+    },
+    "TRAIN_feet": {
+      "url": "/assets/medieval/audio/voice/TRAIN_feet.mp3",
+      "duration": 4.434,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "ec27089d1f506e29706f004ce8aced653e0af0de47e43f97260209e74350076f"
+    },
+    "TRAIN_torso": {
+      "url": "/assets/medieval/audio/voice/TRAIN_torso.mp3",
+      "duration": 4.711,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "11e779b451eaf23ad4c495e9f0d7d6997e498f610a874d4b84a72fe533fdae9f"
+    },
+    "TRAIN_gap": {
+      "url": "/assets/medieval/audio/voice/TRAIN_gap.mp3",
+      "duration": 4.05,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "6ed302c74dd0121c98bafe80b67609bbc5aeb050d7adc3767357f9d842bb7b22"
+    },
+    "TRAIN_rest": {
+      "url": "/assets/medieval/audio/voice/TRAIN_rest.mp3",
+      "duration": 3.111,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "281004a6694cf33613396aa32cd223a6db9fd41660573ec9c2663f363aa6887d"
+    },
+    "TRAIN_complete": {
+      "url": "/assets/medieval/audio/voice/TRAIN_complete.mp3",
+      "duration": 3.943,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "b7e97f12719fe103cec8c9a75e9e9dba5dcf4db1caf4c3711c44286448e65fa9"
+    },
+    "TRAIN_paused": {
+      "url": "/assets/medieval/audio/voice/TRAIN_paused.mp3",
+      "duration": 2.855,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "22e1259d864813acdffbe65cd5f3b253670c1cd30fefe9744752947ce1f63039"
+    },
+    "TRAIN_count_1": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_1.mp3",
+      "duration": 1.021,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "86ee68966f932b56ab9853930d094955a9301680b8b909aaad85f220e8ca315c"
+    },
+    "TRAIN_count_2": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_2.mp3",
+      "duration": 1.042,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "16ca66e4c11aa054be5530ebec21bd22b9cc68a27f16e65ddae6bf7557f11a6b"
+    },
+    "TRAIN_count_3": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_3.mp3",
+      "duration": 1.021,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "54a2de210282d58e66d9fd7d7a2455149b21ce643a84835c40b5b8289f97069b"
+    },
+    "TRAIN_count_4": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_4.mp3",
+      "duration": 1.021,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "023febc5d71531b723b326e876793a92f928e29e7874393e03fcc2db2caab499"
+    },
+    "TRAIN_count_5": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_5.mp3",
+      "duration": 1.127,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "007076781d69f71c25bb5400dae85b0d02ec6300eca65f23e49d7f7bbb62979f"
+    },
+    "TRAIN_count_6": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_6.mp3",
+      "duration": 0.957,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "181f50d3b133216614918927327d1751a52b28149bec5ccfcb0f871a68ed7d35"
+    },
+    "TRAIN_count_7": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_7.mp3",
+      "duration": 1.106,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "97c7d17f6fc435ffb477ea0b0f3cdc7bacd44294dd67895c7b4241dfbbd1224d"
+    },
+    "TRAIN_count_8": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_8.mp3",
+      "duration": 0.999,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "f2b1a24ab867d708addf5ed883e237aa121a4ffcd8e383656f73b3716564ed78"
+    },
+    "TRAIN_count_9": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_9.mp3",
+      "duration": 1.149,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "77e12d48d3599c2af81af5f36b36b999b078f83bba495c880c2fa58e4685f842"
+    },
+    "TRAIN_count_10": {
+      "url": "/assets/medieval/audio/voice/TRAIN_count_10.mp3",
+      "duration": 1.021,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "adb3813f178b16fb4de2d59943827487ee179642daeb92d342f2a704b3146d05"
     }
   },
   "sounds": {

@@ -36,3 +36,11 @@ For a keyboard-only demonstration, enable Desktop preview and say clearly that i
 ## Honest presentation
 
 Position this as a phone-powered movement platform for Fire TV, with playable sword combat and reusable movement coaching. Camera-based movement games already exist; do not claim that concept is new. Emphasize the Fire TV workflow, two-hand combat mapping, personal calibration, and a common tracking interface for games and practice.
+
+## Fitness progression demo
+
+From the chapter title choose **Enter training hall**. Show the assigned circuit and variation choices. In a live camera demo, set the phone at the side and demonstrate the start/lower/return calibration without reaching for the screen. Complete the squat set, wait or pause during its rest, reposition the phone for the push-up calibration, and complete the assigned push-ups. Show the saved XP and capped Strength/Endurance effects on the next story duel. This must be a real camera exercise demonstration to support a tracking claim.
+
+For a clearly labelled software-only walkthrough, connect the desktop preview and hold **B** to lower/release to return. Show that completing the circuit awards no XP. The preview uses synthetic joints and cannot validate human exercise accuracy. Alden’s voice can be toggled from the hall header; all instructions remain captioned.
+
+Fire TV submission proof must be on an actual Fire TV or Fire TV/Vega simulator as required by the event, not solely an Android TV emulator or desktop browser.

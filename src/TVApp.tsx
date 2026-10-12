@@ -9,10 +9,11 @@ import Calibration from './components/Calibration';
 import GamePage from './components/GamePage';
 import CoachPage from './components/CoachPage';
 import { useRoom } from './lib/useRoom';
-import { moveFocus } from './lib/remote';
+import { focusScope, moveFocus } from './lib/remote';
 import { clamp } from '../shared/motion';
 import { poseWithBlade, type Point } from '../shared/game';
 import { lanePoint } from '../shared/weapons';
+import { measureExercise, type TrainingBlock } from '../shared/training';
 import './components/chapter.css';
 
 const ChapterPage = lazy(() => import('./components/ChapterPage'));
@@ -31,6 +32,7 @@ export default function TVApp() {
   const [activity, setActivity] = useState<Activity>(window.location.pathname === '/chapter' ? 'chapter' : 'home');
   const [pairOpen, setPairOpen] = useState(false), [helpOpen, setHelpOpen] = useState(false);
   const [intent, setIntent] = useState<Activity>('home');
+  const [trainingPair, setTrainingPair] = useState(false), [trainingBlock, setTrainingBlock] = useState<TrainingBlock | null>(null);
   const [afterCalibration, setAfterCalibration] = useState<Activity>('home');
   const [profile, setProfile] = useState<CalibrationProfile | null>(loadProfile);
   const [preview, setPreview] = useState(false), [previewProfile, setPreviewProfile] = useState<CalibrationProfile>(DEFAULT_PROFILE);
@@ -83,25 +85,28 @@ export default function TVApp() {
       window.speechSynthesis.speak(voice);
     }
   }, [room.command, sound]);
+  const trainingExercise = useCallback((block: TrainingBlock | null) => { setTrainingBlock(block); room.command('exercise', block ? `${block.exercise}:${block.variation}` : 'none'); }, [room.command, room.phoneConnected]);
   const chapterInstruction = useCallback((text: string) => { room.command('instruction', text); }, [room.command]);
   const navigate = useCallback((next: Activity) => { setActivity(next); room.command('activity', next); keys.current.clear(); window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }, [room.command]);
   const begin = (next: Activity) => {
+    setTrainingPair(false);
     if (next === 'home') return navigate('home');
     if (!tracking && !preview) { setIntent(next); setPairOpen(true); return; }
     if (next !== 'calibrate' && !preview && !profile) { setAfterCalibration(next); navigate('calibrate'); return; }
     if (next === 'calibrate') setAfterCalibration('home');
     navigate(next);
   };
-  const startPreview = () => { setPreview(true); setPairOpen(false); setHelpOpen(false); navigate(intent === 'home' ? 'chapter' : intent); };
+  const startPreview = () => { setPreview(true); setPairOpen(false); setHelpOpen(false); setTrainingPair(false); navigate(intent === 'home' ? 'chapter' : intent); };
   const continuePairing = () => {
     setPairOpen(false); setPreview(false);
+    if (trainingPair) { setTrainingPair(false); navigate('chapter'); return; }
     if (intent === 'home') navigate('home');
     else if (intent === 'calibrate' || !profile) { setAfterCalibration(intent === 'calibrate' ? 'home' : intent); navigate('calibrate'); }
     else navigate(intent);
   };
   useEffect(() => {
     const down = (event: KeyboardEvent) => {
-      if ((event.target as HTMLElement)?.tagName === 'INPUT') return;
+      if (['INPUT', 'SELECT'].includes((event.target as HTMLElement)?.tagName)) return;
       const combatActive = activity === 'chapter' && Boolean(document.querySelector('[data-motion-active="true"]'));
       if (event.key === 'Shift' && preview && (activity === 'play' || combatActive)) { keys.current.add('Shift'); return; }
       if (preview && combatActive && ['a', 'd', 'j', 'k', 'l', 'z', 'x', 'c', 'v'].includes(event.key.toLowerCase())) {
@@ -110,13 +115,14 @@ export default function TVApp() {
         else keys.current.add(key);
         return;
       }
+      if (document.querySelector('.training-hall') && ['Escape', 'Backspace'].includes(event.key)) return;
       if (event.key === 'Escape' || event.key === 'Backspace') {
         event.preventDefault(); if (pairOpen) setPairOpen(false); else if (helpOpen) setHelpOpen(false); else navigate('home'); return;
       }
       if (event.key === ' ' && (activity === 'play' || activity === 'coach' || activity === 'chapter') && !pairOpen && !helpOpen) { event.preventDefault(); window.dispatchEvent(new Event('moveroom:pause')); return; }
       if (event.key.startsWith('Arrow')) {
         event.preventDefault();
-        if (preview && activity !== 'home' && (activity !== 'chapter' || combatActive) && !pairOpen && !helpOpen) keys.current.add(event.key);
+        if (preview && !document.querySelector('.training-hall') && activity !== 'home' && (activity !== 'chapter' || combatActive) && !pairOpen && !helpOpen) keys.current.add(event.key);
         else moveFocus(event.key);
       }
       if (event.key === 'Enter') {
@@ -133,8 +139,7 @@ export default function TVApp() {
   }, [activity, preview, pairOpen, helpOpen, navigate]);
   useEffect(() => {
     const timer = setTimeout(() => {
-      const modal = document.querySelector<HTMLElement>('[role="dialog"]');
-      const scope = modal || document;
+      const scope = focusScope();
       (scope.querySelector<HTMLElement>('[data-autofocus]') || scope.querySelector<HTMLElement>('button:not(:disabled)'))?.focus({ preventScroll: true });
     }, 100);
     return () => clearTimeout(timer);
@@ -159,11 +164,11 @@ export default function TVApp() {
     </main>}
     {activity === 'play' && <GamePage points={points} profile={activeProfile} frameTime={preview ? undefined : room.frame?.packet.t} tracking={tracking} preview={preview} sound={sound} onPreviewMove={movePreviewBlade} onBack={() => navigate('home')} onPair={() => { setIntent('play'); setPairOpen(true); }}/>}
     {activity === 'coach' && <CoachPage points={points} motion={analyzed} tracking={tracking} frameTime={preview ? undefined : room.frame?.packet.t} preview={preview} profile={activeProfile} onBack={() => navigate('home')} onInstruction={speak}/>}
-    {activity === 'chapter' && <Suspense fallback={<div className="loading-screen">Opening Alden’s courtyard…</div>}><ChapterPage points={points} worldPoints={worldPoints} profile={activeProfile} frameTime={preview ? undefined : room.frame?.packet.t} tracking={tracking} controllerReady={preview || Boolean(profile && room.phoneConnected)} preview={preview} sound={sound} onPreviewMove={movePreviewBlade} onBack={() => navigate('home')} onPair={() => { setIntent('chapter'); setPairOpen(true); }} onInstruction={chapterInstruction} onToggleSound={() => setSound(v => !v)}/></Suspense>}
+    {activity === 'chapter' && <Suspense fallback={<div className="loading-screen">Opening Alden’s courtyard…</div>}><ChapterPage points={points} worldPoints={worldPoints} imageAspect={room.frame?.packet.imageAspect} profile={activeProfile} frameTime={preview ? undefined : room.frame?.packet.t} tracking={tracking} controllerReady={preview || Boolean(profile && room.phoneConnected)} preview={preview} sound={sound} onPreviewMove={movePreviewBlade} onBack={() => navigate('home')} onPair={() => { setTrainingPair(false); setIntent('chapter'); setPairOpen(true); }} onTrainingPair={() => { setTrainingPair(true); setIntent('chapter'); setPairOpen(true); }} onInstruction={chapterInstruction} onTrainingExercise={trainingExercise} onToggleSound={() => setSound(v => !v)}/></Suspense>}
     {activity === 'calibrate' && <Calibration points={points} tracking={tracking} preview={preview} onBack={() => navigate('home')} onComplete={onCalibration} onInstruction={speak}/>}
     <footer className="app-footer"><span>MADE FOR YOUR LIVING ROOM <i/> POWERED BY YOUR MOVES</span><div><span>{new URLSearchParams(window.location.search).get('platform') === 'firetv' ? 'Fire OS app' : 'TV preview'}</span><i/><span>{preview ? 'Preview input' : room.phoneConnected && tracking ? `${Math.round(room.frame?.packet.fps || 0)} fps tracking` : 'Phone camera controller'}</span>{room.latency !== null && !preview && room.phoneConnected && <><i/><span>{room.latency} ms relay round trip</span></>}</div></footer>
     </div>
-    {pairOpen && <PairDialog session={room.session} phoneConnected={room.phoneConnected} tracking={Boolean(fresh && room.frame && measureBody(room.frame.packet.landmarks))} error={room.error} onClose={() => setPairOpen(false)} onContinue={continuePairing} onPreview={startPreview} onRenew={room.renew}/>}
+    {pairOpen && <PairDialog session={room.session} phoneConnected={room.phoneConnected} tracking={Boolean(fresh && room.frame && (trainingPair && trainingBlock ? measureExercise(room.frame.packet.landmarks, trainingBlock, room.frame.packet.imageAspect).measurement : measureBody(room.frame.packet.landmarks)))} error={room.error} onClose={() => { setPairOpen(false); setTrainingPair(false); }} onContinue={continuePairing} onPreview={startPreview} onRenew={room.renew}/>}
     {helpOpen && <div className="modal-scrim" onClick={() => setHelpOpen(false)}><section className="help-dialog" role="dialog" aria-modal="true" aria-labelledby="help-title" onClick={event => event.stopPropagation()}><button className="icon-button modal-close" aria-label="Close help" onClick={() => setHelpOpen(false)}><X size={22}/></button><div className="eyebrow"><Sparkles size={16}/> A LITTLE DIFFERENT</div><h2 id="help-title">Your phone sees the moves.<br/><span>Your TV brings them to life.</span></h2><div className="help-features"><div><Smartphone/><h3>Prop. Pair. Play.</h3><p>Use your Android phone’s camera. Leave it near your TV with your upper body in view.</p></div><div><MoveHorizontal/><h3>Controls that fit you.</h3><p>Calibrate a comfortable movement range. Choose standing or seated controls.</p></div><div><ShieldCheck/><h3>Your space stays yours.</h3><p>Camera frames are processed on your phone. Only movement landmarks reach the TV.</p></div></div><div className="help-bottom"><span>Remote: D-pad to browse · Select to choose · Back to return</span><button className="button button-primary" onClick={() => { setHelpOpen(false); setIntent('home'); setPairOpen(true); }}>Pair my phone <ArrowRight size={18}/></button></div></section></div>}
   </div>;
 }

@@ -1,5 +1,10 @@
+export function focusScope(): HTMLElement | Document {
+  const dialogs = Array.from(document.querySelectorAll<HTMLElement>('[role="dialog"][aria-modal="true"]'))
+    .filter(el => !el.closest('[aria-hidden="true"]') && el.getBoundingClientRect().width > 0);
+  return dialogs[dialogs.length - 1] || document;
+}
 export function moveFocus(key: string) {
-  const scope = document.querySelector<HTMLElement>('[role="dialog"][aria-modal="true"]') || document;
+  const scope = focusScope();
   const elements = Array.from(scope.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]'))
     .filter(el => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0 && !el.closest('[aria-hidden="true"]'));
   if (!elements.length) return;

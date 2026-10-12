@@ -166,7 +166,7 @@ def main():
     available = kokoro.get_voices()
     print("Available voices: " + ", ".join(available), flush=True)
     catalogue = json.loads((ROOT / "content/story/chapter-01-dialogue.json").read_text("utf-8"))
-    entries = catalogue["dialogue"] + catalogue.get("exerciseCues", [])
+    entries = catalogue["dialogue"] + catalogue.get("exerciseCues", []) + catalogue.get("trainingCues", [])
     if args.limit:
         entries = entries[:args.limit]
     for index, entry in enumerate(entries):

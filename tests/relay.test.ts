@@ -40,14 +40,17 @@ test('relay enforces tokens, origins, device roles, sequence order, and one phon
   assert.deepEqual(relay.join(session.code), { busy: true });
   const other = new WebSocket(link('phone', session.phoneToken)); clients.push(other); other.on('error', () => {});
   const [closeCode] = await once(other, 'close'); assert.equal(closeCode, 4409);
-  const pose = { type: 'pose', seq: 0, t: 100, landmarks: syntheticPose(), worldLandmarks: syntheticPose(), tracking: { model: 'full', delegate: 'GPU', inferenceMs: 20 }, fps: 18 };
+  const pose = { type: 'pose', seq: 0, t: 100, landmarks: syntheticPose(), worldLandmarks: syntheticPose(), imageAspect: 16 / 9, tracking: { model: 'full', delegate: 'GPU', inferenceMs: 20 }, fps: 18 };
   phone.ws.send(JSON.stringify(pose)); phone.ws.send(JSON.stringify(pose)); phone.ws.send(JSON.stringify({ ...pose, seq: 1 }));
   await tv.until(m => m.type === 'pose' && m.seq === 1);
   assert.deepEqual(tv.messages.filter(m => m.type === 'pose').map(m => m.seq), [0, 1]);
   assert.deepEqual(tv.messages.find(m => m.type === 'pose').worldLandmarks, pose.worldLandmarks);
+  assert.equal(tv.messages.find(m => m.type === 'pose').imageAspect, pose.imageAspect);
   tv.ws.send(JSON.stringify(pose)); await tv.until(m => m.type === 'error' && m.message.includes('Unsupported'));
   tv.ws.send(JSON.stringify({ type: 'command', action: 'activity', value: 'play' }));
   await phone.until(m => m.type === 'command' && m.value === 'play');
+  tv.ws.send(JSON.stringify({ type: 'command', action: 'exercise', value: 'pushup:floor' }));
+  await phone.until(m => m.type === 'command' && m.action === 'exercise' && m.value === 'pushup:floor');
   phone.ws.close(); await tv.until(m => m.type === 'presence' && !m.phoneConnected);
   assert.ok(relay.join(session.code));
 });

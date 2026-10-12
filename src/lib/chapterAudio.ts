@@ -94,7 +94,10 @@ export class ChapterAudio {
       await audio.play();
       if (epoch === this.epoch) onState('playing');
     } catch (error) {
-      if (epoch === this.epoch) { this.speaking = false; this.duck(); onState(error instanceof DOMException && error.name === 'NotAllowedError' ? 'blocked' : 'unavailable'); }
+      if (epoch === this.epoch) {
+        this.speaking = false; this.duck();
+        onState(this.paused ? 'paused' : !this.enabled ? 'idle' : error instanceof DOMException && error.name === 'NotAllowedError' ? 'blocked' : 'unavailable');
+      }
     }
   }
   stopVoice() {

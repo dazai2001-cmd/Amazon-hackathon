@@ -9,7 +9,7 @@ import type { Quest, StoryFocus } from '../../shared/chapter';
 
 export type ArenaFrame = { duel: DuelSnapshot; active: boolean; equipment: DuelEquipment; world?: {
   mode: 'title' | 'memory' | 'explore' | 'dialogue' | 'lesson' | 'duel'; focus: StoryFocus; quest: Quest;
-  guided: number; paused: boolean; showWeapons: boolean; speaker?: string; tracking?: boolean;
+  guided: number; paused: boolean; hidden?: boolean; showWeapons: boolean; speaker?: string; tracking?: boolean;
 } };
 export type ArenaStatus = { ready: boolean; error: string | null; fps: number; triangles: number };
 type Props = { frame: MutableRefObject<ArenaFrame>; onStatus: (status: ArenaStatus) => void; onPointerMove: (x: number, y: number) => void; onWorldUpdate?: (state: WorldState) => void };
@@ -253,7 +253,7 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
     };
     const render = (now: number) => {
       raf = requestAnimationFrame(render);
-      if (document.hidden) { previous = now; return; }
+      if (document.hidden || frame.current.world?.hidden) { previous = now; sampleAt = now; frames = 0; return; }
       if (now - previous < 1000 / (tv ? 30 : 60) - 0.5) return;
       const dt = Math.min((now - previous) / 1000, 0.05); previous = now; world += dt; frames++;
       const f = frame.current, s = f.duel;

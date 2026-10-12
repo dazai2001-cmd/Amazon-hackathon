@@ -1,6 +1,6 @@
 # Medieval movement RPG direction
 
-Updated 10 October 2026. Chapter One now has a continuous story path with courtyard exploration, staged dialogue, choices and callbacks, three interactive weapon lessons, the trial, forge, Orders board and letter reveal. Five prerecorded synthetic cast voices, original score/ambience/effects, subtitles, audio settings and saved quest checkpoints are implemented. The sections below distinguish that local prototype from the larger game proposal.
+Updated 12 October 2026. Chapter One now has a continuous story path with courtyard exploration, staged dialogue, choices and callbacks, three interactive weapon lessons, the trial, forge, Orders board and letter reveal. Five prerecorded synthetic cast voices, original score/ambience/effects, subtitles, audio settings and saved quest checkpoints are implemented. The sections below distinguish that local prototype from the larger game proposal.
 
 ## Agreed direction
 
@@ -11,13 +11,15 @@ Updated 10 October 2026. Chapter One now has a continuous story path with courty
 - Combine the disgraced mentor mystery, the journey through five masters, and the dying king's final tournament.
 - Clans or teams have live multiplayer fights against other players. The multiplayer mode must connect actual players and resolve their shared match state.
 
-## Training proposal
+## Training implementation and next steps
 
-| Exercise | Initial variation choices | Proposed in-game reward |
+| Exercise | Initial variation choices | In-game reward |
 | --- | --- | --- |
-| Push-ups | Wall, knee-supported, standard | Strength; modest sword-power progression |
-| Squats | Comfortable-range squat, slower controlled repetitions | Agility; dodge recovery progression |
-| March or jog in place | March, jog; timed target | Endurance; stamina progression |
+| Push-ups | Wall, knee-supported, standard | Implemented: complete the circuit to grow Strength and Endurance |
+| Squats | Shallow or regular, with calibrated range and controlled repetitions | Implemented: complete the circuit to grow Strength and Endurance |
+| March or jog in place | March, jog; timed target | Planned: dedicated endurance progression |
+
+The anytime hall now assigns reps/sets, calibrates visible range, counts controlled cycles, enforces rest, gives Alden’s local voice cues, saves effort feedback and awards bounded story bonuses. See [the implementation and validation limits](TRAINING.md). Live multiplayer, family profiles, verified server-side rewards and long-term fitness validation remain future work.
 
 Players explicitly choose their variation and a manageable target; the app should not infer their fitness level or force the same repetition target on everyone. Camera setup and calibration are specific to the chosen exercise. Floor push-ups need a side view with relevant joints visible, while standing exercises use a separate setup.
 

@@ -3,6 +3,7 @@ import { ArrowRight, Camera, Check, FlipHorizontal2, Hand, Link2, ScanLine, Shie
 import Brand from './components/Brand';
 import { RoomSocket } from './lib/socket';
 import { PoseCamera } from './lib/camera';
+import { measureExercise, type TrainingBlock } from '../shared/training';
 import { measureBody } from '../shared/motion';
 import type { Activity, PoseFrame, TrackingModel } from '../shared/protocol';
 
@@ -25,6 +26,7 @@ export default function PhoneApp() {
   const socket = useRef<RoomSocket | null>(null), camera = useRef<PoseCamera | null>(null);
   const wake = useRef<WakeLockSentinel | null>(null), sequence = useRef(0), mounted = useRef(true);
   const activityRef = useRef<Activity>('home');
+  const exerciseRef = useRef<TrainingBlock | null>(null);
   useEffect(() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }, [pairing]);
   useEffect(() => {
     mounted.current = true;
@@ -35,6 +37,11 @@ export default function PhoneApp() {
     const connection = new RoomSocket('phone', pairing.code, pairing.phoneToken, message => {
       if (message.type === 'presence' || message.type === 'connected') setTVConnected(message.tvConnected);
       if (message.type === 'error') setError(message.message);
+      if (message.type === 'command' && message.action === 'exercise') {
+        const [exercise, variation] = message.value.split(':');
+        exerciseRef.current = exercise === 'squat' && ['shallow', 'regular'].includes(variation) || exercise === 'pushup' && ['wall', 'knees', 'floor'].includes(variation) ? { exercise, variation, reps: 4, sets: 1 } as TrainingBlock : null;
+      }
+      if (message.type === 'command' && message.action === 'activity') exerciseRef.current = null;
       if (message.type === 'command' && message.action === 'instruction') setInstruction(message.value);
       if (message.type === 'command' && message.action === 'activity') activityRef.current = message.value as Activity;
       if (message.type === 'command' && message.action === 'activity') setInstruction(message.value === 'chapter' ? 'Your hands place the weapons. Step closer or back for footwork; lean or crouch after she commits. Keep hands and hips in view.' : message.value === 'play' ? 'Sweep your right hand to slice. Raise your left hand to shield.' : message.value === 'coach' ? 'Follow the coaching cues on your TV.' : message.value === 'calibrate' ? 'Follow the calibration instructions on your TV.' : 'Look at your TV to choose an experience.');
@@ -63,7 +70,8 @@ export default function PhoneApp() {
       const packet = { ...frame, seq: sequence.current++ };
       socket.current?.send(packet);
       if (frame.tracking) setTrackingInfo(`${frame.tracking.model === 'full' ? 'Full pose' : 'Fast pose'} · ${frame.tracking.delegate} · ${frame.tracking.inferenceMs} ms inference`);
-      if (mounted.current) { const body = measureBody(frame.landmarks), elbows = activityRef.current !== 'chapter' || [13, 14].every(i => frame.landmarks[i]?.visibility >= .5); setTracking(Boolean(body && elbows)); setFps(frame.fps); setStatus(body ? elbows ? 'Your movement is in view.' : 'Bring both elbows into view for sword control.' : 'Step back until your hands and hips are in view.'); }
+      if (mounted.current && exerciseRef.current) { const view = measureExercise(frame.landmarks, exerciseRef.current, frame.imageAspect); setTracking(Boolean(view.measurement)); setFps(frame.fps); setStatus(view.measurement ? 'Your exercise is in side view.' : view.cue === 'view' ? 'Move the phone to your side for this exercise.' : 'Keep the exercise joints fully in view.'); }
+      else if (mounted.current) { const body = measureBody(frame.landmarks), elbows = activityRef.current !== 'chapter' || [13, 14].every(i => frame.landmarks[i]?.visibility >= .5); setTracking(Boolean(body && elbows)); setFps(frame.fps); setStatus(body ? elbows ? 'Your movement is in view.' : 'Bring both elbows into view for sword control.' : 'Step back until your hands and hips are in view.'); }
     }, message => { if (mounted.current) setStatus(message); }, model);
     camera.current = tracker;
     try {
