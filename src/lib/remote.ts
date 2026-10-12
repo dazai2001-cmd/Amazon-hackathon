@@ -1,12 +1,12 @@
 export function focusScope(): HTMLElement | Document {
   const dialogs = Array.from(document.querySelectorAll<HTMLElement>('[role="dialog"][aria-modal="true"]'))
-    .filter(el => !el.closest('[aria-hidden="true"]') && el.getBoundingClientRect().width > 0);
+    .filter(el => !el.closest('[aria-hidden="true"], [inert]') && el.getBoundingClientRect().width > 0);
   return dialogs[dialogs.length - 1] || document;
 }
 export function moveFocus(key: string) {
   const scope = focusScope();
-  const elements = Array.from(scope.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]'))
-    .filter(el => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0 && !el.closest('[aria-hidden="true"]'));
+  const elements = Array.from(scope.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]'))
+    .filter(el => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0 && !el.closest('[aria-hidden="true"], [inert]'));
   if (!elements.length) return;
   const current = document.activeElement as HTMLElement;
   if (!elements.includes(current)) { elements[0].focus(); return; }

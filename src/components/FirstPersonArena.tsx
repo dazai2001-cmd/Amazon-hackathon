@@ -8,13 +8,14 @@ import { goalDistance, moveInCourtyard, routeTo, shots, spawn, type WorldState, 
 import type { Quest, StoryFocus } from '../../shared/chapter';
 import type { WeaponPose } from '../../shared/weapons';
 import type { BodyPose } from '../../shared/body';
+import { scenePixelRatio, type RenderResolution } from '../lib/renderResolution';
 
 export type ArenaFrame = { duel: DuelSnapshot; active: boolean; equipment: DuelEquipment; opponent?: { pose: WeaponPose | null; body: BodyPose; lean: number }; world?: {
   mode: 'title' | 'memory' | 'explore' | 'dialogue' | 'lesson' | 'duel'; focus: StoryFocus; quest: Quest;
   guided: number; paused: boolean; hidden?: boolean; showWeapons: boolean; speaker?: string; tracking?: boolean;
 } };
 export type ArenaStatus = { ready: boolean; error: string | null; fps: number; triangles: number };
-type Props = { frame: MutableRefObject<ArenaFrame>; onStatus: (status: ArenaStatus) => void; onPointerMove: (x: number, y: number) => void; onWorldUpdate?: (state: WorldState) => void };
+type Props = { resolution?: RenderResolution; frame: MutableRefObject<ArenaFrame>; onStatus: (status: ArenaStatus) => void; onPointerMove: (x: number, y: number) => void; onWorldUpdate?: (state: WorldState) => void };
 
 function texture(kind: 'stone' | 'earth' | 'wood' | 'banner' | 'shadow') {
   const canvas = document.createElement('canvas'); canvas.width = 256; canvas.height = kind === 'banner' ? 512 : 256;
@@ -94,7 +95,7 @@ function disposeScene(root: THREE.Object3D) {
   for (const geometry of geometries) geometry.dispose();
 }
 
-export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWorldUpdate }: Props) {
+export default function FirstPersonArena({ resolution = 1080, frame, onStatus, onPointerMove, onWorldUpdate }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseLook = useRef({ x: 0, y: 0 }), previousPointer = useRef<{ x: number; y: number } | null>(null);
   useEffect(() => {
@@ -230,9 +231,14 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
     };
     void load();
     const resize = () => {
-      const rect = canvas.getBoundingClientRect(), cap = tv ? 1280 : 1920;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, tv ? 1 : 1.5, cap / Math.max(1, rect.width)));
-      renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false); camera.aspect = rect.width / Math.max(1, rect.height); camera.updateProjectionMatrix();
+      const rect = canvas.getBoundingClientRect();
+      const ratio = scenePixelRatio(rect.width, rect.height, window.devicePixelRatio || 1, resolution);
+      // CSS can report fractional sizes; round physical pixels explicitly so
+      // a 1280-wide buffer does not become 1279 through WebGL's floor rounding.
+      renderer.setSize(Math.max(1, Math.round(rect.width * ratio)), Math.max(1, Math.round(rect.height * ratio)), false);
+      camera.aspect = rect.width / Math.max(1, rect.height); camera.updateProjectionMatrix();
+      canvas.dataset.renderWidth = String(canvas.width); canvas.dataset.renderHeight = String(canvas.height);
+      if (new URLSearchParams(location.search).get('qa') === 'render') console.info('[AshenGateRender]', JSON.stringify({ width: canvas.width, height: canvas.height, resolution, density: window.devicePixelRatio }));
     };
     const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
     const lost = (event: Event) => { event.preventDefault(); onStatus({ ready: false, error: 'The 3D display was interrupted. Reload the scene to continue.', fps: 0, triangles: 0 }); };
@@ -240,7 +246,7 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
     const heldKeys = new Set<string>();
     let position: WorldPoint = { ...spawn }, yaw = spawn.yaw, pitch = -.025, previousMode = '', guideVersion = 0, guidePath: WorldPoint[] = [], moving = false;
     const keyDown = (event: KeyboardEvent) => {
-      if (frame.current.world?.mode !== 'explore' || frame.current.world.paused || ['INPUT', 'BUTTON'].includes((event.target as HTMLElement).tagName) && !event.key.startsWith('Arrow')) return;
+      if (frame.current.world?.mode !== 'explore' || frame.current.world.paused || document.activeElement !== canvas) return;
       const key = event.key.toLowerCase();
       if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(key)) {
         event.preventDefault(); event.stopImmediatePropagation(); heldKeys.add(key); guidePath = [];
@@ -423,7 +429,7 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
     };
     raf = requestAnimationFrame(render);
     return () => { disposed = true; controller.abort(); cancelAnimationFrame(raf); observer.disconnect(); canvas.removeEventListener('webglcontextlost', lost); window.removeEventListener('keydown', keyDown, true); window.removeEventListener('keyup', keyUp); window.removeEventListener('blur', clearKeys); mixer?.stopAllAction(); disposeScene(scene); rainGeometry.dispose(); (rain.material as THREE.Material).dispose(); renderer.dispose(); };
-  }, [frame, onStatus, onWorldUpdate]);
+  }, [frame, onStatus, onWorldUpdate, resolution]);
   return <canvas ref={canvasRef} tabIndex={0} className="first-person-canvas" aria-label="First-person 3D courtyard: Alden, Mara, the forge and the east gate" onPointerDown={event => { previousPointer.current = { x: event.clientX, y: event.clientY }; event.currentTarget.focus(); }} onPointerUp={() => { previousPointer.current = null; }} onPointerMove={event => {
     const rect = event.currentTarget.getBoundingClientRect();
     if (frame.current.world?.mode === 'explore') { if (event.buttons === 1 && previousPointer.current) { mouseLook.current.x += event.clientX - previousPointer.current.x; mouseLook.current.y += event.clientY - previousPointer.current.y; previousPointer.current = { x: event.clientX, y: event.clientY }; } }

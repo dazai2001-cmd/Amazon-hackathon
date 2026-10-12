@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class MainActivity extends Activity {
     private WebView web;
     private String serverUrl;
-    private long lastBack = 0;
+    private boolean menuSetupShown = false;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,50 +84,43 @@ public class MainActivity extends Activity {
         }
         if (movementKey != null && (event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.ACTION_UP)) {
             String type = event.getAction() == KeyEvent.ACTION_DOWN ? "keydown" : "keyup";
-            web.evaluateJavascript("window.dispatchEvent(new KeyboardEvent('" + type + "',{key:"
-                + JSONObject.quote(movementKey) + ",bubbles:true,cancelable:true,repeat:" + (event.getRepeatCount() > 0) + "}))", null);
+            forwardKey(type, movementKey, event.getRepeatCount() > 0, false);
             return true;
         }
         // WebView can consume media keys before Activity.onKeyDown sees them.
-        if (event.getKeyCode() == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE || event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_MENU && event.getAction() == KeyEvent.ACTION_UP) menuSetupShown = false;
+            if (event.getKeyCode() == KeyEvent.KEYCODE_MENU && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) menuSetupShown = false;
+            if (event.getKeyCode() == KeyEvent.KEYCODE_MENU && event.getAction() == KeyEvent.ACTION_DOWN && !menuSetupShown && (event.isLongPress() || event.getRepeatCount() >= 3) && BuildConfig.DEBUG) {
+                menuSetupShown = true;
+                showServerDialog("Enter the address of your MoveRoom server.");
+                return true;
+            }
             if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
-                web.evaluateJavascript("window.dispatchEvent(new KeyboardEvent('keydown',{key:' ',bubbles:true,cancelable:true}))", null);
+                forwardKey("keydown", " ", false, false);
+            }
+            return true;
+        }
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+                forwardKey("keydown", "Escape", false, true);
             }
             return true;
         }
         return super.dispatchKeyEvent(event);
     }
 
-    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) { showServerDialog("Enter the address of your MoveRoom server."); return true; }
-        String key = null;
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_DPAD_LEFT: key = "ArrowLeft"; break;
-            case KeyEvent.KEYCODE_DPAD_RIGHT: key = "ArrowRight"; break;
-            case KeyEvent.KEYCODE_DPAD_UP: key = "ArrowUp"; break;
-            case KeyEvent.KEYCODE_DPAD_DOWN: key = "ArrowDown"; break;
-            case KeyEvent.KEYCODE_DPAD_CENTER: case KeyEvent.KEYCODE_ENTER: key = "Enter"; break;
-            case KeyEvent.KEYCODE_BACK:
-                long now = System.currentTimeMillis();
-                if (now - lastBack < 500) { finish(); return true; }
-                lastBack = now; key = "Escape"; break;
-        }
-        if (key != null) {
-            final String value = JSONObject.quote(key);
-            web.evaluateJavascript("window.dispatchEvent(new KeyboardEvent('keydown',{key:" + value + ",bubbles:true,cancelable:true}))", null);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override public boolean onKeyUp(int keyCode, KeyEvent event) {
-        String key = null;
-        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) key = "ArrowLeft";
-        if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) key = "ArrowRight";
-        if (keyCode == KeyEvent.KEYCODE_DPAD_UP) key = "ArrowUp";
-        if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) key = "ArrowDown";
-        if (key != null) { web.evaluateJavascript("window.dispatchEvent(new KeyboardEvent('keyup',{key:" + JSONObject.quote(key) + ",bubbles:true}))", null); return true; }
-        return super.onKeyUp(keyCode, event);
+    private void forwardKey(String type, String key, boolean repeat, boolean exitIfUnhandled) {
+        // Target the focused DOM control so React inputs and sliders receive
+        // Select and arrows. The event still bubbles to the game controller.
+        String script = "(document.activeElement||document.body||window).dispatchEvent(new KeyboardEvent("
+            + JSONObject.quote(type) + ",{key:" + JSONObject.quote(key)
+            + ",bubbles:true,cancelable:true,repeat:" + repeat + "}))";
+        web.evaluateJavascript(script, result -> {
+            // Back first closes the game's current menu. Only an unhandled
+            // Back at the main menu exits; quick nested Back presses are safe.
+            if (exitIfUnhandled && "true".equals(result)) runOnUiThread(() -> finish());
+        });
     }
     @Override protected void onPause() { super.onPause(); web.onPause(); }
     @Override protected void onResume() { super.onResume(); if (web != null) web.onResume(); }

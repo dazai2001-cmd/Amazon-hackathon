@@ -9,3 +9,9 @@ The setup lesson shows live phone connection, body-in-view and calibration statu
 The guide supports the TV D-pad, Select and Back, along with keyboard Tab/Enter/Escape. Focus stays in the guide while it is open; the underlying interface is inert. Closing restores a usable game/menu focus. Story progression, character dialogue, combat and training counters pause while reading. In a live multiplayer pairing the server pauses both fighters and the guide prominently explains the 30-second forfeit window. An existing manual pause remains in effect when help closes.
 
 Alden’s three playable weapon lessons remain the practical tutorial: hold a shield, make a cut, and lean away then return. The field guide explains how to reach those lessons and the other modes; it does not mark them complete or grant exercise rewards.
+
+Normal TV play uses the Fire TV remote for navigation and the Android phone camera for sword fighting and exercise form. No desktop keyboard is required. In the courtyard, D-pad up/down walks and left/right turns when the 3D view is focused; Select interacts or takes the guided route. Back opens the pause menu, which also offers the journal, training, help and audio settings. Dialogue choices use D-pad and Select, or the optional camera gestures.
+
+In Clan Wars, highlight a name or invite-code field and press Select to open the on-screen keyboard. Use D-pad to highlight letters, Select to type, Clear/Delete/Space/Aa to edit, Done to save, or Back to cancel. Focus returns to the field; use D-pad to continue through the form. Audio sliders use left/right for five-percent steps and up/down to leave the slider. Play/Pause and Menu pause the current activity. Back at the native main menu exits the app.
+
+The main menu's **Settings → 3D resolution** defaults to **1080p**. Select toggles the saved preference to **720p** for lower GPU load, and back to Full HD. The interface uses the screen's available output resolution in both modes.

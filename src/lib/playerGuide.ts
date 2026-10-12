@@ -2,7 +2,7 @@ export type GuideTopic = 'setup' | 'combat' | 'story' | 'training' | 'clans';
 export const GUIDE_KEY = 'moveroom.player-guide.v1';
 export const guidePages: { topic: GuideTopic; label: string; title: string; summary: string; steps: [string, string][]; note: string }[] = [
   { topic: 'setup', label: 'Get ready', title: 'Your phone is the controller.',
-    summary: 'Play on the TV. Let your Android camera see you.',
+    summary: 'Use the Fire TV remote for menus. Your Android camera tracks combat and exercises.',
     steps: [
       ['Pair your own phone', 'Open Connect controller, scan the QR code, then start the camera on your Android phone. Keep both screens on the same game server.'],
       ['Step into the frame', 'Prop the phone facing you. Keep shoulders, elbows, hands and hips visible. Leave space to move your arms with empty hands.'],
@@ -18,8 +18,8 @@ export const guidePages: { topic: GuideTopic; label: string; title: string; summ
   { topic: 'story', label: 'Your adventure', title: 'Follow the next objective.',
     summary: 'Begin Chapter I, meet Alden, then earn your first victory against Mara.',
     steps: [
-      ['Follow the quest marker', 'The objective tells you who to meet. Choose the guided route, or raise your left hand and hold for a moment to start walking towards the objective.'],
-      ['Talk and choose', 'Dialogue has voices and subtitles. Raise and hold your left hand to continue; lean left or right to select a response, then raise your hand to confirm. The remote also works.'],
+      ['Follow the quest marker', 'Select the guided route, or choose Explore with remote: up/down walk and left/right turn. Select speaks or starts a guided walk. Back opens the menu. You can also hold your left hand up to follow the objective.'],
+      ['Talk and choose', 'Use the D-pad to highlight a response and Select to confirm or continue. Voices and subtitles tell the story. Camera controls also work: lean to choose and hold your left hand up to confirm.'],
       ['Return to your journey', 'The journal keeps your objective. Train opens Alden’s exercise hall anytime. Clan war hall opens multiplayer. Story choices, coins and gear are saved on this device.'],
     ], note: 'Turn sound on to hear the characters. Choices wait for you. Use Pause to take a break or open the journal and audio settings.' },
   { topic: 'training', label: 'Train with Alden', title: 'Earn every repetition.',

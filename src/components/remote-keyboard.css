@@ -1,0 +1,10 @@
+.remote-keyboard-scrim{position:fixed;inset:0;z-index:100;background:#050b08e8;display:grid;place-items:center;padding:24px}
+.remote-keyboard{width:min(600px,92vw);max-height:94svh;overflow:auto;padding:25px 30px;background:#182119;border:1px solid #bca17180;color:#efe8d5;box-shadow:0 16px 80px #0009}
+.remote-keyboard h2{font:28px Georgia,serif;margin:10px 0 16px;text-transform:capitalize}
+.remote-keyboard output{display:block;min-height:47px;padding:10px 14px;background:#0c140f;border:1px solid #8d9c774d;font-size:21px;overflow-wrap:anywhere}
+.remote-keyboard output>span{color:#8d9e8b;font-size:14px}.remote-keyboard>small{display:block;text-align:right;margin:5px 0 12px;color:#a8b79e;font-size:11px}
+.remote-key-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.remote-keyboard button{background:#263327;border:1px solid #778c6945;color:#efe8d5;min-height:39px;padding:8px;font-size:15px;border-radius:2px}
+.remote-keyboard button:focus{outline:3px solid #e1c384;outline-offset:2px;background:#43543b;color:#fff}.remote-keyboard button:hover{background:#43543b}
+.remote-key-tools{display:flex;gap:9px;margin:12px 0}.remote-key-tools button{flex:1;font-size:13px}.remote-keyboard footer{display:flex;gap:10px;align-items:center;margin-top:18px}.remote-keyboard footer p{margin-right:auto;font-size:11px;color:#b4c1a7}.remote-keyboard .remote-key-done{background:#d1b57a;color:#192216;min-width:90px;font-weight:700}
+.clan-remote-hint{color:#c9b17c;font-size:10px;line-height:1.7;margin-bottom:12px}
+@media(max-height:650px){.remote-keyboard{padding:15px 25px}.remote-keyboard h2{font-size:24px;margin:7px 0 10px}.remote-keyboard button{min-height:32px;padding:5px}.remote-key-tools{margin:9px 0}.remote-keyboard footer{margin-top:12px}}
