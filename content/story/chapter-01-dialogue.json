@@ -1,0 +1,1002 @@
+{
+  "chapter": "C01",
+  "title": "The Gate That Stayed Shut",
+  "draft": 1,
+  "source": "docs/CHAPTER_01_SCRIPT.md",
+  "purpose": "Voice recording and content integration catalogue. Conditions are authoring notes, not executable gameplay rules. Player choices, letters, rewards, and full scene directions remain in the screenplay.",
+  "scenes": [
+    {
+      "id": "C01_S01",
+      "title": "A closed gate"
+    },
+    {
+      "id": "C01_S02",
+      "title": "A summons at the wall"
+    },
+    {
+      "id": "C01_S03",
+      "title": "The first circuit"
+    },
+    {
+      "id": "C01_S04",
+      "title": "The space behind a shield"
+    },
+    {
+      "id": "C01_S05",
+      "title": "Earn the opening"
+    },
+    {
+      "id": "C01_S06",
+      "title": "Tomas’s counter"
+    },
+    {
+      "id": "C01_S07",
+      "title": "A name beside yours"
+    },
+    {
+      "id": "C01_S08",
+      "title": "The letter"
+    }
+  ],
+  "dialogue": [
+    {
+      "id": "C01_S01_L001",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "REMEMBERED VOICE",
+      "condition": null,
+      "text": "Alden! There are still people inside!",
+      "sourceLine": 29
+    },
+    {
+      "id": "C01_S01_L002",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Close the gate.",
+      "sourceLine": 33
+    },
+    {
+      "id": "C01_S01_L003",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "You’re early.",
+      "sourceLine": 41
+    },
+    {
+      "id": "C01_S01_L004",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": "if dawn",
+      "text": "Then you’ve already learned to listen. Come in.",
+      "sourceLine": 49
+    },
+    {
+      "id": "C01_S01_L005",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": "if sleepless",
+      "text": "A busy head needs something useful to do. Come in.",
+      "sourceLine": 51
+    },
+    {
+      "id": "C01_S01_L006",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": "if squires",
+      "text": "People say many things about this yard. You may judge this one for yourself.",
+      "sourceLine": 53
+    },
+    {
+      "id": "C01_S01_L007",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "What brought you here?",
+      "sourceLine": 55
+    },
+    {
+      "id": "C01_S01_L008",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": "coin",
+      "text": "A practical answer. Let’s see that you live long enough to spend it.",
+      "sourceLine": 63
+    },
+    {
+      "id": "C01_S01_L009",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": "belonging",
+      "text": "Choose the people beside you carefully. Their promises will become your work.",
+      "sourceLine": 65
+    },
+    {
+      "id": "C01_S01_L010",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": "truth",
+      "text": "That answer will cost you more than the first two.",
+      "sourceLine": 67
+    },
+    {
+      "id": "C01_S01_L011",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "For today, these are yours. Put the shield on your left. The sword goes in your right.",
+      "sourceLine": 71
+    },
+    {
+      "id": "C01_S01_L012",
+      "scene": "C01_S01",
+      "context": "A closed gate",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Your first task is to learn what you can control.",
+      "sourceLine": 75
+    },
+    {
+      "id": "C01_S02_L001",
+      "scene": "C01_S02",
+      "context": "A summons at the wall",
+      "speaker": "HERALD",
+      "condition": null,
+      "text": "By command of King Orren: the Crown Tournament shall name the protector of his heir. Candidates must bear the seals of the Five Masters. The lists are open to orders and independent champions.",
+      "sourceLine": 83
+    },
+    {
+      "id": "C01_S02_L002",
+      "scene": "C01_S02",
+      "context": "A summons at the wall",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "There is no order left to send me. And the Crown struck my name from the lists.",
+      "sourceLine": 89
+    },
+    {
+      "id": "C01_S02_L003",
+      "scene": "C01_S02",
+      "context": "A summons at the wall",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "A banner is easy to make. We’ll begin with the person beneath it.",
+      "sourceLine": 93
+    },
+    {
+      "id": "C01_S02_L004",
+      "scene": "C01_S02",
+      "context": "A summons at the wall",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "The king is dying, Alden. His messengers are already on the road. If your student intends to earn five seals, you should let them leave this yard eventually.",
+      "sourceLine": 97
+    },
+    {
+      "id": "C01_S02_L005",
+      "scene": "C01_S02",
+      "context": "A summons at the wall",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "After they can keep a shield up.",
+      "sourceLine": 99
+    },
+    {
+      "id": "C01_S02_L006",
+      "scene": "C01_S02",
+      "context": "A summons at the wall",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "Then I’ll be in the lists. Bring them before sunset.",
+      "sourceLine": 101
+    },
+    {
+      "id": "C01_S02_L007",
+      "scene": "C01_S02",
+      "context": "A summons at the wall",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "We have time for a first lesson.",
+      "sourceLine": 105
+    },
+    {
+      "id": "C01_S03_L001",
+      "scene": "C01_S03",
+      "context": "Block A — Legs: squats",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "A shield can stop a blade. Your feet must still carry you out of its way.",
+      "sourceLine": 117
+    },
+    {
+      "id": "C01_S03_L002",
+      "scene": "C01_S03",
+      "context": "Block A — Legs: squats",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Show me one slow movement first. We’ll use a range you can repeat comfortably.",
+      "sourceLine": 121
+    },
+    {
+      "id": "C01_S03_L003",
+      "scene": "C01_S03",
+      "context": "Block A — Legs: squats",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Ready. Lower, then return to your starting position.",
+      "sourceLine": 125
+    },
+    {
+      "id": "C01_S03_L004",
+      "scene": "C01_S03",
+      "context": "Block A — Legs: squats",
+      "speaker": "ALDEN",
+      "condition": "completion",
+      "text": "Good. Remember that control when someone asks you to hurry.",
+      "sourceLine": 129
+    },
+    {
+      "id": "C01_S03_L005",
+      "scene": "C01_S03",
+      "context": "Block B — Arms: push-ups",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Your sword will feel heavier near the end of a duel. We’ll prepare for that now.",
+      "sourceLine": 135
+    },
+    {
+      "id": "C01_S03_L006",
+      "scene": "C01_S03",
+      "context": "Block B — Arms: push-ups",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Choose the variation you can manage today.",
+      "sourceLine": 139
+    },
+    {
+      "id": "C01_S03_L007",
+      "scene": "C01_S03",
+      "context": "Block B — Arms: push-ups",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "One slow repetition for the view. Then we’ll begin your set.",
+      "sourceLine": 143
+    },
+    {
+      "id": "C01_S03_L008",
+      "scene": "C01_S03",
+      "context": "Block B — Arms: push-ups",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Lower, return, and let me see you reset.",
+      "sourceLine": 147
+    },
+    {
+      "id": "C01_S03_L009",
+      "scene": "C01_S03",
+      "context": "Block B — Arms: push-ups",
+      "speaker": "ALDEN",
+      "condition": "completion",
+      "text": "Enough for this lesson. You have a steadier foundation to work from.",
+      "sourceLine": 149
+    },
+    {
+      "id": "C01_S03_L010",
+      "scene": "C01_S03",
+      "context": "Block C — Breath: marching or jogging in place",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "A duel lasts longer than its first exchange.",
+      "sourceLine": 155
+    },
+    {
+      "id": "C01_S03_L011",
+      "scene": "C01_S03",
+      "context": "Block C — Breath: marching or jogging in place",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Stay in your space. Find a pace you can maintain.",
+      "sourceLine": 159
+    },
+    {
+      "id": "C01_S03_L012",
+      "scene": "C01_S03",
+      "context": "Block C — Breath: marching or jogging in place",
+      "speaker": "ALDEN",
+      "condition": "halfway",
+      "text": "Keep your pace.",
+      "sourceLine": 163
+    },
+    {
+      "id": "C01_S03_L013",
+      "scene": "C01_S03",
+      "context": "Block C — Breath: marching or jogging in place",
+      "speaker": "ALDEN",
+      "condition": "final five seconds",
+      "text": "Five seconds remain.",
+      "sourceLine": 165
+    },
+    {
+      "id": "C01_S03_L014",
+      "scene": "C01_S03",
+      "context": "Block C — Breath: marching or jogging in place",
+      "speaker": "ALDEN",
+      "condition": "completion",
+      "text": "Now you know the pace you can return to.",
+      "sourceLine": 167
+    },
+    {
+      "id": "C01_S03_L015",
+      "scene": "C01_S03",
+      "context": "End of circuit",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Those three lessons will stay with you: a measured strike, a sure recovery, and enough breath for another exchange.",
+      "sourceLine": 173
+    },
+    {
+      "id": "C01_S03_L016",
+      "scene": "C01_S03",
+      "context": "End of circuit",
+      "speaker": "ALDEN",
+      "condition": "partial circuit",
+      "text": "Keep what you’ve learned today. There’s time for the rest.",
+      "sourceLine": 177
+    },
+    {
+      "id": "C01_S03_L017",
+      "scene": "C01_S03",
+      "context": "End of circuit",
+      "speaker": "ALDEN",
+      "condition": "continue without a block",
+      "text": "We can return to that lesson. Let’s work with what you have today.",
+      "sourceLine": 181
+    },
+    {
+      "id": "C01_S04_L001",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Raise your shield. Your left hand places it. Hold your guard.",
+      "sourceLine": 189
+    },
+    {
+      "id": "C01_S04_L002",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": "guard succeeds",
+      "text": "There. Keep the opening above the shield in mind.",
+      "sourceLine": 193
+    },
+    {
+      "id": "C01_S04_L003",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Your blade follows your wrist and forearm. Make one measured cut, then recover.",
+      "sourceLine": 195
+    },
+    {
+      "id": "C01_S04_L004",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": "cut succeeds",
+      "text": "A clear movement. Let the blade recover before the next.",
+      "sourceLine": 199
+    },
+    {
+      "id": "C01_S04_L005",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Finally, shift into the space beside you.",
+      "sourceLine": 201
+    },
+    {
+      "id": "C01_S04_L006",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": "evasion succeeds",
+      "text": "A small opening is often enough.",
+      "sourceLine": 205
+    },
+    {
+      "id": "C01_S04_L007",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Guard spends stamina. Striking spends stamina. Lower your guard between exchanges and give yourself time to recover.",
+      "sourceLine": 207
+    },
+    {
+      "id": "C01_S04_L008",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "Will you explain every duel before allowing one?",
+      "sourceLine": 211
+    },
+    {
+      "id": "C01_S04_L009",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Only their first.",
+      "sourceLine": 213
+    },
+    {
+      "id": "C01_S04_L010",
+      "scene": "C01_S04",
+      "context": "The space behind a shield",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "Then bring your squire.",
+      "sourceLine": 215
+    },
+    {
+      "id": "C01_S05_L001",
+      "scene": "C01_S05",
+      "context": "Earn the opening",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "We fight until one of us yields. The blades are blunted for the lists. Read my guard, protect your line, and watch your stamina.",
+      "sourceLine": 221
+    },
+    {
+      "id": "C01_S05_L002",
+      "scene": "C01_S05",
+      "context": "Earn the opening",
+      "speaker": "MARA",
+      "condition": "first arena",
+      "text": "Then you’ll remember this one.",
+      "sourceLine": 229
+    },
+    {
+      "id": "C01_S05_L003",
+      "scene": "C01_S05",
+      "context": "Earn the opening",
+      "speaker": "MARA",
+      "condition": "ready",
+      "text": "We’ll find out.",
+      "sourceLine": 231
+    },
+    {
+      "id": "C01_S05_L004",
+      "scene": "C01_S05",
+      "context": "Earn the opening",
+      "speaker": "MARA",
+      "condition": "losing",
+      "text": "You learn where your guard failed. Then you choose whether to try again.",
+      "sourceLine": 233
+    },
+    {
+      "id": "C01_S05_L005",
+      "scene": "C01_S05",
+      "context": "Earn the opening",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Watch her shoulders. She’ll show you where the next strike begins.",
+      "sourceLine": 235
+    },
+    {
+      "id": "C01_S05_L006",
+      "scene": "C01_S05",
+      "context": "First exchange — Guard and answer",
+      "speaker": "ALDEN",
+      "condition": "first occurrence only",
+      "text": "Cover the high line.",
+      "sourceLine": 243
+    },
+    {
+      "id": "C01_S05_L007",
+      "scene": "C01_S05",
+      "context": "Second exchange — Find the opening",
+      "speaker": "ALDEN",
+      "condition": "first occurrence only",
+      "text": "Her blade comes from the left.",
+      "sourceLine": 259
+    },
+    {
+      "id": "C01_S05_L008",
+      "scene": "C01_S05",
+      "context": "Third exchange — Patience",
+      "speaker": "ALDEN",
+      "condition": "if the player repeatedly attacks the guard",
+      "text": "Cover the right, or move aside.",
+      "sourceLine": 269
+    },
+    {
+      "id": "C01_S05_L009",
+      "scene": "C01_S05",
+      "context": "Third exchange — Patience",
+      "speaker": "MARA",
+      "condition": "if the player waits and counters",
+      "text": "Better. You made me commit.",
+      "sourceLine": 273
+    },
+    {
+      "id": "C01_S05_L010",
+      "scene": "C01_S05",
+      "context": "Remaining exchanges",
+      "speaker": "ALDEN",
+      "condition": "low stamina, once per low-stamina episode",
+      "text": "Make room. Let your stamina return.",
+      "sourceLine": 279
+    },
+    {
+      "id": "C01_S05_L011",
+      "scene": "C01_S05",
+      "context": "Remaining exchanges",
+      "speaker": "ALDEN",
+      "condition": "tracking loss",
+      "text": "Hold. We’ll continue when I can see you.",
+      "sourceLine": 281
+    },
+    {
+      "id": "C01_S05_L012",
+      "scene": "C01_S05",
+      "context": "Victory",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "Enough. I yield. Your trial.",
+      "sourceLine": 289
+    },
+    {
+      "id": "C01_S05_L013",
+      "scene": "C01_S05",
+      "context": "Victory",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "That was your first trial. Remember what worked.",
+      "sourceLine": 291
+    },
+    {
+      "id": "C01_S05_L014",
+      "scene": "C01_S05",
+      "context": "Victory",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "You may enjoy that compliment. He rarely gives them.",
+      "sourceLine": 293
+    },
+    {
+      "id": "C01_S05_L015",
+      "scene": "C01_S05",
+      "context": "Victory",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "Ilyra Dane keeps the first master’s seal at Ironbridge. Tell her I sent you. She’ll still make you earn it.",
+      "sourceLine": 297
+    },
+    {
+      "id": "C01_S05_L016",
+      "scene": "C01_S05",
+      "context": "Defeat",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "Enough. You yield. My trial.",
+      "sourceLine": 303
+    },
+    {
+      "id": "C01_S05_L017",
+      "scene": "C01_S05",
+      "context": "Defeat",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Take a moment. Then we’ll look at the exchange that cost you.",
+      "sourceLine": 305
+    },
+    {
+      "id": "C01_S05_L018",
+      "scene": "C01_S05",
+      "context": "Defeat",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "You can try me again before we leave.",
+      "sourceLine": 307
+    },
+    {
+      "id": "C01_S05_L019",
+      "scene": "C01_S05",
+      "context": "Defeat",
+      "speaker": "MARA",
+      "condition": "continuing",
+      "text": "At Ironbridge, ask for Ilyra Dane. Tell her you still have work to do. She’ll appreciate an honest introduction.",
+      "sourceLine": 315
+    },
+    {
+      "id": "C01_S05_L020",
+      "scene": "C01_S05",
+      "context": "Motive callback, after either outcome",
+      "speaker": "MARA",
+      "condition": "coin motive",
+      "text": "The road has purses larger than this one. Keep enough coin to reach them.",
+      "sourceLine": 321
+    },
+    {
+      "id": "C01_S05_L021",
+      "scene": "C01_S05",
+      "context": "Motive callback, after either outcome",
+      "speaker": "MARA",
+      "condition": "belonging motive",
+      "text": "You kept coming back into the exchange. An order can use someone who does that.",
+      "sourceLine": 323
+    },
+    {
+      "id": "C01_S05_L022",
+      "scene": "C01_S05",
+      "context": "Motive callback, after either outcome",
+      "speaker": "MARA",
+      "condition": "truth motive",
+      "text": "You ask direct questions. Keep that habit when you reach the masters.",
+      "sourceLine": 325
+    },
+    {
+      "id": "C01_S06_L001",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "TOMAS",
+      "condition": null,
+      "text": "Alden’s new squire. I wondered who’d be leaving my door with that shield.",
+      "sourceLine": 331
+    },
+    {
+      "id": "C01_S06_L002",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "TOMAS",
+      "condition": null,
+      "text": "I’ve repaired it often enough to claim some credit.",
+      "sourceLine": 335
+    },
+    {
+      "id": "C01_S06_L003",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Twenty coins for the road.",
+      "sourceLine": 339
+    },
+    {
+      "id": "C01_S06_L004",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "An investment. Spend it with thought.",
+      "sourceLine": 343
+    },
+    {
+      "id": "C01_S06_L005",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "TOMAS",
+      "condition": null,
+      "text": "Your kit will get you to Ironbridge. If you want an upgrade, choose what you expect to need.",
+      "sourceLine": 349
+    },
+    {
+      "id": "C01_S06_L006",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "TOMAS",
+      "condition": "selecting the sword",
+      "text": "A good edge. Remember what it asks of your arm.",
+      "sourceLine": 361
+    },
+    {
+      "id": "C01_S06_L007",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "TOMAS",
+      "condition": "selecting the shield",
+      "text": "More cover. Remember what it weighs.",
+      "sourceLine": 363
+    },
+    {
+      "id": "C01_S06_L008",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "TOMAS",
+      "condition": "keeping the kit",
+      "text": "A sensible traveller knows what they can afford.",
+      "sourceLine": 365
+    },
+    {
+      "id": "C01_S06_L009",
+      "scene": "C01_S06",
+      "context": "Tomas’s counter",
+      "speaker": "TOMAS",
+      "condition": "insufficient coins",
+      "text": "Keep your purse. Your present kit still has work in it.",
+      "sourceLine": 369
+    },
+    {
+      "id": "C01_S07_L001",
+      "scene": "C01_S07",
+      "context": "A name beside yours",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "The Crown Tournament takes individual champions. The road belongs to orders.",
+      "sourceLine": 377
+    },
+    {
+      "id": "C01_S07_L002",
+      "scene": "C01_S07",
+      "context": "A name beside yours",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "You may. You’ll still need the five seals.",
+      "sourceLine": 381
+    },
+    {
+      "id": "C01_S07_L003",
+      "scene": "C01_S07",
+      "context": "A name beside yours",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "When you have companions, put a name to your order. Challenge another. Three fighters from each side; each has a duel. Your victories belong to the people beside you as well.",
+      "sourceLine": 385
+    },
+    {
+      "id": "C01_S07_L004",
+      "scene": "C01_S07",
+      "context": "A name beside yours",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "An order begins when someone else can depend on you.",
+      "sourceLine": 387
+    },
+    {
+      "id": "C01_S07_L005",
+      "scene": "C01_S07",
+      "context": "A name beside yours",
+      "speaker": "MARA",
+      "condition": "founded/joined",
+      "text": "I’ll remember your banner when it reaches the lists.",
+      "sourceLine": 397
+    },
+    {
+      "id": "C01_S07_L006",
+      "scene": "C01_S07",
+      "context": "A name beside yours",
+      "speaker": "MARA",
+      "condition": "travelling alone",
+      "text": "Then I’ll remember your name.",
+      "sourceLine": 399
+    },
+    {
+      "id": "C01_S08_L001",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "This came with the proclamation. It was addressed to the next person he trained.",
+      "sourceLine": 411
+    },
+    {
+      "id": "C01_S08_L002",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "My first squire.",
+      "sourceLine": 431
+    },
+    {
+      "id": "C01_S08_L003",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "I gave an order.",
+      "sourceLine": 437
+    },
+    {
+      "id": "C01_S08_L004",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Yes.",
+      "sourceLine": 441
+    },
+    {
+      "id": "C01_S08_L005",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": "trust",
+      "text": "I’ll try to deserve that.",
+      "sourceLine": 451
+    },
+    {
+      "id": "C01_S08_L006",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": "demand truth",
+      "text": "You will hear it. Some of it must come from people who were there.",
+      "sourceLine": 453
+    },
+    {
+      "id": "C01_S08_L007",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": "another account",
+      "text": "You should. Ask the masters as well.",
+      "sourceLine": 455
+    },
+    {
+      "id": "C01_S08_L008",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "MARA",
+      "condition": null,
+      "text": "Ironbridge is two days east.",
+      "sourceLine": 457
+    },
+    {
+      "id": "C01_S08_L009",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "Ilyra saw the gate before it burned. Begin with her.",
+      "sourceLine": 459
+    },
+    {
+      "id": "C01_S08_L010",
+      "scene": "C01_S08",
+      "context": "The letter",
+      "speaker": "ALDEN",
+      "condition": null,
+      "text": "At dawn, you leave.",
+      "sourceLine": 463
+    }
+  ],
+  "exerciseCues": [
+    {
+      "id": "C01_CUE_rep_completed",
+      "label": "Rep completed",
+      "speaker": "ALDEN",
+      "text": "{count}.",
+      "trigger": "One complete calibrated repetition",
+      "sourceLine": 477
+    },
+    {
+      "id": "C01_CUE_final_rep_completed",
+      "label": "Final rep completed",
+      "speaker": "ALDEN",
+      "text": "That’s your set.",
+      "trigger": "Selected target reached",
+      "sourceLine": 478
+    },
+    {
+      "id": "C01_CUE_no_lower_phase",
+      "label": "No lower phase",
+      "speaker": "ALDEN",
+      "text": "Show me the lower part before you return.",
+      "trigger": "Start/reset reached without the calibrated lower phase",
+      "sourceLine": 479
+    },
+    {
+      "id": "C01_CUE_no_reset_phase",
+      "label": "No reset phase",
+      "speaker": "ALDEN",
+      "text": "Return to your starting position before the next.",
+      "trigger": "Lower phase reached without returning/resetting",
+      "sourceLine": 480
+    },
+    {
+      "id": "C01_CUE_motion_is_too_fast_to_assess",
+      "label": "Motion is too fast to assess",
+      "speaker": "ALDEN",
+      "text": "A little slower. Give me time to see the movement.",
+      "trigger": "Validated cadence/phase evidence; not merely low camera FPS",
+      "sourceLine": 481
+    },
+    {
+      "id": "C01_CUE_squat_range_not_reached",
+      "label": "Squat range not reached",
+      "speaker": "ALDEN",
+      "text": "You haven’t reached the range we set. Reset, then try again.",
+      "trigger": "Confident tracking, calibrated personal range missed",
+      "sourceLine": 482
+    },
+    {
+      "id": "C01_CUE_push_up_alignment_drift",
+      "label": "Push-up alignment drift",
+      "speaker": "ALDEN",
+      "text": "Your hips have drifted from the starting line. Reset.",
+      "trigger": "Sustained, confidently measured alignment change for the selected variation",
+      "sourceLine": 483
+    },
+    {
+      "id": "C01_CUE_joint_occluded",
+      "label": "Joint occluded",
+      "speaker": "ALDEN",
+      "text": "Let me see your shoulder and hips before we continue.",
+      "trigger": "Required landmarks not visible",
+      "sourceLine": 484
+    },
+    {
+      "id": "C01_CUE_tracking_absent",
+      "label": "Tracking absent",
+      "speaker": "ALDEN",
+      "text": "Hold there. We’ll continue when the view is clear.",
+      "trigger": "Tracking loss; counting pauses",
+      "sourceLine": 485
+    },
+    {
+      "id": "C01_CUE_camera_setup_needs_changing",
+      "label": "Camera setup needs changing",
+      "speaker": "ALDEN",
+      "text": "Set the view from your side for this lesson.",
+      "trigger": "Exercise setup has not passed its view check",
+      "sourceLine": 486
+    },
+    {
+      "id": "C01_CUE_player_pauses",
+      "label": "Player pauses",
+      "speaker": "ALDEN",
+      "text": "Take your time. Tell me when you’re ready.",
+      "trigger": "Explicit pause",
+      "sourceLine": 487
+    },
+    {
+      "id": "C01_CUE_player_changes_variation",
+      "label": "Player changes variation",
+      "speaker": "ALDEN",
+      "text": "A different approach. We’ll set your range again.",
+      "trigger": "Variant changed; recalibrate",
+      "sourceLine": 488
+    },
+    {
+      "id": "C01_CUE_player_resumes",
+      "label": "Player resumes",
+      "speaker": "ALDEN",
+      "text": "Begin from your starting position.",
+      "trigger": "Explicit resume with tracking restored",
+      "sourceLine": 489
+    },
+    {
+      "id": "C01_CUE_timed_exercise_inactivity",
+      "label": "Timed exercise inactivity",
+      "speaker": "ALDEN",
+      "text": "We’ll count again when your steps begin.",
+      "trigger": "Tracked but selected marching/jogging movement absent",
+      "sourceLine": 490
+    },
+    {
+      "id": "C01_CUE_timed_exercise_halfway",
+      "label": "Timed exercise halfway",
+      "speaker": "ALDEN",
+      "text": "Keep your pace.",
+      "trigger": "Half of tracked active target time completed",
+      "sourceLine": 491
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "moveroom",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "type": "module",
+  "description": "A phone-powered movement playground and coaching app for Fire TV.",
+  "scripts": {
+    "dev": "tsx server/index.ts",
+    "build": "tsc --noEmit && vite build",
+    "start": "tsx server/index.ts --production",
+    "test": "tsx --test tests/*.test.ts",
+    "test:vision:fixtures": "node scripts/prepare-vision-tests.mjs",
+    "assets": "node scripts/prepare-vision.mjs",
+    "android:build": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-android.ps1",
+    "android:run": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-emulator.ps1",
+    "phone:usb": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/connect-phone.ps1",
+    "postinstall": "node scripts/prepare-vision.mjs"
+  },
+  "dependencies": {
+    "@fontsource/manrope": "5.3.0",
+    "@mediapipe/tasks-vision": "1.1.0",
+    "lucide-react": "1.54.0",
+    "qrcode": "1.5.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "selfsigned": "5.5.0",
+    "three": "0.186.1",
+    "ws": "8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "@types/qrcode": "1.5.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.186.0",
+    "@types/ws": "8.18.2",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vite": "8.3.4"
+  }
+}

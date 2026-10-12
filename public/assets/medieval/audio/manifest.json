@@ -1,0 +1,936 @@
+{
+  "version": 1,
+  "voices": {
+    "C01_S01_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L001.mp3",
+      "duration": 2.535,
+      "speaker": "REMEMBERED VOICE",
+      "voice": "bf_isabella",
+      "name": "A voice at the gate",
+      "hash": "bee45a26a65d7e52bd439ac379c40d8b5b3b9a5482abc138378f0ce934bd393f"
+    },
+    "C01_S01_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L002.mp3",
+      "duration": 1.49,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "d9781a0136789c77152014c27a58ae238d9e90be3a03ae995665d0fbb405b186"
+    },
+    "C01_S01_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L003.mp3",
+      "duration": 1.405,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "6c5ec8f91a3b5ec2191bf95b5d1417737f0410b379991b68d5457d1f983c2dbc"
+    },
+    "C01_S01_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L004.mp3",
+      "duration": 3.197,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c34cc74e43e589814fb06de9ecb07dee43d91c6d7f6a7381cef87c5fb0e41c71"
+    },
+    "C01_S01_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L005.mp3",
+      "duration": 3.922,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "53caeb797563d99182cbd1c4fbca48190d2aebe38c24e19a1d7055438baf6e8b"
+    },
+    "C01_S01_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L006.mp3",
+      "duration": 5.458,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "b48009e56009c5c94be1fffb3be4b8fa8643b0cc18ecb5acf55b9123dc977fda"
+    },
+    "C01_S01_L007": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L007.mp3",
+      "duration": 1.767,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "d932ebaa8eef5d7b097ccb836232fc9b75375575f5a4ee20c7d89cf27bd3306e"
+    },
+    "C01_S01_L008": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L008.mp3",
+      "duration": 4.562,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "597bf320100b7c936230c293b702b8733f0cf9104839849846fe337e9182ac35"
+    },
+    "C01_S01_L009": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L009.mp3",
+      "duration": 5.501,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "dd429a5a2f865de3a02439c81f2f5f2407b2fd9a745e4078305730185d94231d"
+    },
+    "C01_S01_L010": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L010.mp3",
+      "duration": 3.431,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1d47d72bd9067e611eee5c29893f3e9136930a2f2481b7d47339084b45de1f4a"
+    },
+    "C01_S01_L011": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L011.mp3",
+      "duration": 5.799,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "e896bb0b38f880517e763e573112d11469c9e33a9bafb4b9837e4d686c3ac84d"
+    },
+    "C01_S01_L012": {
+      "url": "/assets/medieval/audio/voice/C01_S01_L012.mp3",
+      "duration": 3.751,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "6f82568af15f526f0b127bfd84944f463ec66caabdf3dd10deb7c817b4e78544"
+    },
+    "C01_S02_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S02_L001.mp3",
+      "duration": 10.962,
+      "speaker": "HERALD",
+      "voice": "bm_daniel",
+      "name": "The herald",
+      "hash": "4229a8bcf37f824252ac93841632dab44208251fad93d18040ffa0c880bf5a99"
+    },
+    "C01_S02_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S02_L002.mp3",
+      "duration": 5.479,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "5aef85992869e2eeda318d1698a97a4b5333422c76e7907d47cd1e571004909a"
+    },
+    "C01_S02_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S02_L003.mp3",
+      "duration": 4.541,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "f8b770529c76195149e8a3dc4c99d2a3eae652c6c66fe768987aefadd9ec6153"
+    },
+    "C01_S02_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S02_L004.mp3",
+      "duration": 8.871,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "d5eeb2f31a6ddbb445f926aacbcf54079c2de0ab67ec729559810ba4dbac9809"
+    },
+    "C01_S02_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S02_L005.mp3",
+      "duration": 2.429,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "f256c04daff72b4eae1ebfd5d93d5c283ac3192785bea2ac46f3035641c43fa0"
+    },
+    "C01_S02_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S02_L006.mp3",
+      "duration": 2.962,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "9a15227c74e9437139d632d273ec1540496cfd79835e51424d158ec600700e56"
+    },
+    "C01_S02_L007": {
+      "url": "/assets/medieval/audio/voice/C01_S02_L007.mp3",
+      "duration": 2.621,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1235673ed2eddb25d726f387d7121537d6da9961c1d8b4590bfdf93cead29981"
+    },
+    "C01_S03_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L001.mp3",
+      "duration": 5.33,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "bc09edd43f03b09df05d1e4df902cddffd066517d86966cf717f353411dbebba"
+    },
+    "C01_S03_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L002.mp3",
+      "duration": 5.735,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "b7b48006f06cac5cbfe21be69d86912629657e00ca468c7c39ca45e248d3f2f9"
+    },
+    "C01_S03_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L003.mp3",
+      "duration": 3.858,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "49afca4796462b9baa8829e8a901a3e1b3e60affc0a2d490bd7f94c33565a6ff"
+    },
+    "C01_S03_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L004.mp3",
+      "duration": 4.114,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1f5e7e65fcadd3d4ba66fbbf59558c8d0e69339e27a1c9a0de8c38255eeb1b6f"
+    },
+    "C01_S03_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L005.mp3",
+      "duration": 5.351,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "41b3e3ea6a556226d31173d1b1beada438cafb66b0b66f6abf535d9dace44afc"
+    },
+    "C01_S03_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L006.mp3",
+      "duration": 3.474,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1ebbbcdc03fba2b485bdc2538d5079f8bd8d635f68e5127fb7f7c192c957f4c2"
+    },
+    "C01_S03_L007": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L007.mp3",
+      "duration": 4.263,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "f408035a6ea3251ba5891e77d490b0cc774e7aec1adc341b01c13154667440a8"
+    },
+    "C01_S03_L008": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L008.mp3",
+      "duration": 3.261,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "a1f4d1e60978ec301097745784c82711336216729aef6ce812d5d32b0234293b"
+    },
+    "C01_S03_L009": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L009.mp3",
+      "duration": 4.519,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "b724bde4e3902db4621eee9514b4adb7becda60bf7a576420c4399a258c548d2"
+    },
+    "C01_S03_L010": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L010.mp3",
+      "duration": 3.687,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "faa0692a5160d2ae027b96e22779b02f471c6cbf4384886b9fe50f45d8ecbf36"
+    },
+    "C01_S03_L011": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L011.mp3",
+      "duration": 3.879,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1316d9847bc26ad3afadd597913d4eb9e30956d3cea09c2f1656913b3d0257e2"
+    },
+    "C01_S03_L012": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L012.mp3",
+      "duration": 1.639,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "dc281d444e7fc69f7640fa239a631c5cc8b0585c171f40bb398835fa465c87e9"
+    },
+    "C01_S03_L013": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L013.mp3",
+      "duration": 2.087,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "5e5debd9fd5cec4fbfe9cfb3ff1a958b5445ca962fe1fb3278dbd89afade3235"
+    },
+    "C01_S03_L014": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L014.mp3",
+      "duration": 3.303,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c90f82a0da2e2a214d4f22d5100faca211367091b694a1484f9786b5f921f354"
+    },
+    "C01_S03_L015": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L015.mp3",
+      "duration": 7.847,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "03db9e59cda44606a49a55796529b493546f53fa21e2e9b1a661ee2f3be28634"
+    },
+    "C01_S03_L016": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L016.mp3",
+      "duration": 3.645,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "589a0d7b3d64dfc24606d6178ebd3e15f82a61ba64f6c0617cf6e8fbabfeb152"
+    },
+    "C01_S03_L017": {
+      "url": "/assets/medieval/audio/voice/C01_S03_L017.mp3",
+      "duration": 4.519,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "7a8a421dbfaca9f397230f4b29ef1f360b26877fb093c8fe9fac7b12deadd9d7"
+    },
+    "C01_S04_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L001.mp3",
+      "duration": 4.562,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "aca695e3d8e55525767ca8a7496af44f046d69476f7d0eac2e8aa865bc7b7d03"
+    },
+    "C01_S04_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L002.mp3",
+      "duration": 3.495,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "245a1d56dbac2084b79b5584261aa7e36dfaefc57ea088d204fb262bfd092cc2"
+    },
+    "C01_S04_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L003.mp3",
+      "duration": 5.778,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c26f28c4711214510c5ec4def43118d74654e4b74f1dc3c33c3063d3499665a1"
+    },
+    "C01_S04_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L004.mp3",
+      "duration": 4.093,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "2fcd619da7edbd440b9caf7b0d0c7c9d700b45b413331d61ae591336d3f3862e"
+    },
+    "C01_S04_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L005.mp3",
+      "duration": 3.346,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "9a8310d46e78305ceaa91273b4134d170079d1d00b3034b9718bf220057b98c5"
+    },
+    "C01_S04_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L006.mp3",
+      "duration": 2.898,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "8d33ea49c5021bc6d35a41950108a5ed37be31febf7650433e28ab7a0a4c207a"
+    },
+    "C01_S04_L007": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L007.mp3",
+      "duration": 8.594,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "00eeab472ee5b005bf0855431420630ea49b05a15c3cee59114a5b2a2fd55115"
+    },
+    "C01_S04_L008": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L008.mp3",
+      "duration": 2.834,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "9c4271b6abbc3eeda8b5ba5452d77150e102746c3eabd8a3a28803c7713891de"
+    },
+    "C01_S04_L009": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L009.mp3",
+      "duration": 1.81,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "e027047d97ce4462cefb7fa8ada5f3f3e713dafe311b8de88491fe1d32539230"
+    },
+    "C01_S04_L010": {
+      "url": "/assets/medieval/audio/voice/C01_S04_L010.mp3",
+      "duration": 1.618,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "f4a8ae8165c92880c6e8070c88064e5bd17ae9e0a79aae76009f90dd5a8092fe"
+    },
+    "C01_S05_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L001.mp3",
+      "duration": 6.695,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "01ee7bc0bcac929e4c1fc6cf5d62f0a6e313ec7a829339fb4ecd443d30fa4772"
+    },
+    "C01_S05_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L002.mp3",
+      "duration": 1.725,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "1e0061d18bbd9edf3e715e2c18d6375258d147dc324101444e0046108c1ef641"
+    },
+    "C01_S05_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L003.mp3",
+      "duration": 1.362,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "9c74c0df55369b957a399ef0e040f5986c2dbdc04b426c678ed0cc25b57aa3ac"
+    },
+    "C01_S05_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L004.mp3",
+      "duration": 3.858,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "63e792235fed814c297ad1a010b262f7bb9980d16abe45ee83cacd24d45e81c1"
+    },
+    "C01_S05_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L005.mp3",
+      "duration": 4.029,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "f090b834d2f5385ff644d619803950e3335d2342e3fe9d4bc3a4a60e20407483"
+    },
+    "C01_S05_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L006.mp3",
+      "duration": 1.895,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "4fa62066eb44a81fcf33475607ac06717b71c9262c24c20d79638bdbc89f00bd"
+    },
+    "C01_S05_L007": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L007.mp3",
+      "duration": 2.429,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "d37e3b82eb99f232379ae62ed214a5661f0474c47ced1fdce8dfbb1637df0a5c"
+    },
+    "C01_S05_L008": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L008.mp3",
+      "duration": 2.642,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "8096e718159aa6a51b1a0953e3c4ed248e3bffd65bfa33023aaafb7a04392527"
+    },
+    "C01_S05_L009": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L009.mp3",
+      "duration": 1.831,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "8fcdfe5944d85e5dd593000e5bfdc61c0ffcefaf306d13cd5292d323d4481bdc"
+    },
+    "C01_S05_L010": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L010.mp3",
+      "duration": 3.047,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "d02c492d6b4a693e199b3bbdabe1d612d87c4c88e0e7d196467734bf3948e655"
+    },
+    "C01_S05_L011": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L011.mp3",
+      "duration": 3.09,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "b5f40c46cafd7ef5707c683aa3a4b4b4c0be8a0dcc9336ddb0994f1c0fd88f1f"
+    },
+    "C01_S05_L012": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L012.mp3",
+      "duration": 2.023,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "cfc65adfd8b15dcfa3514fb7e358e630321fe0c87a1d20d9ea623fe5c18495fd"
+    },
+    "C01_S05_L013": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L013.mp3",
+      "duration": 3.495,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "d0a89e4d95927d80a5a80c3660982ff536b49a5d68ccbb745df3bdb31a02de98"
+    },
+    "C01_S05_L014": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L014.mp3",
+      "duration": 3.005,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "61f77caac7e9289f10d81930dac5357c1b36d357d786f944cf3925dd82e09fa1"
+    },
+    "C01_S05_L015": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L015.mp3",
+      "duration": 6.269,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "7be2f7d4e9684a123b8ff974be74ad7c3455ac6894d70ce7480193c27c2d0fe6"
+    },
+    "C01_S05_L016": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L016.mp3",
+      "duration": 2.002,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "3dbc6d5d107b9dc853129afda6f8b7c4366ee9202890a37001e9946287366a51"
+    },
+    "C01_S05_L017": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L017.mp3",
+      "duration": 4.007,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "6a32076c8701dada1cf9968451c712923a6f178b45e257847b4c1b7037df0090"
+    },
+    "C01_S05_L018": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L018.mp3",
+      "duration": 2.173,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "ae528c5816421348a79a7ba3e5f8f41fc38e0a95551e4d34bea9820575d531ec"
+    },
+    "C01_S05_L019": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L019.mp3",
+      "duration": 6.482,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "d08d0f52c5018196b53032fa1867e063124f9567eb5bb323e3b7353f3d703df1"
+    },
+    "C01_S05_L020": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L020.mp3",
+      "duration": 4.242,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "7f80fad1c421b375a145e3da6f8dc0765eed2031f77d4b44e2268ceee007878c"
+    },
+    "C01_S05_L021": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L021.mp3",
+      "duration": 4.391,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "530ad6f752c7b004261a88c20d3cc1519b84283fa427f9689c4587f39a421490"
+    },
+    "C01_S05_L022": {
+      "url": "/assets/medieval/audio/voice/C01_S05_L022.mp3",
+      "duration": 4.114,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "22d8b82e79286ead2c06da05b8d85486802f4b6ea6e4bf9e551712f1e5a02234"
+    },
+    "C01_S06_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L001.mp3",
+      "duration": 4.605,
+      "speaker": "TOMAS",
+      "voice": "bm_lewis",
+      "name": "Tomas",
+      "hash": "b6ee8a712beb99257f5a9671e998482707b8caf9b8f73310b2c75aa7e73ee9f3"
+    },
+    "C01_S06_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L002.mp3",
+      "duration": 3.239,
+      "speaker": "TOMAS",
+      "voice": "bm_lewis",
+      "name": "Tomas",
+      "hash": "848f59cb77c2d34571336a16aef843f000d2ce6e55b6e3e253c15d81ab0b4be7"
+    },
+    "C01_S06_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L003.mp3",
+      "duration": 2.429,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c803641d79f76c163525099d814d979c57cd21022c7662a3a2ccd942121b8975"
+    },
+    "C01_S06_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L004.mp3",
+      "duration": 2.855,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c913aefd16d46df3c3057e7febfc33b8e63ce5c90bfbf4ddcfc1d59372b336cb"
+    },
+    "C01_S06_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L005.mp3",
+      "duration": 5.522,
+      "speaker": "TOMAS",
+      "voice": "bm_lewis",
+      "name": "Tomas",
+      "hash": "1a3749186a5911892e646af552481a0bbe992772ef657eaca4a6633d1d347f0d"
+    },
+    "C01_S06_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L006.mp3",
+      "duration": 3.346,
+      "speaker": "TOMAS",
+      "voice": "bm_lewis",
+      "name": "Tomas",
+      "hash": "fbbfc788e6b8363277e88ea3c56251c18f2ccd15ceef393af1f408fb9983c2bf"
+    },
+    "C01_S06_L007": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L007.mp3",
+      "duration": 2.642,
+      "speaker": "TOMAS",
+      "voice": "bm_lewis",
+      "name": "Tomas",
+      "hash": "c5109f215fbd3679b5a8a9d2eafb19c748a1a5e3be4ee5c861775929d1b70c0b"
+    },
+    "C01_S06_L008": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L008.mp3",
+      "duration": 3.325,
+      "speaker": "TOMAS",
+      "voice": "bm_lewis",
+      "name": "Tomas",
+      "hash": "e79d6dcba6b553918c99cb41c5ee3c471c2cc24f641df3101a7b8baf2a53552f"
+    },
+    "C01_S06_L009": {
+      "url": "/assets/medieval/audio/voice/C01_S06_L009.mp3",
+      "duration": 3.602,
+      "speaker": "TOMAS",
+      "voice": "bm_lewis",
+      "name": "Tomas",
+      "hash": "262f40bf2914940c315832b67fc21414993685190f18497f5fb689300e3fc11d"
+    },
+    "C01_S07_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S07_L001.mp3",
+      "duration": 4.626,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "9bca5d65273855ec290ad5d3bcb0406b61ec2315463e7bd62cda36c918987aa0"
+    },
+    "C01_S07_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S07_L002.mp3",
+      "duration": 2.322,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "5239428b4dfc0952b5fda61a5529355aa7f0a0c4aeab3cfb706ef1bd7c11e91c"
+    },
+    "C01_S07_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S07_L003.mp3",
+      "duration": 9.618,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "9dcb4f704064fb381f462efb4e12d7c1b2e9a381ccea97baa91da64e67859edd"
+    },
+    "C01_S07_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S07_L004.mp3",
+      "duration": 4.242,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "f9e50111032787af6af5d282d49df62254b4647390ef3a9d7d5ea75cbc2b6f6b"
+    },
+    "C01_S07_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S07_L005.mp3",
+      "duration": 2.685,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "4f534c4b47c488c215f35ffb2163ee23abbcdbbd6c307064345032078a5575f3"
+    },
+    "C01_S07_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S07_L006.mp3",
+      "duration": 1.917,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "be40c1ca5cbdcd454d5aafc64c74d1095aab924fc059f849295aae0d74634027"
+    },
+    "C01_S08_L001": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L001.mp3",
+      "duration": 4.37,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "ea6afe90dcc9f0b86795d4c9417fdc29c4214d427f0d8c2fb33faee0feae1511"
+    },
+    "C01_S08_L002": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L002.mp3",
+      "duration": 1.618,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "e63a8ef77a32b689b23ad41a0bf75cc8df11be7a080d64d27a36b06f3ebd7921"
+    },
+    "C01_S08_L003": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L003.mp3",
+      "duration": 1.703,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "e6226f1e57dab8cbaa934d3012f552e4a3715310b15f007c67147eced62778f2"
+    },
+    "C01_S08_L004": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L004.mp3",
+      "duration": 1.042,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "51614ad27ae57e01811554e451b23907b2d4dbd1b394318047be077f1cac7cee"
+    },
+    "C01_S08_L005": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L005.mp3",
+      "duration": 2.109,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "d00a35a7bf3b3219a822c719581922f000fbdb029aafa3f6f03253ba6993f303"
+    },
+    "C01_S08_L006": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L006.mp3",
+      "duration": 4.05,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c1c6865f2b209114d8579b065fae6182d82bd07700995ea7d1f8480127cf8163"
+    },
+    "C01_S08_L007": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L007.mp3",
+      "duration": 2.813,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "7100747806e6b1127fed81922e2a368c0b6d5a50d9eaf372e51e3677f9bab936"
+    },
+    "C01_S08_L008": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L008.mp3",
+      "duration": 2.023,
+      "speaker": "MARA",
+      "voice": "bf_emma",
+      "name": "Mara Venn",
+      "hash": "6f70a065c353569de50b4c5d259dd9716aa4f66dbe1a9161c4d0355a7a63643d"
+    },
+    "C01_S08_L009": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L009.mp3",
+      "duration": 4.029,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c8427806a3dff9ba6010ad1984d3e6a7163972952068c5e778f1e7ef516c9b5e"
+    },
+    "C01_S08_L010": {
+      "url": "/assets/medieval/audio/voice/C01_S08_L010.mp3",
+      "duration": 1.938,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "fd68282d1bf18335191a24af1b0ea11a025acbb73708e022f3f9cc32effeef84"
+    },
+    "C01_CUE_rep_completed": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_rep_completed.mp3",
+      "duration": 0.999,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "c3bcd284d920a8ca872b9e583be43ff224336e7435c644fde6a7403cd1698231"
+    },
+    "C01_CUE_final_rep_completed": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_final_rep_completed.mp3",
+      "duration": 1.469,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "36508b9a4625147353a6175b8f4c08de9746953abd8fe9328f0842629366ade4"
+    },
+    "C01_CUE_no_lower_phase": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_no_lower_phase.mp3",
+      "duration": 3.047,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "77a1072f90a8cf474cbefe830244573701f343f0b651ffe282e4755e244f4f1c"
+    },
+    "C01_CUE_no_reset_phase": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_no_reset_phase.mp3",
+      "duration": 3.666,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "a24d56abfce63207b8355fd97e9be3c4f56f45bfe363ed58cfd2e2f6fdffb6d6"
+    },
+    "C01_CUE_motion_is_too_fast_to_assess": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_motion_is_too_fast_to_assess.mp3",
+      "duration": 3.389,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "bc1f0384a32fc8de6f5a3b5bf3c34f093c963a6fd74e7d5e909b22a1a1cb039f"
+    },
+    "C01_CUE_squat_range_not_reached": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_squat_range_not_reached.mp3",
+      "duration": 4.562,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1f7d9c4a66832821fed1b6a41c39fd115745b7a93a273d3c1716ed3612d45c3e"
+    },
+    "C01_CUE_push_up_alignment_drift": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_push_up_alignment_drift.mp3",
+      "duration": 3.815,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "2e866e2eb698e47cef2aea36db5dc40139d594c5675c4461862374e53e034be1"
+    },
+    "C01_CUE_joint_occluded": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_joint_occluded.mp3",
+      "duration": 3.943,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "1db9980ce65b650f1a2a4b00c64e5d8b71be259fea762eccc20d6fdcebc6184c"
+    },
+    "C01_CUE_tracking_absent": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_tracking_absent.mp3",
+      "duration": 3.346,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "3b836ac1bfc7bca949ba12b6a23956a67323c118bc6e66a7899fa8444995a6a6"
+    },
+    "C01_CUE_camera_setup_needs_changing": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_camera_setup_needs_changing.mp3",
+      "duration": 3.133,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "ef2c2b0a5030cb766908481dc222dab27aa488fadef50b54ec83094b4d5cadf0"
+    },
+    "C01_CUE_player_pauses": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_player_pauses.mp3",
+      "duration": 2.855,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "22e1259d864813acdffbe65cd5f3b253670c1cd30fefe9744752947ce1f63039"
+    },
+    "C01_CUE_player_changes_variation": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_player_changes_variation.mp3",
+      "duration": 3.559,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "38d13d2ce809ee9561c29beba1229c28fb2dd181928fca2c236e2de855d89ea1"
+    },
+    "C01_CUE_player_resumes": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_player_resumes.mp3",
+      "duration": 2.791,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "04dbe635a0e96d919b6ad31c3c190aec047b09d3dc794639add0071d0e927ec1"
+    },
+    "C01_CUE_timed_exercise_inactivity": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_timed_exercise_inactivity.mp3",
+      "duration": 2.962,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "a34413feba960206a4a5ef013e1520c380b8f385bab674e491b220c7cc103fee"
+    },
+    "C01_CUE_timed_exercise_halfway": {
+      "url": "/assets/medieval/audio/voice/C01_CUE_timed_exercise_halfway.mp3",
+      "duration": 1.639,
+      "speaker": "ALDEN",
+      "voice": "bm_george",
+      "name": "Sir Alden Vale",
+      "hash": "dc281d444e7fc69f7640fa239a631c5cc8b0585c171f40bb398835fa465c87e9"
+    }
+  },
+  "sounds": {
+    "footstep": {
+      "url": "/assets/medieval/audio/sound/footstep.mp3",
+      "duration": 0.25
+    },
+    "swish": {
+      "url": "/assets/medieval/audio/sound/swish.mp3",
+      "duration": 0.36
+    },
+    "impact": {
+      "url": "/assets/medieval/audio/sound/impact.mp3",
+      "duration": 0.48
+    },
+    "shield": {
+      "url": "/assets/medieval/audio/sound/shield.mp3",
+      "duration": 0.7
+    },
+    "coin": {
+      "url": "/assets/medieval/audio/sound/coin.mp3",
+      "duration": 0.8
+    },
+    "page": {
+      "url": "/assets/medieval/audio/sound/page.mp3",
+      "duration": 0.6
+    },
+    "gate": {
+      "url": "/assets/medieval/audio/sound/gate.mp3",
+      "duration": 2.4
+    },
+    "horn": {
+      "url": "/assets/medieval/audio/sound/horn.mp3",
+      "duration": 3.8
+    },
+    "ui": {
+      "url": "/assets/medieval/audio/sound/ui.mp3",
+      "duration": 0.22
+    },
+    "courtyard": {
+      "url": "/assets/medieval/audio/music/courtyard.mp3",
+      "duration": 48.0
+    },
+    "trial": {
+      "url": "/assets/medieval/audio/music/trial.mp3",
+      "duration": 32.0
+    },
+    "revelation": {
+      "url": "/assets/medieval/audio/music/revelation.mp3",
+      "duration": 48.0
+    },
+    "wind": {
+      "url": "/assets/medieval/audio/ambience/wind.mp3",
+      "duration": 24.0
+    },
+    "rain": {
+      "url": "/assets/medieval/audio/ambience/rain.mp3",
+      "duration": 24.0
+    },
+    "forge": {
+      "url": "/assets/medieval/audio/ambience/forge.mp3",
+      "duration": 24.0
+    }
+  },
+  "provenance": {
+    "speech": "Kokoro-82M v1.0, synthetic stock voices, Apache-2.0",
+    "scoreAndEffects": "Original deterministic synthesis; scripts/generate-chapter-audio.py",
+    "model": "https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0"
+  }
+}

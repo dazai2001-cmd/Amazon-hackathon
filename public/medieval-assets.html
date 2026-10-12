@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Medieval asset library · MoveRoom</title>
+  <style>
+    :root { color-scheme: dark; --paper:#eee8db; --quiet:#ada99f; --line:#3d3a33; --gold:#d1b782; --ground:#181916; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--ground); color:var(--paper); font:16px/1.55 system-ui,sans-serif; }
+    a { color:var(--gold); text-underline-offset:4px; }
+    button { font:inherit; cursor:pointer; }
+    :focus-visible { outline:3px solid var(--gold); outline-offset:5px; }
+    .wrap { width:min(1160px,calc(100% - 64px)); margin:auto; }
+    header { padding:28px 0 20px; border-bottom:1px solid var(--line); }
+    .top { display:flex; justify-content:space-between; gap:20px; align-items:center; }
+    .brand { font:24px Georgia,serif; letter-spacing:.01em; }
+    .overline { color:var(--gold); font-size:11px; font-weight:650; letter-spacing:.16em; text-transform:uppercase; }
+    nav { display:flex; gap:24px; font-size:13px; }
+    nav a { color:var(--quiet); text-decoration:none; }
+    main { padding-bottom:64px; }
+    .intro { padding:36px 0 22px; display:flex; justify-content:space-between; align-items:end; gap:28px; }
+    h1,h2,h3,p { margin:0; }
+    h1 { font:clamp(32px,4vw,48px)/1.12 Georgia,serif; margin:8px 0 12px; }
+    .intro p { max-width:640px; color:var(--quiet); font-size:14px; }
+    .asset-count { color:var(--quiet); text-align:right; font-size:12px; flex-shrink:0; }
+    .asset-count strong { display:block; color:var(--paper); font:34px Georgia,serif; }
+    .stage { height:480px; position:relative; overflow:hidden; border:1px solid #514b3f; background:#2d302a; }
+    .scene { width:100%; height:100%; object-fit:cover; display:block; }
+    .scrim { position:absolute; inset:0; background:linear-gradient(90deg,rgba(13,17,14,.88),rgba(13,17,14,.30) 60%,rgba(13,17,14,.04)); pointer-events:none; }
+    .stage-copy { position:absolute; left:42px; top:50%; transform:translateY(-50%); width:46%; }
+    .stage-copy h2 { font:clamp(32px,4vw,48px)/1.15 Georgia,serif; margin:12px 0; }
+    .stage-copy p { color:#dedbcf; font-size:14px; max-width:365px; }
+    .stage-character { position:absolute; right:6%; bottom:0; height:94%; width:38%; object-fit:contain; object-position:bottom; }
+    .controls { display:flex; gap:26px; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+    .control-group { display:flex; gap:7px; align-items:center; flex-wrap:wrap; }
+    .control-label { color:var(--quiet); font-size:11px; margin-right:4px; text-transform:uppercase; letter-spacing:.08em; }
+    .control-group button { border:1px solid var(--line); background:transparent; color:var(--quiet); padding:7px 13px; font-size:12px; border-radius:2px; }
+    .control-group button[aria-pressed="true"] { background:#34342b; color:var(--paper); border-color:#82755a; }
+    section { margin-top:44px; scroll-margin-top:24px; }
+    .section-head { display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-bottom:18px; }
+    h2 { font:28px Georgia,serif; }
+    .section-head span { color:var(--quiet); font-size:12px; }
+    .grid { display:grid; gap:16px; }
+    .characters,.locations { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .equipment { grid-template-columns:repeat(6,minmax(0,1fr)); }
+    .card { border:1px solid var(--line); min-width:0; background:#1c1e19; }
+    .art-link { display:block; text-decoration:none; }
+    .portrait { height:330px; background:radial-gradient(ellipse at center,#454438,#252821 70%); }
+    .portrait img { width:100%; height:100%; object-fit:contain; padding:14px; display:block; }
+    .location img { width:100%; height:auto; aspect-ratio:16/9; display:block; object-fit:cover; }
+    .item-art { background:#262820; }
+    .item-art img { width:100%; height:auto; aspect-ratio:1; padding:16px; object-fit:contain; display:block; }
+    .card-info { padding:14px 16px; }
+    .card h3 { font:20px Georgia,serif; margin-bottom:5px; }
+    .card p { color:var(--quiet); font-size:12px; }
+    .card .file { font-size:11px; margin-top:10px; display:inline-block; }
+    .equipment .card-info { padding:12px; }
+    .equipment h3 { font-size:17px; }
+    .models { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .model { padding:22px; }
+    .model h3 { margin:8px 0; font-size:23px; }
+    .model p { max-width:490px; }
+    .model .stats { display:flex; gap:18px; margin:17px 0; color:var(--paper); font-size:12px; flex-wrap:wrap; }
+    .model .source { font-size:12px; margin-right:16px; }
+    footer { border-top:1px solid var(--line); padding:23px 0 32px; color:var(--quiet); font-size:12px; }
+    footer a { margin-right:18px; }
+    @media (max-width:800px) { .wrap{width:calc(100% - 36px)} .equipment{grid-template-columns:repeat(3,minmax(0,1fr))} nav{gap:12px}.stage{height:420px}.stage-copy{left:26px;width:48%}.stage-character{right:1%;width:46%}.portrait{height:270px} }
+    @media (max-width:560px) { .top{display:block}nav{margin-top:16px;flex-wrap:wrap}.intro{padding-top:26px}.asset-count{display:none}.characters,.locations,.models{grid-template-columns:1fr}.portrait{height:360px}.stage{height:440px}.stage-copy{top:28px;transform:none;left:22px;width:85%}.stage-copy h2{font-size:30px;margin:6px 0}.stage-copy p{font-size:12px;max-width:210px}.stage-character{height:64%;width:60%;right:0}.scrim{background:linear-gradient(180deg,rgba(13,17,14,.9),rgba(13,17,14,.25))}.control-group{gap:6px}.equipment{grid-template-columns:repeat(2,minmax(0,1fr))}.section-head{display:block}.section-head span{display:block;margin-top:5px} }
+  </style>
+</head>
+<body>
+  <header><div class="wrap top"><div class="brand">MoveRoom <span style="color:var(--quiet)">/</span> Art library</div><nav aria-label="Asset sections"><a href="#characters">Characters</a><a href="#locations">Locations</a><a href="#equipment">Equipment</a><a href="#models">3D candidates</a></nav></div></header>
+  <main class="wrap">
+    <div class="intro"><div><div class="overline">First chapter · Working visual direction</div><h1>A squire’s first steps.</h1><p>Practical armour, worn steel, and a teacher with a story to tell. Original artwork for the medieval training and dueling concept.</p></div><div class="asset-count"><strong>12 + 2</strong>Original images + sourced 3D models</div></div>
+    <div class="stage" aria-label="Scene and character art preview">
+      <img class="scene" id="scene" src="assets/medieval/environments/courtyard.png" alt="Morning light in the stone training courtyard" width="1672" height="941" />
+      <div class="scrim"></div>
+      <div class="stage-copy"><div class="overline">Visual direction preview</div><h2 id="scene-title">The training courtyard</h2><p id="scene-copy">Begin with a simple sword and shield. Your instructor teaches the fundamentals before your first duel.</p></div>
+      <img class="stage-character" id="stage-character" src="assets/medieval/characters/instructor.png" alt="The veteran sword instructor" width="1024" height="1536" />
+    </div>
+    <div class="controls">
+      <div class="control-group" role="group" aria-label="Preview location"><span class="control-label">Location</span><button data-scene="courtyard" aria-pressed="true">Courtyard</button><button data-scene="arena" aria-pressed="false">Arena</button><button data-scene="blacksmith" aria-pressed="false">Blacksmith</button></div>
+      <div class="control-group" role="group" aria-label="Preview character"><span class="control-label">Character</span><button data-character="squire" aria-pressed="false">Squire</button><button data-character="instructor" aria-pressed="true">Instructor</button><button data-character="rival" aria-pressed="false">Rival</button></div>
+    </div>
+    <section id="characters"><div class="section-head"><h2>The first three faces</h2><span>1024 × 1536 · Transparent PNG</span></div><div class="grid characters">
+      <article class="card"><a class="art-link portrait" href="assets/medieval/characters/squire.png"><img src="assets/medieval/characters/squire.png" alt="The beginner squire in a blue tabard with an iron sword and wooden shield" loading="lazy" width="1024" height="1536" /></a><div class="card-info"><h3>Your squire</h3><p>Humble starting gear. An adult beginner with room to grow.</p><a class="file" href="assets/medieval/characters/squire.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link portrait" href="assets/medieval/characters/instructor.png"><img src="assets/medieval/characters/instructor.png" alt="The grey-haired instructor gesturing in a weathered cloak" loading="lazy" width="1024" height="1536" /></a><div class="card-info"><h3>The instructor</h3><p>A veteran mentor for dialogue and voice-guided lessons.</p><a class="file" href="assets/medieval/characters/instructor.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link portrait" href="assets/medieval/characters/rival.png"><img src="assets/medieval/characters/rival.png" alt="The first rival wearing chainmail and carrying a burgundy shield" loading="lazy" width="1024" height="1536" /></a><div class="card-info"><h3>Your first rival</h3><p>A practiced duelist who tests your timing and guard.</p><a class="file" href="assets/medieval/characters/rival.png" download>Save PNG ↗</a></div></article>
+    </div></section>
+    <section id="locations"><div class="section-head"><h2>Places to earn your progress</h2><span>1672 × 941 · Scene backdrops</span></div><div class="grid locations">
+      <article class="card"><a class="art-link location" href="assets/medieval/environments/courtyard.png"><img src="assets/medieval/environments/courtyard.png" alt="The stone keep's training courtyard" loading="lazy" width="1672" height="941" /></a><div class="card-info"><h3>Training courtyard</h3><p>Lessons, exercise, and instructor conversations.</p><a class="file" href="assets/medieval/environments/courtyard.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link location" href="assets/medieval/environments/arena.png"><img src="assets/medieval/environments/arena.png" alt="The empty sand arena surrounded by tournament stands" loading="lazy" width="1672" height="941" /></a><div class="card-info"><h3>Tournament arena</h3><p>The setting for the first duels and arena menu.</p><a class="file" href="assets/medieval/environments/arena.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link location" href="assets/medieval/environments/blacksmith.png"><img src="assets/medieval/environments/blacksmith.png" alt="The warm forge and wooden counter inside a village blacksmith" loading="lazy" width="1672" height="941" /></a><div class="card-info"><h3>Village blacksmith</h3><p>A home for the equipment shop and upgrade choices.</p><a class="file" href="assets/medieval/environments/blacksmith.png" download>Save PNG ↗</a></div></article>
+    </div></section>
+    <section id="equipment"><div class="section-head"><h2>A modest kit. A better blade.</h2><span>1254 × 1254 · Transparent PNG</span></div><div class="grid equipment">
+      <article class="card"><a class="art-link item-art" href="assets/medieval/items/iron-sword.png"><img src="assets/medieval/items/iron-sword.png" alt="A worn iron arming sword" loading="lazy" width="1254" height="1254" /></a><div class="card-info"><h3>Iron sword</h3><p>Starter weapon</p><a class="file" href="assets/medieval/items/iron-sword.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link item-art" href="assets/medieval/items/wooden-shield.png"><img src="assets/medieval/items/wooden-shield.png" alt="A round wooden shield with an iron boss" loading="lazy" width="1254" height="1254" /></a><div class="card-info"><h3>Oak shield</h3><p>Starter guard</p><a class="file" href="assets/medieval/items/wooden-shield.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link item-art" href="assets/medieval/items/gambeson.png"><img src="assets/medieval/items/gambeson.png" alt="A quilted oatmeal gambeson coat" loading="lazy" width="1254" height="1254" /></a><div class="card-info"><h3>Gambeson</h3><p>Starter armour</p><a class="file" href="assets/medieval/items/gambeson.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link item-art" href="assets/medieval/items/steel-sword.png"><img src="assets/medieval/items/steel-sword.png" alt="A refined steel sword with a brass inset pommel" loading="lazy" width="1254" height="1254" /></a><div class="card-info"><h3>Steel sword</h3><p>First weapon upgrade</p><a class="file" href="assets/medieval/items/steel-sword.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link item-art" href="assets/medieval/items/heater-shield.png"><img src="assets/medieval/items/heater-shield.png" alt="A reinforced blue heater shield with a cream chevron" loading="lazy" width="1254" height="1254" /></a><div class="card-info"><h3>Heater shield</h3><p>First guard upgrade</p><a class="file" href="assets/medieval/items/heater-shield.png" download>Save PNG ↗</a></div></article>
+      <article class="card"><a class="art-link item-art" href="assets/medieval/items/coins.png"><img src="assets/medieval/items/coins.png" alt="A stack of worn brass coins" loading="lazy" width="1254" height="1254" /></a><div class="card-info"><h3>Arena coins</h3><p>In-game currency</p><a class="file" href="assets/medieval/items/coins.png" download>Save PNG ↗</a></div></article>
+    </div></section>
+    <section id="models"><div class="section-head"><h2>Movement needs a rig</h2><span>Sourced candidates · Saved locally for evaluation</span></div><div class="models">
+      <article class="card model"><div class="overline">Detailed candidate</div><h3>AutoSprite T1 Sentinel</h3><p>A rigged armoured knight. The downloaded file contains sword attack, sword block, hit, death, idle, and walk clips. Its detailed mesh needs a performance check on Fire TV before adoption.</p><div class="stats"><span>23.2 MiB</span><span>149,880 triangles</span><span>7 clips</span><span>CC0</span></div><a class="source" href="https://www.autosprite.io/free-3d-models/t1-sentinel" target="_blank" rel="noopener noreferrer">Creator’s model page ↗</a><a class="source" href="https://www.autosprite.io/free/license" target="_blank" rel="noopener noreferrer">License ↗</a></article>
+      <article class="card model"><div class="overline">Lighter prototype fallback</div><h3>KayKit Knight</h3><p>A stylized knight with a complete combat animation set: one-handed cuts, thrusts, blocking, hits, and movement. Useful for developing the combat loop; its cartoon proportions differ from the artwork above.</p><div class="stats"><span>3.5 MiB</span><span>6,952 triangles</span><span>76 clips</span><span>CC0</span></div><a class="source" href="https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0" target="_blank" rel="noopener noreferrer">Creator’s repository ↗</a></article>
+    </div></section>
+  </main>
+  <footer><div class="wrap"><p style="margin-bottom:10px">The 12 images were generated with the built-in image generator. Character and equipment art is transparent. These are visual assets; medieval gameplay, equipment effects, and multiplayer are still pending.</p><a href="assets/medieval/manifest.json">Asset manifest</a><a href="assets/medieval/prompts.json">Exact generation prompts</a><a href="/">Back to MoveRoom</a></div></footer>
+  <script>
+    const scenes = {
+      courtyard: { title:'The training courtyard', alt:'Morning light in the stone training courtyard', copy:'Begin with a simple sword and shield. Your instructor teaches the fundamentals before your first duel.' },
+      arena: { title:'Your first tournament', alt:'The empty sand arena surrounded by tournament stands', copy:'A clear guard, a measured cut, and enough stamina to hold your ground. Meet your first opponent.' },
+      blacksmith: { title:'The village blacksmith', alt:'The warm forge inside a village blacksmith workshop', copy:'Coins earned in the arena become better equipment. Every upgrade should give you a choice about how you fight.' }
+    };
+    const characters = { squire:'The beginner squire', instructor:'The veteran sword instructor', rival:'The first rival duelist' };
+    document.querySelectorAll('[data-scene]').forEach(button => button.addEventListener('click', () => {
+      const id=button.dataset.scene, scene=scenes[id];
+      document.querySelector('#scene').src=`assets/medieval/environments/${id}.png`;
+      document.querySelector('#scene').alt=scene.alt;
+      document.querySelector('#scene-title').textContent=scene.title;
+      document.querySelector('#scene-copy').textContent=scene.copy;
+      document.querySelectorAll('[data-scene]').forEach(control=>control.setAttribute('aria-pressed',String(control===button)));
+    }));
+    document.querySelectorAll('[data-character]').forEach(button => button.addEventListener('click', () => {
+      const id=button.dataset.character;
+      document.querySelector('#stage-character').src=`assets/medieval/characters/${id}.png`;
+      document.querySelector('#stage-character').alt=characters[id];
+      document.querySelectorAll('[data-character]').forEach(control=>control.setAttribute('aria-pressed',String(control===button)));
+    }));
+  </script>
+</body>
+</html>

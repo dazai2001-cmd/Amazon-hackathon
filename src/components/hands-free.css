@@ -1,0 +1,4 @@
+.hands-free-start{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding:10px 12px;border:1px solid #c7f56b25;border-radius:8px;background:#c7f56b08;color:#b8d69b;font-size:10px;line-height:1.7}
+.hands-free-start>span{flex:1}.hands-free-start .text-button{font-size:10px;white-space:nowrap;color:#c7f56b;padding:3px 0}
+.calibration-copy .hands-free-start{max-width:420px}.hands-free-start.waiting{color:#9cae8e;background:#ffffff03;border-color:#ffffff12}
+@media(max-width:600px){.hands-free-start{align-items:flex-start;flex-direction:column}}

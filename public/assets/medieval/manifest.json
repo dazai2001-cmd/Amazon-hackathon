@@ -1,0 +1,140 @@
+{
+  "title": "Medieval first chapter artwork",
+  "created": "2026-10-10",
+  "generator": "built-in image_gen.imagegen",
+  "status": "Artwork ready; medieval gameplay integration pending",
+  "assets": [
+    {
+      "id": "squire",
+      "category": "characters",
+      "file": "/assets/medieval/characters/squire.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1985397,
+      "transparent": true,
+      "sha256": "384152b55e8e162084de1f995cf7078c292c2278452828c3a4f88a49a734baa4",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "instructor",
+      "category": "characters",
+      "file": "/assets/medieval/characters/instructor.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2033334,
+      "transparent": true,
+      "sha256": "64c6c5113d217728e5bee61d000f8ef87ca4fac81a3ea58437821026a464236b",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "rival",
+      "category": "characters",
+      "file": "/assets/medieval/characters/rival.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2057871,
+      "transparent": true,
+      "sha256": "6e26be33591ff57a11d3c575a261053054efe46475e7a911c7f841a967762dfe",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "courtyard",
+      "category": "environments",
+      "file": "/assets/medieval/environments/courtyard.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3150637,
+      "transparent": false,
+      "sha256": "db785e1257c6cfcdc1ae9d2faad5f58bdd7db6448aa93062973ef3e50057d655",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "arena",
+      "category": "environments",
+      "file": "/assets/medieval/environments/arena.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2705212,
+      "transparent": false,
+      "sha256": "e07abcb5b7598fbfcbfb8b4893bc3eb7e959125f90ed8a203152baa15fbb85ac",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "blacksmith",
+      "category": "environments",
+      "file": "/assets/medieval/environments/blacksmith.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2737414,
+      "transparent": false,
+      "sha256": "0d56133cc708bfcfd301cae744dbaed4216ad9830af39a0964d56d18a7ddf429",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "iron-sword",
+      "category": "items",
+      "file": "/assets/medieval/items/iron-sword.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 593659,
+      "transparent": true,
+      "sha256": "0963a91324ebad0207c8cb6d8ad07465686812b4bc222cc951974d6cc0c61374",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "wooden-shield",
+      "category": "items",
+      "file": "/assets/medieval/items/wooden-shield.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 2636212,
+      "transparent": true,
+      "sha256": "ab24da04839e90d582454ace4043b5739e6c1517829a51370d588076b40efee6",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "gambeson",
+      "category": "items",
+      "file": "/assets/medieval/items/gambeson.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1916316,
+      "transparent": true,
+      "sha256": "417014e9ca5fb24c0b065fcf175156622d71eedf64ea8813d27a683fdec3c2c7",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "coins",
+      "category": "items",
+      "file": "/assets/medieval/items/coins.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1457245,
+      "transparent": true,
+      "sha256": "bc0ccfb2173c83c98c9e5f6464032aa8a0c1c7b544c878ba6a298f3a5ad50f14",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "steel-sword",
+      "category": "items",
+      "file": "/assets/medieval/items/steel-sword.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 527014,
+      "transparent": true,
+      "sha256": "3a662532fe22719df91fd8c6980e38045688bf41135ecd09b3cafdbb10d48e5c",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    },
+    {
+      "id": "heater-shield",
+      "category": "items",
+      "file": "/assets/medieval/items/heater-shield.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1911794,
+      "transparent": true,
+      "sha256": "e02bed12e93cce416a1e1b901f8dbe0a2d98badd9f50977d4b0e1aa5c80eff14",
+      "source": "Generated for this project with built-in image_gen.imagegen"
+    }
+  ]
+}

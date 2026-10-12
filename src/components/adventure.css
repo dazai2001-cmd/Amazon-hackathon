@@ -1,0 +1,170 @@
+.adventure{--gold:#d0b783;--gold-light:#eee0b8;font-family:Manrope,sans-serif;background:#25322c}
+.adventure button:focus-visible{outline:2px solid #f3dfaf;outline-offset:5px}
+.adventure-vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#080e16a1,transparent 28%,transparent 52%,#0b0e13a8),radial-gradient(ellipse at 50% 42%,transparent 30%,#0b0e1533);z-index:1}
+.adventure-header{position:absolute;inset:0 0 auto;height:74px;z-index:8;display:flex;align-items:center;justify-content:space-between;padding:0 3.5vw;background:linear-gradient(#080f1794,transparent);pointer-events:none}
+.adventure-header>button,.adventure-header>div{pointer-events:auto}
+.adventure-header>button{display:flex;align-items:center;gap:12px;color:#e7ddc4;font-size:9px;letter-spacing:2px}
+.adventure-header .ashen-crest{width:23px;height:28px}
+.adventure-header>div{display:flex;gap:22px;align-items:center}
+.adventure-header>div>button{color:#e6dfca;display:flex;padding:5px}
+.adventure .chapter-button{border-radius:2px;font-size:11px;letter-spacing:.3px;min-height:43px}
+.adventure .chapter-button.secondary{background:#121b1acf;border-color:#d0b78375}
+.adventure .chapter-text-button{font-size:10px;letter-spacing:.2px}
+.adventure-panel{position:absolute;z-index:5;color:#eee8d6}
+.adventure-panel h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-1.4px;line-height:1.1;font-size:44px;margin:0 0 20px}
+.adventure-panel h1 em{font-weight:400;color:#dcc58e}
+.adventure-panel>p{font-size:12px;color:#d8d5c5;line-height:1.9;margin:0 0 26px}
+.adventure-title{top:50%;left:9%;transform:translateY(-50%);width:500px}
+.stage-title .adventure-vignette{background:linear-gradient(90deg,#0a131df2,#0b141da8 38%,#10212a22 75%),linear-gradient(0deg,#0b1017a8,transparent 35%)}
+.title-emblem{margin:0 0 22px}
+.title-emblem .ashen-crest{height:47px;width:38px}
+.adventure-title .chapter-eyebrow{font-size:8px;letter-spacing:3.3px;margin-bottom:19px;color:#d3c29f}
+.adventure-title h1{font-size:92px;line-height:.92;letter-spacing:-3px;margin-bottom:27px;text-shadow:0 3px 30px #07101e66}
+.adventure-title h1 em{font-style:normal;letter-spacing:1px}
+.adventure-title>p{font-family:Georgia,serif;font-size:17px;color:#bfcbd0;line-height:1.65;margin-bottom:29px}
+.title-actions{display:flex;flex-direction:column;gap:11px;align-items:flex-start}
+.title-actions>.chapter-button{min-width:248px;justify-content:space-between}
+.title-chapter{margin-top:32px;border-top:1px solid #d6bd852c;padding-top:17px;display:flex;flex-direction:column;gap:8px}
+.title-chapter>span{font-size:7px;letter-spacing:3px;color:#cdb582}
+.title-chapter>strong{font-family:Georgia,serif;font-size:20px;font-weight:400}
+.title-chapter>small{font-size:9px;color:#a5b4bc;letter-spacing:.3px}
+.title-back{position:fixed;bottom:-40px;display:flex;align-items:center;gap:9px;color:#a8b7bd;font-size:10px}
+.cinema-bars{position:absolute;inset:0;pointer-events:none;z-index:3;border-top:6vh solid #05090e;border-bottom:6vh solid #05090e}
+.stage-dialogue .adventure-header,.stage-memory .adventure-header{height:6vh;padding-right:3.5vw;background:none}
+.stage-dialogue .adventure-header>button span,.stage-memory .adventure-header>button span{display:none}
+.stage-dialogue .adventure-header .ashen-crest,.stage-memory .adventure-header .ashen-crest{height:23px;width:19px}
+.stage-dialogue .adventure-header>div>button svg,.stage-memory .adventure-header>div>button svg{width:15px}
+.stage-dialogue .adventure-header .chapter-coins,.stage-memory .adventure-header .chapter-coins{font-size:10px}
+.memory-time{position:absolute;top:16%;left:0;right:0;text-align:center;font-size:8px;letter-spacing:3px;color:#c1ccd0;z-index:4}
+.memory-subtitle{position:absolute;left:15%;right:15%;bottom:16%;text-align:center;z-index:4}
+.memory-subtitle>span{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#d6bf8c}
+.memory-subtitle>p{font-family:Georgia,serif;font-size:26px;line-height:1.6;color:#f5eee0;text-shadow:0 2px 15px #000;margin-top:12px;min-height:42px}
+.memory-title{position:absolute;z-index:4;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:#090f1999;animation:chapter-title-in 1.2s ease both}
+.memory-title>span{font-size:8px;letter-spacing:4px;color:#d4bd89;margin-bottom:25px}
+.memory-title h1{font-family:Georgia,serif;font-size:59px;font-weight:400;line-height:1.15;letter-spacing:-1px}
+.memory-title h1 em{color:#dcc48e}
+.memory-skip{position:absolute;right:3.5vw;bottom:2vh;z-index:9;display:flex;align-items:center;gap:8px;color:#9faeb7;font-size:9px}
+.adventure-compass{position:absolute;top:84px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:30px;align-items:center;color:#eee6c9;text-shadow:0 1px 8px #0008;font-size:9px;letter-spacing:1px}
+.adventure-compass>i{height:6px;width:1px;background:#f4e0ad55}
+.adventure-compass>div{position:absolute;top:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:8px;color:#ead3a1;letter-spacing:.4px}
+.quest-objective{position:absolute;left:3.5vw;top:120px;z-index:4;padding-left:15px;border-left:1px solid #dcc48c80;max-width:290px;text-shadow:0 2px 7px #000}
+.quest-objective>span{font-size:7px;letter-spacing:2px;color:#dbc99e;display:flex;align-items:center;gap:8px}
+.quest-objective h2{font-family:Georgia,serif;font-weight:400;font-size:23px;line-height:1.3;margin:11px 0 6px;color:#f2ecd9}
+.quest-objective p{font-size:10px;color:#c7d0c9;line-height:1.7}
+.explore-reticle{position:absolute;z-index:3;left:50%;top:48%;width:3px;height:3px;background:#f2e9ca;border-radius:50%;box-shadow:0 0 2px #070d12}
+.explore-prompt{position:absolute;left:50%;bottom:69px;transform:translateX(-50%);z-index:5;text-align:center;min-width:420px;display:flex;align-items:center;flex-direction:column}
+.explore-prompt>span{font-family:Georgia,serif;font-size:24px;color:#efe4c9;text-shadow:0 2px 9px #000}
+.explore-prompt>small{font-size:8px;color:#c2c9b5;margin:7px 0 16px}
+.explore-prompt>p{font-size:8px;color:#c0cac4;margin-top:16px;line-height:1.7;text-shadow:0 1px 6px #000}
+.keycap{font-family:Manrope,sans-serif;font-size:9px;display:inline-flex;align-items:center;justify-content:center;width:19px;height:20px;border:1px solid #75674a77;border-radius:2px;margin-right:3px}
+.story-dialogue{position:absolute;inset:0;z-index:5;pointer-events:none}
+.scene-heading{position:absolute;top:11vh;left:3.5vw;text-shadow:0 2px 12px #000}
+.scene-heading>span{font-size:7px;letter-spacing:2.5px;color:#d4bd89}
+.scene-heading h2{font-family:Georgia,serif;font-weight:400;font-size:22px;letter-spacing:.3px;margin:9px 0 0;color:#e9e1cd}
+.dialogue-deck{position:absolute;bottom:10vh;left:7%;right:7%;display:grid;grid-template-columns:60px minmax(0,1fr) auto;align-items:center;gap:20px;padding:23px 26px;background:linear-gradient(95deg,#09121aeb,#101a20e8 65%,#10181ee6);border-top:1px solid #d1b98554;border-bottom:1px solid #b5c3bd20;box-shadow:0 8px 30px #02081050;pointer-events:auto}
+.speaker-portrait{height:74px;width:60px;object-fit:cover;object-position:center 18%;border:1px solid #dfc38a55;filter:saturate(.75)}
+.spoken-line{min-height:74px}
+.spoken-line>div{display:flex;gap:14px;align-items:center}
+.spoken-line>div>span:first-child{font-size:8px;text-transform:uppercase;letter-spacing:2.1px;color:#dec793;font-weight:600}
+.spoken-line>p{font-family:Georgia,serif;font-size:20px;line-height:1.6;color:#f2eee0;margin-top:10px;min-height:32px}
+.typing-cursor{color:#dccda4;animation:chapter-cursor .75s step-end infinite;margin-left:1px}
+.typing-cursor.hidden{visibility:hidden}
+.voice-wave{display:inline-flex;height:11px;align-items:center;gap:2px}
+.voice-wave i{width:2px;height:8px;background:#d5c8a8;animation:chapter-voice .65s ease-in-out infinite alternate}
+.voice-wave i:nth-child(2){animation-delay:-.2s}.voice-wave i:nth-child(3){animation-delay:-.45s}.voice-wave i:nth-child(4){animation-delay:-.1s}
+.dialogue-next{display:flex;align-items:center;gap:16px;color:#e0c799;padding:14px 10px;font-size:10px;white-space:nowrap}
+.dialogue-next>svg{color:#f2dfb7}
+.dialogue-responses{width:330px;display:flex;flex-direction:column;gap:8px}
+.dialogue-responses>button{display:flex;align-items:center;text-align:left;gap:11px;color:#d1d8d2;border:1px solid #c2cfcc29;background:#1c262946;padding:12px 14px;font-size:11px;line-height:1.55;min-height:39px;transition:background .12s}
+.dialogue-responses>button>span{font-size:8px;color:#b09c73;flex-shrink:0}
+.dialogue-responses>button>svg{margin-left:auto;flex-shrink:0;color:#b89f75}
+.dialogue-responses>button.selected,.dialogue-responses>button:focus-visible{background:#b99b5220;border-color:#d4bc8588;color:#f4eacb}
+.dialogue-footer{position:absolute;bottom:2vh;left:7%;right:7%;display:flex;justify-content:space-between;align-items:center;pointer-events:auto;color:#929fa8;font-size:7px;letter-spacing:1.5px}
+.dialogue-footer>button{font-size:8px;letter-spacing:.4px;color:#b6c1c5;padding:5px}
+.dialogue-deck:not(:has(.speaker-portrait)){grid-template-columns:minmax(0,1fr) auto}
+.letter-prop{position:absolute;top:15vh;left:50%;transform:translateX(-50%) rotate(-1.5deg);padding:25px 32px;background:radial-gradient(ellipse at 30% 25%,#efe3c1,#d1bc90);color:#49402f;width:360px;text-align:center;box-shadow:0 20px 45px #0008;border:1px solid #c1a872}
+.letter-prop>.ashen-crest{stroke:#806638;margin:0 auto 15px}
+.letter-prop>span{font-size:6px;letter-spacing:1.2px;color:#8c7241}
+.letter-prop>p{font-family:Georgia,serif;font-size:16px;line-height:1.8;margin:18px 0}
+.letter-prop>strong{font-family:Georgia,serif;font-size:19px;display:block;font-weight:400;font-style:italic;margin-top:18px}
+.letter-prop>small{font-size:6px;letter-spacing:1.6px;display:block;margin-top:6px;color:#8c7241}
+.reading-letter .dialogue-deck{grid-template-columns:minmax(0,1fr) auto}
+.reading-letter .spoken-line>p{font-size:14px}
+.lesson-card{left:4.5vw;top:50%;transform:translateY(-50%);width:350px;background:linear-gradient(110deg,#101b20e6,#14201edf);padding:29px 31px;border-left:1px solid #d2b98166;border-bottom:1px solid #bac8c526}
+.lesson-card>.chapter-eyebrow{font-size:7px;letter-spacing:1.4px}
+.lesson-card>svg{color:#d3b983;margin:5px 0 20px}
+.lesson-card h1{font-size:31px;line-height:1.2;letter-spacing:-.5px}
+.lesson-card>p{font-size:11px;margin-bottom:22px;color:#c0cdc8}
+.lesson-progress{height:3px;background:#c6d5c626;margin:20px 0}
+.lesson-progress i{display:block;height:100%;background:#d5c18c;transition:width .1s}
+.lesson-card .tracking-note{color:#e0c996;font-size:10px}
+.lesson-card .chapter-text-button{font-size:8px;margin-top:6px}
+.trial-briefing{left:5.5vw;top:50%;transform:translateY(-50%);width:420px;background:linear-gradient(100deg,#0e1921ed,#101e20c4);padding:33px 32px;border-left:1px solid #d4bb8750}
+.trial-briefing .chapter-eyebrow{font-size:7px;letter-spacing:1.5px}
+.trial-briefing h1{font-size:38px}
+.trial-briefing>div{display:flex;gap:23px;margin:26px 0}
+.trial-briefing>div>span{display:flex;flex-direction:column;gap:8px;font-size:8px;color:#c9d2c6;min-width:65px}
+.trial-briefing>div svg{color:#d2b67c;margin-bottom:4px}
+.trial-briefing>div b{font-size:6px;letter-spacing:1.4px;font-weight:400;color:#a9b8ae}
+.trial-briefing>.briefing-footwork{font-size:10px;margin-bottom:24px;line-height:1.8}
+.trial-briefing .chapter-text-button{display:block;margin-top:16px}
+.trial-result{top:50%;left:50%;transform:translate(-50%,-50%);width:500px;max-width:90%;text-align:center;background:#0a161ded;border:1px solid #d4bb854d;padding:30px 35px;box-shadow:0 10px 35px #02080b55}
+.trial-result>.ashen-crest,.chapter-ending>.ashen-crest{margin:0 auto 23px}
+.trial-result h1{font-size:36px;letter-spacing:-.8px;margin-bottom:16px}
+.trial-result .chapter-action-row{justify-content:center}
+.trial-result .duel-result-stats{margin:25px 0}
+.forge-shop{top:50%;left:4.5vw;transform:translateY(-50%);width:650px;background:linear-gradient(100deg,#131c1eea,#111c1be5);padding:29px 33px;border-left:1px solid #dfc89444}
+.forge-shop h1{font-size:37px;margin-bottom:14px}
+.forge-shop>.chapter-eyebrow{font-size:7px}
+.forge-shop>p{margin-bottom:16px;font-size:11px}
+.forge-shop .shop-purse{font-size:10px;margin:10px 0 0;display:flex;align-items:center;gap:8px}
+.forge-shop .chapter-shop-grid{gap:12px;margin:23px 0}
+.forge-shop .chapter-shop-item{background:#0c151a4d;border-color:#d0b67a34;gap:9px;padding:12px}
+.forge-shop .chapter-shop-item>img{width:70px;height:120px}
+.forge-shop .chapter-shop-item h3{font-size:20px;line-height:1.2}
+.forge-shop .chapter-shop-item p{font-size:8px;line-height:1.7;margin:8px 0 12px}
+.forge-shop .chapter-shop-item .chapter-button{font-size:8px;padding:9px 10px;min-height:34px;white-space:nowrap}
+.chapter-ending{top:50%;left:50%;transform:translate(-50%,-50%);width:550px;max-width:90%;text-align:center;background:#0b161edb;padding:31px 37px;border:1px solid #d2b88338}
+.chapter-ending h1{font-size:53px}
+.chapter-ending .chapter-action-row{justify-content:center}
+.chapter-ending .next-quest{margin:21px auto;padding:17px 0}
+.chapter-ending>.ending-note{font-size:8px;color:#a4b4b6;margin:18px 0 0}
+.adventure .rival-hud{top:85px}
+.adventure .rival-hud>span{font-size:7px}
+.adventure .duel-caption{bottom:96px}
+.adventure .duel-telegraph{bottom:160px}
+.adventure .duel-controls{bottom:57px;flex-wrap:wrap;max-width:325px;justify-content:flex-end;gap:15px}
+.adventure .duel-distance{flex-basis:100%;display:block;text-align:right;color:#d2c291;font-size:7px;letter-spacing:1px;margin-top:2px}
+.adventure .squire-hud{bottom:58px}
+.adventure-runtime{position:absolute;left:3.5vw;right:3.5vw;bottom:17px;z-index:9;display:flex;justify-content:space-between;font-size:6px;letter-spacing:1.5px;color:#afbbb5a8;pointer-events:none}
+.adventure.cinematic .adventure-runtime{bottom:2vh;left:auto;right:45%;font-size:5px;opacity:.6}
+.adventure-modal-scrim{position:absolute;z-index:20;inset:0;background:#040b13b5;backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:25px}
+.adventure-modal{position:relative;width:410px;max-width:90vw;max-height:90%;overflow:auto;padding:38px 39px;background:#101d25fa;border:1px solid #d0b88351;box-shadow:0 15px 50px #0006;text-align:left}
+.adventure-modal>.ashen-crest{margin-bottom:23px}
+.adventure-modal>svg{color:#d1b780;margin-bottom:20px}
+.adventure-modal h2{font-family:Georgia,serif;font-weight:400;font-size:35px;line-height:1.15;letter-spacing:-.5px;margin:0 0 20px}
+.adventure-modal>p{font-size:11px;line-height:1.9;color:#b7c6c9;margin-bottom:25px}
+.adventure-modal>.chapter-button{width:100%;margin:7px 0;justify-content:space-between}
+.adventure-modal .chapter-eyebrow{font-size:7px;letter-spacing:2px;margin-bottom:13px}
+.adventure-modal .modal-close{position:absolute;right:15px;top:15px;padding:5px;color:#bcc9c6}
+.adventure-modal>.chapter-text-button{font-size:9px;margin-top:15px}
+.journal-modal{width:490px}
+.journal-modal .journal-equipment p{font-size:11px;margin-top:14px}
+.journal-modal .journal-quest{margin:23px 0;padding:21px 0}
+.journal-modal .journal-motive{font-size:10px;margin:25px 0 18px}
+.audio-master{display:flex;align-items:center;gap:10px;color:#e4d3ab;font-size:12px;margin-bottom:25px}
+.audio-slider{display:block;margin:22px 0}
+.audio-slider>span{display:flex;justify-content:space-between;color:#cfdbd5;font-size:11px;margin-bottom:13px}
+.audio-slider b{color:#ccb583;font-size:9px;font-weight:500}
+.audio-slider>input{width:100%;accent-color:#d2b880;height:3px;cursor:pointer}
+.dialogue-auto-setting{display:flex;justify-content:space-between;color:#c6d3cf;font-size:10px;gap:15px;width:100%;padding:16px 0;border-top:1px solid #bacacb20;margin-top:26px}
+.dialogue-auto-setting>span{color:#ddc491}
+.adventure-modal>.audio-setting-note{font-size:9px;color:#92a7af;margin-bottom:18px}
+@keyframes chapter-title-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes chapter-cursor{50%{opacity:0}}
+@keyframes chapter-voice{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+@media(max-height:720px){.adventure-title h1{font-size:73px}.title-emblem{margin-bottom:17px}.adventure-title>p{font-size:15px;margin-bottom:21px}.title-chapter{margin-top:24px;padding-top:14px}.adventure-title .chapter-eyebrow{margin-bottom:14px}.dialogue-deck{bottom:10vh;padding:18px 22px;gap:17px}.spoken-line>p{font-size:18px;line-height:1.6}.dialogue-responses>button{font-size:10px;padding:10px 12px}.scene-heading h2{font-size:19px}.memory-title h1{font-size:50px}.letter-prop{padding:18px 28px;width:320px;top:14vh}.letter-prop>p{font-size:15px;line-height:1.6;margin:13px 0}.letter-prop>.ashen-crest{height:25px;margin-bottom:12px}.letter-prop>strong{font-size:18px;margin-top:13px}.trial-result{padding:27px 32px}.trial-result h1{font-size:33px}.forge-shop{padding:24px 29px}.forge-shop .chapter-shop-item>img{height:108px}.chapter-ending{padding:25px 34px}.chapter-ending h1{font-size:47px}.chapter-ending .next-quest{margin:18px auto;padding:14px 0}.adventure-header{height:66px}.quest-objective{top:115px}}
+@media(max-width:950px){.adventure-title{left:6%;width:420px}.adventure-title h1{font-size:73px}.dialogue-deck{left:4%;right:4%;grid-template-columns:48px minmax(0,1fr) auto;gap:14px;padding:18px}.speaker-portrait{width:48px;height:66px}.dialogue-responses{width:270px}.spoken-line>p{font-size:17px}.dialogue-responses>button{font-size:10px}.dialogue-footer{left:4%;right:4%;font-size:6px}.forge-shop{width:580px;left:4%}.forge-shop .chapter-shop-item h3{font-size:18px}.trial-briefing{width:360px;left:4%;padding:27px}.trial-briefing h1{font-size:34px}.adventure-header>div{gap:15px}.quest-objective{max-width:230px}.quest-objective h2{font-size:21px}.adventure .duel-caption{width:45vw;bottom:122px}.adventure .duel-telegraph{bottom:186px}.adventure .duel-controls{max-width:235px;gap:12px;font-size:7px}.adventure .squire-hud{width:180px}}
+@media(max-width:600px){.adventure.chapter-world{height:100svh!important;min-height:650px}.adventure-title{left:8%;width:84%}.adventure-title h1{font-size:70px}.title-chapter>small{font-size:8px}.title-back{bottom:-28px}.adventure-header{padding:0 18px}.adventure-header>button>span{display:none}.adventure-header>div{gap:13px}.adventure-header>div>button svg{width:16px}.adventure-compass{top:83px}.quest-objective{left:20px;top:130px;max-width:220px}.explore-prompt{bottom:70px;min-width:0;width:90%}.explore-prompt>p{font-size:8px;max-width:310px}.dialogue-deck{display:flex;flex-wrap:wrap;align-items:center;gap:12px;bottom:10vh;padding:16px 18px;left:5%;right:5%}.speaker-portrait{width:40px;height:51px}.spoken-line{flex:1;min-height:58px}.spoken-line>p{font-size:17px;margin-top:7px}.spoken-line>div>span:first-child{font-size:7px;letter-spacing:1.3px}.dialogue-responses{width:100%}.dialogue-next{margin-left:auto;padding:10px 0;font-size:9px}.dialogue-responses>button{font-size:11px;min-height:43px;padding:10px 12px}.dialogue-footer{font-size:5px;letter-spacing:.8px}.dialogue-footer>button{font-size:7px}.scene-heading{left:6%;top:11vh}.scene-heading h2{font-size:18px}.memory-subtitle{left:8%;right:8%;bottom:22%}.memory-subtitle>p{font-size:23px}.memory-title h1{font-size:43px}.memory-time{font-size:6px;letter-spacing:2px;top:18%}.letter-prop{width:275px;top:20%;padding:18px 25px}.letter-prop>p{font-size:14px}.letter-prop>strong{font-size:16px}.reading-letter .spoken-line>p{font-size:12px}.lesson-card{left:6%;width:88%;top:auto;bottom:12%;transform:none;padding:23px 27px}.lesson-card h1{font-size:28px}.lesson-card>svg{width:25px;margin-bottom:13px}.lesson-card>p{font-size:11px;margin-bottom:18px}.lesson-card>.chapter-eyebrow{font-size:6px}.trial-briefing{left:6%;width:88%;top:54%;padding:27px}.trial-briefing h1{font-size:32px}.trial-briefing>div{gap:30px}.trial-briefing>p{font-size:11px}.trial-result{width:90%;padding:25px 20px}.trial-result h1{font-size:29px}.trial-result .duel-result-stats{gap:30px;margin:24px 0}.trial-result .chapter-action-row{gap:9px}.trial-result .chapter-button{font-size:9px;padding:12px 14px}.forge-shop{width:90%;left:5%;padding:24px;top:52%}.forge-shop h1{font-size:33px}.forge-shop .chapter-shop-grid{grid-template-columns:1fr;margin:20px 0;gap:10px}.forge-shop .chapter-shop-item>img{width:65px;height:96px}.forge-shop .chapter-shop-item>div{display:grid;grid-template-columns:1fr auto;column-gap:10px}.forge-shop .chapter-shop-item p{grid-column:1;font-size:8px;max-width:130px;margin-bottom:4px}.forge-shop .chapter-shop-item .chapter-button{grid-column:2;grid-row:1/3}.forge-shop .chapter-shop-item h3{font-size:18px}.forge-shop>.chapter-button{width:100%;font-size:9px}.chapter-ending{padding:26px 22px;top:53%}.chapter-ending h1{font-size:44px}.chapter-ending>p{font-size:11px}.chapter-ending .chapter-button{font-size:9px;padding:12px}.chapter-ending .next-quest h3{font-size:22px}.adventure .rival-hud{top:107px}.adventure .rival-hud h2{font-size:24px}.adventure .duel-caption{width:85%;bottom:210px}.adventure .duel-telegraph{bottom:277px}.adventure .squire-hud{left:20px;bottom:73px;width:170px}.adventure .duel-controls{right:20px;bottom:70px;max-width:140px;gap:10px}.adventure .duel-distance{font-size:6px;letter-spacing:.5px}.adventure-modal{padding:31px 28px}.adventure-modal h2{font-size:31px}.adventure-runtime{left:20px;right:20px;font-size:5px;letter-spacing:1px}.adventure.cinematic .adventure-runtime{display:none}}
+@media(prefers-reduced-motion:reduce){.typing-cursor,.voice-wave i,.memory-title{animation:none}.lesson-progress i,.dialogue-responses>button{transition:none}}
+.combat-health{width:100%;margin:10px 0 12px}.combat-health>div:first-child{display:flex;justify-content:space-between;gap:18px;font:9px Manrope,sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}.combat-health b{font-weight:500;color:#f0dfbf}.combat-health [role=progressbar]{height:8px;background:#070d0b99;border:1px solid #c9ac6338;overflow:hidden}.combat-health [role=progressbar]>i{display:block;height:100%;background:linear-gradient(90deg,#943e36,#d88566);transition:width .2s}.squire-hud .combat-health [role=progressbar]>i{background:linear-gradient(90deg,#557366,#a3b790)}.combat-health.critical [role=progressbar]>i{background:#be594a}.rival-hud .combat-health{min-width:245px}.rival-hud>small{font-size:8px;letter-spacing:1px;color:#c3c3b1}.squire-hud{min-width:230px}.squire-hud>.combat-health{display:block}.combat-lines{position:absolute;left:calc(50% - 55px);top:43%;width:110px;height:75px;border:1px solid #e9d9b51c;border-radius:50%;color:#c9c6b4;pointer-events:none}.combat-lines>span{position:absolute;font-size:7px;letter-spacing:1px;background:#101611a3;padding:3px 5px}.combat-lines>span:first-child{top:5%;left:35%}.combat-lines>span:nth-child(2){top:50%;left:3%}.combat-lines>span:nth-child(3){top:50%;right:0}.combat-lines>span.incoming{color:#ffe0be;border-bottom:1px solid #e2996b}.combat-lines>i{position:absolute;width:10px;height:10px;border:1px solid #c3d5bf;border-radius:50%;transform:translate(-50%,-50%);opacity:.3}.combat-lines>i.raised{background:#88ae8c;opacity:1}.combat-lines>small{position:absolute;top:110%;width:100%;text-align:center;font-size:6px;letter-spacing:1px}.trial-result .duel-result-stats{gap:28px}.trial-briefing .briefing-footwork{max-width:540px;font-size:11px;line-height:1.8}.stage-duel .duel-caption{max-width:480px}.stage-duel .duel-caption p{font-size:16px}@media(max-width:600px){.squire-hud{min-width:165px}.combat-lines{top:44%}.trial-result .duel-result-stats{flex-wrap:wrap;gap:20px}.rival-hud .combat-health{min-width:210px}}
