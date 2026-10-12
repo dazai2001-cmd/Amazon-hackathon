@@ -1,0 +1,20 @@
+import { Accessibility, ArrowRight, BookOpen, Check, Keyboard, ScanLine, Settings2, Smartphone, Volume2, VolumeX, X } from 'lucide-react';
+import type { CalibrationProfile } from '../../shared/motion';
+
+export type MenuPreferences = { sound: boolean; autoDialogue: boolean };
+export function readMenuPreferences(): MenuPreferences {
+  try {
+    const saved = JSON.parse(localStorage.getItem('moveroom.settings.v1') || 'null');
+    if (saved && typeof saved.sound === 'boolean' && typeof saved.autoDialogue === 'boolean') return { sound: saved.sound, autoDialogue: saved.autoDialogue };
+  } catch { /* Use the default controls if preferences are unavailable. */ }
+  return { sound: true, autoDialogue: true };
+}
+type Props = { panel: 'setup' | 'settings'; preferences: MenuPreferences; profile: CalibrationProfile | null; preview: boolean; connected: boolean;
+  onClose: () => void; onPair: () => void; onCalibrate: () => void; onPreview: () => void; onExitPreview: () => void; onGuide: () => void; onSound: () => void; onAutoDialogue: () => void };
+export default function MenuPanel({ panel, preferences, profile, preview, connected, onClose, onPair, onCalibrate, onPreview, onExitPreview, onGuide, onSound, onAutoDialogue }: Props) {
+  return <div className="menu-panel-scrim"><section className="menu-panel" role="dialog" aria-modal="true" aria-labelledby="menu-panel-title"><button className="menu-panel-close" aria-label={`Close ${panel === 'setup' ? 'controller setup' : 'settings'}`} onClick={onClose}><X size={22}/></button><span className="menu-eyebrow">{panel === 'setup' ? 'YOUR BODY IS THE CONTROLLER' : 'MAKE THE JOURNEY YOURS'}</span><h2 id="menu-panel-title">{panel === 'setup' ? 'Controller Setup' : 'Settings'}</h2>
+    {panel === 'setup' ? <><p>Pair an Android phone for camera controls, then calibrate a comfortable lean and reach range.</p><div className="menu-setup-status"><span>{preview ? <Keyboard size={18}/> : <Smartphone size={18}/>} {preview ? 'Desktop preview · Camera off' : connected ? 'Phone connected' : 'Phone waiting to connect'}</span><span>{profile ? <Check size={18}/> : <Accessibility size={18}/>} {profile ? `${profile.mode === 'seated' ? 'Seated' : 'Standing'} range saved on this device` : 'Movement range not calibrated yet'}</span></div><button data-autofocus className="menu-panel-primary" onClick={onPair}><Smartphone size={18}/>{preview ? 'Switch to phone camera' : connected ? 'Open camera pairing' : 'Connect Android phone'}<ArrowRight size={18}/></button><button className="menu-panel-option" onClick={onCalibrate}><ScanLine size={18}/> Calibrate movement <ArrowRight size={16}/></button><button className="menu-panel-option" onClick={preview ? onExitPreview : onPreview}><Keyboard size={18}/> {preview ? 'Exit desktop preview' : 'Try desktop preview'}<ArrowRight size={16}/></button><p className="menu-panel-note">Setup continues hands-free once you are in view. Exercise routines use their own side-view calibration in Alden’s hall.</p></>
+    : <><p>Set your sound and dialogue preferences. Subtitles and exercise corrections remain visible.</p><button data-autofocus className="menu-preference" aria-pressed={preferences.sound} onClick={onSound}>{preferences.sound ? <Volume2 size={20}/> : <VolumeX size={20}/>}<span><strong>Game sound</strong><small>Character voices, music & effects</small></span><b>{preferences.sound ? 'On' : 'Off'}</b></button><button className="menu-preference" aria-pressed={preferences.autoDialogue} onClick={onAutoDialogue}><BookOpen size={20}/><span><strong>Auto dialogue</strong><small>Continue spoken lines automatically</small></span><b>{preferences.autoDialogue ? 'On' : 'Off'}</b></button><p className="menu-panel-note">Choices always wait for your answer. Voice, music and effects levels are also adjustable from the story’s audio settings.</p><button className="menu-panel-option" onClick={onGuide}><BookOpen size={18}/> Open player guide <ArrowRight size={16}/></button></>}
+    <button className="menu-panel-back" onClick={onClose}><Settings2 size={15}/> Return to main menu</button>
+  </section></div>;
+}

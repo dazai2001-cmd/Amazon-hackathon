@@ -28,7 +28,7 @@ Alden has 25 new local voice clips for setup, visible corrections, pause, rest, 
 
 The labelled desktop preview uses the same measurement, calibration and repetition engine with synthetic side-view joints. Hold **B** to lower and release it to return, or use the Preview lower position / Preview return to start buttons. Movements interpolate over 0.8 seconds with a fixed simulation step, so slower display frames do not manufacture tracking gaps or add a rep directly. Live camera frames retain their actual capture timestamps and are never filled in with synthetic poses. Preview records a practice completion but awards zero XP. The covered 3D courtyard stops rendering during training and resumes on return.
 
-Fifteen focused tests cover framing, portrait/landscape image aspect, all variations, calibration, sets, rest, invalid repetitions, gaps, duplicates, pose loss, pause, adaptation, save validation, reward limits, capped battle bonuses and trainer script coverage. The relay test also checks exercise setup commands and image aspect delivery. Full suite: 69 tests. Human-camera rep accuracy, real form-label validation and long-term fitness outcomes remain untested.
+Fifteen focused tests cover framing, portrait/landscape image aspect, all variations, calibration, sets, rest, invalid repetitions, gaps, duplicates, pose loss, pause, adaptation, save validation, reward limits, capped battle bonuses and trainer script coverage. The relay test also checks exercise setup commands and image aspect delivery. Current full suite: 86 tests. Human-camera rep accuracy, real form-label validation and long-term fitness outcomes remain untested.
 
 ## Research basis and limits
 

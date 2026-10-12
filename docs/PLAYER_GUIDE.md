@@ -2,7 +2,7 @@
 
 The Squire’s Field Guide opens on the first visit to the chapter or clan hall. It has five illustrated lessons: phone setup, sword and shield, story objectives/dialogue, Alden’s exercises, and clan wars. Players can follow Next/Previous or jump directly to a lesson. Closing it records onboarding on this browser/device; it does not reset game saves.
 
-Reopen **Player guide** from the chapter title or pause menu, the question-mark button during the story, **Training guide** from Alden’s hall, or **War guide** from multiplayer. The home adventure card also offers **Player guide**.
+Reopen **Player guide** from the chapter title or pause menu, the question-mark button during the story, **Training guide** from Alden’s hall, or **War guide** from multiplayer. The main menu has a dedicated **Player Guide** option beside Settings and Controller Setup.
 
 The setup lesson shows live phone connection, body-in-view and calibration status and can open camera pairing. Pairing and calibration continue hands-free once the player is framed and follows the poses. Exercise setup explains the separate side view and start/lower/return calibration. Desktop preview displays different keyboard instructions and explicitly disables exercise XP.
 

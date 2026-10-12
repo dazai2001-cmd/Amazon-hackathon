@@ -1,6 +1,6 @@
-# MoveRoom
+# The Ashen Gate
 
-A Fire TV movement playground powered by an Android phone camera. **The Ashen Gate** now has a complete first-chapter story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available from the title, chapter header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **The Orders** now supports live clan wars with 1–3 champions per clan, human-versus-human duels and a shared clan score. An illustrated first-visit tutorial explains setup, combat, story, training and multiplayer, with contextual replay buttons. **Orbit Arena** and **Reach & Reset** remain available from the playground.
+A medieval fitness adventure for Fire TV, powered by an Android phone camera. **The Ashen Gate** now has a complete first-chapter story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available directly from the main menu, chapter title, header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **The Orders** now supports live clan wars with 1–3 champions per clan, human-versus-human duels and a shared clan score. An illustrated first-visit tutorial explains setup, combat, story, training and multiplayer, with contextual replay buttons. The root page is now the medieval main menu: Story, Training, Clan Wars, Controller Setup, Settings and Player Guide. The older Orbit Arena and Reach & Reset demo screens have been removed.
 
 The TV runs a native Android/Fire OS APK with a landscape WebView, D-pad navigation, Select/Back/Play-Pause support, and a Leanback launcher. The phone runs MediaPipe Pose Landmarker locally in Chrome. A small Node server serves both interfaces and relays landmarks over WebSockets. A TV camera is not required.
 
@@ -14,7 +14,7 @@ npm install
 npm run dev
 ~~~
 
-Open **http://localhost:8787/** and choose **Begin Chapter I**. Connect and calibrate your phone, or choose **Explore a desktop preview first** for an explicitly labelled simulated controller. You can also open **http://localhost:8787/chapter** directly. **Begin story** enables audio; **Continue** resumes the saved quest checkpoint.
+Open **http://localhost:8787/** for the main menu. Choose **Story** for Chapter I, **Training** for Alden’s routines, or **Clan Wars** for multiplayer. **Controller Setup** contains Android pairing, movement calibration and the labelled desktop preview. **Settings** saves sound and auto-dialogue preferences. Story, training and multiplayer can also open directly at `/chapter`, `/training` and `/arena`; navigation and browser Back keep the URL in sync. **Continue** resumes the saved quest checkpoint.
 
 In the courtyard, **WASD** walks, **Left/Right arrows** turn, mouse dragging looks around, and **E** interacts. Each objective also offers a guided walk. During weapon lessons and the trial, **J / K / L** simulate cuts in different directions; mouse movement also places the sword hand. Hold **Shift + Z / X / C** to cover the left / high / right line, and **A / D** to lean. **W / S** advance or retreat in combat; hold **V** to crouch in the preview. **Space** pauses, **Q** opens the journal, and **Escape/Back** opens or closes menus. Camera tracking is off in desktop preview. On the phone controller, raise the left hand for a second to walk/interact/continue; lean to select a dialogue choice and return to centre before another selection.
 
@@ -98,7 +98,8 @@ npm install copies the MediaPipe WASM into public/vision and downloads the offic
 
 | Path | Purpose |
 | --- | --- |
-| src/TVApp.tsx | TV home, pairing, calibration, activity navigation |
+| src/TVApp.tsx | Main-menu routes, shared training progress, settings, pairing and calibration |
+| src/components/MainMenu.tsx | Medieval title screen and visible mode choices |
 | src/PhoneApp.tsx | Android camera controller and pairing |
 | src/lib/camera.ts | Local MediaPipe inference with GPU/CPU fallback |
 | shared/game.ts | Wrist mapping, sweep validation, arena rules |

@@ -44,7 +44,7 @@ export default function PhoneApp() {
       if (message.type === 'command' && message.action === 'activity') exerciseRef.current = null;
       if (message.type === 'command' && message.action === 'instruction') setInstruction(message.value);
       if (message.type === 'command' && message.action === 'activity') activityRef.current = message.value as Activity;
-      if (message.type === 'command' && message.action === 'activity') setInstruction(message.value === 'chapter' || message.value === 'arena' ? 'Your hands place the weapons. Step closer or back for footwork; lean or crouch after she commits. Keep hands and hips in view.' : message.value === 'play' ? 'Sweep your right hand to slice. Raise your left hand to shield.' : message.value === 'coach' ? 'Follow the coaching cues on your TV.' : message.value === 'calibrate' ? 'Follow the calibration instructions on your TV.' : 'Look at your TV to choose an experience.');
+      if (message.type === 'command' && message.action === 'activity') setInstruction(message.value === 'chapter' || message.value === 'arena' ? 'Your hands place the weapons. Step closer or back for footwork; lean or crouch after she commits. Keep hands and hips in view.' : message.value === 'training' ? 'Follow Alden’s exercise calibration and rep cues on your screen.' : message.value === 'calibrate' ? 'Follow the calibration instructions on your TV.' : 'Look at your TV to choose an experience.');
     }, state => { setConnected(state); if (!state) setTVConnected(false); });
     socket.current = connection;
     return () => { connection.close(); socket.current = null; };

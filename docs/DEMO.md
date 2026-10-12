@@ -1,7 +1,7 @@
 # Chapter One demonstration
 
-1. Launch the native APK in the Android TV emulator with the local server running. Open **Begin Chapter I** and pair/calibrate the Android phone over USB.
-2. Begin the story with sound enabled. Show the opening memory, walk to Alden, and choose a reason for becoming his squire. Voice playback advances conversations; dialogue choices wait for the player.
+1. Launch the native APK in the Android TV emulator with the local server running. Open **Controller Setup** on the main menu and pair/calibrate the Android phone over USB, then choose **Story**.
+2. Set **Game sound** on in Settings and begin the story. Show the opening memory, walk to Alden, and choose a reason for becoming his squire. Voice playback advances conversations; dialogue choices wait for the player.
 3. Complete the shield, cut and evasion lessons. The right wrist places the sword and the forearm aims it; the left wrist places the shield. Keep the relevant joints visible.
 4. Meet Mara or use **Go straight to sparring** for a shorter presentation. Point out the two health bars and stamina. Cover a high/left/right attack line, then cut into her recovery opening. A late block earns a stronger riposte; cutting into her guard is parried. Use distance to stay within sword reach.
 5. Briefly leave the camera view during a trial to show that both fighters pause. Return to view without awarding damage from the jump in position.
@@ -11,18 +11,6 @@
 For a short recording, show excerpts from the story and one complete combat exchange. The anytime exercise hall and live guest clan wars are playable. Present live multiplayer with a second independent participant screen, keeping it distinct from Mara’s computer-controlled story trial.
 
 Desktop preview uses explicitly simulated landmarks: **J / K / L** cut, mouse movement places the sword hand, **Shift + Z / X / C** covers left / high / right, **A / D** leans, and **W / S** advances or retreats in the trial. **Space** pauses. In exploration, WASD walks, arrows turn, E interacts, and each objective provides a guided route. To repeat the relay path at 18 fps without a phone, attach scripts/relay-fixture.ts to the pairing code; identify this as synthetic input in the recording.
-
-## Playground demonstration
-
-1. Launch the APK in the Android TV emulator with the local server running.
-2. Pair the Android phone over USB and enable its camera. Show the phone's landmark overlay and the TV connection status.
-3. Choose standing or seated calibration. Hold neutral, lean left, lean right, and show a comfortable two-hand reach.
-4. Enter Orbit Arena. Sweep the right hand across lime drones; point out the blade cursor, streak and score. Raise the left hand to block an orange bolt. Lean away to dodge another.
-5. Briefly cover the camera or leave the frame: the round pauses. Return to view: a position jump does not count as a slash.
-6. Return to Practice. Start Reach & Reset. Move the hands unevenly for a moment to trigger its practice cue, then complete a two-second coordinated reach and lower both hands to count a rep.
-7. Explain: phone-local computer vision, landmarks-only relay, a native Fire TV experience, and controls adjusted to the player's range.
-
-For a keyboard-only demonstration, enable Desktop preview and say clearly that it uses simulated landmarks. Mouse/arrows control the blade, Shift shields, and Space pauses. In Practice, hold Up for two seconds and release to reset.
 
 ## Before recording
 
@@ -39,7 +27,7 @@ Position this as a phone-powered movement platform for Fire TV, with playable sw
 
 ## Fitness progression demo
 
-From the chapter title choose **Enter training hall**. Show the assigned circuit and variation choices. In a live camera demo, set the phone at the side and demonstrate the start/lower/return calibration without reaching for the screen. Complete the squat set, wait or pause during its rest, reposition the phone for the push-up calibration, and complete the assigned push-ups. Show the saved XP and capped Strength/Endurance effects on the next story duel. This must be a real camera exercise demonstration to support a tracking claim.
+Choose **Training** directly from the main menu, or **Enter training hall** from the chapter. Show the assigned circuit and variation choices. In a live camera demo, set the phone at the side and demonstrate the start/lower/return calibration without reaching for the screen. Complete the squat set, wait or pause during its rest, reposition the phone for the push-up calibration, and complete the assigned push-ups. Show the saved XP and capped Strength/Endurance effects on the next story duel. This must be a real camera exercise demonstration to support a tracking claim.
 
 For a clearly labelled software-only walkthrough, connect the desktop preview and hold **B** to lower/release to return. Show that completing the circuit awards no XP. The preview uses synthetic joints and cannot validate human exercise accuracy. Alden’s voice can be toggled from the hall header; all instructions remain captioned.
 
@@ -50,7 +38,7 @@ Fire TV submission proof must be on an actual Fire TV or Fire TV/Vega simulator 
 
 For the available laptop, extended monitor and one Android phone, follow [the two-screen setup](TWO_SCREEN_DEMO.md). One fighter uses the camera and a second person uses the labelled preview controller. Visible browser windows keep receiving their respective controls even when keyboard focus changes.
 
-1. On a fresh browser/device, enter the chapter and show the five-lesson field guide. Demonstrate Next/Previous and Back with the remote. Close it and reopen **Player guide** to show it remains available.
+1. On a fresh browser/device, show the main menu and its six options, then open **Player Guide** to show the five-lesson field guide. Demonstrate Next/Previous and Back with the remote. Close it and reopen **Player guide** to show it remains available.
 2. From Alden’s exercise hall, open **Training guide**. Show that the counter is paused while reading and resumes without an extra rep when the guide closes.
 3. On two independent screens, open **Clan war hall**. Create a 1 vs 1 war, join the opposing clan with its invite, and pair one phone per participant. For a software-only recording, label both controllers as desktop previews.
 4. Ready both fighters and let the captain start. Show one person’s cut updating the opponent health on both screens, then a correct guard or timed parry. There is no opponent AI in this mode.

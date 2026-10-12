@@ -37,7 +37,7 @@ socket.on('message', bytes => {
 });
 const timer = setInterval(() => {
   if (socket.readyState !== WebSocket.OPEN || mode === 'freeze') return;
-  const now = performance.now(), t = now / 1000;
+  const now = performance.now();
   const counterAge = now - duelWindup - (duelExchange % 2 ? 1400 : 1260);
   const swinging = counterAge >= 0 && counterAge < 300;
   const lessonAge = now - lessonStarted, lessonSwing = lesson === 'cut' && lessonAge % 1000 < 300;
@@ -45,9 +45,7 @@ const timer = setInterval(() => {
   const guarding = lesson === 'shield' || (duelExchange > 0 && counterAge < 0);
   const duelPoints = poseWithBlade(syntheticPose(lesson === 'evade' && lessonAge < 800 ? .85 : 0), { x: .82 - cutProgress * .64, y: .22 + cutProgress * .42 }, guarding, DEFAULT_PROFILE, lanePoint(incoming), true);
   const points = activity === 'calibrate' ? syntheticPose(calibrationStep === 1 ? -0.8 : calibrationStep === 2 ? 0.8 : 0, calibrationStep === 3)
-    : activity === 'chapter' ? duelPoints
-    : activity === 'play' ? poseWithBlade(syntheticPose(Math.sin(t * 0.7)), { x: 0.5 + Math.sin(t * 3) * 0.4, y: 0.52 + Math.sin(t * 1.3) * 0.18 }, t % 7 < 2.3, DEFAULT_PROFILE)
-    : activity === 'coach' ? syntheticPose(0, t % 3.4 < 2.7) : syntheticPose();
+    : activity === 'chapter' || activity === 'arena' ? duelPoints : syntheticPose();
   socket.send(JSON.stringify({ type: 'pose', seq: sequence++, t: now, landmarks: mode === 'blank' ? [] : points, fps: 18 }));
 }, 1000 / 18);
 const input = createInterface({ input: process.stdin });
