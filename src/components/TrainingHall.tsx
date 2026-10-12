@@ -1,23 +1,24 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowLeft, Check, Dumbbell, Pause, Play, Shield, Volume2, VolumeX } from 'lucide-react';
+import { ArrowLeft, Check, CircleHelp, Dumbbell, Pause, Play, Shield, Volume2, VolumeX } from 'lucide-react';
 import { completeTraining, exerciseName, makeTrainingPlan, measureExercise, TrainingCoach, trainingCues, trainingPreviewPose, trainingStats, trainingVoice, type TrainingBlock, type TrainingPreference, type TrainingSave, type TrainingSnapshot } from '../../shared/training';
 import type { Landmark } from '../../shared/protocol';
 import { ChapterAudio, type VoiceState } from '../lib/chapterAudio';
 import PoseView from './PoseView';
 import './training.css';
 
-type Props = { points: Landmark[]; frameTime?: number; aspect: number; preview: boolean; sound: boolean; save: TrainingSave;
+type Props = { guideOpen: boolean; onGuide: () => void; points: Landmark[]; frameTime?: number; aspect: number; preview: boolean; sound: boolean; save: TrainingSave;
   onSave: (value: TrainingSave) => void; onClose: () => void; onPair: () => void; onInstruction: (text: string) => void; onExercise: (block: TrainingBlock | null) => void; onToggleSound: () => void };
 const localDay = () => { const date = new Date(); return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; };
 
-export default function TrainingHall({ points, frameTime, aspect, preview, sound, save, onSave, onClose, onPair, onInstruction, onExercise, onToggleSound }: Props) {
+export default function TrainingHall({ guideOpen, onGuide, points, frameTime, aspect, preview, sound, save, onSave, onClose, onPair, onInstruction, onExercise, onToggleSound }: Props) {
   const [preference, setPreference] = useState<TrainingPreference>({ ...save.preference });
   const [coach, setCoach] = useState<TrainingCoach | null>(null), [state, setState] = useState<TrainingSnapshot | null>(null);
-  const [paused, setPaused] = useState(false), [lowered, setLowered] = useState(false), [previewPoints, setPreviewPoints] = useState<Landmark[]>([]);
+  const [userPaused, setPaused] = useState(false), [lowered, setLowered] = useState(false), [previewPoints, setPreviewPoints] = useState<Landmark[]>([]);
   const [voiceState, setVoiceState] = useState<VoiceState>('idle'), [receipt, setReceipt] = useState<'earned' | 'preview' | 'capped' | null>(null);
   const audio = useRef<ChapterAudio | null>(null), lastVoice = useRef(''), lastVoiceAt = useRef(-10000), finished = useRef(false), lastRep = useRef(0), lastRejected = useRef(0);
   const sessionId = useRef(''), lowerTarget = useRef(false), currentLower = useRef(0), preferenceRef = useRef(preference), mounted = useRef(true);
   preferenceRef.current = preference;
+  const paused = userPaused || guideOpen;
   const latest = useRef({ points, frameTime, aspect, preview, paused }); latest.current = { points, frameTime, aspect, preview, paused };
   const lastCompleted = save.history.some(h => !h.preview);
   const plan = makeTrainingPlan(preference, lastCompleted), stats = trainingStats(save);
@@ -99,6 +100,7 @@ export default function TrainingHall({ points, frameTime, aspect, preview, sound
   useEffect(() => {
     const pause = () => { if (coach && coach.state.phase !== 'complete') setPaused(p => !p); };
     const down = (event: KeyboardEvent) => {
+      if (guideOpen) return;
       const key = event.key.toLowerCase();
       if (['escape', 'backspace', 'q'].includes(key)) { event.preventDefault(); event.stopImmediatePropagation(); if (key !== 'q') { if (coach && coach.state.phase !== 'complete') setPaused(p => !p); else onClose(); } }
       if (preview && key === 'b' && coach) { event.preventDefault(); event.stopImmediatePropagation(); lowerTarget.current = true; setLowered(true); }
@@ -107,7 +109,7 @@ export default function TrainingHall({ points, frameTime, aspect, preview, sound
     const blur = () => { lowerTarget.current = false; setLowered(false); if (coach) setPaused(true); };
     window.addEventListener('keydown', down, true); window.addEventListener('keyup', up); window.addEventListener('moveroom:pause', pause); window.addEventListener('blur', blur);
     return () => { window.removeEventListener('keydown', down, true); window.removeEventListener('keyup', up); window.removeEventListener('moveroom:pause', pause); window.removeEventListener('blur', blur); };
-  }, [coach, preview, onClose]);
+  }, [coach, preview, onClose, guideOpen]);
   const begin = () => {
     onSave({ ...save, preference }); sessionId.current = crypto.randomUUID(); finished.current = false; lastRep.current = 0; lastRejected.current = 0;
     lastVoice.current = ''; currentLower.current = 0; lowerTarget.current = false; setLowered(false); setPaused(false); setReceipt(null);
@@ -118,7 +120,7 @@ export default function TrainingHall({ points, frameTime, aspect, preview, sound
   const changeRoutine = () => { audio.current?.stopVoice(); setCoach(null); setState(null); setPaused(false); lowerTarget.current = false; setLowered(false); };
   const complete = state?.phase === 'complete';
   return <section className="training-hall" role="dialog" aria-modal="true" aria-label="Alden’s training hall" data-training-phase={state?.phase || 'plan'} data-voice-state={voiceState}>
-    <header className="training-header"><button className="chapter-text-button" onClick={onClose}><ArrowLeft size={17}/> Return to adventure</button><span><Dumbbell size={18}/> ALDEN’S TRAINING HALL</span><button className="chapter-text-button" aria-label={sound ? 'Turn training sound off' : 'Turn training sound on'} onClick={onToggleSound}>{sound ? <Volume2 size={19}/> : <VolumeX size={19}/>}</button></header>
+    <header className="training-header"><button className="chapter-text-button" onClick={onClose}><ArrowLeft size={17}/> Return to adventure</button><span><Dumbbell size={18}/> ALDEN’S TRAINING HALL</span><button className="chapter-text-button" onClick={onGuide}><CircleHelp size={17}/> Training guide</button><button className="chapter-text-button" aria-label={sound ? 'Turn training sound off' : 'Turn training sound on'} onClick={onToggleSound}>{sound ? <Volume2 size={19}/> : <VolumeX size={19}/>}</button></header>
     <div className="training-body"><aside className="training-mentor"><img src="/assets/medieval/characters/instructor.png" alt="Sir Alden Vale"/><span className="chapter-eyebrow">YOUR INSTRUCTOR</span><h2>Discipline<br/><em>before glory.</em></h2><p>“An honest repetition earns its place. Reset the movement, and we begin again.”</p><div className="training-stats"><div><b>{stats.level}</b><span>Squire level</span></div><div><b>{stats.strength}</b><span>Strength</span></div><div><b>{stats.endurance}</b><span>Endurance</span></div></div><small>{save.xp} training XP · Story damage +{Math.round(stats.damageBonus * 100)}% · Stamina recovery +{Math.round(stats.recoveryBonus * 100)}%</small></aside>
     {!coach ? <div className="training-plan"><span className="chapter-eyebrow">A ROUTINE FOR TODAY</span><h1>Build your squire.</h1><p>Choose a starting pace and comfortable variations. Alden sets the reps, sets and rest, using your last completed routine and effort feedback.</p>
       <fieldset><legend>Today’s pace</legend><div>{(['start', 'steady'] as const).map(value => <button data-autofocus={value === 'start' || undefined} className={preference.pace === value ? 'selected' : ''} aria-pressed={preference.pace === value} key={value} onClick={() => choose('pace', value)}>{value === 'start' ? 'Starting out' : 'Steady practice'}</button>)}</div></fieldset>

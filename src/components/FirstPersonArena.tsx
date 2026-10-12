@@ -6,8 +6,10 @@ import { clamp } from '../../shared/motion';
 import type { DuelEquipment, DuelSnapshot } from '../../shared/duel';
 import { goalDistance, moveInCourtyard, routeTo, shots, spawn, type WorldState, type WorldPoint } from '../../shared/courtyard';
 import type { Quest, StoryFocus } from '../../shared/chapter';
+import type { WeaponPose } from '../../shared/weapons';
+import type { BodyPose } from '../../shared/body';
 
-export type ArenaFrame = { duel: DuelSnapshot; active: boolean; equipment: DuelEquipment; world?: {
+export type ArenaFrame = { duel: DuelSnapshot; active: boolean; equipment: DuelEquipment; opponent?: { pose: WeaponPose | null; body: BodyPose; lean: number }; world?: {
   mode: 'title' | 'memory' | 'explore' | 'dialogue' | 'lesson' | 'duel'; focus: StoryFocus; quest: Quest;
   guided: number; paused: boolean; hidden?: boolean; showWeapons: boolean; speaker?: string; tracking?: boolean;
 } };
@@ -203,6 +205,7 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
     instructor.add(aldenFigure); smith.add(tomasFigure);
     let mixer: THREE.AnimationMixer | null = null, action: THREE.AnimationAction | null = null, disposed = false, ready = false;
     let rivalBlade: THREE.Group | null = null;
+    const peerBones: Record<string, THREE.Object3D> = {};
     const clips = new Map<string, THREE.AnimationClip>();
     const controller = new AbortController();
     const load = async () => {
@@ -219,6 +222,7 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
         rival.add(model.scene); mixer = new THREE.AnimationMixer(model.scene);
         let rightHand: THREE.Object3D | null = null, leftHand: THREE.Object3D | null = null;
         model.scene.traverse(object => { if (object.name.endsWith('RightHand')) rightHand = object; if (object.name.endsWith('LeftHand')) leftHand = object; });
+        model.scene.traverse(object => { for (const name of ['RightArm', 'RightForeArm', 'RightHand', 'LeftArm', 'LeftForeArm', 'LeftHand']) if (object.name.endsWith(name)) peerBones[name] = object; });
         if (rightHand) { const blade = sword(); rivalBlade = blade; blade.scale.setScalar(1 / scale); blade.rotation.x = Math.PI / 2; blade.position.y = 0.015; (rightHand as THREE.Object3D).add(blade); }
         if (leftHand) { const guard = shield(); guard.scale.setScalar(0.75 / scale); guard.rotation.x = Math.PI / 2; (leftHand as THREE.Object3D).add(guard); }
         ready = true; onStatus({ ready: true, error: null, fps: 0, triangles: 0 });
@@ -250,6 +254,21 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
     const connectLimb = (mesh: THREE.Mesh, start: THREE.Vector3, end: THREE.Vector3, length: number) => {
       limbDelta.subVectors(end, start); mesh.position.copy(start).add(end).multiplyScalar(.5);
       mesh.quaternion.setFromUnitVectors(upAxis, limbDelta.clone().normalize()); mesh.scale.y = limbDelta.length() / length;
+    };
+    const retargetArm = (side: 'Right' | 'Left', hand: THREE.Vector3, elbow: THREE.Vector3) => {
+      const upper = peerBones[`${side}Arm`], lower = peerBones[`${side}ForeArm`], wrist = peerBones[`${side}Hand`];
+      if (!upper || !lower || !wrist || !upper.parent || !lower.parent) return;
+      const root = upper.getWorldPosition(new THREE.Vector3()), scale = lower.getWorldScale(new THREE.Vector3()).y;
+      const a = lower.position.length() * scale, b = wrist.position.length() * scale, ray = hand.clone().sub(root), distance = clamp(ray.length(), .04, a + b - .005);
+      ray.normalize(); const pole = elbow.clone().sub(root); pole.addScaledVector(ray, -pole.dot(ray)); if (pole.lengthSq() < .0001) pole.set(0, -1, 0); pole.normalize();
+      const along = clamp((a * a + distance * distance - b * b) / (2 * distance), -a, a);
+      const bend = root.clone().addScaledVector(ray, along).addScaledVector(pole, Math.sqrt(Math.max(0, a * a - along * along)));
+      const rotate = (bone: THREE.Object3D, rest: THREE.Vector3, destination: THREE.Vector3) => {
+        const direction = destination.clone().sub(bone.getWorldPosition(new THREE.Vector3())).normalize();
+        direction.applyQuaternion(bone.parent!.getWorldQuaternion(new THREE.Quaternion()).invert());
+        bone.quaternion.setFromUnitVectors(rest.clone().normalize(), direction); bone.updateWorldMatrix(false, true);
+      };
+      rotate(upper, lower.position, bend); rotate(lower, wrist.position, root.clone().addScaledVector(ray, distance));
     };
     const render = (now: number) => {
       raf = requestAnimationFrame(render);
@@ -345,7 +364,7 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
         connectLimb(leftArm, limbStart.set(pose.shieldElbow.x, pose.shieldElbow.y, pose.shieldElbow.z), limbEnd.set(pose.shield.x, pose.shield.y, pose.shield.z), .44);
         connectLimb(leftUpperArm, limbStart.set(-.26, -.5, -.30), limbEnd.set(pose.shieldElbow.x, pose.shieldElbow.y, pose.shieldElbow.z), .39);
       } else { rightArm.scale.y = leftArm.scale.y = 1; rightArm.rotation.set(0,0,-.2); leftArm.rotation.set(0,0,.7); }
-      if (mode === 'duel') { rival.position.z = s.rivalZ; rival.position.x = Math.sin(s.exchange * 1.9) * .12; }
+      if (mode === 'duel') { rival.position.z = s.rivalZ; if (!f.opponent) rival.position.x = Math.sin(s.exchange * 1.9) * .12; }
       else if (quest === 'orders' || focus === 'orders') rival.position.set(7.2, 0, -6.5);
       else if (quest === 'gate' || quest === 'done') rival.position.set(1.5, 0, -8);
       else rival.position.set(0, 0, -2);
@@ -376,6 +395,21 @@ export default function FirstPersonArena({ frame, onStatus, onPointerMove, onWor
           else if (name === 'walk_loop') action.time = (gaitPhase % clip.duration + clip.duration) % clip.duration;
           else action.time = (s.phase === 'ready' || s.finished ? world : s.elapsed) % clip.duration;
           mixer.update(dt);
+        }
+      }
+      if (f.opponent && !f.world?.paused) {
+        const peer = f.opponent, pose = peer.pose;
+        rival.position.x = THREE.MathUtils.damp(rival.position.x, -peer.lean * .6, 12, dt);
+        rival.position.y = THREE.MathUtils.damp(rival.position.y, -peer.body.crouch * .28, 12, dt);
+        rival.updateWorldMatrix(true, true);
+        if (pose) {
+          const worldPoint = (v: { x: number; y: number; z: number }) => new THREE.Vector3(rival.position.x - v.x, 1.6 + rival.position.y + v.y, rival.position.z - v.z);
+          retargetArm('Right', worldPoint(pose.hilt), worldPoint(pose.elbow)); retargetArm('Left', worldPoint(pose.shield), worldPoint(pose.shieldElbow));
+          if (rivalBlade?.parent) {
+            const direction = new THREE.Vector3(-pose.axis.x, pose.axis.y, -pose.axis.z).normalize();
+            const rotation = new THREE.Quaternion().setFromUnitVectors(upAxis, direction);
+            rivalBlade.quaternion.copy(rivalBlade.parent.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(rotation));
+          }
         }
       }
       for (const flag of banners) {

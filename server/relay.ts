@@ -8,6 +8,8 @@ const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 const equalToken = (a: string, b: string) => /^[a-f0-9]{48}$/.test(a) && a.length === b.length && timingSafeEqual(Buffer.from(a), Buffer.from(b));
 
 export class SessionRelay {
+  onTVMessage?: (room: string, message: unknown) => boolean;
+  onTVPresence?: (room: string, connected: boolean) => void;
   rooms = new Map<string, Room>();
   private wss = new WebSocketServer({ noServer: true, maxPayload: 16_384, perMessageDeflate: false });
   private cleanup: ReturnType<typeof setInterval>;
@@ -48,6 +50,7 @@ export class SessionRelay {
   private send(ws: WebSocket | null, message: object) {
     if (ws?.readyState === WebSocket.OPEN && ws.bufferedAmount < 64_000) ws.send(JSON.stringify(message));
   }
+  sendToTV(code: string, message: object) { this.send(this.rooms.get(code)?.tv || null, message); }
   private presence(room: Room) {
     const message = { type: 'presence', phoneConnected: room.phone?.readyState === WebSocket.OPEN, tvConnected: room.tv?.readyState === WebSocket.OPEN };
     this.send(room.tv, message); this.send(room.phone, message);
@@ -60,6 +63,7 @@ export class SessionRelay {
     room[role] = ws;
     this.send(ws, { type: 'connected', role, phoneConnected: room.phone?.readyState === WebSocket.OPEN, tvConnected: room.tv?.readyState === WebSocket.OPEN });
     this.presence(room);
+    if (role === 'tv') this.onTVPresence?.(room.code, true);
     let lastSequence = -1, windowStart = Date.now(), packets = 0;
     ws.on('message', raw => {
       if (room[role] !== ws) return;
@@ -74,9 +78,10 @@ export class SessionRelay {
         if (message.seq <= lastSequence) return;
         lastSequence = message.seq; this.send(room.tv, message);
       } else if (role === 'tv' && isCommand(message)) this.send(room.phone, message);
+      else if (role === 'tv' && this.onTVMessage?.(room.code, message)) { /* Authenticated game commands. */ }
       else this.send(ws, { type: 'error', message: 'Unsupported message for this device.' });
     });
-    ws.on('close', () => { if (room[role] === ws) { room[role] = null; this.presence(room); } });
+    ws.on('close', () => { if (room[role] === ws) { room[role] = null; this.presence(room); if (role === 'tv') this.onTVPresence?.(room.code, false); } });
     ws.on('error', () => { /* Close events update presence. */ });
   }
   expire() {

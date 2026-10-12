@@ -1,6 +1,6 @@
 # MoveRoom
 
-A Fire TV movement playground powered by an Android phone camera. **The Ashen Gate** now has a complete first-chapter story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available from the title, chapter header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **Orbit Arena** and **Reach & Reset** remain available from the playground.
+A Fire TV movement playground powered by an Android phone camera. **The Ashen Gate** now has a complete first-chapter story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available from the title, chapter header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **The Orders** now supports live clan wars with 1–3 champions per clan, human-versus-human duels and a shared clan score. An illustrated first-visit tutorial explains setup, combat, story, training and multiplayer, with contextual replay buttons. **Orbit Arena** and **Reach & Reset** remain available from the playground.
 
 The TV runs a native Android/Fire OS APK with a landscape WebView, D-pad navigation, Select/Back/Play-Pause support, and a Leanback launcher. The phone runs MediaPipe Pose Landmarker locally in Chrome. A small Node server serves both interfaces and relays landmarks over WebSockets. A TV camera is not required.
 
@@ -76,7 +76,7 @@ npm run build
 npm run android:build
 ~~~
 
-The 69 automated tests cover calibrated/mirrored controls, wrist and sword-tip sweeps, independent hands and forearm orientation, dropouts, frame-rate consistency, coached holds and resets, and authenticated relay roles. Chapter checks cover dialogue branches and motive callbacks, checkpoint validation, collision-safe guided routes, all audio assets, health damage, directional guards and parries, perfect blocks and ripostes, stamina, timed evasion, combat reach, tracking/pause freezes, gear and once-only rewards. Fifteen training tests cover exercise views, calibration, complete rep cycles, sets/rest, visible corrections, personalization and bounded XP/stat rewards. See the [chapter test report](artifacts/story-adventure-test-report.md) for manual browser and emulator checks.
+The 86 automated tests cover calibrated/mirrored controls, wrist and sword-tip sweeps, independent hands and forearm orientation, dropouts, frame-rate consistency, coached holds and resets, and authenticated relay roles. Chapter checks cover dialogue branches and motive callbacks, checkpoint validation, collision-safe guided routes, all audio assets, health damage, directional guards and parries, perfect blocks and ripostes, stamina, timed evasion, combat reach, tracking/pause freezes, gear and once-only rewards. Fifteen training tests cover exercise views, calibration, complete rep cycles, sets/rest, visible corrections, personalization and bounded XP/stat rewards. Sixteen multiplayer rule tests and a two-client WebSocket integration test cover human inputs, defenses, pause/dropout handling, health results, rosters and clan scoring. See the [multiplayer and tutorial report](artifacts/multiplayer-tutorial-test-report.md) and the [chapter test report](artifacts/story-adventure-test-report.md) for manual browser and emulator checks.
 
 For recorded-input vision testing, run npm run test:vision:fixtures, then npm run build. Open http://localhost:8787/diagnostics and click Run recorded vision test. It checks a human image, 24 samples from a squat video, blank frames, and reacquisition using the phone's model and confidence settings. GPU and CPU can be tested separately. Fixtures have verified SHA-256 hashes and are ignored by Git; sources are listed in THIRD_PARTY.md.
 
@@ -103,6 +103,10 @@ npm install copies the MediaPipe WASM into public/vision and downloads the offic
 | src/lib/camera.ts | Local MediaPipe inference with GPU/CPU fallback |
 | shared/game.ts | Wrist mapping, sweep validation, arena rules |
 | shared/weapons.ts | Two-hand weapon placement, forearm orientation and guard coverage |
+| shared/multiplayer.ts | Server-owned human duel rules and validated movement inputs |
+| server/multiplayer.ts | Clan rosters, pairing, disconnect rules and shared war score |
+| src/components/ClanWarsPage.tsx | Live multiplayer lobby, first-person fight and results |
+| src/components/PlayerGuide.tsx | Illustrated, remote-accessible player tutorial |
 | shared/duel.ts | Health-based duel, directional guards, stamina, gear and chapter rewards |
 | shared/chapter.ts | Dialogue graph, branches, quests and checkpoint validation |
 | shared/courtyard.ts | Camera shots, world collision and guided routes |
@@ -119,7 +123,7 @@ See docs/DEMO.md for the presentation sequence and THIRD_PARTY.md for asset attr
 
 ## Scope
 
-The medieval prototype includes one explorable first-person courtyard and one computer-controlled rival, with the chapter's narrative through the Ironbridge quest hook. Squat and push-up detection, sets/rest and exercise-driven stats are implemented in the anytime training hall. Live multiplayer, family profiles, Orders contests and later regions remain planned. The current models and animations need further art and performance work for a polished release. A single camera estimates wrist placement and forearm direction with bounded depth; it does not measure a physical sword's exact position or rotation. Hit tests use projected sword-tip sweeps and attack lines, rather than full 3D weapon-contact physics. The native app needs the included server. Physical Fire TV performance and live phone play still need testing.
+The medieval prototype includes one explorable first-person courtyard and one computer-controlled rival, with the chapter's narrative through the Ironbridge quest hook. Squat and push-up detection, sets/rest and exercise-driven stats are implemented in the anytime training hall. Live clan wars are implemented at `/arena`; persistent clans, family profiles, ranked matchmaking, PvP rewards and later regions remain planned. The current models and animations need further art and performance work for a polished release. A single camera estimates wrist placement and forearm direction with bounded depth; it does not measure a physical sword's exact position or rotation. Hit tests use projected sword-tip sweeps and attack lines, rather than full 3D weapon-contact physics. The native app needs the included server. Physical Fire TV performance and live phone play still need testing.
 
 ## Chapter audio assets
 
@@ -145,4 +149,13 @@ Open **Enter training hall**, or **Train** inside the chapter. Choose a pace, sq
 
 A completed camera circuit earns 60 XP once per day; Strength and Endurance improve the next story duel’s base damage and stamina recovery, with bounded bonuses. Preview practice uses **B** to lower and release to return, and earns no XP. Completed camera practice and your effort feedback inform the next recommendation. Existing gear, coins and story saves are preserved.
 
-See [training implementation and limits](docs/TRAINING.md). These side-view checks need live phone validation; they do not certify every aspect of exercise form or demonstrate long-term fitness gains. **69 automated tests pass**, including 15 training tests and the exercise relay contract. The hackathon submission still needs a recording on a physical Fire TV or Fire TV/Vega simulator.
+See [training implementation and limits](docs/TRAINING.md). These side-view checks need live phone validation; they do not certify every aspect of exercise form or demonstrate long-term fitness gains. **86 automated tests pass**, including 15 training tests and the exercise relay contract. The hackathon submission still needs a recording on a physical Fire TV or Fire TV/Vega simulator.
+
+
+## Live clan wars and player guidance
+
+Open **Clan war hall** from the chapter, or `/arena`. Create a 1 vs 1, 2 vs 2 or 3 vs 3 war and share its invite. Each participant joins the chosen clan from their own screen and pairs their own phone. Both full rosters must be ready before the captain starts. Each roster slot fights the corresponding opposing slot; wins earn one clan point and draws half a point each. The server resolves health, stamina, guards, cuts and the final clan score. Everyone uses starter gear; exercise bonuses currently apply to story combat only.
+
+The first-visit **Player guide** explains phone framing, hands-free setup, weapon controls, quest/dialogue controls, strict rep/set training and clan lobbies. Reopen it from the chapter, pause menu, training header or multiplayer header. Reading pauses the relevant activity; multiplayer retains its 30-second return/forfeit rule.
+
+Clans and results are temporary guests held in server memory. Internet matchmaking, accounts, permanent clans, rankings and saved PvP rewards still need implementation. See [multiplayer details](docs/MULTIPLAYER.md), [tutorial behavior](docs/PLAYER_GUIDE.md), and [browser validation](artifacts/multiplayer-tutorial-test-report.md). The two-screen browser proof uses labelled synthetic controls; actual Android phones and Fire TV hardware remain to be validated.

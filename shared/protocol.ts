@@ -2,7 +2,8 @@ export type Landmark = { x: number; y: number; z: number; visibility: number };
 export type TrackingModel = 'lite' | 'full';
 export type PoseFrame = { type: 'pose'; seq: number; t: number; landmarks: Landmark[]; fps: number; imageAspect?: number; worldLandmarks?: Landmark[]; tracking?: { model: TrackingModel; delegate: 'GPU' | 'CPU'; inferenceMs: number } };
 export type MovementMode = 'standing' | 'seated';
-export type Activity = 'home' | 'play' | 'coach' | 'calibrate' | 'chapter';
+import type { ArenaError, ArenaState } from './multiplayer';
+export type Activity = 'home' | 'play' | 'coach' | 'calibrate' | 'chapter' | 'arena';
 export type Command = { type: 'command'; action: 'activity' | 'instruction' | 'stop' | 'exercise'; value: string };
 export type SessionInfo = { code: string; tvToken: string; phoneToken: string; phoneUrl: string; expiresAt: number };
 export type ServerMessage =
@@ -11,6 +12,8 @@ export type ServerMessage =
   | { type: 'error'; message: string }
   | { type: 'pong'; t: number }
   | Command
+  | ArenaState
+  | ArenaError
   | PoseFrame;
 
 export function isPoseFrame(value: unknown): value is PoseFrame {

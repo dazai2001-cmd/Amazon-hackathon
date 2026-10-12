@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Coins, Compass, Dumbbell, Flag, Footprints, Pause, Play, RotateCcw, Settings2, Shield, Smartphone, Swords, Volume2, VolumeX, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Coins, Compass, CircleHelp, Dumbbell, Flag, Footprints, Pause, Play, RotateCcw, Settings2, Shield, Smartphone, Swords, Volume2, VolumeX, X } from 'lucide-react';
 import { BladeTracker, type BladeInput, type Point } from '../../shared/game';
 import { SwordDuel, buyChapterGear, claimChapterReward, newChapterSave, readChapterSave, type ChapterSave, type DuelSnapshot } from '../../shared/duel';
 import { conversations, dialogueLine, newStoryProgress, questText, readStoryProgress, type ConversationId, type Quest, type StoryAction, type StoryChoice, type StoryNode, type StoryProgress } from '../../shared/chapter';
@@ -9,11 +9,12 @@ import type { Landmark } from '../../shared/protocol';
 import FirstPersonArena, { type ArenaFrame, type ArenaStatus } from './FirstPersonArena';
 import { ChapterAudio, type AudioMix, type VoiceState } from '../lib/chapterAudio';
 import TrainingHall from './TrainingHall';
+import type { GuideTopic } from '../lib/playerGuide';
 import { TRAINING_KEY, readTrainingSave, trainingStats, type TrainingBlock, type TrainingSave } from '../../shared/training';
 import './chapter.css';
 import './adventure.css';
 
-type Props = { points: Landmark[]; worldPoints?: Landmark[]; imageAspect?: number; profile: CalibrationProfile; frameTime?: number; tracking: boolean; controllerReady: boolean; preview: boolean; sound: boolean; onPreviewMove: (point: Point) => void; onBack: () => void; onPair: () => void; onTrainingPair: () => void; onInstruction: (text: string) => void; onTrainingExercise: (block: TrainingBlock | null) => void; onToggleSound: () => void };
+type Props = { guideOpen: boolean; onGuide: (topic: GuideTopic) => void; points: Landmark[]; worldPoints?: Landmark[]; imageAspect?: number; profile: CalibrationProfile; frameTime?: number; tracking: boolean; controllerReady: boolean; preview: boolean; sound: boolean; onPreviewMove: (point: Point) => void; onBack: () => void; onPair: () => void; onArena: () => void; onTrainingPair: () => void; onInstruction: (text: string) => void; onTrainingExercise: (block: TrainingBlock | null) => void; onToggleSound: () => void };
 type Stage = 'title' | 'memory' | 'explore' | 'dialogue' | 'lesson' | 'briefing' | 'duel' | 'result' | 'shop' | 'complete';
 type Lesson = 'shield' | 'cut' | 'evade';
 const EMPTY_POSE: Landmark[] = [];
@@ -24,7 +25,7 @@ const portraitFor = (speaker: string) => speaker === 'MARA' ? 'rival' : speaker 
 function Crest({ small = false }: { small?: boolean }) { return <svg className={`ashen-crest ${small ? 'small' : ''}`} viewBox="0 0 48 58" aria-hidden="true"><path d="M5 5H43V31Q39 44 24 53Q9 44 5 31Z"/><path d="M24 15V40M24 30L15 22M24 26L34 17"/></svg>; }
 function Health({ value, name }: { value: number; name: string }) { return <div className={`combat-health ${value < 30 ? 'critical' : ''}`}><div><span>{name}</span><b>{value} / 100</b></div><div role="progressbar" aria-label={`${name} health`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={value}><i style={{width:`${value}%`}}/></div></div>; }
 
-export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAspect = 4 / 3, profile, frameTime, tracking, controllerReady, preview, sound, onPreviewMove, onBack, onPair, onTrainingPair, onInstruction, onTrainingExercise, onToggleSound }: Props) {
+export default function ChapterPage({ guideOpen, onGuide, points, worldPoints = EMPTY_POSE, imageAspect = 4 / 3, profile, frameTime, tracking, controllerReady, preview, sound, onPreviewMove, onBack, onPair, onArena, onTrainingPair, onInstruction, onTrainingExercise, onToggleSound }: Props) {
   const [trainingOpen, setTrainingOpen] = useState(false);
   const [trainingSave, setTrainingSave] = useState(() => readStored(TRAINING_KEY, readTrainingSave));
   const saveTraining = useCallback((next: TrainingSave) => { setTrainingSave(next); try { localStorage.setItem(TRAINING_KEY, JSON.stringify(next)); } catch { /* Session progress remains available. */ } }, []);
@@ -47,8 +48,8 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
   const input = useRef<BladeInput>({ tracked: false, blade: { x: .7, y: .6 }, shield: false, lean: 0, sequence: 0, slash: null });
   const lessonRuntime = useRef({ held: 0, evaded: false, sequence: -1, completed: false, completeAt: 0 });
   const gesture = useRef({ held: 0, latched: false, leaned: false });
-  const controls = useRef({ stage, paused, journal, settings, trainingOpen, tracking: motionTracking, ready: status.ready, sound, lesson, autoAdvance });
-  controls.current = { stage, paused, journal, settings, trainingOpen, tracking: motionTracking, ready: status.ready, sound, lesson, autoAdvance };
+  const controls = useRef({ stage, paused, journal, settings, trainingOpen, guideOpen, tracking: motionTracking, ready: status.ready, sound, lesson, autoAdvance });
+  controls.current = { stage, paused, journal, settings, trainingOpen, guideOpen, tracking: motionTracking, ready: status.ready, sound, lesson, autoAdvance };
   const advanceRef = useRef<() => void>(() => undefined), interactRef = useRef<() => void>(() => undefined), lessonDoneRef = useRef<() => void>(() => undefined);
   const arenaFrame = useRef<ArenaFrame>({ duel: snapshot, active: false, equipment: save.equipment });
   const script = conversations[conversation];
@@ -57,13 +58,13 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
   const activeLine: Pick<StoryNode, 'key' | 'text' | 'speaker' | 'voiceId'> | null = node || (memoryLine ? { key: memoryLine.id, text: memoryLine.text, speaker: memoryLine.speaker, voiceId: memoryLine.id } : null);
   const focus = stage === 'memory' ? 'memory' : stage === 'title' ? 'panorama' : stage === 'dialogue' ? node?.focus || script.focus : stage === 'shop' ? 'forge' : stage === 'complete' ? 'gate' : stage === 'lesson' ? 'alden' : 'mara';
   const worldMode = stage === 'memory' ? 'memory' : stage === 'title' ? 'title' : stage === 'explore' ? 'explore' : stage === 'duel' ? 'duel' : stage === 'lesson' ? 'lesson' : 'dialogue';
-  const interrupted = paused || journal || settings || trainingOpen || document.hidden;
+  const interrupted = paused || journal || settings || trainingOpen || guideOpen || document.hidden;
   arenaFrame.current = { duel: duel.current.state, active: stage === 'duel' && !interrupted && motionTracking && status.ready, equipment: save.equipment, world: {
     mode: worldMode, focus, quest: progress.quest, guided, paused: interrupted, hidden: trainingOpen, tracking, showWeapons: progress.quest !== 'alden', speaker: activeLine?.speaker,
   } };
   const onStatus = useCallback((value: ArenaStatus) => setStatus(value), []);
   const onWorldUpdate = useCallback((value: WorldState) => setWorld(value), []);
-  const pointer = useCallback((x: number, y: number) => { if (preview && (stage === 'duel' || stage === 'lesson') && !paused && !journal && !settings) onPreviewMove({ x, y }); }, [preview, stage, paused, journal, settings, onPreviewMove]);
+  const pointer = useCallback((x: number, y: number) => { if (preview && (stage === 'duel' || stage === 'lesson') && !paused && !journal && !settings && !guideOpen) onPreviewMove({ x, y }); }, [preview, stage, paused, journal, settings, guideOpen, onPreviewMove]);
   const updateSave = useCallback((update: (previous: ChapterSave) => ChapterSave) => {
     const next = update(saveRef.current); saveRef.current = next; setSave(next);
     try { localStorage.setItem('moveroom.chapter-one.v1', JSON.stringify(next)); } catch { /* Retain session progress. */ }
@@ -89,14 +90,14 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
     else if (action === 'complete') { updateProgress({ quest: 'done' }); updateSave(previous => ({ ...previous, completed: true })); setStage('complete'); }
   };
   advanceRef.current = () => {
-    if (controls.current.paused || controls.current.journal || controls.current.settings) return;
+    if (controls.current.paused || controls.current.journal || controls.current.settings || controls.current.guideOpen || controls.current.trainingOpen) return;
     if (stage === 'memory') { if (memoryBeat < 2) setMemoryBeat(v => v + 1); else { updateProgress({ memorySeen: true }); explore('alden'); } return; }
     if (!node || node.choices) return;
     const next = node.byMotive ? node.byMotive[saveRef.current.motive || 'truth'] : node.next;
     if (next) { setNodeKey(next); setSelectedChoice(0); } else finishConversation(script.end);
   };
   const choose = (choice: StoryChoice) => {
-    if (paused || journal || settings) return;
+    if (paused || journal || settings || guideOpen) return;
     if (choice.motive) updateSave(previous => ({ ...previous, motive: choice.motive! }));
     if (choice.relationship) updateSave(previous => ({ ...previous, relationship: choice.relationship! }));
     void audio.current?.effect('ui'); setNodeKey(choice.next); setSelectedChoice(0);
@@ -129,7 +130,7 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
   useEffect(() => { audio.current = new ChapterAudio(); return () => { audio.current?.close(); audio.current = null; }; }, []);
   useEffect(() => { audio.current?.setEnabled(sound); }, [sound]);
   useEffect(() => { audio.current?.setMix(mix); }, [mix]);
-  useEffect(() => { audio.current?.setPaused(paused || journal || settings || trainingOpen); }, [paused, journal, settings, trainingOpen]);
+  useEffect(() => { audio.current?.setPaused(paused || journal || settings || trainingOpen || guideOpen); }, [paused, journal, settings, trainingOpen, guideOpen]);
   useEffect(() => {
     void audio.current?.setScene(stage === 'duel' || stage === 'briefing' ? 'trial' : stage === 'memory' || progress.quest === 'gate' || progress.quest === 'done' ? 'revelation' : 'courtyard', stage === 'memory' ? 'rain' : stage === 'shop' || focus === 'forge' ? 'forge' : 'wind');
   }, [stage, progress.quest, focus]);
@@ -145,9 +146,9 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
       const dt = Math.min(.05, (now - previous) / 1000); previous = now;
       const c = controls.current, current = input.current, before = duel.current.state.event?.id;
       const lessonCut = current.pose ? current.weaponSlash : current.slash;
-      const live = !c.paused && !c.journal && !c.settings && !c.trainingOpen && !document.hidden && c.ready;
+      const live = !c.paused && !c.journal && !c.settings && !c.trainingOpen && !c.guideOpen && !document.hidden && c.ready;
       if (live && c.stage === 'duel' && c.tracking) duel.current.step(dt, current, (keys.current.has('w') ? 1 : 0) - (keys.current.has('s') ? 1 : 0));
-      else duel.current.suspend(current, c.paused || c.journal || c.settings || c.trainingOpen || document.hidden || !c.tracking);
+      else duel.current.suspend(current, c.paused || c.journal || c.settings || c.trainingOpen || c.guideOpen || document.hidden || !c.tracking);
       const s = duel.current.state;
       if (c.stage === 'lesson' && live && c.tracking) {
         s.elapsed += dt; s.shielding = current.pose?.guarding ?? current.shield;
@@ -186,13 +187,13 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
     keys.current.clear(); setStage('result');
   }, [snapshot.finished, snapshot.won, stage, updateSave]);
   useEffect(() => {
-    const pause = () => { if (!controls.current.trainingOpen && controls.current.stage !== 'title') setPaused(v => !v); };
-    const blur = () => { keys.current.clear(); tracker.reset(); if (!controls.current.trainingOpen && controls.current.stage !== 'title') setPaused(true); };
+    const pause = () => { if (!controls.current.trainingOpen && !controls.current.guideOpen && controls.current.stage !== 'title') setPaused(v => !v); };
+    const blur = () => { keys.current.clear(); tracker.reset(); if (!controls.current.trainingOpen && !controls.current.guideOpen && controls.current.stage !== 'title') setPaused(true); };
     const visibility = () => { if (document.hidden) blur(); };
     const down = (event: KeyboardEvent) => {
       if ((event.target as HTMLElement).tagName === 'INPUT') return;
       const key = event.key.toLowerCase(), c = controls.current;
-      if (c.trainingOpen) return;
+      if (c.trainingOpen || c.guideOpen) return;
       if (key === 'escape' || key === 'backspace') { event.preventDefault(); event.stopImmediatePropagation(); if (settings) setSettings(false); else if (journal) setJournal(false); else setPaused(v => !v); return; }
       if (c.stage === 'duel' && ['w', 's'].includes(key) && !c.paused && !c.journal && !c.settings) { event.preventDefault(); event.stopImmediatePropagation(); keys.current.add(key); }
       if (c.stage === 'explore' && (key === 'e' || key === 'enter') && (event.target as HTMLElement).tagName !== 'BUTTON' && !c.paused) { event.preventDefault(); event.stopImmediatePropagation(); interactRef.current(); }
@@ -210,19 +211,19 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
     return () => { window.removeEventListener('ashen:confirm', confirm); window.removeEventListener('ashen:choice', select); };
   }, [node, selectedChoice]);
   useEffect(() => {
-    if (trainingOpen) return;
+    if (trainingOpen || guideOpen) return;
     const id = requestAnimationFrame(() => {
       const menu = document.querySelector<HTMLElement>('.adventure-modal[role="dialog"]');
       if (menu) (menu.querySelector<HTMLElement>('[data-autofocus]:not(:disabled)') || menu.querySelector<HTMLElement>('button:not(:disabled)'))?.focus({ preventScroll: true });
       else if (stage === 'explore' || stage === 'duel' || stage === 'lesson') document.querySelector<HTMLCanvasElement>('.first-person-canvas')?.focus({ preventScroll: true });
       else document.querySelector<HTMLElement>('.story-dialogue [data-autofocus]:not(:disabled), .adventure-panel [data-autofocus]:not(:disabled), .story-dialogue button:not(:disabled), .adventure-panel button:not(:disabled)')?.focus({ preventScroll: true });
     }); return () => cancelAnimationFrame(id);
-  }, [stage, nodeKey, paused, journal, settings, trainingOpen, status.ready, status.error]);
+  }, [stage, nodeKey, paused, journal, settings, trainingOpen, guideOpen, status.ready, status.error]);
   useEffect(() => { setRevealed(0); gesture.current.held = 0; }, [activeLine?.key]);
   useEffect(() => {
     const timer = setInterval(() => {
       setVoiceTime(audio.current?.getVoiceTime() || 0);
-      if (controls.current.paused || controls.current.journal || controls.current.settings || controls.current.trainingOpen) return;
+      if (controls.current.paused || controls.current.journal || controls.current.settings || controls.current.trainingOpen || controls.current.guideOpen) return;
       if (activeLine) setRevealed(v => Math.min(activeLine.text.length, v + 2));
     }, 35); return () => clearInterval(timer);
   }, [activeLine?.key]);
@@ -283,9 +284,10 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
     <FirstPersonArena key={rendererKey} frame={arenaFrame} onStatus={onStatus} onPointerMove={pointer} onWorldUpdate={onWorldUpdate}/>
     <div className="adventure-vignette" aria-hidden="true"/>
     {['dialogue', 'memory'].includes(stage) && <div className="cinema-bars" aria-hidden="true"/>}
-    {stage !== 'title' && <header className="adventure-header"><button aria-label="Pause adventure" onClick={() => setPaused(true)}><Crest small/><span>THE ASHEN GATE</span></button><div><button aria-label="Open training hall" onClick={openTraining}><Dumbbell size={18}/><span>Train</span></button><span className="chapter-coins"><Coins size={15}/>{save.coins}</span><button aria-label="Open journal" onClick={() => setJournal(true)}><BookOpen size={19}/></button><button aria-label="Audio settings" onClick={() => setSettings(true)}><Settings2 size={18}/></button><button aria-label={sound ? 'Turn sound off' : 'Turn sound on'} onClick={() => { audio.current?.setEnabled(!sound); onToggleSound(); }}>{sound ? <Volume2 size={19}/> : <VolumeX size={19}/>}</button><button aria-label="Pause game" onClick={() => setPaused(true)}><Pause size={18}/></button></div></header>}
+    {stage !== 'title' && <header className="adventure-header"><button aria-label="Pause adventure" onClick={() => setPaused(true)}><Crest small/><span>THE ASHEN GATE</span></button><div><button aria-label="Open player guide" onClick={() => onGuide(stage === 'duel' || stage === 'lesson' ? 'combat' : 'story')}><CircleHelp size={18}/></button><button aria-label="Open clan war hall" onClick={onArena}><Flag size={18}/></button><button aria-label="Open training hall" onClick={openTraining}><Dumbbell size={18}/><span>Train</span></button><span className="chapter-coins"><Coins size={15}/>{save.coins}</span><button aria-label="Open journal" onClick={() => setJournal(true)}><BookOpen size={19}/></button><button aria-label="Audio settings" onClick={() => setSettings(true)}><Settings2 size={18}/></button><button aria-label={sound ? 'Turn sound off' : 'Turn sound on'} onClick={() => { audio.current?.setEnabled(!sound); onToggleSound(); }}>{sound ? <Volume2 size={19}/> : <VolumeX size={19}/>}</button><button aria-label="Pause game" onClick={() => setPaused(true)}><Pause size={18}/></button></div></header>}
 
-    {stage === 'title' && <section className="adventure-title adventure-panel"><div className="title-emblem"><Crest/></div><span className="chapter-eyebrow">A FIRST-PERSON ADVENTURE</span><h1>The Ashen<br/><em>Gate</em></h1><p>A sword to learn. Five seals to earn.<br/>An order your teacher will not explain.</p><div className="title-actions">{progress.memorySeen && <button data-autofocus className="chapter-button" disabled={!status.ready} onClick={() => begin(true)}><Play size={17}/> {progress.quest === 'done' ? 'Return to your chapter' : `Continue · ${quest.target}`}</button>}<button data-autofocus={!progress.memorySeen || undefined} className={`chapter-button ${progress.memorySeen ? 'secondary' : ''}`} disabled={!status.ready} onClick={() => begin()}>{status.ready ? progress.memorySeen ? 'Begin the chapter again' : 'Begin story' : 'Opening the courtyard…'}<ArrowRight size={17}/></button><button className="chapter-text-button" onClick={() => { enableSound(); updateProgress({ quest: 'mara', memorySeen: true }); setStage('briefing'); }}>Go straight to sparring</button><button className="chapter-text-button" onClick={() => { enableSound(); openTraining(); }}><Dumbbell size={15}/> Enter training hall</button></div><div className="title-chapter"><span>CHAPTER I</span><strong>The gate that stayed shut</strong><small>Voiced dialogue · Courtyard exploration · Sword & shield</small></div><button className="title-back" onClick={onBack}><ArrowLeft size={14}/> MoveRoom</button></section>}
+    {stage === 'title' && <button className="adventure-guide-button chapter-button secondary" onClick={() => onGuide('setup')}><CircleHelp size={17}/> Player guide</button>}
+    {stage === 'title' && <section className="adventure-title adventure-panel"><div className="title-emblem"><Crest/></div><span className="chapter-eyebrow">A FIRST-PERSON ADVENTURE</span><h1>The Ashen<br/><em>Gate</em></h1><p>A sword to learn. Five seals to earn.<br/>An order your teacher will not explain.</p><div className="title-actions">{progress.memorySeen && <button data-autofocus className="chapter-button" disabled={!status.ready} onClick={() => begin(true)}><Play size={17}/> {progress.quest === 'done' ? 'Return to your chapter' : `Continue · ${quest.target}`}</button>}<button data-autofocus={!progress.memorySeen || undefined} className={`chapter-button ${progress.memorySeen ? 'secondary' : ''}`} disabled={!status.ready} onClick={() => begin()}>{status.ready ? progress.memorySeen ? 'Begin the chapter again' : 'Begin story' : 'Opening the courtyard…'}<ArrowRight size={17}/></button><button className="chapter-text-button" onClick={() => { enableSound(); updateProgress({ quest: 'mara', memorySeen: true }); setStage('briefing'); }}>Go straight to sparring</button><button className="chapter-text-button" onClick={() => { enableSound(); openTraining(); }}><Dumbbell size={15}/> Enter training hall</button><button className="chapter-text-button" onClick={onArena}><Flag size={15}/> Clan war hall</button></div><div className="title-chapter"><span>CHAPTER I</span><strong>The gate that stayed shut</strong><small>Voiced dialogue · Courtyard exploration · Sword & shield</small></div><button className="title-back" onClick={onBack}><ArrowLeft size={14}/> MoveRoom</button></section>}
 
     {stage === 'memory' && <>
       <span className="memory-time">THE ASHEN GATE · YEARS BEFORE</span>
@@ -339,8 +341,8 @@ export default function ChapterPage({ points, worldPoints = EMPTY_POSE, imageAsp
       {status.error ? <><h2>The courtyard awaits.</h2><p>{status.error}</p><button data-autofocus className="chapter-button" onClick={() => { setStatus({ ready: false, error: null, fps: 0, triangles: 0 }); setRendererKey(k => k + 1); }}>Reload the scene</button></>
       : settings ? <><span className="chapter-eyebrow">SOUND & DIALOGUE</span><h2>Hear the world.</h2><button className="audio-master" onClick={() => { audio.current?.setEnabled(!sound); onToggleSound(); }}>{sound ? <Volume2 size={17}/> : <VolumeX size={17}/>} Sound {sound ? 'on' : 'off'}</button>{([['voice', 'Character voices'], ['music', 'Music'], ['effects', 'Effects & ambience']] as const).map(([channel, label]) => <label className="audio-slider" key={channel}><span>{label}<b>{Math.round(mix[channel] * 100)}%</b></span><input type="range" min="0" max="100" value={Math.round(mix[channel] * 100)} onChange={event => setMix(previous => ({ ...previous, [channel]: Number(event.target.value) / 100 }))}/></label>)}<button className="dialogue-auto-setting" onClick={() => setAutoAdvance(v => !v)}>Advance dialogue automatically <span>{autoAdvance ? 'On' : 'Off'}</span></button><p className="audio-setting-note">Choices wait for your answer. Subtitles stay visible.</p><button data-autofocus className="chapter-button" onClick={() => setSettings(false)}>Return to your chapter <ChevronRight size={16}/></button></>
       : journal ? <><Crest/><span className="chapter-eyebrow">YOUR JOURNEY</span><h2>{quest.title}</h2><p>{quest.detail}</p><div className="journal-quest"><span>THE ROYAL SUMMONS</span><h3>Five seals. One crown.</h3><p>The king’s tournament will choose the protector of his heir. Your first road leads to Ilyra Dane at Ironbridge.</p></div><div className="journal-equipment"><span>YOUR EQUIPMENT</span><p><Swords size={16}/>{save.equipment.sword === 'steel' ? 'Balanced steel sword' : 'Iron sword'}</p><p><Shield size={16}/>{save.equipment.shield === 'heater' ? 'Heater shield' : 'Oak shield'}</p><p><Coins size={16}/>{save.coins} coins</p></div><p className="journal-motive">Your reason: {save.motive === 'coin' ? 'A living to earn.' : save.motive === 'belonging' ? 'An order to belong to.' : save.motive === 'truth' ? 'The truth behind a name.' : 'Still yours to choose.'}</p><button data-autofocus className="chapter-button" onClick={() => setJournal(false)}>Return <ChevronRight size={16}/></button></>
-      : <><Crest/><span className="chapter-eyebrow">THE ASHEN GATE</span><h2>Take your time.</h2><p>Your story and the exchange will wait.</p><button data-autofocus className="chapter-button" onClick={() => { keys.current.clear(); tracker.reset(); setPaused(false); }}>Resume <Play size={16}/></button><button className="chapter-button secondary" onClick={openTraining}><Dumbbell size={16}/> Train with Alden</button><button className="chapter-button secondary" onClick={() => { setPaused(false); setSettings(true); }}><Settings2 size={16}/> Audio settings</button><button className="chapter-text-button" onClick={() => { audio.current?.stopVoice(); onBack(); }}>Return to MoveRoom</button></>}
+      : <><Crest/><span className="chapter-eyebrow">THE ASHEN GATE</span><h2>Take your time.</h2><p>Your story and the exchange will wait.</p><button data-autofocus className="chapter-button" onClick={() => { keys.current.clear(); tracker.reset(); setPaused(false); }}>Resume <Play size={16}/></button><button className="chapter-button secondary" onClick={openTraining}><Dumbbell size={16}/> Train with Alden</button><button className="chapter-button secondary" onClick={() => onGuide('combat')}><CircleHelp size={16}/> Player guide</button><button className="chapter-button secondary" onClick={() => { setPaused(false); setSettings(true); }}><Settings2 size={16}/> Audio settings</button><button className="chapter-text-button" onClick={() => { audio.current?.stopVoice(); onBack(); }}>Return to MoveRoom</button></>}
     </section></div>}
-    {trainingOpen && <TrainingHall points={points} frameTime={frameTime} aspect={imageAspect} preview={preview} sound={sound} save={trainingSave} onSave={saveTraining} onClose={() => { tracker.reset(); setTrainingOpen(false); if (stage === 'duel' || stage === 'lesson') setPaused(true); }} onPair={onTrainingPair} onInstruction={onInstruction} onExercise={onTrainingExercise} onToggleSound={onToggleSound}/>}
+    {trainingOpen && <TrainingHall guideOpen={guideOpen} onGuide={() => onGuide('training')} points={points} frameTime={frameTime} aspect={imageAspect} preview={preview} sound={sound} save={trainingSave} onSave={saveTraining} onClose={() => { tracker.reset(); setTrainingOpen(false); if (stage === 'duel' || stage === 'lesson') setPaused(true); }} onPair={onTrainingPair} onInstruction={onInstruction} onExercise={onTrainingExercise} onToggleSound={onToggleSound}/>}
   </main>;
 }

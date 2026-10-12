@@ -6,6 +6,7 @@ import { existsSync } from 'node:fs';
 import { resolve, extname } from 'node:path';
 import { generate } from 'selfsigned';
 import { SessionRelay } from './relay';
+import { ClanWars } from './multiplayer';
 
 if (existsSync('.env')) process.loadEnvFile('.env');
 
@@ -16,6 +17,9 @@ const localAddresses = Object.values(networkInterfaces()).flat().filter(a => a?.
 const lan = localAddresses.find(ip => ip.startsWith('192.168.')) || localAddresses.find(ip => ip.startsWith('10.')) || localAddresses[0] || 'localhost';
 const phoneBase = (process.env.PHONE_BASE_URL || `https://${lan}:${tlsPort}`).replace(/\/$/, '');
 const relay = new SessionRelay(phoneBase);
+const clanWars = new ClanWars((room, message) => relay.sendToTV(room, message));
+relay.onTVMessage = (room, message) => clanWars.command(room, message);
+relay.onTVPresence = (room, connected) => clanWars.connected(room, connected);
 const joinAttempts = new Map<string, { count: number; startedAt: number }>();
 const json = (response: ServerResponse, status: number, body: object) => { response.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); response.end(JSON.stringify(body)); };
 
@@ -88,5 +92,5 @@ server.listen(port, '0.0.0.0', () => {
   console.log(`\nMoveRoom is ready.\n  Desktop TV preview: http://localhost:${port}\n  Android emulator:   http://10.0.2.2:${port}\n  Phone over Wi-Fi:   ${phoneBase}/phone\n  Phone over USB:     http://localhost:${port}/phone\n\nWi-Fi uses a local development certificate. USB localhost requires adb reverse; run npm run phone:usb.\n`);
 });
 secure.listen(tlsPort, '0.0.0.0');
-const shutdown = async () => { relay.close(); await vite?.close(); server.close(); secure.close(); process.exit(0); };
+const shutdown = async () => { clanWars.close(); relay.close(); await vite?.close(); server.close(); secure.close(); process.exit(0); };
 process.once('SIGINT', shutdown); process.once('SIGTERM', shutdown);

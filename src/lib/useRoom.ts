@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Command, PoseFrame, SessionInfo } from '../../shared/protocol';
 import { RoomSocket } from './socket';
+import type { ArenaCommand, ArenaState } from '../../shared/multiplayer';
 
 let roomPromise: Promise<SessionInfo> | null = null;
 function createRoom() {
@@ -26,6 +27,7 @@ export function useRoom() {
   const [error, setError] = useState('');
   const [latency, setLatency] = useState<number | null>(null);
   const [generation, setGeneration] = useState(0);
+  const [arena, setArena] = useState<ArenaState>({ type: 'arena-state', me: null, war: null, match: null }), [arenaError, setArenaError] = useState('');
   const socket = useRef<RoomSocket | null>(null);
   useEffect(() => {
     let stopped = false;
@@ -41,15 +43,19 @@ export function useRoom() {
         }
         if (message.type === 'error') setError(message.message);
         if (message.type === 'pong') setLatency(Math.round(performance.now() - message.t));
-      }, state => { if (!stopped) { setConnected(state); if (!state) { setPhoneConnected(false); setFrame(null); } } });
+        if (message.type === 'arena-state') setArena(message);
+        if (message.type === 'arena-error') setArenaError(message.message);
+      }, state => { if (!stopped) { setConnected(state); if (state) connection.send({ type: 'arena-command', action: 'sync' }); else { setPhoneConnected(false); setFrame(null); } } });
       socket.current = connection;
     }).catch(error => { if (!stopped) setError(error.message); });
     return () => { stopped = true; socket.current?.close(); socket.current = null; };
   }, [generation]);
   const command = useCallback((action: Command['action'], value: string) => socket.current?.send({ type: 'command', action, value }), []);
+  const arenaCommand = useCallback((message: ArenaCommand) => { if (message.action !== 'input') setArenaError(''); socket.current?.send(message); }, []);
   const renew = useCallback(() => {
     roomPromise = null; sessionStorage.removeItem('moveroom.session');
     setSession(null); setPhoneConnected(false); setFrame(null); setGeneration(v => v + 1);
+    setArena({ type: 'arena-state', me: null, war: null, match: null }); setArenaError('');
   }, []);
-  return { session, phoneConnected, connected, frame, error, latency, command, renew };
+  return { session, phoneConnected, connected, frame, error, latency, command, renew, arena, arenaError, arenaCommand };
 }

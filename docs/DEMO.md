@@ -8,7 +8,7 @@
 6. After a win, speak to Mara, walk to Tomas's forge and choose equipment. The first victory awards 20 coins and Tomas's travel purse awards 20 more; each reward is collected once. Steel costs 30 and trades stamina for reach.
 7. Follow the Orders board conversation and the letter scene at the gate. Select the closing response and finish the chapter. Reload and resume to demonstrate the saved quest, choice, coins and gear.
 
-For a short recording, show excerpts from the story and one complete combat exchange. The chapter's bodyweight circuit, exercise-driven stats and live Orders duels are future work. Keep these distinct from the playable computer rival.
+For a short recording, show excerpts from the story and one complete combat exchange. The anytime exercise hall and live guest clan wars are playable. Present live multiplayer with a second independent participant screen, keeping it distinct from Mara’s computer-controlled story trial.
 
 Desktop preview uses explicitly simulated landmarks: **J / K / L** cut, mouse movement places the sword hand, **Shift + Z / X / C** covers left / high / right, **A / D** leans, and **W / S** advances or retreats in the trial. **Space** pauses. In exploration, WASD walks, arrows turn, E interacts, and each objective provides a guided route. To repeat the relay path at 18 fps without a phone, attach scripts/relay-fixture.ts to the pairing code; identify this as synthetic input in the recording.
 
@@ -44,3 +44,15 @@ From the chapter title choose **Enter training hall**. Show the assigned circuit
 For a clearly labelled software-only walkthrough, connect the desktop preview and hold **B** to lower/release to return. Show that completing the circuit awards no XP. The preview uses synthetic joints and cannot validate human exercise accuracy. Alden’s voice can be toggled from the hall header; all instructions remain captioned.
 
 Fire TV submission proof must be on an actual Fire TV or Fire TV/Vega simulator as required by the event, not solely an Android TV emulator or desktop browser.
+
+
+## Player guide and multiplayer demo
+
+1. On a fresh browser/device, enter the chapter and show the five-lesson field guide. Demonstrate Next/Previous and Back with the remote. Close it and reopen **Player guide** to show it remains available.
+2. From Alden’s exercise hall, open **Training guide**. Show that the counter is paused while reading and resumes without an extra rep when the guide closes.
+3. On two independent screens, open **Clan war hall**. Create a 1 vs 1 war, join the opposing clan with its invite, and pair one phone per participant. For a software-only recording, label both controllers as desktop previews.
+4. Ready both fighters and let the captain start. Show one person’s cut updating the opponent health on both screens, then a correct guard or timed parry. There is no opponent AI in this mode.
+5. Open **War guide** briefly during the fight: both players pause and the guide explains the 30-second return window. Close it promptly and resume.
+6. Complete the health-based fight. Show the shared clan point and result. Explain that 2 vs 2 and 3 vs 3 wars consist of paired duels; the final total waits for every pairing.
+
+Guests and war results currently expire with the server session. Permanent clans, PvP economy, seasons and internet matchmaking should be presented as future scope. Physical camera/controller and Fire TV/Vega submission proof still need to be recorded.
