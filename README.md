@@ -159,3 +159,5 @@ Open **Clan war hall** from the chapter, or `/arena`. Create a 1 vs 1, 2 vs 2 or
 The first-visit **Player guide** explains phone framing, hands-free setup, weapon controls, quest/dialogue controls, strict rep/set training and clan lobbies. Reopen it from the chapter, pause menu, training header or multiplayer header. Reading pauses the relevant activity; multiplayer retains its 30-second return/forfeit rule.
 
 Clans and results are temporary guests held in server memory. Internet matchmaking, accounts, permanent clans, rankings and saved PvP rewards still need implementation. See [multiplayer details](docs/MULTIPLAYER.md), [tutorial behavior](docs/PLAYER_GUIDE.md), and [browser validation](artifacts/multiplayer-tutorial-test-report.md). The two-screen browser proof uses labelled synthetic controls; actual Android phones and Fire TV hardware remain to be validated.
+
+For one laptop, an extended monitor and one Android phone, use [the two-screen demo setup](docs/TWO_SCREEN_DEMO.md): one person controls a fighter with the camera and another uses the labelled keyboard preview in a second visible browser window.

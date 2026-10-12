@@ -2,3 +2,4 @@
 .clan-battle-world>.adventure-vignette{position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(180deg,#06111ce6,transparent 30%,transparent 65%,#07111cce)}
 .clan-battle .clan-combat-wrap{padding-top:0}.clan-battle .clan-controls{margin:9px 0!important}.clan-combat-hud .clan-health>span{font-size:13px}.clan-combat-hud .clan-health small{font-size:10px}.clan-war-score>span{font-size:10px}.clan-header>button:last-child{margin-left:0}
 .clan-wars.clan-preview{min-height:calc(100svh - 34px)}.clan-preview .clan-battle-world{width:min(100%,calc((100svh - 125px)*16/9))}.clan-war-score>span{font-size:10px}
+.clan-wars{--gold:#cfb27a;--gold-light:#f1ddac;--ink:#151511}

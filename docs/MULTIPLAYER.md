@@ -15,6 +15,8 @@ Open `/arena`, or choose **Clan war hall** from the chapter. This prototype repl
 
 Preview controls: J/K/L cut, Shift+Z/X/C guard left/high/right, A/D lean, V crouch, W/S duel footwork. Space pauses. These are synthetic movements; no camera is running.
 
+A laptop and an extended monitor can host two separate, visible browser windows on the same PC. Keyboard focus can change while the visible phone-controlled fighter continues receiving movements. Hiding or minimizing a game pauses its pairing. With one Android phone, use a second person on the labelled keyboard preview for the other fighter. See [the two-screen demo setup](TWO_SCREEN_DEMO.md).
+
 ## Implemented rules and transport
 
 The existing authenticated TV WebSocket routes clan commands. Phone clients cannot create wars, claim damage or declare results. Public fighter IDs are separate from private camera pairing codes and TV tokens. Clients send bounded hand/forearm/body controls at 20 Hz; the server simulates pairings at 30 Hz and publishes snapshots at approximately 15 Hz. No camera frames or microphone audio are transmitted.

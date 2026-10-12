@@ -49,9 +49,12 @@ export default function ClanWarsPage({ guideOpen, onGuide, points, worldPoints, 
       if (stateRef.current.war?.phase === 'fighting' && ['w', 's'].includes(key)) { event.preventDefault(); keys.current.add(key); }
     };
     const up = (event: KeyboardEvent) => keys.current.delete(event.key.toLowerCase());
-    const blur = () => { keys.current.clear(); if (stateRef.current.war?.phase === 'fighting') { setPaused(true); send({ type: 'arena-command', action: 'pause', paused: true }); } };
-    window.addEventListener('keydown', down, true); window.addEventListener('keyup', up); window.addEventListener('blur', blur); window.addEventListener('moveroom:pause', togglePause);
-    return () => { window.removeEventListener('keydown', down, true); window.removeEventListener('keyup', up); window.removeEventListener('blur', blur); window.removeEventListener('moveroom:pause', togglePause); };
+    // Two visible windows can share one computer during a local demo. Losing
+    // keyboard focus releases held keys without stopping the phone controller.
+    const blur = () => keys.current.clear();
+    const visibility = () => { if (document.hidden && stateRef.current.war?.phase === 'fighting') { keys.current.clear(); setPaused(true); send({ type: 'arena-command', action: 'pause', paused: true }); } };
+    window.addEventListener('keydown', down, true); window.addEventListener('keyup', up); window.addEventListener('blur', blur); window.addEventListener('moveroom:pause', togglePause); document.addEventListener('visibilitychange', visibility);
+    return () => { window.removeEventListener('keydown', down, true); window.removeEventListener('keyup', up); window.removeEventListener('blur', blur); window.removeEventListener('moveroom:pause', togglePause); document.removeEventListener('visibilitychange', visibility); };
   }, [send, togglePause, onBack, guideOpen]);
   useEffect(() => { if (guideOpen) return; const id = requestAnimationFrame(() => document.querySelector<HTMLElement>('.clan-wars [data-autofocus]')?.focus({ preventScroll: true })); return () => cancelAnimationFrame(id); }, [war?.code, war?.phase, guideOpen]);
   const leave = () => { send({ type: 'arena-command', action: 'leave' }); setPaused(false); keys.current.clear(); };

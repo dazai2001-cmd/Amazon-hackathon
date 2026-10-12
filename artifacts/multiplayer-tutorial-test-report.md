@@ -29,6 +29,8 @@ Screenshots:
 
 ## Limits
 
+The subsequent laptop/monitor setup passed the production build and all 86 tests. Multiplayer now releases held keys when focus changes, and pauses when the document becomes hidden. The local lobby loaded without captured console warnings/errors. The actual extended-display focus-switch and camera-plus-keyboard demonstration still needs to be tried on the user’s displays; automated server tests do not establish that hardware result.
+
 These checks prove software behavior with simulated movements over real WebSockets. They do not validate live human pose accuracy, physical exercise form, end-to-end camera latency, two real phone controllers, six simultaneous human cameras, audible speaker quality, or physical Fire TV performance. No Fire TV/Vega simulator recording was made in this pass.
 
 Clan membership and results are in memory; accounts, permanent clans, rankings, saved PvP rewards and an internet deployment remain unimplemented. The server validates controls and owns results but cannot establish that a client is an untampered human camera. Exercise bonuses remain local and apply only to story combat. Peer arm placement uses an approximate rig solver rather than full-body motion capture.

@@ -48,6 +48,8 @@ Fire TV submission proof must be on an actual Fire TV or Fire TV/Vega simulator 
 
 ## Player guide and multiplayer demo
 
+For the available laptop, extended monitor and one Android phone, follow [the two-screen setup](TWO_SCREEN_DEMO.md). One fighter uses the camera and a second person uses the labelled preview controller. Visible browser windows keep receiving their respective controls even when keyboard focus changes.
+
 1. On a fresh browser/device, enter the chapter and show the five-lesson field guide. Demonstrate Next/Previous and Back with the remote. Close it and reopen **Player guide** to show it remains available.
 2. From Alden’s exercise hall, open **Training guide**. Show that the counter is paused while reading and resumes without an extra rep when the guide closes.
 3. On two independent screens, open **Clan war hall**. Create a 1 vs 1 war, join the opposing clan with its invite, and pair one phone per participant. For a software-only recording, label both controllers as desktop previews.
