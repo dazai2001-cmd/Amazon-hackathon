@@ -2,6 +2,8 @@
 
 Prepared 13 October 2026 from repository implementation and test reports. This is a local draft, not feedback already entered in Devpost. Review the suggested reuse decisions and add your own account setup and phone rehearsal experience before submission.
 
+The five form answers, optional challenge selections, feature requests and AI disclosure are collected in [DEVPOST_ADDITIONAL_FIELDS.md](DEVPOST_ADDITIONAL_FIELDS.md). The optional URL field can point to [FRICTION_LOG.md](FRICTION_LOG.md), which contains reproduction steps and supporting evidence.
+
 The [official submission requirements](https://amazonappdev2026.devpost.com/rules) ask for tools used and their purpose, successes, limitations, onboarding experience and whether the entrant would use them again. Dependencies and asset provenance are recorded in package-lock.json and THIRD_PARTY.md.
 
 ## Fire TV application route: Android SDK, Java, Gradle and WebView

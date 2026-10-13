@@ -74,6 +74,7 @@ If a real camera routine or correction is unreliable during rehearsal, fix and r
 - GitHub URL: https://github.com/dazai2001-cmd/Amazon-hackathon. The private repository still needs the official reviewers' access.
 - Build/testing instructions: README.md and docs/DEMO.md. Include the native emulator and local server route.
 - Product feedback: review and copy the relevant text from [PRODUCT_FEEDBACK.md](PRODUCT_FEEDBACK.md).
+- Additional form fields: [DEVPOST_ADDITIONAL_FIELDS.md](DEVPOST_ADDITIONAL_FIELDS.md) provides the five feedback answers, optional challenge decisions, feature requests and AI-tools disclosure. The optional friction-log URL points to [FRICTION_LOG.md](FRICTION_LOG.md). Personal declarations and survey choices require your own answers.
 - Primary track: Fire TV. Optional AWS Builder/Open Source claims need their own qualifying evidence; none is currently established.
 - Team/entrant details, eligibility and rights: complete with your own accurate information.
 - Final status: saving a draft does not confirm the hackathon entry has been submitted. Verify the submission confirmation before the deadline.

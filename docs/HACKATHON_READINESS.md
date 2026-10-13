@@ -52,7 +52,7 @@ These are assessments of the current implementation, not guaranteed judge scores
 
 - **AWS Builder:** not currently evidenced. No AWS integration or Kiro Crew use was found. This does not block Fire TV entry.
 - **Open Source:** not currently evidenced. The game repository is private and no qualifying public contribution was identified. This does not block Fire TV entry.
-- **Friction log:** optional, potentially useful for the event's judging bonus. Document actual steps, expected/observed behavior, severity, workaround and an actionable suggestion.
+- **Friction log:** [drafted with reproduction steps and evidence](FRICTION_LOG.md), for entrant review and the optional URL field. The rules allow up to a 10% judging bonus for assessed friction logs; submitting this draft does not guarantee a bonus.
 - **1080p:** implemented as the default and verified as an actual 1920×1080 drawing buffer. 720p is a saved performance option. The event does not list a resolution minimum.
 - **Internet hosting, permanent clans, ranked matchmaking, later chapters and an Appstore release:** not necessary for this prototype's submission. Describe the implemented local/LAN guest multiplayer and story-only exercise bonuses accurately.
 - **Physical Fire TV:** useful additional compatibility testing, but not required by the FAQ. Physical camera/form validation still improves the credibility of our central feature.
