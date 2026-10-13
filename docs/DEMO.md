@@ -1,4 +1,4 @@
-# Chapter One demonstration
+# Earned Valor — The First Oath demonstration
 
 1. Launch the native APK in the Android TV emulator with the local server running. Open **Controller Setup** on the main menu and pair/calibrate the Android phone over USB, then choose **Story**.
 2. Set **Game sound** on in Settings and begin the story. Show the opening memory, walk to Alden, and choose a reason for becoming his squire. Voice playback advances conversations; dialogue choices wait for the player.

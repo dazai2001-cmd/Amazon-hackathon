@@ -1,8 +1,8 @@
-# Chapter One — The Gate That Stayed Shut
+# Chapter One — The First Oath
 
 First playable chapter, draft 1 · 10 October 2026
 
-This is the narrative and interaction script for Chapter One. The MoveRoom prototype now runs its story path in an explorable 3D courtyard: the opening memory, arrival dialogue and motive choices, royal summons, three interactive weapon lessons, Mara's first-person trial and win/loss dialogue, forge conversation and shop, Orders discussion, full letter reveal and closing choice. Dialogue is staged in the world with five prerecorded synthetic cast voices, captions, original music, ambience and effects. Quest checkpoints retain story progress; choices also have later callbacks. The bodyweight circuit and exercise-driven stat rewards remain scripted content to implement. The normal-play estimate below includes that future circuit.
+This is the narrative and interaction script for Chapter One. The Earned Valor prototype now runs its story path in an explorable 3D courtyard: the opening memory, arrival dialogue and motive choices, royal summons, three interactive weapon lessons, Mara's first-person trial and win/loss dialogue, forge conversation and shop, Orders discussion, full letter reveal and closing choice. Dialogue is staged in the world with five prerecorded synthetic cast voices, captions, original music, ambience and effects. Quest checkpoints retain story progress; choices also have later callbacks. Alden’s anytime training hall implements calibrated bodyweight routines and exercise-driven story stats. Integrating the circuit into the required chapter sequence remains planned; the normal-play estimate below includes that future scene.
 
 ## Chapter at a glance
 
@@ -34,7 +34,7 @@ One beat of silence.
 
 The gate falls shut. Cut the sound sharply.
 
-Title appears: **The Gate That Stayed Shut.**
+Title appears: **The First Oath.**
 
 Fade into the morning courtyard. Alden stands beside an unused training post. His hand rests on his sheathed sword. When he sees you watching, he removes it.
 

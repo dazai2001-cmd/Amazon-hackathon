@@ -1,6 +1,6 @@
 # Hackathon readiness — 13 October 2026
 
-The Ashen Gate fits the Fire TV track and has a working, tested prototype. Rahul confirmed that Devpost registration is complete and that identity verification on the Amazon developer portal is done. The submission is **not fully ready**: two camera recovery/lifecycle issues remain, the real-phone demonstration still needs validation and recording, judge access is absent, and video and product feedback remain unsubmitted according to the last update. Local submission and feedback drafts are available for review.
+Earned Valor fits the Fire TV track and has a working, tested prototype. Rahul confirmed that Devpost registration is complete and that identity verification on the Amazon developer portal is done. The submission is **not fully ready**: two camera recovery/lifecycle issues remain, the real-phone demonstration still needs validation and recording, judge access is absent, and video and product feedback remain unsubmitted according to the last update. Local submission and feedback drafts are available for review.
 
 Implementation audited: `3392b36fff6dad5b90a5fc0a1fb2e93cf1533793`. The earlier native remote/graphics checks used `2676823204ef9bc89e9f59794520776aca18b754`. Repository: [dazai2001-cmd/Amazon-hackathon](https://github.com/dazai2001-cmd/Amazon-hackathon).
 

@@ -1,6 +1,6 @@
-# Alden’s training hall
+# Earned Valor — Alden’s training hall
 
-Implemented 12 October 2026. This is the fitness progression slice of The Ashen Gate. Open **Enter training hall** on the chapter title, **Train** in the chapter header, or **Train with Alden** in the pause menu. The story, dialogue, walking and combat freeze while training is open. Leaving an unfinished routine keeps the existing character save and gives no training reward.
+Implemented 12 October 2026. This is the fitness progression slice of Earned Valor. Open **Enter training hall** on the chapter title, **Train** in the chapter header, or **Train with Alden** in the pause menu. The story, dialogue, walking and combat freeze while training is open. Leaving an unfinished routine keeps the existing character save and gives no training reward.
 
 ## Routine and progression
 

@@ -1,4 +1,4 @@
-# The Ashen Gate — submission preparation
+# Earned Valor — submission preparation
 
 Prepared 13 October 2026. Rahul confirmed Devpost registration and completed identity verification on the Amazon developer portal. Video and final submission remain unfinished according to the latest available update. The project currently passes 112 automated tests; two camera recovery/lifecycle fixes identified by a separate fault audit remain outstanding.
 
@@ -6,11 +6,13 @@ The [official rules](https://amazonappdev2026.devpost.com/rules) require the Fir
 
 ## Suggested Devpost text
 
-**Project name:** The Ashen Gate
+**Project name:** Earned Valor
 
-**Tagline:** Train with a knight. Fight with your own movements. Grow through the journey.
+**Tagline:** Train your body. Forge your legend.
 
 **Primary track:** Fire TV
+
+**Chapter I:** The First Oath
 
 ### Inspiration
 
@@ -18,7 +20,7 @@ We wanted exercise to have a place inside an adventure: a mentor, a reason to pr
 
 ### What it does
 
-The Ashen Gate is a medieval movement game designed for Fire TV. Players begin as a squire in a voiced first chapter, learn from Sir Alden and face a health-based sword duel. The Android phone estimates body joints locally. The right hand and forearm place and aim the sword; the left hand places the shield. Leaning, crouching and body-position changes provide bounded movement controls. Timing, attack line, stamina and distance influence the fight.
+Earned Valor is a medieval movement game designed for Fire TV. Players begin as a squire in a voiced first chapter, learn from Sir Alden and face a health-based sword duel. The Android phone estimates body joints locally. The right hand and forearm place and aim the sword; the left hand places the shield. Leaning, crouching and body-position changes provide bounded movement controls. Timing, attack line, stamina and distance influence the fight.
 
 Players can enter Alden's training hall from the main menu or the story. They choose squat and push-up variations and a starting pace. The trainer assigns reps, sets and rest, calibrates a side view for each exercise and checks visible range, pace, support position and alignment. Missing joints, partial movements and interruptions reset the current attempt. Prerecorded voice guidance and captions explain what to do. Completed camera routines earn daily-capped XP and bounded story bonuses. The next recommendation uses completed practice and the player's effort feedback.
 
@@ -44,7 +46,7 @@ Use English narration. Capture the native APK in the Android TV emulator and rea
 
 | Time | Footage | Suggested narration |
 | --- | --- | --- |
-| 0:00–0:12 | Native emulator app main menu, then the courtyard. | "This is The Ashen Gate, a movement-controlled medieval adventure for Fire TV. Training with your mentor strengthens your character for the story." |
+| 0:00–0:12 | Native emulator app main menu, then the courtyard. | "This is Earned Valor, a movement-controlled medieval adventure for Fire TV. Training with your mentor strengthens your character for the story." |
 | 0:12–0:30 | Player in the phone camera view; native game sword and shield follow deliberate movements. Briefly show D-pad navigation. | "The Android phone estimates joints locally. My right arm places and aims the sword; my left arm places the shield. The TV remote handles the menus. Camera video stays on my phone." |
 | 0:30–1:05 | Training menu, side-view calibration, a valid rep, a rejected partial rep and voice correction. Include squat and push-up excerpts; show completion and XP only from an actually completed camera routine. | "Alden assigns the routine and guides each exercise. Counting needs a controlled, visible movement through the calibrated range. This partial rep resets. Completed camera routines earn daily-capped story progression." |
 | 1:05–1:35 | Story dialogue excerpt, a directional block or parry and a counter. Show health, stamina and brief tracking loss/return. | "In the story, skill matters: cover the incoming line, manage stamina and counter at the right time. Losing tracking holds the fight, and returning cannot turn a jump in position into damage." |

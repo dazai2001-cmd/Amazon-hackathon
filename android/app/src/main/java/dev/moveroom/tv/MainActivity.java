@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
                 catch (Exception ignored) { return true; }
             }
             @Override public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                if (request.isForMainFrame()) runOnUiThread(() -> showServerDialog("Start the MoveRoom server on your computer, then enter its address. The Android emulator uses http://10.0.2.2:8787."));
+                if (request.isForMainFrame()) runOnUiThread(() -> showServerDialog("Start the Earned Valor server on your computer, then enter its address. The Android emulator uses http://10.0.2.2:8787."));
             }
         });
         setContentView(web);
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     private void showServerDialog(String message) {
         EditText input = new EditText(this);
         input.setText(serverUrl); input.setSingleLine(true); input.setSelectAllOnFocus(true);
-        new AlertDialog.Builder(this).setTitle("Connect MoveRoom").setMessage(message).setView(input)
+        new AlertDialog.Builder(this).setTitle("Connect Earned Valor").setMessage(message).setView(input)
             .setPositiveButton("Connect", (dialog, which) -> loadServer(input.getText().toString().trim()))
             .setNegativeButton("Cancel", null).show();
     }
@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
             if (event.getKeyCode() == KeyEvent.KEYCODE_MENU && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) menuSetupShown = false;
             if (event.getKeyCode() == KeyEvent.KEYCODE_MENU && event.getAction() == KeyEvent.ACTION_DOWN && !menuSetupShown && (event.isLongPress() || event.getRepeatCount() >= 3) && BuildConfig.DEBUG) {
                 menuSetupShown = true;
-                showServerDialog("Enter the address of your MoveRoom server.");
+                showServerDialog("Enter the address of your Earned Valor server.");
                 return true;
             }
             if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {

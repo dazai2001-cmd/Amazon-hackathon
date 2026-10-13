@@ -40,11 +40,11 @@ async function handle(request: IncomingMessage, response: ServerResponse) {
   const pathname = new URL(request.url || '/', `http://${request.headers.host}`).pathname;
   if (request.method === 'POST') {
     const origin = request.headers.origin;
-    try { if (origin && new URL(origin).host !== request.headers.host) return json(response, 403, { error: 'Open MoveRoom on this server.' }); }
+    try { if (origin && new URL(origin).host !== request.headers.host) return json(response, 403, { error: 'Open Earned Valor on this server.' }); }
     catch { return json(response, 403, { error: 'Invalid origin.' }); }
   }
   try {
-    if (pathname === '/api/health') return json(response, 200, { ok: true, name: 'MoveRoom', version: '0.1.0' });
+    if (pathname === '/api/health') return json(response, 200, { ok: true, name: 'Earned Valor', version: '0.1.0' });
     if (pathname === '/api/config') return json(response, 200, { phoneBase, httpPort: port, httpsPort: tlsPort, lan });
     if (pathname === '/api/sessions' && request.method === 'POST') return json(response, 201, relay.create());
     if (pathname === '/api/join' && request.method === 'POST') {
@@ -77,7 +77,7 @@ const tlsRoot = resolve('.local/tls');
 await mkdir(tlsRoot, { recursive: true });
 const certFile = resolve(tlsRoot, 'cert.pem'), keyFile = resolve(tlsRoot, 'key.pem');
 if (!existsSync(certFile) || !existsSync(keyFile)) {
-  const cert = await generate([{ name: 'commonName', value: 'MoveRoom Development' }], {
+  const cert = await generate([{ name: 'commonName', value: 'Earned Valor Development' }], {
     keySize: 2048, algorithm: 'sha256',
     extensions: [{ name: 'subjectAltName', altNames: [
       { type: 2, value: 'localhost' }, { type: 7, ip: '127.0.0.1' }, ...localAddresses.map(ip => ({ type: 7 as const, ip })),
@@ -89,7 +89,7 @@ const server = http.createServer((req, res) => { void handle(req, res); });
 const secure = https.createServer({ cert: await readFile(certFile), key: await readFile(keyFile) }, (req, res) => { void handle(req, res); });
 relay.attach(server); relay.attach(secure);
 server.listen(port, '0.0.0.0', () => {
-  console.log(`\nMoveRoom is ready.\n  Desktop TV preview: http://localhost:${port}\n  Android emulator:   http://10.0.2.2:${port}\n  Phone over Wi-Fi:   ${phoneBase}/phone\n  Phone over USB:     http://localhost:${port}/phone\n\nWi-Fi uses a local development certificate. USB localhost requires adb reverse; run npm run phone:usb.\n`);
+  console.log(`\nEarned Valor is ready.\n  Desktop TV preview: http://localhost:${port}\n  Android emulator:   http://10.0.2.2:${port}\n  Phone over Wi-Fi:   ${phoneBase}/phone\n  Phone over USB:     http://localhost:${port}/phone\n\nWi-Fi uses a local development certificate. USB localhost requires adb reverse; run npm run phone:usb.\n`);
 });
 secure.listen(tlsPort, '0.0.0.0');
 const shutdown = async () => { clanWars.close(); relay.close(); await vite?.close(); server.close(); secure.close(); process.exit(0); };

@@ -1,12 +1,12 @@
 {
-  "name": "moveroom",
+  "name": "earned-valor",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=22.12.0"
   },
   "type": "module",
-  "description": "A phone-powered movement playground and coaching app for Fire TV.",
+  "description": "A medieval fitness adventure and live clan duels for Fire TV, controlled by an Android phone camera.",
   "scripts": {
     "dev": "tsx server/index.ts",
     "build": "tsc --noEmit && vite build",

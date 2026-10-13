@@ -1,3 +1,3 @@
 export default function Brand({ compact = false }: { compact?: boolean }) {
-  return <div className={`brand ${compact ? 'brand-compact' : ''}`}><svg viewBox="0 0 38 38" aria-hidden="true"><path d="M7 29V9h6l6 9 6-9h6v20h-7V20l-5 7-5-7v9z" fill="currentColor" /></svg><span>move<span className="brand-room">room</span><span className="brand-dot">.</span></span></div>;
+  return <div className={`brand ${compact ? 'brand-compact' : ''}`}><svg viewBox="0 0 48 58" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 5H43V31Q39 44 24 53Q9 44 5 31Z"/><path d="M24 15V40M24 30L15 22M24 26L34 17"/></svg><span>Earned <span className="brand-valor">Valor</span></span></div>;
 }

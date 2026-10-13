@@ -1,8 +1,12 @@
-# The Ashen Gate
+# Earned Valor
 
-A medieval fitness adventure for Fire TV, powered by an Android phone camera. **The Ashen Gate** now has a complete first-chapter story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available directly from the main menu, chapter title, header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **The Orders** now supports live clan wars with 1–3 champions per clan, human-versus-human duels and a shared clan score. An illustrated first-visit tutorial explains setup, combat, story, training and multiplayer, with contextual replay buttons. The root page is now the medieval main menu: Story, Training, Clan Wars, Controller Setup, Settings and Player Guide. The older Orbit Arena and Reach & Reset demo screens have been removed.
+*Train your body. Forge your legend.*
+
+A medieval fitness adventure for Fire TV, powered by an Android phone camera. **Earned Valor** includes **Chapter I: The First Oath**, a complete story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available directly from the main menu, chapter title, header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **The Orders** now supports live clan wars with 1–3 champions per clan, human-versus-human duels and a shared clan score. An illustrated first-visit tutorial explains setup, combat, story, training and multiplayer, with contextual replay buttons. The root page is now the medieval main menu: Story, Training, Clan Wars, Controller Setup, Settings and Player Guide. The older Orbit Arena and Reach & Reset demo screens have been removed.
 
 The TV runs a native Android/Fire OS APK with a landscape WebView, D-pad navigation, Select/Back/Play-Pause support, and a Leanback launcher. The phone runs MediaPipe Pose Landmarker locally in Chrome. A small Node server serves both interfaces and relays landmarks over WebSockets. A TV camera is not required.
+
+![Earned Valor main menu with Story, Training and Clan Wars](artifacts/earned-valor-main-menu.png)
 
 ## Run on this computer
 
@@ -33,7 +37,7 @@ Do not run production and development servers on the same ports simultaneously. 
 
 ## Run the Fire TV app
 
-The current debug APK is **artifacts/MoveRoom-debug.apk**.
+The current debug APK is **artifacts/EarnedValor-debug.apk**.
 
 ~~~powershell
 npm run android:build
@@ -43,7 +47,7 @@ npm run android:run
 The emulator helper enables OpenGL ES 3 with **host** graphics and `GLESDynamicVersion`, required by the 3D renderer. It forwards port 8787 through ADB and opens http://127.0.0.1:8787 to reach the server on this PC. The server must remain running. To launch the chapter directly, pass `-ServerUrl http://127.0.0.1:8787/chapter` to scripts/run-emulator.ps1. For a physical Fire TV, install the APK with adb and provide your PC's LAN server address:
 
 ~~~powershell
-adb -s DEVICE_SERIAL install -r artifacts/MoveRoom-debug.apk
+adb -s DEVICE_SERIAL install -r artifacts/EarnedValor-debug.apk
 adb -s DEVICE_SERIAL shell am start -n dev.moveroom.tv/.MainActivity --es server http://YOUR_PC_IP:8787
 ~~~
 

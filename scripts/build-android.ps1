@@ -16,5 +16,5 @@ if (!(Test-Path -LiteralPath $taskGradle)) { $taskGradle = Join-Path $taskRoot '
 if ($LASTEXITCODE -ne 0) { throw 'Android build failed.' }
 $taskApk = Join-Path $taskRoot 'android\app\build\outputs\apk\debug\app-debug.apk'
 New-Item -ItemType Directory -Force -Path (Join-Path $taskRoot 'artifacts') | Out-Null
-Copy-Item -LiteralPath $taskApk -Destination (Join-Path $taskRoot 'artifacts\MoveRoom-debug.apk') -Force
-Write-Output ('APK ready: ' + (Join-Path $taskRoot 'artifacts\MoveRoom-debug.apk'))
+Copy-Item -LiteralPath $taskApk -Destination (Join-Path $taskRoot 'artifacts\EarnedValor-debug.apk') -Force
+Write-Output ('APK ready: ' + (Join-Path $taskRoot 'artifacts\EarnedValor-debug.apk'))

@@ -12,7 +12,7 @@ The built-in `image_gen.imagegen` tool produced 12 PNG assets. The exact final p
 
 Art direction: grounded medieval realism, practical equipment, weathered iron and leather, muted cloth, believable adult proportions. The artwork uses fictional characters. These PNGs are dialogue, scene, and inventory assets; they do not contain rigs, 3D geometry, or combat animations.
 
-Open the gallery at `http://localhost:8787/medieval-assets.html` after `npm run build` with the MoveRoom server running. It previews characters against all three scenes and links every full-resolution image. The images are served locally without third-party image hosts.
+Open the gallery at `http://localhost:8787/medieval-assets.html` after `npm run build` with the Earned Valor server running. It previews characters against all three scenes and links every full-resolution image. The images are served locally without third-party image hosts.
 
 ## Sourced 3D candidates
 

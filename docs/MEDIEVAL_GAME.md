@@ -1,4 +1,4 @@
-# Medieval movement RPG direction
+# Earned Valor — medieval movement RPG direction
 
 Updated 12 October 2026. Chapter One now has a continuous story path with courtyard exploration, staged dialogue, choices and callbacks, three interactive weapon lessons, the trial, forge, Orders board and letter reveal. Five prerecorded synthetic cast voices, original score/ambience/effects, subtitles, audio settings and saved quest checkpoints are implemented. The sections below distinguish that local prototype from the larger game proposal.
 
@@ -59,7 +59,7 @@ This sequence is a delivery proposal; the user has agreed to the concept, not a 
 
 ## Assets and current status
 
-A complete first-chapter screenplay is drafted in [CHAPTER_01_SCRIPT.md](CHAPTER_01_SCRIPT.md). The prototype uses its opening, choices, royal summons, weapon briefing, Mara's health-based trial, win/loss branches, shop, Orders introduction and letter reveal. Its working title is “The Gate That Stayed Shut.” The anytime training hall connects bodyweight routines to calibrated squat/push-up detectors and Alden’s voiced guidance.
+A complete first-chapter screenplay is drafted in [CHAPTER_01_SCRIPT.md](CHAPTER_01_SCRIPT.md). Earned Valor uses its opening, choices, royal summons, weapon briefing, Mara's health-based trial, win/loss branches, shop, Orders introduction and letter reveal. Chapter I is titled “The First Oath.” The anytime training hall connects bodyweight routines to calibrated squat/push-up detectors and Alden’s voiced guidance.
 
 Twelve original raster assets are saved under `public/assets/medieval`: three characters, three locations, and six inventory icons. The local gallery is `http://localhost:8787/medieval-assets.html`. Exact generation prompts, dimensions, and file hashes are included in that folder.
 

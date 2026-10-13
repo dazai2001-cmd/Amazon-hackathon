@@ -21,7 +21,7 @@ Two third-party 3D models are retained in assets/medieval/models. Sentinel is al
 
 See assets/medieval/README.md and model-inspection.json for model provenance, geometry, animation metadata, and remaining validation.
 
-The MoveRoom logo, SVG space illustration, arena graphics, and sound effects were created for this prototype; they do not use Amazon logos or third-party game artwork.
+The Earned Valor crest and wordmark, legacy MoveRoom logo and SVG space illustration, arena graphics, and sound effects were created for this prototype; they do not use Amazon logos or third-party game artwork.
 
 ## Chapter voices, music and effects
 

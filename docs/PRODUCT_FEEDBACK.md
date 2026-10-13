@@ -1,4 +1,4 @@
-# Product feedback — draft for review
+# Earned Valor — product feedback draft for review
 
 Prepared 13 October 2026 from repository implementation and test reports. This is a local draft, not feedback already entered in Devpost. Review the suggested reuse decisions and add your own account setup and phone rehearsal experience before submission.
 
