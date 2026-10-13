@@ -31,7 +31,7 @@ Choose **Training** directly from the main menu, or **Enter training hall** from
 
 For a clearly labelled software-only walkthrough, connect the desktop preview and hold **B** to lower/release to return. Show that completing the circuit awards no XP. The preview uses synthetic joints and cannot validate human exercise accuracy. Alden’s voice can be toggled from the hall header; all instructions remain captioned.
 
-Fire TV submission proof must be on an actual Fire TV or Fire TV/Vega simulator as required by the event, not solely an Android TV emulator or desktop browser.
+The [official FAQ](https://amazonappdev2026.devpost.com/details/faqs) explicitly accepts an Android TV Emulator or Fire TV/Vega simulator; physical Fire TV hardware is not required. Record the native emulator APK in the final video. A desktop browser alone does not demonstrate that platform workflow.
 
 
 ## Player guide and multiplayer demo
@@ -45,4 +45,4 @@ For the available laptop, extended monitor and one Android phone, follow [the tw
 5. Open **War guide** briefly during the fight: both players pause and the guide explains the 30-second return window. Close it promptly and resume.
 6. Complete the health-based fight. Show the shared clan point and result. Explain that 2 vs 2 and 3 vs 3 wars consist of paired duels; the final total waits for every pairing.
 
-Guests and war results currently expire with the server session. Permanent clans, PvP economy, seasons and internet matchmaking should be presented as future scope. Physical camera/controller and Fire TV/Vega submission proof still need to be recorded.
+Guests and war results currently expire with the server session. Permanent clans, PvP economy, seasons and internet matchmaking should be presented as future scope. Actual phone-camera input and the accepted native emulator workflow still need to be recorded for submission.
