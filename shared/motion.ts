@@ -10,6 +10,20 @@ export type Motion = { tracked: boolean; lean: number; leftReach: number; rightR
 export const REST_MOTION: Motion = { tracked: false, lean: 0, leftReach: 0, rightReach: 0, shield: false, duck: false, confidence: 0, symmetry: 0 };
 export const DEFAULT_PROFILE: CalibrationProfile = { mode: 'standing', centerX: 0.5, shoulderY: 0.3, torso: 0.22, shoulderWidth: .14, leftRange: 0.12, rightRange: 0.12, reachTarget: 0.8, createdAt: 0 };
 
+export function readCalibrationProfile(value: unknown): CalibrationProfile | null {
+  if (!value || typeof value !== 'object') return null;
+  const p = value as CalibrationProfile;
+  const between = (n: number, min: number, max: number) => Number.isFinite(n) && n >= min && n <= max;
+  if (!['standing', 'seated'].includes(p.mode) || !between(p.centerX, 0, 1) || !between(p.shoulderY, 0, 1)
+    || !between(p.torso, .04, 1) || p.shoulderY + p.torso > 1
+    || !between(p.leftRange, .008, .35) || !between(p.rightRange, .008, .35)
+    || !between(p.reachTarget, .05, 1.6) || !between(p.createdAt, 0, Number.MAX_SAFE_INTEGER)
+    || p.shoulderWidth !== undefined && (!Number.isFinite(p.shoulderWidth) || p.shoulderWidth <= .02 || p.shoulderWidth >= .8)) return null;
+  return { mode: p.mode, centerX: p.centerX, shoulderY: p.shoulderY, torso: p.torso, leftRange: p.leftRange,
+    rightRange: p.rightRange, reachTarget: p.reachTarget, createdAt: p.createdAt,
+    ...(p.shoulderWidth === undefined ? {} : { shoulderWidth: p.shoulderWidth }) };
+}
+
 export function measureBody(points: Landmark[]): BodyMeasurement | null {
   if (points.length !== 33) return null;
   const required = [11, 12, 23, 24, 15, 16];

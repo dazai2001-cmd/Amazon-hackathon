@@ -88,6 +88,34 @@ test('duplicate frames, tracking gaps and pause/resume never complete a partial 
   d.rep(); assert.equal(d.coach.state.reps, 1);
 });
 
+test('interrupted calibration requires a fresh continuous hold; frame gaps visibly stop tracking', () => {
+  const d = new Driver(); d.hold(0, 1000); d.coach.update([], d.time += 50); d.hold(0, 700);
+  assert.equal(d.coach.state.phase, 'calibrate-top'); d.hold(0, 700);
+  assert.equal(d.coach.state.phase, 'calibrate-bottom');
+  d.time += 1000; d.coach.update(trainingPreviewPose(d.coach.block, 1), d.time);
+  assert.equal(d.coach.state.tracked, false); assert.equal(d.coach.state.angle, null);
+  assert.equal(d.coach.state.cue, 'gap'); assert.equal(d.coach.state.totalReps, 0);
+});
+
+test('a visibility loss on the calibrated side cannot switch sides to finish a rep', () => {
+  const d = new Driver(); d.calibrate(); d.move(0, 1); d.hold(1, 300);
+  d.hold(1, 200, p => { for (const i of [11, 23, 25, 27]) p[i].visibility = .1; return p; });
+  d.move(1, 0); d.hold(0, 500);
+  assert.equal(d.coach.state.reps, 0); assert.ok(d.coach.state.rejected > 0);
+  d.rep(); assert.equal(d.coach.state.reps, 1);
+});
+
+test('invalid rest ticks and repeated complete frames cannot skip sets or add reps', () => {
+  const d = new Driver(new TrainingCoach(plan(1))); d.calibrate(); d.rep();
+  const remaining = d.coach.state.restRemaining;
+  for (const seconds of [0, -1, NaN, Infinity]) d.coach.tick(seconds);
+  assert.equal(d.coach.state.restRemaining, remaining); assert.equal(d.coach.state.completedSets, 1);
+  d.rest(); d.calibrate(); d.rep();
+  const receipt = { ...d.coach.state };
+  for (let i = 0; i < 100; i++) { d.time += 50; d.coach.update(trainingPreviewPose(d.coach.block, i % 2), d.time); d.coach.tick(100); }
+  assert.deepEqual(d.coach.state, receipt);
+});
+
 test('occlusion, support movement, or hip-line drift invalidate the current repetition', () => {
   const d = new Driver(); d.calibrate(); d.move(0, 1); d.hold(1, 300); d.hold(1, 100, p => { p[27].visibility = .1; return p; }); d.move(1, 0); d.hold(0, 600); assert.equal(d.coach.state.reps, 0);
   d.move(0, 1); d.hold(1, 100, p => { p[27].x += .1; return p; }); d.move(1, 0); d.hold(0, 600); assert.equal(d.coach.state.reps, 0);

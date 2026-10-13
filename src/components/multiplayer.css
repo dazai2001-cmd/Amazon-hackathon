@@ -3,3 +3,4 @@
 .clan-battle .clan-combat-wrap{padding-top:0}.clan-battle .clan-controls{margin:9px 0!important}.clan-combat-hud .clan-health>span{font-size:13px}.clan-combat-hud .clan-health small{font-size:10px}.clan-war-score>span{font-size:10px}.clan-header>button:last-child{margin-left:0}
 .clan-wars.clan-preview{min-height:calc(100svh - 34px)}.clan-preview .clan-battle-world{width:min(100%,calc((100svh - 125px)*16/9))}.clan-war-score>span{font-size:10px}
 .clan-wars{--gold:#cfb27a;--gold-light:#f1ddac;--ink:#151511}
+.clan-error{position:fixed;left:4%;right:4%;bottom:12px;z-index:20;background:#352c26;border:1px solid #b98d62;box-shadow:0 5px 24px #0006}

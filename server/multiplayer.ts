@@ -78,9 +78,9 @@ export class ClanWars {
     found.member.connected = connected;
     if (connected) {
       found.member.lastSeen = this.clock(); found.member.pauseAt = null;
-      const pair = found.war.pairs.find(p => p.members.includes(found.member.id));
-      if (pair) pair.duel.reconnect(pair.members[0] === found.member.id ? 0 : 1);
     }
+    const pair = found.war.pairs.find(p => p.members.includes(found.member.id));
+    if (pair) pair.duel.reconnect(pair.members[0] === found.member.id ? 0 : 1);
     this.publish(found.war);
   }
   leave(room: string) {
@@ -90,12 +90,21 @@ export class ClanWars {
     member.connected = false; this.membership.delete(room);
     if (war.phase === 'lobby') { war.members = war.members.filter(m => m !== member); if (war.leader === member.id) war.leader = war.members.find(m => m.team === 0)?.id || ''; }
     this.send(room, { type: 'arena-state', me: null, war: null, match: null });
-    if (!war.members.some(m => this.membership.has(m.room))) this.wars.delete(war.code); else this.publish(war);
+    if (!war.members.some(m => this.membership.get(m.room)?.war === war)) this.wars.delete(war.code); else this.publish(war);
   }
   tick(now: number) {
     const dt = Math.min(.05, Math.max(0, (now - this.lastTick) / 1000)); this.lastTick = now;
     for (const war of this.wars.values()) {
-      if (now - war.createdAt > 60 * 60 * 1000) { for (const m of war.members) this.membership.delete(m.room); this.wars.delete(war.code); continue; }
+      if (now - war.createdAt > 60 * 60 * 1000) {
+        for (const m of war.members) if (this.membership.get(m.room)?.war === war) {
+          this.membership.delete(m.room);
+          if (m.connected) {
+            this.send(m.room, this.state(m.room));
+            this.error(m.room, 'This clan war expired. Create or join a new war.');
+          }
+        }
+        this.wars.delete(war.code); continue;
+      }
       if (war.phase === 'fighting') {
         for (const pair of war.pairs) {
           const members = pair.members.map(id => war.members.find(m => m.id === id)!);

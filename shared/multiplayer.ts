@@ -24,6 +24,8 @@ export type ArenaError = { type: 'arena-error'; message: string };
 const finite = (value: unknown, min: number, max: number) => typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
 const point = (value: unknown): value is Point => Boolean(value && typeof value === 'object' && finite((value as Point).x, -2, 3) && finite((value as Point).y, -2, 3));
 const vector = (value: unknown) => Boolean(value && typeof value === 'object' && ['x', 'y', 'z'].every(k => finite((value as Record<string, unknown>)[k], -2, 2)));
+const copyPoint = (p: Point): Point => ({ x: p.x, y: p.y });
+const copyVector = (p: WeaponPose['hilt']) => ({ x: p.x, y: p.y, z: p.z });
 export function readArenaInput(value: unknown): ArenaInput | null {
   if (!value || typeof value !== 'object') return null;
   const v = value as ArenaInput, p = v.pose, b = v.body;
@@ -34,8 +36,8 @@ export function readArenaInput(value: unknown): ArenaInput | null {
   if (p && (Math.abs(v.tip.x - p.tip.x) > .001 || Math.abs(v.tip.y - p.tip.y) > .001)) return null;
   // Copy only gameplay inputs. Claimed damage, coins, winners and stats from
   // clients have no place in authoritative match state.
-  return { seq: v.seq, tracked: v.tracked && Boolean(p), tip: { ...v.tip }, lean: v.lean, forward: v.forward, body: { tracked: b.tracked, forward: b.forward, crouch: b.crouch }, pose: p ? {
-    hilt: { ...p.hilt }, axis: { ...p.axis }, elbow: { ...p.elbow }, shield: { ...p.shield }, shieldElbow: { ...p.shieldElbow }, tip: { ...p.tip }, shieldPoint: { ...p.shieldPoint }, guarding: p.guarding, depthSource: p.depthSource,
+  return { seq: v.seq, tracked: v.tracked && Boolean(p), tip: copyPoint(v.tip), lean: v.lean, forward: v.forward, body: { tracked: b.tracked, forward: b.forward, crouch: b.crouch }, pose: p ? {
+    hilt: copyVector(p.hilt), axis: copyVector(p.axis), elbow: copyVector(p.elbow), shield: copyVector(p.shield), shieldElbow: copyVector(p.shieldElbow), tip: copyPoint(p.tip), shieldPoint: copyPoint(p.shieldPoint), guarding: p.guarding, depthSource: p.depthSource,
   } : null };
 }
 
@@ -57,6 +59,9 @@ export class HumanDuel {
     const r = this.runtime[index];
     if (value.seq <= r.sequence) return false;
     r.sequence = value.seq; r.input = value; r.receivedAt = now;
+    // Discard in-flight actions at the transition itself. Loss and return can
+    // both arrive between simulation ticks when a network buffers packets.
+    if (!value.tracked) this.suspend();
     const gap = now - r.previousAt;
     if (value.tracked && r.previousTip && gap > 0 && gap <= 180 && !r.paused && this.active) {
       const distance = Math.hypot(value.tip.x - r.previousTip.x, value.tip.y - r.previousTip.y), speed = distance / (gap / 1000);
@@ -65,9 +70,9 @@ export class HumanDuel {
     r.previousTip = value.tracked ? { ...value.tip } : null; r.previousAt = now;
     return true;
   }
-  pause(index: 0 | 1, paused: boolean) { this.runtime[index].paused = paused; }
+  pause(index: 0 | 1, paused: boolean) { this.runtime[index].paused = paused; if (paused) this.suspend(); }
   available(index: 0 | 1, now: number) { const r = this.runtime[index]; return Boolean(r.input?.tracked && !r.paused && now - r.receivedAt <= 500); }
-  reconnect(index: 0 | 1) { this.runtime[index] = runtime(); }
+  reconnect(index: 0 | 1) { this.runtime[index] = runtime(); this.suspend(); }
   private suspend() {
     this.active = false; this.held = true;
     for (const r of this.runtime) { r.pending = null; r.previousTip = null; r.physicalForward = null; r.swingResolved = true; r.wasCovering = { high: false, left: false, right: false }; r.coverSince = { high: -10, left: -10, right: -10 }; }

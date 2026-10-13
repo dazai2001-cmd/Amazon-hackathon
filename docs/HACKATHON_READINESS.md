@@ -56,3 +56,5 @@ These are assessments of the current implementation, not guaranteed judge scores
 - **Physical Fire TV:** useful additional compatibility testing, but not required by the FAQ. Physical camera/form validation still improves the credibility of our central feature.
 
 Relevant evidence: [remote/graphics checks](../artifacts/remote-controls-test-report.md), [multiplayer checks](../artifacts/multiplayer-tutorial-test-report.md), [training checks](../artifacts/training-test-report.md), [asset notices](../THIRD_PARTY.md), [demo plan](DEMO.md).
+
+13 October follow-up: [23 additional edge cases](../artifacts/edge-test-report.md) and their fixes raise the automated suite to 112 passing tests. This improves interruption handling, corrupted-save recovery and remote-visible feedback; the submission and real-device evidence gaps listed above remain.

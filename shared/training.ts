@@ -133,7 +133,7 @@ export class TrainingCoach {
     if (this.previous !== null && now <= this.previous) return s;
     const gap = this.previous !== null && now - this.previous > 300;
     this.previous = now;
-    if (gap) { this.invalidate('gap'); return s; }
+    if (gap) { s.tracked = false; s.angle = null; this.invalidate('gap'); return s; }
     const view = measureExercise(points, this.block, aspect, this.baseline?.side);
     s.tracked = Boolean(view.measurement); s.angle = view.measurement?.angle ?? null;
     if (!view.measurement) { this.invalidate(view.cue); return s; }

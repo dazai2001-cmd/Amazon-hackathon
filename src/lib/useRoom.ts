@@ -1,23 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Command, PoseFrame, SessionInfo } from '../../shared/protocol';
 import { RoomSocket } from './socket';
+import { createRoom, clearRoom } from './session';
 import type { ArenaCommand, ArenaState } from '../../shared/multiplayer';
-
-let roomPromise: Promise<SessionInfo> | null = null;
-function createRoom() {
-  if (!roomPromise) roomPromise = (async () => {
-    try {
-      const saved = JSON.parse(sessionStorage.getItem('moveroom.session') || 'null') as SessionInfo | null;
-      if (saved && saved.expiresAt > Date.now() + 60_000) return saved;
-    } catch { /* Make a new room if the saved session is invalid. */ }
-    const response = await fetch('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-    if (!response.ok) throw new Error('The pairing server is unavailable. Start it, then try again.');
-    const session = await response.json() as SessionInfo;
-    sessionStorage.setItem('moveroom.session', JSON.stringify(session));
-    return session;
-  })().catch(error => { roomPromise = null; throw error; });
-  return roomPromise;
-}
 
 export function useRoom() {
   const [session, setSession] = useState<SessionInfo | null>(null);
@@ -53,7 +38,7 @@ export function useRoom() {
   const command = useCallback((action: Command['action'], value: string) => socket.current?.send({ type: 'command', action, value }), []);
   const arenaCommand = useCallback((message: ArenaCommand) => { if (message.action !== 'input') setArenaError(''); socket.current?.send(message); }, []);
   const renew = useCallback(() => {
-    roomPromise = null; sessionStorage.removeItem('moveroom.session');
+    clearRoom();
     setSession(null); setPhoneConnected(false); setFrame(null); setGeneration(v => v + 1);
     setArena({ type: 'arena-state', me: null, war: null, match: null }); setArenaError('');
   }, []);

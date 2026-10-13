@@ -1,6 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, Keyboard, Smartphone, X } from 'lucide-react';
-import { DEFAULT_PROFILE, MotionEngine, measureBody, syntheticPose, type CalibrationProfile } from '../shared/motion';
+import { DEFAULT_PROFILE, MotionEngine, measureBody, readCalibrationProfile, syntheticPose, type CalibrationProfile } from '../shared/motion';
 import type { Activity, Landmark } from '../shared/protocol';
 import { readStoryProgress } from '../shared/chapter';
 import { TRAINING_KEY, readTrainingSave, measureExercise, type TrainingBlock, type TrainingSave } from '../shared/training';
@@ -26,11 +26,7 @@ const paths: Record<Screen, string> = { home: '/', chapter: '/chapter', arena: '
 const screenAt = (path: string): Screen => (Object.entries(paths).find(([, value]) => value === path)?.[0] as Screen) || 'home';
 const readStored = <T,>(key: string, parse: (value: unknown) => T): T => { try { return parse(JSON.parse(localStorage.getItem(key) || 'null')); } catch { return parse(null); } };
 function loadProfile(): CalibrationProfile | null {
-  try {
-    const p = JSON.parse(localStorage.getItem('moveroom.profile') || 'null') as CalibrationProfile | null;
-    if (p && ['standing', 'seated'].includes(p.mode) && ['centerX', 'shoulderY', 'torso', 'leftRange', 'rightRange', 'reachTarget', 'createdAt'].every(k => Number.isFinite(p[k as keyof CalibrationProfile])) && (p.shoulderWidth === undefined || Number.isFinite(p.shoulderWidth) && p.shoulderWidth > .02 && p.shoulderWidth < .8)) return p;
-  } catch { /* Calibrate when there is no saved profile. */ }
-  return null;
+  return readStored('moveroom.profile', readCalibrationProfile);
 }
 
 export default function TVApp() {
