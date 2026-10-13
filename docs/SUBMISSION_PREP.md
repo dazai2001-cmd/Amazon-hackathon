@@ -1,6 +1,6 @@
 # The Ashen Gate — submission preparation
 
-Prepared 13 October 2026. Devpost registration is complete according to Rahul. The Amazon developer account, video and final submission remain unfinished. The project currently passes 112 automated tests.
+Prepared 13 October 2026. Rahul confirmed Devpost registration and completed identity verification on the Amazon developer portal. Video and final submission remain unfinished according to the latest available update. The project currently passes 112 automated tests; two camera recovery/lifecycle fixes identified by a separate fault audit remain outstanding.
 
 The [official rules](https://amazonappdev2026.devpost.com/rules) require the Fire TV developer account, project description, accessible GitHub repository, public demonstration video and product feedback. The [FAQ](https://amazonappdev2026.devpost.com/details/faqs) accepts the Android TV emulator. The deadline is **24 October 2026 at 00:30 IST** (23 October at noon PDT).
 
@@ -36,7 +36,7 @@ Movement continuity mattered as much as rendering. We tested tracking gaps, hidd
 
 Phone framing and reliable interruption handling are central to a movement game. Our next work is broader human playtesting, exercise accuracy and end-to-end latency measurement, Fire TV hardware profiling, more bespoke character animation and later story regions. Permanent clans, saved multiplayer rewards and internet matchmaking are future scope. The current prototype provides local/LAN guest multiplayer and exercise-driven story progression.
 
-**Before copying:** replace or supplement this draft with what you personally learned during the phone rehearsal. Do not describe real-phone accuracy or physical Fire TV performance as validated until those checks happen.
+**Before copying:** fix the two issues documented in [the camera streaming audit](../artifacts/camera-stream-audit.md), then replace or supplement this draft with what you personally learned during the phone rehearsal. Do not describe real-phone accuracy or physical Fire TV performance as validated until those checks happen.
 
 ## 2:45 recording script
 
@@ -58,7 +58,7 @@ If a real camera routine or correction is unreliable during rehearsal, fix and r
 
 ## Recording setup
 
-1. Create the [Amazon developer account](https://developer.amazon.com/apps-and-games/).
+1. The Amazon developer account/identity step is reported complete. Finish the outstanding camera fixes and plan the real-phone checks described in [the audit](../artifacts/camera-stream-audit.md) before recording.
 2. Build and start the app server: `npm run build`, then `npm start` in a terminal that remains running.
 3. Build/run the native emulator APK with `npm run android:build` and `npm run android:run`. For the Windows setup, use the existing emulator and its server configuration.
 4. Connect the Android phone through `npm run phone:usb`, approve debugging on the phone and start its camera. Rehearse full upper-body framing for combat and the side view for training.

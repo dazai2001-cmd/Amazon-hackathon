@@ -1,6 +1,6 @@
 # Hackathon readiness — 13 October 2026
 
-The Ashen Gate fits the Fire TV track and has a working, tested prototype. The submission is **not fully ready**: Rahul confirmed that Devpost registration is complete, the Amazon developer account is not created, and no demo video or submitted product feedback exists. Judge access is absent. Local submission and feedback drafts are now available for review.
+The Ashen Gate fits the Fire TV track and has a working, tested prototype. Rahul confirmed that Devpost registration is complete and that identity verification on the Amazon developer portal is done. The submission is **not fully ready**: two camera recovery/lifecycle issues remain, the real-phone demonstration still needs validation and recording, judge access is absent, and video and product feedback remain unsubmitted according to the last update. Local submission and feedback drafts are available for review.
 
 Implementation audited: `3392b36fff6dad5b90a5fc0a1fb2e93cf1533793`. The earlier native remote/graphics checks used `2676823204ef9bc89e9f59794520776aca18b754`. Repository: [dazai2001-cmd/Amazon-hackathon](https://github.com/dazai2001-cmd/Amazon-hackathon).
 
@@ -13,7 +13,7 @@ Sources: [official rules](https://amazonappdev2026.devpost.com/rules), [official
 | Fire TV theme | Meets | Fitness routines, computer vision, movement gaming, voice guidance and clan duels match the track. Every priority category need not be implemented. |
 | Permitted implementation | Meets | Android/Fire OS WebView APK, React/TypeScript/Three.js, Android phone MediaPipe inference and local Node relay. No special Amazon runtime API is mandatory for this track. |
 | Emulator demonstration route | Meets | The APK built and ran on Android TV 30 x86, with native D-pad/Select/Back/Play-Pause inputs. This is an accepted emulator according to the FAQ. |
-| Working prototype | Tested, with limits | 112 automated tests passed; manual native and browser checks cover menus, story, 1080p, training setup and multiplayer. Human exercise accuracy and camera latency need demonstration on the phone. |
+| Working prototype | Tested, with outstanding camera fixes | 112 automated tests passed; manual native and browser checks cover menus, story, 1080p, training setup and multiplayer. A separate camera fault audit reproduced two recovery/lifecycle failures outside that suite. Fix those and demonstrate exercise accuracy and movement on the real phone. |
 | Source, assets and setup | Present | Source, models, artwork, audio, pose models, package lock, Gradle wrapper, license notices and run instructions are tracked. Runtime dependencies can be prepared through npm installation. The APK can be rebuilt from source. |
 | Judge access | **Not met** | Authenticated GitHub checks show a PRIVATE repository, only `dazai2001-cmd` as collaborator, and no pending invitations. The listed reviewers need access. |
 | Project open-source license | Not required for the current private route | GitHub reports no project license. That does not block a private submission shared with judges. A public submission would need an open-source license. |
@@ -24,14 +24,14 @@ Sources: [official rules](https://amazonappdev2026.devpost.com/rules), [official
 | Work during the event | Evidence present | Recorded implementation commits are dated 12 October 2026. Generated-art provenance dates are within the event window. Explain these contributions in the submission. |
 | Third-party rights | Documented | THIRD_PARTY.md and included notices cover MediaPipe, React, Three.js, fonts, icons, Kokoro and model assets. The creator currently identifies Sentinel as CC0. Entrant ownership and final video permissions remain personal confirmations. |
 | Devpost registration | Confirmed by entrant | Rahul confirmed that Devpost registration is done. This does not confirm completion of the project submission form. |
-| Amazon developer account | **Not created** | Rahul confirmed only Devpost is done. The Fire TV entry instructions require a developer account; complete that at developer.amazon.com/apps-and-games. |
+| Amazon developer account and identity | Confirmed by entrant | Rahul reported identity verification completed in the Amazon developer portal on 13 October. Account setup is no longer an outstanding action. Appstore publishing has not been claimed or evaluated. |
 | Entrant eligibility and representation | Unverified | Age/residence eligibility, conflicts/support restrictions and team representative if applicable remain personal confirmations. |
 
 ## Immediate submission work
 
-1. Create the [Amazon developer account](https://developer.amazon.com/apps-and-games/) required by the Fire TV entry instructions. Devpost registration is already confirmed.
+1. Fix the two [camera recovery/lifecycle defects](../artifacts/camera-stream-audit.md): persistent inference errors retain stale phone tracking state, and cleanup from an old camera request can interfere with a newer session. Then rehearse with the actual Android phone, including camera restart, loss/return to view, exercise correction, complete reps/sets and shared multiplayer health. The account and identity step is confirmed complete.
 2. Rehearse and record a public English YouTube/Vimeo demo under three minutes using [the timed script and submission draft](SUBMISSION_PREP.md). Show the native emulator APK, actual phone camera movement, a controlled exercise with a correction/rejected rep, and shared multiplayer health/score. Label any preview opponent clearly. Remove private notifications and pairing credentials from footage.
-3. Review [the product feedback draft](PRODUCT_FEEDBACK.md), add your actual account/device experience and opinions, and enter it into Devpost. Distinguish implementation fixes from SDK/platform faults.
+3. Review [the product feedback draft](PRODUCT_FEEDBACK.md), add your completed Amazon identity/account onboarding experience, actual phone results and opinions, and enter it into Devpost. Distinguish implementation fixes from SDK/platform faults.
 4. Give the official reviewers access to the private repository: `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth`, `emersonsklar`, and Devpost's `testing@devpost.com` contact as directed by the event. Check accepted access; invitation expiry is seven days. Time invitations around submission and re-send expired invitations.
 5. Complete the project description, Fire TV selection, applicable optional challenge fields and final Devpost submission. Confirm personal eligibility, rights and the public video URL. Keep judge access and reproducible setup available through judging.
 
@@ -58,6 +58,8 @@ These are assessments of the current implementation, not guaranteed judge scores
 - **Physical Fire TV:** useful additional compatibility testing, but not required by the FAQ. Physical camera/form validation still improves the credibility of our central feature.
 
 Relevant evidence: [remote/graphics checks](../artifacts/remote-controls-test-report.md), [multiplayer checks](../artifacts/multiplayer-tutorial-test-report.md), [training checks](../artifacts/training-test-report.md), [asset notices](../THIRD_PARTY.md), [demo plan](DEMO.md).
+
+Latest outstanding implementation work: [camera streaming audit](../artifacts/camera-stream-audit.md). The audit deliberately injected failures; it did not report a failure on Rahul's live phone, and the two repairs have not yet been implemented.
 
 Submission preparation: [written draft and 2:45 recording script](SUBMISSION_PREP.md), [product feedback draft](PRODUCT_FEEDBACK.md). These files are preparation material, not a submitted entry or a recorded video.
 

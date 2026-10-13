@@ -12,9 +12,9 @@ The [official submission requirements](https://amazonappdev2026.devpost.com/rule
 
 **Needs work / project friction:** remote focus, text entry and Back handling needed a deliberate application layer. Our fixes routed key events to the focused element and added a D-pad keyboard. These were implementation issues, not demonstrated Android or Fire TV SDK defects. The 3D content still needs physical Fire TV profiling.
 
-**Onboarding:** the project needed a Java/Gradle toolchain, SDK platform and emulator image, then install/launch and server configuration. Scripts now make this route reproducible. Amazon developer-account and Appstore onboarding have not yet been performed, so we cannot rate that experience.
+**Onboarding:** the project needed a Java/Gradle toolchain, SDK platform and emulator image, then install/launch and server configuration. Scripts now make this route reproducible. Rahul has since reported identity verification completed on the Amazon developer portal. His account-onboarding experience and ratings still need to be added in his own words. Appstore publishing has not been evaluated.
 
-**Suggested reuse answer:** Yes, for rapid TV prototypes that reuse a web interface, provided remote navigation and hardware performance are treated as core work. Review this answer after the account setup and phone rehearsal.
+**Suggested reuse answer:** Yes, for rapid TV prototypes that reuse a web interface, provided remote navigation and hardware performance are treated as core work. Review this answer using your account setup experience and phone rehearsal.
 
 ## MediaPipe Tasks Vision and Pose Landmarker
 
@@ -23,6 +23,8 @@ The [official submission requirements](https://amazonappdev2026.devpost.com/rule
 **Worked well:** recorded-input checks passed on GPU and CPU. The application can exchange landmarks without transmitting camera video. Model assets are bundled and pinned for reproducible setup.
 
 **Needs work / limitations:** framing and joint visibility directly affect the game. Estimated monocular depth is not a precise physical sword measurement. Exercise coaching needs a calibrated side view and separate visibility/range/timing rules; pose output alone cannot certify form. Actual phone inference speed, exercise accuracy and full camera-to-display latency still need measurement.
+
+Separate fault-injection checks also found application integration defects in runtime inference recovery and camera-session cleanup. Those fixes remain outstanding; they are documented in [the camera audit](../artifacts/camera-stream-audit.md), rather than attributed to a demonstrated MediaPipe defect.
 
 **Onboarding:** prepare the model and WASM assets, obtain camera permission in a secure context, choose the delegate and feed video frames into the task. USB localhost is a useful development route; Wi-Fi requires HTTPS. First-load camera/model setup needs a clear user guide.
 
@@ -108,4 +110,4 @@ Generated artwork, the temporary Sentinel model and original synthesized effects
 
 ## Entrant review still needed
 
-Add your Amazon account onboarding experience after creating it; actual Android phone framing, model startup and exercise results after rehearsal; any measured end-to-end latency; and your own decision on which tools you would use again. Keep physical Fire TV claims limited to tests actually performed. Submit the reviewed feedback as part of the Devpost entry.
+Add your completed Amazon account/identity onboarding experience; actual Android phone framing, model startup and exercise results after rehearsal; any measured end-to-end latency; and your own decision on which tools you would use again. Update the status of the two camera fixes when implemented and retested. Keep physical Fire TV claims limited to tests actually performed. Submit the reviewed feedback as part of the Devpost entry.
