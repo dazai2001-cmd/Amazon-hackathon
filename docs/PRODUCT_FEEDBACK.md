@@ -1,6 +1,6 @@
 # Earned Valor — product feedback draft for review
 
-Updated 23 October 2026 from implementation and test evidence. The public Devpost project is associated with the hackathon, but saved private feedback cannot be verified from its public page. Use these answers to check the submitted form. Phone testing is treated complete at Rahul's instruction; device-specific measurements and personal reuse decisions must reflect his actual experience.
+Updated 23 October 2026 from implementation and test evidence. Rahul confirmed that all required submission fields are complete; these drafts remain a reference for the submitted feedback. Saved private feedback is not independently exposed on the public page. Phone testing is treated complete at Rahul's instruction; device-specific measurements and personal reuse decisions must reflect his actual experience.
 
 The five form answers, optional challenge selections, feature requests and AI disclosure are collected in [DEVPOST_ADDITIONAL_FIELDS.md](DEVPOST_ADDITIONAL_FIELDS.md). The optional URL field can point to [FRICTION_LOG.md](FRICTION_LOG.md), which contains reproduction steps and supporting evidence.
 
@@ -100,7 +100,7 @@ The same local stock-voice tooling also supplies the clearly synthetic narration
 
 **Worked well:** browser checks reproduced camera replacement and cancellation behavior in a real browser. The final video exports as a 143.961-second 1080p H.264/AAC file with captions and original project music. Signed-out YouTube playback and the Devpost embed work.
 
-**Needs work:** automated and synthetic inputs cannot quantify human exercise accuracy or physical TV performance. Emulator WebView updates can interrupt recording takes; the affected take was repeated after its update. The uploaded video's Unlisted setting should be changed to Public for the final requirement check.
+**Needs work:** automated and synthetic inputs cannot quantify human exercise accuracy or physical TV performance. Emulator WebView updates can interrupt recording takes; the affected take was repeated after its update. The uploaded video is accessible through its Unlisted link without sign-in; no mandatory change to Public is asserted.
 
 **Onboarding:** install Playwright's browser on other machines, run the supplied verification commands, and configure the Android toolchain for the APK job. Video preparation uses installed local tools and stock offline speech assets, with no runtime speech dependency in the game.
 

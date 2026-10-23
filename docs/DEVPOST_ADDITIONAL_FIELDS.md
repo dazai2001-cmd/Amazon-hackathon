@@ -2,6 +2,8 @@
 
 Updated 23 October 2026 from the implemented project, test reports and [official rules](https://amazonappdev2026.devpost.com/rules). The [public project](https://devpost.com/software/earned-valor) is associated with the hackathon, but its private feedback and track fields are not visible while signed out. These are copy-ready answers for the entrant to review against the saved form. The repository is private; no AWS/Kiro integration or qualifying additional public contribution is documented. Phone testing is treated complete at Rahul's instruction.
 
+**Status:** Rahul has confirmed that all required submission fields are complete. These drafts remain reference material, rather than an outstanding form-filling task.
+
 ## AWS Builder Mini Challenge
 
 **Selection:** No.

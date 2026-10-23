@@ -68,13 +68,15 @@ If a real camera routine or correction is unreliable during rehearsal, fix and r
 6. Record app audio plus clear narration. Hide private phone notifications and pairing tokens. Capture actual game footage, including the native application, rather than a slide-only pitch.
 7. Export under three minutes, upload publicly to YouTube or Vimeo, and check the link in a signed-out browser.
 
-## Submission fields to finish
+## Submission field reference
 
-- Video URL: https://youtu.be/gmJccY-Ejcs. Signed-out playback verified; YouTube currently labels it Unlisted, so change to Public for the final requirement check.
+Rahul confirmed on 23 October that all required submission fields are complete. The entries below are retained as reference material.
+
+- Video URL: https://youtu.be/gmJccY-Ejcs. Unlisted and viewable without sign-in. Keep the link accessible; the earlier mandatory-Public instruction is withdrawn.
 - GitHub URL: https://github.com/dazai2001-cmd/Amazon-hackathon. All listed Amazon reviewers and `devposttesting` are accepted collaborators; the repository remains private.
 - Build/testing instructions: README.md and docs/DEMO.md. Include the native emulator and local server route.
-- Product feedback: review and copy the relevant text from [PRODUCT_FEEDBACK.md](PRODUCT_FEEDBACK.md).
+- Product feedback: completed per entrant; drafts are retained in [PRODUCT_FEEDBACK.md](PRODUCT_FEEDBACK.md).
 - Additional form fields: [DEVPOST_ADDITIONAL_FIELDS.md](DEVPOST_ADDITIONAL_FIELDS.md) provides the five feedback answers, optional challenge decisions, feature requests and AI-tools disclosure. The optional friction-log URL points to [FRICTION_LOG.md](FRICTION_LOG.md). Personal declarations and survey choices require your own answers.
 - Primary track: Fire TV. Optional AWS Builder/Open Source claims need their own qualifying evidence; none is currently established.
 - Team/entrant details, eligibility and rights: complete with your own accurate information.
-- Final status: the public Devpost page shows **Submitted to** the Amazon hackathon. Confirm saved Fire TV/feedback/private declarations and retain the confirmation; a public page does not expose those fields.
+- Final status: the public Devpost page shows **Submitted to** the Amazon hackathon. Required private fields are complete per entrant; retain the submission confirmation.

@@ -37,13 +37,10 @@ The camera recovery and restart fixes are implemented and covered by regression 
 
 The video records the native Android TV APK in an emulator. Its skeleton and two multiplayer controllers supply synthetic pose input through the real relay and game rules. Training and rest are edited for length, and progression belongs to an isolated test profile. This demonstrates the software path and platform integration; it is not a recording of live camera inference or a quantitative accuracy/latency benchmark.
 
-## Private fields
+## Confirmed submission status
 
-- Confirm the saved primary track is **Fire TV**.
-- Confirm the tools-used, successes, limitations, onboarding and reuse answers are all saved. The linked feedback draft provides each answer.
-- Complete the entrant's own eligibility, rights, conflict/support and representation declarations accurately.
-- Keep the entry associated with **Build, Ship, Shape: Amazon Developer Hackathon** and retain its submission confirmation.
+Rahul confirmed on 23 October that he completed everything required to submit, in response to the question about Fire TV and all five feedback answers. Required private fields and declarations are recorded as **completed per entrant**; their contents are not independently exposed on the public page. The project publicly lists **Build, Ship, Shape: Amazon Developer Hackathon** under Submitted to. Retain its submission confirmation.
 
-The uploaded video plays without sign-in but carries YouTube's **Unlisted** badge. Set it to **Public** to remove ambiguity with the publicly-visible-video requirement. The rules do not expressly clarify the Unlisted setting, so this audit does not certify that setting as compliant.
+The uploaded video is **Unlisted** and plays without sign-in. [YouTube's documentation](https://support.google.com/youtube/answer/157177?hl=en) confirms that anyone with an Unlisted link can view without a Google account. The [rules](https://amazonappdev2026.devpost.com/rules) require a publicly visible video link but do not explicitly name YouTube's Public setting. We interpret the observed anonymous link access as meeting the viewing requirement; this is not a separate organizer ruling about visibility labels. The earlier instruction to switch to Public was overly strict and is withdrawn. Keep the current link accessible through judging.
 
 Deadline: **24 October 2026, 00:30 IST**. See [the readiness audit](HACKATHON_READINESS.md) and [official rules](https://amazonappdev2026.devpost.com/rules).
