@@ -87,7 +87,7 @@ npm run test:browser
 npm run android:build
 ~~~
 
-The 10 browser checks use installed Chrome on this Windows computer; elsewhere run `npx playwright install chromium` first. GitHub Actions is configured to run game/camera/persistence tests, the browser journey and an Android debug build on every push/PR. The verification workflow is included with this submission snapshot; its run status is linked from the submission audit. See [the improvement verification report](artifacts/improvements-report.md) for current results and native screenshots.
+The 10 browser checks use installed Chrome on this Windows computer. CI uses Chrome already supplied on GitHub's Ubuntu 24.04 runner; elsewhere run `npx playwright install chromium` first or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to an installed browser. GitHub Actions runs game/camera/persistence tests, the browser journey and an Android debug build on every push/PR. Its run status is linked from the submission audit. See [the improvement verification report](artifacts/improvements-report.md) for current results and native screenshots.
 
 Open **Controller Setup → Device check** to record a bounded timing report and compare your latest camera circuit with manually counted reps. See [the real-device playtest](docs/DEVICE_PLAYTEST.md). A domain/hosting is optional for this hackathon; [deployment files](docs/DEPLOYMENT.md) are prepared for later use.
 

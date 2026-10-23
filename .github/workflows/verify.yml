@@ -4,7 +4,7 @@ permissions:
   contents: read
 jobs:
   game-and-browser:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
@@ -15,7 +15,11 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      - name: Use the runner's installed Chrome
+        run: |
+          chrome_path="$(command -v google-chrome)"
+          test -x "$chrome_path"
+          echo "PLAYWRIGHT_CHROMIUM_EXECUTABLE=$chrome_path" >> "$GITHUB_ENV"
       - run: npm run test:browser
       - uses: actions/upload-artifact@v4
         if: failure()
