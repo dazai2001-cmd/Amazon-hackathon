@@ -1,4 +1,4 @@
-# Laptop and monitor multiplayer demo
+# Two-screen local multiplayer setup
 
 One PC, an extended monitor and one Android phone are enough to demonstrate the real local multiplayer connection. Use two separate browser windows: one fighter uses the phone camera, and a second person controls the opposing fighter with the labelled desktop preview. Both screens connect to the same local game server.
 
@@ -20,8 +20,6 @@ On the keyboard screen, enter the war invite and join **Opposing clan**. Choose 
 
 Choose **I’m ready** on both screens, then let the captain start. Keep keyboard focus on the preview window while the camera player stays framed. The preview player uses J/K/L to cut, Shift+Z/X/C to guard left/high/right, A/D to lean, V to crouch and W/S to adjust range. Space pauses. Both participants see the same health, defenses and clan result.
 
-## Recording
+## Native TV screens
 
-Show both screens in one camera shot, or record each display and combine the footage. Say: **“This is live local multiplayer. One player uses phone-local pose tracking; the other uses our labelled keyboard preview controller.”** Public internet hosting is not required for this demonstration. It does not demonstrate two camera-controlled humans or matchmaking across different homes.
-
-For hackathon platform proof, also record the actual app running on the required Fire TV/Vega device or simulator. Laptop browser windows demonstrate the multiplayer software path but do not supply that platform proof by themselves.
+Use [the native TV setup](REVIEWER_GUIDE.md#4-build-and-run-the-native-tv-apk) to substitute an Android TV emulator or compatible Fire TV for either browser screen. Both players must still reach the same running server. This setup supports local/LAN play; internet hosting and public matchmaking are planned.

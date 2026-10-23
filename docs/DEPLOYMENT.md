@@ -1,6 +1,6 @@
 # Running and optional hosting
 
-A domain and hosted service are not required for the local Fire TV hackathon demonstration. Keep a reproducible repository, native emulator demo video and setup instructions available to judges. See the [official testing rules](https://amazonappdev2026.devpost.com/rules) and [emulator FAQ](https://amazonappdev2026.devpost.com/details/faqs).
+A domain and hosted service are optional. Local play uses the included Node server, a TV/browser screen and an Android phone; see [the setup and requirements](REVIEWER_GUIDE.md).
 
 For local play, `npm run dev` supplies HTTP for the TV and development HTTPS for Wi-Fi phones. USB localhost is an optional camera connection; Wi-Fi QR pairing works without a cable. See [device playtest instructions](DEVICE_PLAYTEST.md).
 

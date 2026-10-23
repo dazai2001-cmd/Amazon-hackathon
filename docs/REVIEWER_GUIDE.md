@@ -2,7 +2,7 @@
 
 This is the evaluator setup guide. Start with the browser preview, then build the native TV APK and connect a phone if testing camera controls. The TV APK loads this repository's running server; keep that server running throughout the review.
 
-[Fresh-clone verification and native screenshots](../artifacts/reviewer-setup-test-report.md) document a successful reproduction. [The cloud verification](https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39905234049) also passed.
+The [verification workflow](../.github/workflows/verify.yml) runs a clean installation, unit/browser checks, a production smoke check and a native APK build. Generated reports and screenshots stay local; follow the commands below to reproduce the checks.
 
 ## Requirements
 
@@ -175,4 +175,4 @@ Local player profiles, calibration, story, settings and training live in browser
 | Phone sees you but TV receipt is missing | Keep the TV game open on the same server and pair to its current code. Check the phone's connection and restart pairing after a server restart. |
 | Exercise rep does not count | Use the specified side view, keep required joints visible and complete the calibrated lower-and-return cycle. Preview deliberately awards no XP. |
 
-Use [the player guide](PLAYER_GUIDE.md) for control details, [multiplayer instructions](MULTIPLAYER.md) for shared wars, and [the demo walkthrough](DEMO.md) for a suggested review sequence. Asset provenance is in [THIRD_PARTY.md](../THIRD_PARTY.md).
+Use [the player guide](PLAYER_GUIDE.md) for control details and [multiplayer instructions](MULTIPLAYER.md) for shared wars. Section 2 above provides the playable review sequence. Asset provenance is in [THIRD_PARTY.md](../THIRD_PARTY.md).

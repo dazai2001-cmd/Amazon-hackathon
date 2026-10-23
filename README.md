@@ -2,7 +2,7 @@
 
 *Train your body. Forge your legend.*
 
-[Devpost submission](https://devpost.com/software/earned-valor) · [Demo video](https://youtu.be/gmJccY-Ejcs) · [Submission audit](docs/HACKATHON_READINESS.md)
+[Setup and requirements](docs/REVIEWER_GUIDE.md) · [Player guide](docs/PLAYER_GUIDE.md) · [Multiplayer setup](docs/MULTIPLAYER.md)
 
 **Earned Valor brings fitness, adventure and friendly competition to the living-room TV.** Train with a medieval mentor, grow your squire through completed routines, and put movement and timing into sword-and-shield duels. Our vision is a game people return to for their own progress, time with family and friends, and a wider community of rivals.
 
@@ -28,10 +28,6 @@ Fair competition matters to that vision. In the prototype, training XP provides 
 The first-visit Player Guide explains setup, combat, story, training and multiplayer, and can be reopened with the TV remote.
 
 The TV runs a native Android/Fire OS APK with a landscape WebView, D-pad navigation, Select/Back/Play-Pause support, and a Leanback launcher. The phone runs MediaPipe Pose Landmarker locally in Chrome. A small Node server serves both interfaces and relays landmarks over WebSockets. A TV camera is not required.
-
-The demo records the native APK in an Android TV emulator with clearly labelled synthetic skeleton input. Phone testing is treated as complete for the submission audit at the entrant's instruction; the recording itself is not live-camera footage.
-
-![Earned Valor main menu with Story, Training and Clan Wars](artifacts/earned-valor-main-menu.png)
 
 ## Quick start from a fresh clone
 
@@ -77,7 +73,7 @@ Remote controls: D-pad browses menus; Select chooses, continues dialogue or open
 
 Graphics default to **Auto**, beginning at a **1920×1080** 3D buffer on a Full HD TV. **Settings → 3D resolution** cycles through Auto, fixed 1080p and fixed 720p. Auto lowers the scene to a 1280×720 cap after sustained low frame rate; manual choices stay fixed. The preference is saved on this device. Display density is honored, including Android TV WebViews exposing a 960×540 CSS viewport at 2× density. The interface remains at the display's output resolution; smaller screens render at their available size. This follows [Amazon's 1080p web-app guidance](https://developer.amazon.com/docs/fire-tv/getting-started-with-web-apps.html#resolution-and-page-scaling). Frame rate still depends on hardware; physical Fire TV performance has not been measured.
 
-The [hackathon FAQ](https://amazonappdev2026.devpost.com/details/faqs) accepts an Android TV Emulator for a Fire TV submission. The [Fire TV track requirements](https://amazonappdev2026.devpost.com/rules) require an app running on Fire OS or Vega; the supplied APK targets Fire OS/Android TV. This build does not target Vega OS.
+The supplied APK targets Fire OS/Android TV. Use the Android TV emulator or a compatible Fire TV device; this build does not target Vega OS.
 
 ## Connect your Android phone
 
@@ -85,7 +81,7 @@ The [hackathon FAQ](https://amazonappdev2026.devpost.com/details/faqs) accepts a
 
 1. Connect the phone and TV/computer to a network where both can reach this PC, and keep the server running.
 2. Open **Controller Setup → Connect Android phone** on the TV and scan its QR code. The code opens the HTTPS controller page and identifies the room.
-3. The local server uses a self-signed development certificate. The phone browser must trust the HTTPS page before camera access will work; handle any certificate warning on the phone. A domain is optional for the local hackathon setup.
+3. The local server uses a self-signed development certificate. The phone browser must trust the HTTPS page before camera access will work; handle any certificate warning on the phone. A domain is optional for local play.
 4. Tap Start my camera and allow Chrome camera access.
 5. Prop the phone near the TV facing you. Keep both hands, shoulders, and hips visible.
 6. Stay in view for three seconds; pairing continues automatically. Calibration begins after a five-second countdown in the selected standing/seated mode. Follow its four cues, then it returns to the game automatically. Choose **Keep setup open** or **Choose settings first** to take your time. After the camera has seen you, the manual buttons remain usable when you reach for the mouse; movement waits until you return to view.
@@ -106,17 +102,17 @@ npm run test:browser
 npm run android:build
 ~~~
 
-The 10 browser checks use installed Chrome on Windows. CI uses Chrome already supplied on GitHub's Ubuntu 24.04 runner; elsewhere run `npx playwright install chromium` first or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to an installed browser. Linux may need `npx playwright install --with-deps chromium`. Stop the development server before browser checks to free Vite's HMR port. `npm run check` runs tests, build, the production smoke check and browser checks together. The production check verifies built routes/assets, both pose models, HTTPS and authenticated HTTP/WSS relay delivery using isolated synthetic input. GitHub Actions also builds the native APK. See [the reviewer guide](docs/REVIEWER_GUIDE.md#3-run-the-automated-verification) and [improvement verification report](artifacts/improvements-report.md).
+The 10 browser checks use installed Chrome on Windows. CI uses Chrome already supplied on GitHub's Ubuntu 24.04 runner; elsewhere run `npx playwright install chromium` first or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to an installed browser. Linux may need `npx playwright install --with-deps chromium`. Stop the development server before browser checks to free Vite's HMR port. `npm run check` runs tests, build, the production smoke check and browser checks together. The production check verifies built routes/assets, both pose models, HTTPS and authenticated HTTP/WSS relay delivery using isolated synthetic input. GitHub Actions also builds the native APK. See [the reviewer guide](docs/REVIEWER_GUIDE.md#3-run-the-automated-verification).
 
 Maintainers can verify the current branch again from **GitHub Actions → Verify Earned Valor → Run workflow**, selecting `main`. Older failed runs retain the result for their original code; check the newest run and its commit when assessing current readiness.
 
-Open **Controller Setup → Device check** to record a bounded timing report and compare your latest camera circuit with manually counted reps. See [the real-device playtest](docs/DEVICE_PLAYTEST.md). A domain/hosting is optional for this hackathon; [deployment files](docs/DEPLOYMENT.md) are prepared for later use.
+Open **Controller Setup → Device check** to record a bounded timing report and compare your latest camera circuit with manually counted reps. See [the real-device playtest](docs/DEVICE_PLAYTEST.md). A domain/hosting is optional for local play; [deployment files](docs/DEPLOYMENT.md) are available for a hosted server.
 
-The 128 automated tests cover calibrated/mirrored controls, wrist and sword-tip sweeps, independent hands and forearm orientation, dropouts, frame-rate consistency, coached holds and resets, and authenticated relay roles. Chapter checks cover dialogue branches and motive callbacks, checkpoint validation, collision-safe guided routes, all audio assets, health damage, directional guards and parries, perfect blocks and ripostes, stamina, timed evasion, combat reach, tracking/pause freezes, gear and once-only rewards. Eighteen training tests cover exercise views, calibration, complete rep cycles, sets/rest, visible corrections, personalization and bounded XP/stat rewards. Twenty-three multiplayer rule tests and a two-client WebSocket integration test cover human inputs, defenses, pause/dropout handling, health results, rosters and clan scoring. Additional edge tests exercise malformed/flooded relay traffic, replaced controllers, corrupted storage, overlapping pairing requests and expired wars. See the [edge-test report](artifacts/edge-test-report.md), [multiplayer and tutorial report](artifacts/multiplayer-tutorial-test-report.md) and [chapter test report](artifacts/story-adventure-test-report.md) for evidence and manual checks.
+The 128 automated tests cover calibrated/mirrored controls, wrist and sword-tip sweeps, independent hands and forearm orientation, dropouts, frame-rate consistency, coached holds and resets, and authenticated relay roles. Chapter checks cover dialogue branches and motive callbacks, checkpoint validation, collision-safe guided routes, all audio assets, health damage, directional guards and parries, perfect blocks and ripostes, stamina, timed evasion, combat reach, tracking/pause freezes, gear and once-only rewards. Eighteen training tests cover exercise views, calibration, complete rep cycles, sets/rest, visible corrections, personalization and bounded XP/stat rewards. Twenty-three multiplayer rule tests and a two-client WebSocket integration test cover human inputs, defenses, pause/dropout handling, health results, rosters and clan scoring. Additional edge tests exercise malformed/flooded relay traffic, replaced controllers, corrupted storage, overlapping pairing requests and expired wars. The [test sources](tests) and [device playtest](docs/DEVICE_PLAYTEST.md) provide reproducible checks.
 
 For recorded-input vision testing, run npm run test:vision:fixtures, then npm run build. Open http://localhost:8787/diagnostics and click Run recorded vision test. It checks a human image, 24 samples from a squat video, blank frames, and reacquisition using the phone's model and confidence settings. GPU and CPU can be tested separately. Fixtures have verified SHA-256 hashes and are ignored by Git; sources are listed in THIRD_PARTY.md.
 
-The app has been tested in the Android TV emulator through pairing, calibration, a complete scored round, and lost/recovered tracking using a synthetic phone-landmark source. Desktop tests also completed calibration, five coached reaches, replay and restart. Both GPU and CPU passed recorded-human vision tests. **Phone testing is treated as complete for this submission audit. Quantitative accuracy, latency and physical Fire TV benchmarks are not claimed.** Tracking freshness automatically pauses play after missing frames; no tracking gap may create a sword strike or count as a coached hold.
+The app has been tested in the Android TV emulator through pairing, calibration, a complete scored round, and lost/recovered tracking using a synthetic phone-landmark source. Desktop tests also completed calibration, five coached reaches, replay and restart. Both GPU and CPU passed recorded-human vision tests. Quantitative accuracy, latency and physical Fire TV benchmarks are not claimed. Tracking freshness automatically pauses play after missing frames; no tracking gap may create a sword strike or count as a coached hold.
 
 To repeat the relay test without a phone, open TV pairing, then run node --import tsx scripts/relay-fixture.ts YOUR_TV_CODE in an interactive terminal. This explicitly uses synthetic landmarks at 18 fps, follows calibration cues, and generates wrist sweeps and shields. In the chapter trial it follows high/left/right wind-up cues to cover the correct line, then counterattacks. Type blank for no-person frames, freeze to stop sending packets, live to resume, or quit to disconnect. Choose an activity after attaching the fixture so it receives the TV's activity command. Keep this distinct from a real camera demo.
 
@@ -156,11 +152,11 @@ npm ci copies the pinned MediaPipe runtime/WASM into public/vision. Both pose mo
 | android/app | Native Fire OS host |
 | tests | Movement and relay verification |
 
-See docs/DEMO.md for the presentation sequence and THIRD_PARTY.md for asset attribution.
+See [the setup guide](docs/REVIEWER_GUIDE.md) for a playable walkthrough and [THIRD_PARTY.md](THIRD_PARTY.md) for asset attribution. Generated outputs, recordings, screenshots, saved reports and submission materials stay local and are excluded from Git.
 
 ## Scope
 
-The medieval prototype includes one explorable first-person courtyard and one computer-controlled rival, with the chapter's narrative through the Ironbridge quest hook. Squat and push-up detection, sets/rest and exercise-driven stats are implemented in the anytime training hall. Live clan wars are implemented at `/arena`; account-backed membership, ranked matchmaking, PvP rewards and later regions remain planned. Local family profiles and server-persisted clan records/results are implemented. The courtyard uses original lightweight articulated figures and combat feedback. Bespoke art and physical-device performance validation remain release work. A single camera estimates wrist placement and forearm direction with bounded depth; it does not measure a physical sword's exact position or rotation. Hit tests use projected sword-tip sweeps and attack lines, rather than full 3D weapon-contact physics. The native app needs the included server. Physical Fire TV performance still needs measurement; phone testing is treated complete for this submission audit.
+The medieval prototype includes one explorable first-person courtyard and one computer-controlled rival, with the chapter's narrative through the Ironbridge quest hook. Squat and push-up detection, sets/rest and exercise-driven stats are implemented in the anytime training hall. Live clan wars are implemented at `/arena`; account-backed membership, ranked matchmaking, PvP rewards and later regions remain planned. Local family profiles and server-persisted clan records/results are implemented. The courtyard uses original lightweight articulated figures and combat feedback. Bespoke art and physical-device performance validation remain release work. A single camera estimates wrist placement and forearm direction with bounded depth; it does not measure a physical sword's exact position or rotation. Hit tests use projected sword-tip sweeps and attack lines, rather than full 3D weapon-contact physics. The native app needs the included server. Physical Fire TV performance still needs measurement.
 
 ## Chapter audio assets
 
@@ -188,7 +184,7 @@ Open **Enter training hall**, or **Train** inside the chapter. Choose a pace, sq
 
 A completed camera circuit earns 60 XP once per day; Strength and Endurance improve the next story duel’s base damage and stamina recovery, with bounded bonuses. Preview practice uses **B** to lower and release to return, and earns no XP. Completed camera practice and your effort feedback inform the next recommendation. Existing gear, coins and story saves are preserved.
 
-See [training implementation and limits](docs/TRAINING.md). Phone testing is treated complete for this submission audit; the side-view checks do not certify every aspect of exercise form or demonstrate long-term fitness gains. **128 automated tests pass**, including 18 training tests and the exercise relay contract. The [uploaded demo](https://youtu.be/gmJccY-Ejcs) records the native APK in an Android TV emulator with clearly labelled synthetic input; the official FAQ accepts that emulator route.
+See [training implementation and limits](docs/TRAINING.md). The side-view checks do not certify every aspect of exercise form or demonstrate long-term fitness gains. **128 automated tests pass**, including 18 training tests and the exercise relay contract.
 
 
 ## Live clan wars and player guidance
@@ -197,8 +193,6 @@ Open **Clan war hall** from the chapter, or `/arena`. Create a 1 vs 1, 2 vs 2 or
 
 The first-visit **Player guide** explains phone framing, hands-free setup, weapon controls, quest/dialogue controls, strict rep/set training and clan lobbies. Reopen it from the chapter, pause menu, training header or multiplayer header. Reading pauses the relevant activity; multiplayer retains its 30-second return/forfeit rule.
 
-Clan names, member names and the latest 100 completed war results persist under `.local/data/clans.json` (override with `DATA_DIR`). Rooms, active rosters and duels remain temporary. Internet matchmaking, account-backed membership, rankings and saved PvP rewards still need implementation. See [multiplayer details](docs/MULTIPLAYER.md), [tutorial behavior](docs/PLAYER_GUIDE.md), and [browser validation](artifacts/multiplayer-tutorial-test-report.md). The two-screen browser proof uses labelled synthetic controls; it does not establish physical Fire TV performance or two-camera human multiplayer accuracy.
+Clan names, member names and the latest 100 completed war results persist under `.local/data/clans.json` (override with `DATA_DIR`). Rooms, active rosters and duels remain temporary. Internet matchmaking, account-backed membership, rankings and saved PvP rewards still need implementation. See [multiplayer details](docs/MULTIPLAYER.md), [tutorial behavior](docs/PLAYER_GUIDE.md), and [browser checks](tests/browser/journey.spec.ts). The two-screen browser proof uses labelled synthetic controls; it does not establish physical Fire TV performance or two-camera human multiplayer accuracy.
 
 For one laptop, an extended monitor and one Android phone, use [the two-screen demo setup](docs/TWO_SCREEN_DEMO.md): one person controls a fighter with the camera and another uses the labelled keyboard preview in a second visible browser window.
-
-See [the hackathon readiness audit](docs/HACKATHON_READINESS.md) for checked requirements, remaining submission steps and judge access.

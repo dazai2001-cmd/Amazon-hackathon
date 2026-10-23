@@ -1,12 +1,10 @@
 # Real-device playtest
 
-**Submission status, 23 October 2026:** Rahul instructed us to treat phone testing as complete. The checklist below remains the reproduction guide. No specific phone model, measured accuracy, latency or physical Fire TV result was supplied, so those values are not invented or claimed.
-
 The regular game tests and browser checks exercise software behavior. They do not establish accuracy with a live human camera or physical Fire TV performance.
 
 ## Start locally
 
-Run `npm install`, `npm run dev`, then `npm run android:build` and `npm run android:run` for the Android TV emulator. Physical Fire TV is optional for this hackathon; the [official FAQ](https://amazonappdev2026.devpost.com/details/faqs) accepts the emulator.
+Run `npm ci`, `npm run build` and `npm start`, then use a separate terminal for `npm run android:build` and `npm run android:run` on Windows. See [the setup guide](REVIEWER_GUIDE.md) for prerequisites, native commands on other systems and physical Fire TV installation. Keep the server running during the test.
 
 Wi-Fi: the phone and TV/computer must reach the same server. Scan the QR and open its HTTPS controller page. A self-signed local development certificate can show a browser warning; the user handles that warning on the phone. No USB cable is required for QR pairing.
 
@@ -26,4 +24,4 @@ The phone’s receipt timing covers capture/inference plus the phone → TV → 
 
 ## Suggested acceptance record
 
-Record the phone model/browser, model/delegate, lighting, camera position, manual and detected counts, individual false/missed reps and strikes, median/p95 inference and arrival intervals, longest tracking gap, render resolution/FPS, and whether each recovery path works. Keep unsuccessful runs in the record. A live hardware pass remains pending until these checks are actually performed.
+Record the phone model/browser, model/delegate, lighting, camera position, manual and detected counts, individual false/missed reps and strikes, median/p95 inference and arrival intervals, longest tracking gap, render resolution/FPS, and whether each recovery path works. Keep unsuccessful runs in the record. Use this checklist when validating another device or configuration; automated software results do not replace its hardware measurements.

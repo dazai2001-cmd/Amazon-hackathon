@@ -1,6 +1,6 @@
 # Medieval first chapter assets
 
-Prepared for Rahul's Fire TV movement-controlled medieval game concept on 10 October 2026.
+Asset sources and maintenance commands for Earned Valor's Fire TV game.
 
 ## Original artwork
 
@@ -16,7 +16,7 @@ Open the gallery at `http://localhost:8787/medieval-assets.html` after `npm run 
 
 ## Sourced 3D candidates
 
-Original models are staged in `assets/medieval/models`. A copy of Sentinel is now served from `public/assets/medieval/models/sentinel.glb` for the first-person chapter trial. KayKit remains an unused fallback. Neither model reproduces the generated character illustrations.
+Original models are staged in `assets/medieval/models`, with a copy of Sentinel under `public/assets/medieval/models`. These are unused reference/fallback assets. The runtime cast uses original procedural figures from `src/lib/storyCharacters.ts` and `src/lib/maraFigure.ts`. Neither reference model reproduces the generated character illustrations.
 
 ### AutoSprite T1 Sentinel
 
@@ -26,7 +26,7 @@ Original models are staged in `assets/medieval/models`. A copy of Sentinel is no
 - [Creator's license page](https://www.autosprite.io/free/license): CC0 1.0, permitted for game/app use and modification. Source notes are preserved in `licenses/AutoSprite-source.md`.
 - Saved as `models/sentinel.glb`; 24,319,564 bytes; one skinned mesh, 22 joints, 149,880 triangles, one embedded texture image.
 - Actual downloaded file contains seven clips: `idle`, `walk_loop`, `death`, `hit_chest`, `sword_attack`, `sword_block`, `sword_idle`. The source page advertises two clips in its lightweight preview; the saved full model contains more.
-- The current chapter uses this model's sword idle, attack, block and chest-hit clips as a temporary Mara opponent. Playback has been checked in the desktop browser and Android TV emulator. Its geometry and texture sizes still need optimization and a physical Fire TV performance check before final adoption.
+- This model was evaluated as an early opponent. It is not loaded by the current renderer; adopting it later would require geometry/texture optimization and device performance checks.
 
 ### KayKit Knight
 
@@ -43,6 +43,4 @@ Original models are staged in `assets/medieval/models`. A copy of Sentinel is no
 
 `node scripts/catalog-medieval-assets.mjs` checks PNG file signatures and alpha channels and produces the artwork manifest. Corner pixels were additionally checked as fully transparent for all nine character/item assets.
 
-`artifacts/medieval-artwork.zip` contains the generated artwork, gallery, manifest, and prompts. The third-party models stay in the local project; they are excluded from the artwork archive.
-
-The chapter now has first-person combat, functional equipment tradeoffs, local saved progression and an abridged story flow. Live multiplayer, bodyweight detectors, final matching character rigs and physical Fire TV performance validation remain separate work. See `artifacts/first-person-test-report.md` for the prototype checks.
+Generated archives, screenshots and reports stay local under the ignored `artifacts/` directory. Runtime artwork, prompts, manifests and source/license records remain in the repository.

@@ -31,4 +31,4 @@ Active wars, pairing identities and rosters are held in server memory and expire
 
 All PvP fighters use the same starter sword and shield. Local exercise XP and story purchases do not alter competitive damage. Bounded client controls are not proof of a human body or tamper-resistant exercise verification, so the prototype does not claim ranked anti-cheat.
 
-Browser validation used two independent screens with labelled synthetic controllers. It verifies shared controls, health, defenses and scoring over real WebSockets, not two physical phone cameras or Fire TV hardware performance. See [the test report](../artifacts/multiplayer-tutorial-test-report.md).
+Browser validation uses two independent screens with labelled synthetic controllers. It verifies shared controls, health, defenses and scoring over real WebSockets. Run it using [the setup and testing guide](REVIEWER_GUIDE.md#3-run-the-automated-verification); use [the device playtest](DEVICE_PLAYTEST.md) to evaluate live cameras and physical TV performance.

@@ -522,4 +522,4 @@ Returning to a scene or restarting the app must not duplicate coins or stat rewa
 - All first-chapter rewards and prices above are draft balancing values.
 - Exercise detectors, exercise-driven stats, live multiplayer and Orders contests remain implementation work. The local chapter already saves choices, completion, coins and purchased equipment.
 - The current presentation combines portraits and captions with a real 3D courtyard, first-person weapons and an animated opponent. Desktop and Android TV emulator playback have passed; final character models and physical Fire TV performance still need work.
-- [Game direction](D:/ALEXA+/docs/MEDIEVAL_GAME.md) · [Artwork manifest](D:/ALEXA+/public/assets/medieval/manifest.json) · [Asset gallery](http://localhost:8787/medieval-assets.html)
+- [Player guide](PLAYER_GUIDE.md) · [Artwork manifest](../public/assets/medieval/manifest.json) · [Asset gallery](http://localhost:8787/medieval-assets.html)

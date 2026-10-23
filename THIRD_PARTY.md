@@ -37,14 +37,6 @@ The optional test download script saves these fixtures under public/vision/testd
 - pose.jpg: [MediaPipe's official asset](https://storage.googleapis.com/mediapipe-assets/pose.jpg), used by its [pose test](https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/python/solutions/pose_test.py).
 - pose_squats.mp4: [TensorFlow's test-data file](https://github.com/tensorflow/tfjs-models/blob/master/pose-detection/test_data/pose_squats.mp4). The [official test source](https://github.com/tensorflow/tfjs-models/blob/master/pose-detection/src/blazepose_tfjs/blazepose_test.ts) attributes the original recording to [Pexels, woman doing squats](https://www.pexels.com/video/woman-doing-squats-4838220/). That recording retains its original content license; TensorFlow's source-code license does not replace it.
 
-## Submission video
-
-The [uploaded demonstration](https://youtu.be/gmJccY-Ejcs) contains native Android TV emulator footage of this project. Its side panel visualizes the same synthetic landmarks supplied to the game; both multiplayer controllers are scripted. Training/rest are edited for length, and progression belongs to an isolated test profile. No external human-camera footage is used.
-
-The narrator uses Kokoro's stock `af_heart` preset under the Kokoro licensing described above. Background music is this project's original `courtyard.mp3` synthesis. FFmpeg and Python/Pillow combine the footage, overlay and captions; their software is not incorporated as a runtime game service. Video labels and the submission description should preserve the distinction between synthetic input and live camera testing.
-
-The local vision revision uses the same footage, voice preset and original music, with new opening/closing narration and text panels. Its roadmap labels distinguish the demonstrated local prototype from planned online play. See [revision verification](artifacts/EarnedValor-Video-Verification-Vision.json); it awaits reupload by the entrant.
-
 ## Tracking upgrade
 
 The official MediaPipe Full pose bundle is included alongside Lite. Both use the MediaPipe license already included under public/licenses. The preparation script downloads the pinned float16 version 1 bundles from Google's official model storage. [Model guide](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker).
