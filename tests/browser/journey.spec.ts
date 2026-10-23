@@ -82,7 +82,10 @@ test('late rejected camera startup cannot stop its replacement or leave a stale 
   try {
     await page.goto(`/phone#code=${session.code}&token=${session.phoneToken}`); await page.locator('#tracking-quality').selectOption('lite');
     await page.getByRole('button', { name: 'Start my camera' }).click(); await page.getByRole('button', { name: 'Cancel camera startup' }).click();
-    await page.getByRole('button', { name: 'Start my camera' }).click(); await expect(page.locator('.camera-running')).toBeVisible();
+    await page.getByRole('button', { name: 'Start my camera' }).click();
+    // The real model compiles WASM/shaders on first use; shared CI runners
+    // can exceed the normal five-second locator wait while still loading.
+    await expect(page.locator('.camera-running')).toBeVisible({ timeout: 20000 });
     await page.evaluate(() => (window as unknown as { rejectOldCamera: () => void }).rejectOldCamera());
     await expect(page.locator('.camera-running')).toBeVisible(); await expect(page.getByRole('alert')).toHaveCount(0);
     const live = await page.locator('video').evaluate(video => Boolean(((video as HTMLVideoElement).srcObject as MediaStream)?.getVideoTracks().some(track => track.readyState === 'live'))); expect(live).toBe(true);
