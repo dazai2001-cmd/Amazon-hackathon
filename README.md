@@ -4,13 +4,32 @@
 
 [Devpost submission](https://devpost.com/software/earned-valor) · [Demo video](https://youtu.be/gmJccY-Ejcs) · [Submission audit](docs/HACKATHON_READINESS.md)
 
+**Earned Valor brings fitness, adventure and friendly competition to the living-room TV.** Train with a medieval mentor, grow your squire through completed routines, and put movement and timing into sword-and-shield duels. Our vision is a game people return to for their own progress, time with family and friends, and a wider community of rivals.
+
 **Reviewers: start with [the repository setup and testing guide](docs/REVIEWER_GUIDE.md)** for exact requirements, a clean-clone walkthrough, expected results, Windows/macOS/Linux commands, TV emulator setup, phone pairing and troubleshooting.
 
-The demo records the native APK in an Android TV emulator with clearly labelled synthetic skeleton input. Phone testing is treated as complete for the submission audit at the entrant's instruction; the recording itself is not live-camera footage.
+## The vision
 
-A medieval fitness adventure for Fire TV, powered by an Android phone camera. **Earned Valor** includes **Chapter I: The First Oath**, a complete story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Six local squire profiles keep separate story, gear, calibration and training saves. A progress view shows weekly practice, earned ranks and story bonuses. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available directly from the main menu, chapter title, header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **The Orders** now supports live clan wars with 1–3 champions per clan, human-versus-human duels and a shared clan score. An illustrated first-visit tutorial explains setup, combat, story, training and multiplayer, with contextual replay buttons. The root page is now the medieval main menu: Story, Training, Clan Wars, Controller Setup, Settings and Player Guide. The older Orbit Arena and Reach & Reset demo screens have been removed.
+We want movement to have a place in everyday entertainment. The TV is the shared stage, the phone camera is the movement controller, and the adventure gives practice a purpose. The intended loop is **train → progress → play → return**: complete a short routine, see your squire develop, continue the story or challenge another fighter, then come back for the next goal.
+
+- **Fitness:** guided squat and push-up practice, comfortable variations, visible rep/set goals and progress that carries into the adventure.
+- **Family and friends:** take turns, keep separate local squires, follow the story together and organize friendly clan challenges. Each simultaneous clan fighter currently needs an independent screen/controller session.
+- **Competition and community:** movement, guard placement, timing and stamina give each duel decisions to master. The longer-term vision is to invite friends and family across households, then offer opt-in online matches against new opponents and rival clans.
+
+Fair competition matters to that vision. In the prototype, training XP provides bounded **story** bonuses; clan duels use common starter gear and do not inherit those bonuses. Our proposed online expansion would build on that separation with accounts, matchmaking and player protections. Cross-household hosting, public matchmaking, rankings and persistent account-backed clans are **planned**, while the current game uses a local/LAN Node server.
+
+## What you can play today
+
+- **Chapter I: The First Oath:** an explorable 3D courtyard, voiced conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and the Ironbridge story hook.
+- **Alden's training hall:** squat/push-up calibration, reps, sets, rest, voice/caption cues, daily-capped XP and bounded story bonuses.
+- **The Orders:** live local clan wars with 1–3 champions per clan, human-versus-human duels, shared scoring and server-persisted completed results.
+- **Personal progress:** six local squire profiles with separate story, equipment, calibration and training saves, plus weekly practice and rank views.
+
+The first-visit Player Guide explains setup, combat, story, training and multiplayer, and can be reopened with the TV remote.
 
 The TV runs a native Android/Fire OS APK with a landscape WebView, D-pad navigation, Select/Back/Play-Pause support, and a Leanback launcher. The phone runs MediaPipe Pose Landmarker locally in Chrome. A small Node server serves both interfaces and relays landmarks over WebSockets. A TV camera is not required.
+
+The demo records the native APK in an Android TV emulator with clearly labelled synthetic skeleton input. Phone testing is treated as complete for the submission audit at the entrant's instruction; the recording itself is not live-camera footage.
 
 ![Earned Valor main menu with Story, Training and Clan Wars](artifacts/earned-valor-main-menu.png)
 

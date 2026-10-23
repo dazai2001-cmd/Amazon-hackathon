@@ -23,6 +23,10 @@ The published source at `4cd91f65de14dbf9610943df66ccd80fc53a7beb` passed a fres
 
 The live Devpost page includes the project story, uploaded video and source link and lists the Amazon hackathon under **Submitted to**. Its narrative still describes the earlier implementation. These replacement paragraphs match the current source:
 
+### Vision / Inspiration
+
+Earned Valor brings fitness, adventure and friendly competition to the living-room TV. Our goal is to give people three reasons to move: their own progress, an entertaining story and time with other people. Train with a medieval mentor, grow your squire through completed routines and use your movement and timing in sword-and-shield duels. Families and friends can take turns and keep their own local progress; the working prototype also supports local clan matches across independent screens. Our longer-term vision is online play with friends and family across households, followed by opt-in matchmaking against new rivals and clans. Fair competition remains central: exercise rewards strengthen the story experience, while multiplayer begins on common terms. Internet hosting, account-backed clans and public matchmaking are planned work.
+
 ### Accomplishments
 
 We built a complete first-chapter story path, a voiced training instructor, exercise-driven story progression and live local clan duels. Six local squire profiles keep separate story, equipment, calibration and training saves. Completed clan results and records persist on the server.

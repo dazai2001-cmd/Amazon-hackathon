@@ -6,9 +6,12 @@ Train your body. Forge your legend.
 
 Earned Valor is a medieval fitness adventure designed for Fire TV. Meet Sir Alden in Chapter I: The First Oath, practise sword-and-shield combat, complete guided squat and push-up routines, and compete in local clan matches.
 
+OUR VISION
+Bring fitness, adventure and friendly competition to the living-room TV. We want people to return for their own progress, an entertaining story and time with family and friends. The longer-term vision is online play across households, followed by opt-in matches against new rivals and clans. Internet hosting, public matchmaking, rankings and account-backed clans are planned; the current prototype supports local/LAN play with independent screens/controllers. Exercise XP provides bounded story bonuses, while clan duels use common starter gear without those bonuses.
+
 This demonstration records the native Android TV APK running in an emulator. A synthetic skeleton sends pose landmarks through the real relay and game rules. No live phone camera or human exercise accuracy is demonstrated. The skeleton panel is drawn from the same recorded pose stream supplied to the game. Clan Wars uses two scripted controllers; the server resolves the health, result and clan score. Training and rest are shortened in the edit. Progress shown belongs to an isolated test profile.
 
-Live phone-camera accuracy and physical Fire TV performance remain to be validated. The prototype uses a local Node server; this is not a public internet matchmaking demonstration.
+This recording does not measure live phone-camera accuracy or physical Fire TV performance. The prototype uses a local Node server; the footage demonstrates local multiplayer.
 
 The video includes offline synthetic narration and the project's original music. See THIRD_PARTY.md in the repository for asset and tool attribution.
 
@@ -27,3 +30,6 @@ CHAPTERS
 01:45 Local progression
 01:56 Clan Wars
 02:09 What comes next
+
+EDITING NOTE
+This is copy-ready description text. The current uploaded video and its timestamps have not been changed. Proposed short vision narration is in docs/DEMO.md.

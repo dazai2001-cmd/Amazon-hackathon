@@ -14,6 +14,24 @@ For a short recording, show excerpts from the story and one complete combat exch
 
 Desktop preview uses explicitly simulated landmarks: **J / K / L** cut, mouse movement places the sword hand, **Shift + Z / X / C** covers left / high / right, **A / D** leans, and **W / S** advances or retreats in the trial. **Space** pauses. In exploration, WASD walks, arrows turn, E interacts, and each objective provides a guided route. To repeat the relay path at 18 fps without a phone, attach scripts/relay-fixture.ts to the pairing code; identify this as synthetic input in the recording.
 
+## Explain the vision in the video
+
+The [judging criteria](https://amazonappdev2026.devpost.com/rules) give equal weight to implementation, design, potential impact and idea quality. A useful pitch explains who would play and why they would return, then grounds that vision in the functioning game. The current uploaded video already shows the prototype; the following is proposed narration for a future edit, not a claim that the upload has changed.
+
+**Opening, about 15–20 seconds:**
+
+> Earned Valor brings fitness, adventure and friendly competition to the living-room TV. Train with a medieval mentor, grow your squire and challenge another fighter. Our goal is to give people a reason to move, play and return together.
+
+Show the existing training, story and duel footage while this is spoken. Keep the synthetic-input disclosure visible wherever applicable.
+
+**Closing, about 15–20 seconds:**
+
+> Today, the prototype supports personal progress and local clan duels. Our next step is online play with family and friends across homes, followed by opt-in matches against new rivals. That is the vision: fitness, entertainment and a community worth returning to.
+
+Use **Working prototype** for current footage and **Planned online experience** for the roadmap caption. These passages can replace the existing opening/closing; most of the video should continue to show the actual application. At 2:24, the existing video has about 36 seconds of room if appending one short segment instead. Measure the final export after changing narration or timing. This document does not require replacing the already submitted video link.
+
+The same vision paragraph can go into the YouTube description or Devpost's Inspiration/What's next fields. See [the copy-ready submission text](SUBMISSION_FINAL.md). Account-backed clans, public matchmaking, rankings and player protections are roadmap work; current simultaneous clan play uses independent screens/controllers on the same local server. Training bonuses apply to the story; PvP uses common starting terms.
+
 ## Before recording
 
 - Keep the PC server running and the phone display awake.

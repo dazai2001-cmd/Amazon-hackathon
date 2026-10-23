@@ -16,7 +16,7 @@ The [official rules](https://amazonappdev2026.devpost.com/rules) require the Fir
 
 ### Inspiration
 
-We wanted exercise to have a place inside an adventure: a mentor, a reason to practise and progress that carries into the story. A television gives that adventure a shared screen, while a phone can supply movement tracking without buying a wearable controller. Our goal was to connect bodyweight training, medieval sword-and-shield play and live clan competition in one experience.
+We wanted exercise to have a place inside an adventure: a mentor, a reason to practise and progress that carries into the story. A television gives that adventure a shared screen, while a phone supplies movement tracking. Our vision connects fitness, entertainment and fair competition: personal practice, families and friends taking turns, and clans giving players a reason to return together. The prototype implements story/training progress and local clan duels across independent screens. Longer term, we want friends and family to play across households, then let players opt into online matches against new rivals. Internet hosting, account-backed clans and public matchmaking remain planned work.
 
 ### What it does
 
