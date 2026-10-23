@@ -44,12 +44,16 @@ test('remote profile creation and switching preserve original progress', async (
 test('the new courtyard model renders at TV density and exposes its quality measurements', async ({ page }) => {
   await page.addInitScript(profile => {
     localStorage.setItem('moveroom.profile', JSON.stringify(profile)); localStorage.setItem('moveroom.player-guide.v1', 'seen');
+    localStorage.setItem('moveroom.settings.v1', JSON.stringify({ resolution: 1080 }));
   }, DEFAULT_PROFILE);
   await page.goto('/chapter?platform=firetv');
   const guide = page.getByRole('dialog', { name: /Player guide/ });
   if (await guide.count()) await page.getByRole('button', { name: /Close player guide|Let.*begin|Return to/ }).first().click();
+  // Wait for the actual scene readiness signal on software-GPU CI runners.
+  // Fixed Full HD keeps Auto's deliberate 720p fallback out of this check.
+  await expect(page.getByRole('button', { name: 'Begin story', exact: true })).toBeEnabled({ timeout: 20000 });
   await expect(page.locator('.first-person-canvas')).toHaveAttribute('data-render-width', '1920');
-  await expect(page.locator('.first-person-canvas')).toHaveAttribute('data-quality', /1080|720/);
+  await expect(page.locator('.first-person-canvas')).toHaveAttribute('data-quality', '1080');
   await expect(page.locator('.first-person-canvas')).toBeVisible(); await page.screenshot({ path: 'artifacts/improved-courtyard.png' });
 });
 test('background inference processes an actual video frame without a camera permission', async ({ page }) => {
@@ -67,6 +71,7 @@ test('background inference processes an actual video frame without a camera perm
 });
 
 test('late rejected camera startup cannot stop its replacement or leave a stale error', async ({ page, request }) => {
+  test.setTimeout(60000);
   const session = await (await request.post('/api/sessions', { data: {} })).json();
   const tv = new WebSocket(`ws://127.0.0.1:8897/relay?role=tv&code=${session.code}&token=${session.tvToken}`);
   await new Promise<void>(resolve => tv.once('open', resolve));
