@@ -14,23 +14,27 @@ For a short recording, show excerpts from the story and one complete combat exch
 
 Desktop preview uses explicitly simulated landmarks: **J / K / L** cut, mouse movement places the sword hand, **Shift + Z / X / C** covers left / high / right, **A / D** leans, and **W / S** advances or retreats in the trial. **Space** pauses. In exploration, WASD walks, arrows turn, E interacts, and each objective provides a guided route. To repeat the relay path at 18 fps without a phone, attach scripts/relay-fixture.ts to the pairing code; identify this as synthetic input in the recording.
 
-## Explain the vision in the video
+## Revised video with the vision
 
-The [judging criteria](https://amazonappdev2026.devpost.com/rules) give equal weight to implementation, design, potential impact and idea quality. A useful pitch explains who would play and why they would return, then grounds that vision in the functioning game. The current uploaded video already shows the prototype; the following is proposed narration for a future edit, not a claim that the upload has changed.
+The revised export is **2:34.753, 1920×1080 at 30 fps**, with English narration, music and burned-in captions. It replaces the opening and closing with the fitness, adventure, family and competition vision, while retaining all ten middle gameplay sections. The [judging criteria](https://amazonappdev2026.devpost.com/rules) give equal weight to implementation, design, potential impact and idea quality; the pitch is grounded in the functioning prototype.
 
-**Opening, about 15–20 seconds:**
+Local upload file: `artifacts/EarnedValor-YouTube-Demo-Vision.mp4`. Companion files: [YouTube title, description and updated chapters](../artifacts/EarnedValor-YouTube-Upload-Vision.txt), [English captions](../artifacts/EarnedValor-YouTube-Captions-Vision.srt), and [export verification](../artifacts/EarnedValor-Video-Verification-Vision.json). The MP4 remains a local artifact; small companion files are committed to the repository. The original export is preserved.
 
-> Earned Valor brings fitness, adventure and friendly competition to the living-room TV. Train with a medieval mentor, grow your squire and challenge another fighter. Our goal is to give people a reason to move, play and return together.
+**Opening, 17.73 seconds:**
 
-Show the existing training, story and duel footage while this is spoken. Keep the synthetic-input disclosure visible wherever applicable.
+> Earned Valor brings fitness, adventure, and friendly competition to the living room TV. Train with a medieval mentor, grow your squire through completed routines, and challenge another fighter. Our goal is to give families and friends a reason to move, play, and return together.
 
-**Closing, about 15–20 seconds:**
+The opening combines the native main menu, training and duel footage with a fitness/adventure/competition panel. Synthetic-input labels remain visible.
 
-> Today, the prototype supports personal progress and local clan duels. Our next step is online play with family and friends across homes, followed by opt-in matches against new rivals. That is the vision: fitness, entertainment and a community worth returning to.
+**Closing, 20.37 seconds:**
 
-Use **Working prototype** for current footage and **Planned online experience** for the roadmap caption. These passages can replace the existing opening/closing; most of the video should continue to show the actual application. At 2:24, the existing video has about 36 seconds of room if appending one short segment instead. Measure the final export after changing narration or timing. This document does not require replacing the already submitted video link.
+> Today, the prototype supports personal progress and local clan duels, with equal starting gear for competitive matches. Our vision is online play with family and friends across homes, followed by opt-in matches against new rivals and clans. Online matchmaking is planned. Train your body. Forge your legend.
 
-The same vision paragraph can go into the YouTube description or Devpost's Inspiration/What's next fields. See [the copy-ready submission text](SUBMISSION_FINAL.md). Account-backed clans, public matchmaking, rankings and player protections are roadmap work; current simultaneous clan play uses independent screens/controllers on the same local server. Training bonuses apply to the story; PvP uses common starting terms.
+The closing explicitly separates **Working prototype** from **Planned online experience**, and keeps **Online play is planned** on screen. Full audio/video decoding, ordered captions, audio levels and sampled visuals were checked. The audio mix averages −16.35 LUFS with a −4.40 dBTP true peak.
+
+**Upload status:** the revision is ready for Rahul to reupload. The existing YouTube link still points to the original video. After uploading this export, replace the Devpost video link and use the revised description/chapters. No new upload URL has been claimed.
+
+The same vision can go into Devpost's Inspiration/What's next fields. See [the copy-ready submission text](SUBMISSION_FINAL.md). Account-backed clans, public matchmaking, rankings and player protections are roadmap work; current simultaneous clan play uses independent screens/controllers on the same local server. Training bonuses apply to the story; PvP uses common starting terms.
 
 ## Before recording
 

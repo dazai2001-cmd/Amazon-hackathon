@@ -59,6 +59,9 @@ public/vision/runtime.js
 !artifacts/EarnedValor-Video-Verification.json
 !artifacts/EarnedValor-YouTube-Captions.srt
 !artifacts/EarnedValor-YouTube-Upload.txt
+!artifacts/EarnedValor-Video-Verification-Vision.json
+!artifacts/EarnedValor-YouTube-Captions-Vision.srt
+!artifacts/EarnedValor-YouTube-Upload-Vision.txt
 !artifacts/reviewer-setup-test-report.md
 !artifacts/reviewer-native-menu.png
 !artifacts/reviewer-native-chapter.png

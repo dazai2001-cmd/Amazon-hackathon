@@ -43,6 +43,8 @@ The [uploaded demonstration](https://youtu.be/gmJccY-Ejcs) contains native Andro
 
 The narrator uses Kokoro's stock `af_heart` preset under the Kokoro licensing described above. Background music is this project's original `courtyard.mp3` synthesis. FFmpeg and Python/Pillow combine the footage, overlay and captions; their software is not incorporated as a runtime game service. Video labels and the submission description should preserve the distinction between synthetic input and live camera testing.
 
+The local vision revision uses the same footage, voice preset and original music, with new opening/closing narration and text panels. Its roadmap labels distinguish the demonstrated local prototype from planned online play. See [revision verification](artifacts/EarnedValor-Video-Verification-Vision.json); it awaits reupload by the entrant.
+
 ## Tracking upgrade
 
 The official MediaPipe Full pose bundle is included alongside Lite. Both use the MediaPipe license already included under public/licenses. The preparation script downloads the pinned float16 version 1 bundles from Google's official model storage. [Model guide](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker).

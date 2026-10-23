@@ -7,17 +7,20 @@ Updated 23 October 2026. Phone testing is treated as complete at Rahul's instruc
 | Project | Earned Valor |
 | Primary track | Fire TV |
 | Devpost project | https://devpost.com/software/earned-valor |
-| Demo video | https://youtu.be/gmJccY-Ejcs |
+| Current uploaded demo (original version) | https://youtu.be/gmJccY-Ejcs |
+| Revised vision video, ready for reupload | [Upload text and chapters](../artifacts/EarnedValor-YouTube-Upload-Vision.txt), [captions](../artifacts/EarnedValor-YouTube-Captions-Vision.srt), [export verification](../artifacts/EarnedValor-Video-Verification-Vision.json) |
 | Source code | https://github.com/dazai2001-cmd/Amazon-hackathon |
 | Setup / testing instructions | https://github.com/dazai2001-cmd/Amazon-hackathon/blob/main/README.md |
 | Reviewer requirements and walkthrough | https://github.com/dazai2001-cmd/Amazon-hackathon/blob/main/docs/REVIEWER_GUIDE.md |
-| Passing software / browser / APK verification | https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39905234049 |
+| Passing software / browser / APK verification | https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39907917271 |
 | Product feedback: five answers | [DEVPOST_ADDITIONAL_FIELDS.md](DEVPOST_ADDITIONAL_FIELDS.md) |
 | Tool-by-tool feedback | [PRODUCT_FEEDBACK.md](PRODUCT_FEEDBACK.md) |
 | Optional friction log URL | https://github.com/dazai2001-cmd/Amazon-hackathon/blob/main/docs/FRICTION_LOG.md |
 | AWS Builder / Open Source mini-challenges | No / No, unless additional qualifying work is supplied |
 
-The published source at `4cd91f65de14dbf9610943df66ccd80fc53a7beb` passed a fresh GitHub Actions installation, 128 unit tests, 10 browser checks, production build, HTTPS/WSS production smoke check and native APK build. A separate fresh clone also loaded the production game and 3D courtyard in a fresh TV emulator. Later documentation-only changes do not alter that tested application.
+The published source at `3f4efaac0762e5b34a4ee572356b49aa9e2450af` passed a fresh GitHub Actions installation, 128 unit tests, 10 browser checks, production build, HTTPS/WSS production smoke check and native APK build. A separate fresh clone also loaded the production game and 3D courtyard in a fresh TV emulator. Later documentation/video-only changes do not alter that tested application.
+
+The revised local video is `artifacts/EarnedValor-YouTube-Demo-Vision.mp4` (**2:34.753, 1080p/30 fps**). Its opening and closing explain the fitness, family, entertainment and competition vision; online matchmaking is explicitly planned. Rahul will reupload it and replace the Devpost video URL. Until a new URL is supplied, all published links above still identify the original uploaded version.
 
 ## Public-page corrections
 
