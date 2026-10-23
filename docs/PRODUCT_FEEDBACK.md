@@ -96,7 +96,7 @@ The same local stock-voice tooling also supplies the clearly synthetic narration
 
 ## Browser verification, CI and video preparation
 
-**Use:** Playwright runs 10 browser checks covering navigation, pairing, camera lifecycle, profiles and rendering. GitHub Actions runs software/browser checks and an Android APK build; [the final source verification passed](https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39903798362). FFmpeg and Python/Pillow prepare the narrated demo and visualize its recorded synthetic pose stream.
+**Use:** Playwright runs 10 browser checks covering navigation, pairing, camera lifecycle, profiles and rendering. GitHub Actions runs software/browser checks, production HTTPS/WSS smoke verification and an Android APK build; [the final source verification passed](https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39905234049). FFmpeg and Python/Pillow prepare the narrated demo and visualize its recorded synthetic pose stream.
 
 **Worked well:** browser checks reproduced camera replacement and cancellation behavior in a real browser. The final video exports as a 143.961-second 1080p H.264/AAC file with captions and original project music. Signed-out YouTube playback and the Devpost embed work.
 

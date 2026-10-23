@@ -10,13 +10,14 @@ Updated 23 October 2026. Phone testing is treated as complete at Rahul's instruc
 | Demo video | https://youtu.be/gmJccY-Ejcs |
 | Source code | https://github.com/dazai2001-cmd/Amazon-hackathon |
 | Setup / testing instructions | https://github.com/dazai2001-cmd/Amazon-hackathon/blob/main/README.md |
-| Passing software / browser / APK verification | https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39903798362 |
+| Reviewer requirements and walkthrough | https://github.com/dazai2001-cmd/Amazon-hackathon/blob/main/docs/REVIEWER_GUIDE.md |
+| Passing software / browser / APK verification | https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39905234049 |
 | Product feedback: five answers | [DEVPOST_ADDITIONAL_FIELDS.md](DEVPOST_ADDITIONAL_FIELDS.md) |
 | Tool-by-tool feedback | [PRODUCT_FEEDBACK.md](PRODUCT_FEEDBACK.md) |
 | Optional friction log URL | https://github.com/dazai2001-cmd/Amazon-hackathon/blob/main/docs/FRICTION_LOG.md |
 | AWS Builder / Open Source mini-challenges | No / No, unless additional qualifying work is supplied |
 
-The published source at `0e63b7d7ed3ff836acd805a48e98858e8b50f6f4` passed a fresh GitHub Actions installation, 128 unit tests, 10 browser checks, production build and native APK build. Later documentation-only changes do not alter that tested application.
+The published source at `4cd91f65de14dbf9610943df66ccd80fc53a7beb` passed a fresh GitHub Actions installation, 128 unit tests, 10 browser checks, production build, HTTPS/WSS production smoke check and native APK build. A separate fresh clone also loaded the production game and 3D courtyard in a fresh TV emulator. Later documentation-only changes do not alter that tested application.
 
 ## Public-page corrections
 

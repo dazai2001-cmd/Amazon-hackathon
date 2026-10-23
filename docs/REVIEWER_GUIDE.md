@@ -2,6 +2,8 @@
 
 This is the evaluator setup guide. Start with the browser preview, then build the native TV APK and connect a phone if testing camera controls. The TV APK loads this repository's running server; keep that server running throughout the review.
 
+[Fresh-clone verification and native screenshots](../artifacts/reviewer-setup-test-report.md) document a successful reproduction. [The cloud verification](https://github.com/dazai2001-cmd/Amazon-hackathon/actions/runs/39905234049) also passed.
+
 ## Requirements
 
 | What you want to test | Required software and equipment |
