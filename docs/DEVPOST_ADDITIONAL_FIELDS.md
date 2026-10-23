@@ -72,7 +72,7 @@ The Android route required Java, Gradle, SDK/platform tools and an Android TV em
 
 React, React DOM, TypeScript, Vite, Three.js and the supporting npm libraries were set up through the project's dependency installation and build process. MediaPipe additionally required matching model/WASM assets, camera permission and a secure context. USB localhost simplified the local camera setup; wireless camera access requires HTTPS.
 
-Node.js/ws setup involved starting the server and configuring pairing and test connections; selfsigned supplies development certificates. tsx and Node's runner execute the test suite. Kokoro used local Python/model tooling to create audio assets. Codex and image generation were used iteratively with repository inspection and verification. Phone testing is treated complete at Rahul's instruction; no numerical device results are invented.
+Node.js/ws setup involved starting the server and configuring pairing and test connections; selfsigned supplies development certificates. tsx and Node's runner execute the test suite. Kokoro used local Python/model tooling to create audio assets. Codex and image generation were used iteratively with repository inspection and verification.
 
 ## Feedback 5 — reuse decision
 
