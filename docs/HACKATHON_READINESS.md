@@ -1,8 +1,10 @@
-# Hackathon readiness — 13 October 2026
+# Hackathon readiness — 23 October 2026
 
-Earned Valor fits the Fire TV track and has a working, tested prototype. Rahul confirmed that Devpost registration is complete and that identity verification on the Amazon developer portal is done. The submission is **not fully ready**: two camera recovery/lifecycle issues remain, the real-phone demonstration still needs validation and recording, judge access is absent, and video and product feedback remain unsubmitted according to the last update. Local submission and feedback drafts are available for review.
+The public [Devpost project](https://devpost.com/software/earned-valor) shows **Submitted to** the Amazon hackathon, embeds [the uploaded demo](https://youtu.be/gmJccY-Ejcs), and links to the correct GitHub repository. These observations were made while signed out. All listed reviewers have accepted repository access. Rahul instructed us to treat phone testing as complete; Devpost registration and Amazon developer account/identity verification were already confirmed.
 
-Implementation audited: `3392b36fff6dad5b90a5fc0a1fb2e93cf1533793`. The earlier native remote/graphics checks used `2676823204ef9bc89e9f59794520776aca18b754`. Repository: [dazai2001-cmd/Amazon-hackathon](https://github.com/dazai2001-cmd/Amazon-hackathon).
+**Current final checks:** verify the published source's [GitHub Actions run](https://github.com/dazai2001-cmd/Amazon-hackathon/actions/workflows/verify.yml); change the YouTube video from **Unlisted** to **Public** to remove ambiguity with the publicly-visible-video requirement; confirm Fire TV and all five feedback answers in the private entry fields. The public project page cannot reveal those private selections or personal declarations. See [final submission details and factual corrections](SUBMISSION_FINAL.md).
+
+Earlier implementation audited: `3392b36fff6dad5b90a5fc0a1fb2e93cf1533793`. The earlier native remote/graphics checks used `2676823204ef9bc89e9f59794520776aca18b754`. Repository: [dazai2001-cmd/Amazon-hackathon](https://github.com/dazai2001-cmd/Amazon-hackathon).
 
 Sources: [official rules](https://amazonappdev2026.devpost.com/rules), [official FAQ](https://amazonappdev2026.devpost.com/details/faqs), [submission and judging overview](https://amazonappdev2026.devpost.com/). The FAQ explicitly accepts an Android TV emulator. A physical Fire TV is not mandatory.
 
@@ -13,14 +15,14 @@ Sources: [official rules](https://amazonappdev2026.devpost.com/rules), [official
 | Fire TV theme | Meets | Fitness routines, computer vision, movement gaming, voice guidance and clan duels match the track. Every priority category need not be implemented. |
 | Permitted implementation | Meets | Android/Fire OS WebView APK, React/TypeScript/Three.js, Android phone MediaPipe inference and local Node relay. No special Amazon runtime API is mandatory for this track. |
 | Emulator demonstration route | Meets | The APK built and ran on Android TV 30 x86, with native D-pad/Select/Back/Play-Pause inputs. This is an accepted emulator according to the FAQ. |
-| Working prototype | Tested, with outstanding camera fixes | 112 automated tests passed; manual native and browser checks cover menus, story, 1080p, training setup and multiplayer. A separate camera fault audit reproduced two recovery/lifecycle failures outside that suite. Fix those and demonstrate exercise accuracy and movement on the real phone. |
-| Source, assets and setup | Present | Source, models, artwork, audio, pose models, package lock, Gradle wrapper, license notices and run instructions are tracked. Runtime dependencies can be prepared through npm installation. The APK can be rebuilt from source. |
-| Judge access | **Not met** | Authenticated GitHub checks show a PRIVATE repository, only `dazai2001-cmd` as collaborator, and no pending invitations. The listed reviewers need access. |
+| Working prototype | Software verified; phone testing treated complete | 128 automated tests and 10 browser checks passed. Camera recovery fixes, profiles, training progression and saved clan records are implemented. Phone testing is closed at Rahul's instruction; no specific accuracy or latency numbers were supplied. |
+| Source, assets and setup | Included and verified from a clean installation | This snapshot includes the latest source, tests and CI files. An isolated fresh `npm ci` passed 128 tests, production build and 10 browser checks. The native APK rebuild also passed. Models, artwork, audio, package lock, Gradle wrapper, notices and run instructions are included. |
+| Judge access | **Verified** | Private repo collaborators include `knmeiss`, `giolaq`, `anishamalde`, `mosesroth`, `emersonsklar`, `chris-trag` and `devposttesting`. No pending invitations were returned. |
 | Project open-source license | Not required for the current private route | GitHub reports no project license. That does not block a private submission shared with judges. A public submission would need an open-source license. |
-| Public demo video | **Not made** | Rahul confirmed this on 13 October. Follow the timed recording script in SUBMISSION_PREP.md, then upload the final video publicly to YouTube or Vimeo. |
-| Product feedback | **Drafted locally; not submitted** | Rahul confirmed no feedback has been entered. PRODUCT_FEEDBACK.md now provides a draft grounded in implementation and test evidence; personal opinions and account/device experience need review. |
-| Written description and track selection | External status unverified | README explains the product; the actual Devpost fields and final submission have not been inspected. Select Fire TV. |
-| English | Meets for existing material | App text, dialogue, captions and repository documentation are English. Final video and submission text still need checking. |
+| Public demo video | Uploaded and playable signed out; visibility action remains | [YouTube demo](https://youtu.be/gmJccY-Ejcs) is embedded in Devpost and displays 2:23. Local file is 143.961 seconds, 1080p/30 fps H.264/AAC with English narration and captions. YouTube currently labels it **Unlisted**; use **Public** to remove ambiguity. Synthetic skeleton input is labelled throughout. |
+| Product feedback | Prepared; private fields require entrant confirmation | Five answers are in DEVPOST_ADDITIONAL_FIELDS.md, with tool-by-tool detail in PRODUCT_FEEDBACK.md. Public Devpost pages do not expose these saved private fields. |
+| Written description and track selection | Description verified; private track selection requires confirmation | Public story, source link, video and event association are present. Confirm **Fire TV** in the entry. Public text still says 112 tests and describes completed camera fixes/clan persistence as future work; replacement text is in SUBMISSION_FINAL.md. |
+| English | Verified for public materials | App, repository instructions, live Devpost description and narrated/captioned demo are English. |
 | Work during the event | Evidence present | Recorded implementation commits are dated 12 October 2026. Generated-art provenance dates are within the event window. Explain these contributions in the submission. |
 | Third-party rights | Documented | THIRD_PARTY.md and included notices cover MediaPipe, React, Three.js, fonts, icons, Kokoro and model assets. The creator currently identifies Sentinel as CC0. Entrant ownership and final video permissions remain personal confirmations. |
 | Devpost registration | Confirmed by entrant | Rahul confirmed that Devpost registration is done. This does not confirm completion of the project submission form. |
@@ -29,11 +31,11 @@ Sources: [official rules](https://amazonappdev2026.devpost.com/rules), [official
 
 ## Immediate submission work
 
-1. Fix the two [camera recovery/lifecycle defects](../artifacts/camera-stream-audit.md): persistent inference errors retain stale phone tracking state, and cleanup from an old camera request can interfere with a newer session. Then rehearse with the actual Android phone, including camera restart, loss/return to view, exercise correction, complete reps/sets and shared multiplayer health. The account and identity step is confirmed complete.
-2. Rehearse and record a public English YouTube/Vimeo demo under three minutes using [the timed script and submission draft](SUBMISSION_PREP.md). Show the native emulator APK, actual phone camera movement, a controlled exercise with a correction/rejected rep, and shared multiplayer health/score. Label any preview opponent clearly. Remove private notifications and pairing credentials from footage.
-3. Review [the product feedback draft](PRODUCT_FEEDBACK.md), add your completed Amazon identity/account onboarding experience, actual phone results and opinions, and enter it into Devpost. Distinguish implementation fixes from SDK/platform faults.
-4. Give the official reviewers access to the private repository: `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth`, `emersonsklar`, and Devpost's `testing@devpost.com` contact as directed by the event. Check accepted access; invitation expiry is seven days. Time invitations around submission and re-send expired invitations.
-5. Complete the project description, Fire TV selection, applicable optional challenge fields and final Devpost submission. Confirm personal eligibility, rights and the public video URL. Keep judge access and reproducible setup available through judging.
+1. Check the [latest verification workflow](https://github.com/dazai2001-cmd/Amazon-hackathon/actions/workflows/verify.yml) for the published snapshot. Clean-install software/browser checks and the native APK rebuild have passed locally. Judge access is already accepted.
+2. Set the [uploaded video](https://youtu.be/gmJccY-Ejcs) to **Public** and recheck signed-out playback. Its native emulator footage, synthetic input labels, English narration and duration already match the prepared demo.
+3. Confirm Fire TV and all five required feedback answers are saved in the submitted entry. Review [the feedback draft](DEVPOST_ADDITIONAL_FIELDS.md) and apply [the public-page factual updates](SUBMISSION_FINAL.md).
+4. Complete the entrant's own eligibility, rights, support/conflict and team-representation declarations accurately. The public page's **Submitted to** banner verifies event association, but not those hidden answers. Keep the submission confirmation.
+5. Keep reviewer access, video and reproducible setup available through 20 November 2026. Public hosting is optional for this local prototype.
 
 Deadline: **24 October 2026 at 00:30 IST**, equivalent to **23 October at noon PDT**. Judging ends 20 November 2026.
 
@@ -43,7 +45,7 @@ These are assessments of the current implementation, not guaranteed judge scores
 
 | Area | Current evidence | Strongest improvement |
 | --- | --- | --- |
-| Technical implementation | Native remote handling, local pose inference, calibrated sword/shield movement, strict rep/set state machines, server-owned human duels and 112 passing tests. | Record real phone inputs and corrections. Show both participant screens changing together. |
+| Technical implementation | Native remote handling, local pose inference, calibrated sword/shield movement, strict rep/set state machines, server-owned human duels and 128 passing tests. | Record real phone inputs and corrections. Show both participant screens changing together. |
 | Design | Medieval main menu, voiced Chapter I, player guide, hands-free calibration, anytime training and remote text entry. | Rehearse one short, coherent journey. Avoid spending the video on setup or long dialogue. |
 | Potential impact | Exercise practice creates bounded story progression; the TV is a shared screen and video stays on the phone. | Explain the intended household/player and show why they would return. Keep fitness claims within demonstrated behavior. |
 | Quality of the idea | Camera-controlled sword/shield play and a medieval instructor connect exercise, story progression and cooperative clan competition. | Lead with the fitness-to-game loop and embodied controls. Show what vision adds to the experience. |
@@ -53,14 +55,14 @@ These are assessments of the current implementation, not guaranteed judge scores
 - **AWS Builder:** not currently evidenced. No AWS integration or Kiro Crew use was found. This does not block Fire TV entry.
 - **Open Source:** not currently evidenced. The game repository is private and no qualifying public contribution was identified. This does not block Fire TV entry.
 - **Friction log:** [drafted with reproduction steps and evidence](FRICTION_LOG.md), for entrant review and the optional URL field. The rules allow up to a 10% judging bonus for assessed friction logs; submitting this draft does not guarantee a bonus.
-- **1080p:** implemented as the default and verified as an actual 1920×1080 drawing buffer. 720p is a saved performance option. The event does not list a resolution minimum.
+- **Graphics:** Auto starts with a 1920×1080 buffer and lowers to a 720p cap after sustained low frame rate; fixed 1080p/720p choices are also saved. The Full HD path has been verified in the emulator. The event does not list a resolution minimum.
 - **Internet hosting, permanent clans, ranked matchmaking, later chapters and an Appstore release:** not necessary for this prototype's submission. Describe the implemented local/LAN guest multiplayer and story-only exercise bonuses accurately.
 - **Physical Fire TV:** useful additional compatibility testing, but not required by the FAQ. Physical camera/form validation still improves the credibility of our central feature.
 
 Relevant evidence: [remote/graphics checks](../artifacts/remote-controls-test-report.md), [multiplayer checks](../artifacts/multiplayer-tutorial-test-report.md), [training checks](../artifacts/training-test-report.md), [asset notices](../THIRD_PARTY.md), [demo plan](DEMO.md).
 
-Latest outstanding implementation work: [camera streaming audit](../artifacts/camera-stream-audit.md). The audit deliberately injected failures; it did not report a failure on Rahul's live phone, and the two repairs have not yet been implemented.
+The [camera streaming audit](../artifacts/camera-stream-audit.md) preserves the original failure observations and links to implemented regression checks. Phone testing is treated complete at Rahul's instruction. No phone model, rep-accuracy percentage, measured motion-to-display latency or physical Fire TV benchmark was supplied; those values are not invented.
 
-Submission preparation: [written draft and 2:45 recording script](SUBMISSION_PREP.md), [product feedback draft](PRODUCT_FEEDBACK.md). These files are preparation material, not a submitted entry or a recorded video.
+Submission resources: [final links and copy-ready corrections](SUBMISSION_FINAL.md), [written draft and historical recording script](SUBMISSION_PREP.md), [product feedback](PRODUCT_FEEDBACK.md), [video verification](../artifacts/EarnedValor-Video-Verification.json). Current official rules and FAQ were rechecked on 23 October 2026.
 
-13 October follow-up: [23 additional edge cases](../artifacts/edge-test-report.md) and their fixes raise the automated suite to 112 passing tests. This improves interruption handling, corrupted-save recovery and remote-visible feedback; the submission and real-device evidence gaps listed above remain.
+Historical 13 October evidence: [23 additional edge cases](../artifacts/edge-test-report.md) brought the earlier suite to 112 tests. The current snapshot has 128 tests plus 10 browser checks; use the current audit above for remaining actions.

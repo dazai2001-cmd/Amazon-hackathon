@@ -10,12 +10,15 @@ dist/
 *.jks
 *.keystore
 *.log
+playwright-report/
+test-results/
 android/.gradle/
 android/local.properties
 android/**/build/
 artifacts/*
 public/vision/testdata/
 public/vision/wasm/
+public/vision/runtime.js
 !artifacts/.gitkeep
 !artifacts/story-adventure-test-report.md
 !artifacts/adventure-health-duel.png
@@ -50,3 +53,9 @@ public/vision/wasm/
 !artifacts/camera-stream-audit.md
 !artifacts/earned-valor-main-menu.png
 !artifacts/earned-valor-branding-report.md
+!artifacts/improvements-report.md
+!artifacts/improved-progress-native.png
+!artifacts/improved-combat-native.png
+!artifacts/EarnedValor-Video-Verification.json
+!artifacts/EarnedValor-YouTube-Captions.srt
+!artifacts/EarnedValor-YouTube-Upload.txt

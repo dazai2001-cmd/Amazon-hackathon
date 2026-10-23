@@ -7,16 +7,20 @@ export class RoomSocket {
   private stopped = false;
   private retries = 0;
   constructor(private role: 'tv' | 'phone', private code: string, private token: string,
-    private onMessage: (message: ServerMessage) => void, private onState: (connected: boolean) => void) { this.connect(); }
+    private onMessage: (message: ServerMessage) => void, private onState: (connected: boolean) => void) {
+    // Effect cleanup can cancel an unopened connection before a replacement mounts.
+    this.timer = setTimeout(() => { this.timer = null; if (!this.stopped) this.connect(); }, 0);
+  }
   private connect() {
     const url = new URL('/relay', window.location.href);
     url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
     url.search = new URLSearchParams({ role: this.role, code: this.code, token: this.token }).toString();
     const ws = this.ws = new WebSocket(url);
-    ws.onopen = () => { this.retries = 0; this.onState(true); this.heartbeat = setInterval(() => this.send({ type: 'ping', t: performance.now() }), 4000); };
-    ws.onmessage = event => { try { this.onMessage(JSON.parse(event.data) as ServerMessage); } catch { /* Ignore malformed messages. */ } };
+    ws.onopen = () => { if (this.stopped || this.ws !== ws) return; this.retries = 0; this.onState(true); this.heartbeat = setInterval(() => this.send({ type: 'ping', t: performance.now() }), 4000); };
+    ws.onmessage = event => { if (this.stopped || this.ws !== ws) return; try { this.onMessage(JSON.parse(event.data) as ServerMessage); } catch { /* Ignore malformed messages. */ } };
     ws.onerror = () => { /* Close handles reconnect. */ };
     ws.onclose = event => {
+      if (this.stopped || this.ws !== ws) return;
       if (this.heartbeat) clearInterval(this.heartbeat);
       this.onState(false);
       if (this.stopped) return;
@@ -27,6 +31,9 @@ export class RoomSocket {
       this.timer = setTimeout(() => this.connect(), Math.min(8000, 600 * 2 ** this.retries++));
     };
   }
-  send(message: object) { if (this.ws?.readyState === WebSocket.OPEN && this.ws.bufferedAmount < 32_000) this.ws.send(JSON.stringify(message)); }
+  send(message: object): boolean {
+    if (this.stopped || this.ws?.readyState !== WebSocket.OPEN || this.ws.bufferedAmount >= 32_000) return false;
+    this.ws.send(JSON.stringify(message)); return true;
+  }
   close() { this.stopped = true; if (this.timer) clearTimeout(this.timer); if (this.heartbeat) clearInterval(this.heartbeat); this.ws?.close(); }
 }

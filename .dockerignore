@@ -1,0 +1,10 @@
+.git
+.local
+node_modules
+dist
+android
+artifacts
+.env
+.env.*
+playwright-report
+test-results

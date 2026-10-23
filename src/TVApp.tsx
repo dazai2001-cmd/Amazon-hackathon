@@ -1,10 +1,14 @@
-import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, Keyboard, Smartphone, X } from 'lucide-react';
 import { DEFAULT_PROFILE, MotionEngine, measureBody, readCalibrationProfile, syntheticPose, type CalibrationProfile } from '../shared/motion';
 import type { Activity, Landmark } from '../shared/protocol';
 import { readStoryProgress } from '../shared/chapter';
 import { TRAINING_KEY, readTrainingSave, measureExercise, type TrainingBlock, type TrainingSave } from '../shared/training';
 import MainMenu from './components/MainMenu';
+import PlayerProfiles from './components/PlayerProfiles';
+import DeviceCheck from './components/DeviceCheck';
+import TrainingProgress from './components/TrainingProgress';
+import { playerStorage } from './lib/playerStorage';
 import MenuPanel, { readMenuPreferences } from './components/MenuPanel';
 import PairDialog from './components/PairDialog';
 import PlayerGuide from './components/PlayerGuide';
@@ -24,7 +28,7 @@ const EMPTY_POSE: Landmark[] = [];
 type Screen = Exclude<Activity, 'play' | 'coach'>;
 const paths: Record<Screen, string> = { home: '/', chapter: '/chapter', arena: '/arena', training: '/training', calibrate: '/calibrate' };
 const screenAt = (path: string): Screen => (Object.entries(paths).find(([, value]) => value === path)?.[0] as Screen) || 'home';
-const readStored = <T,>(key: string, parse: (value: unknown) => T): T => { try { return parse(JSON.parse(localStorage.getItem(key) || 'null')); } catch { return parse(null); } };
+const readStored = <T,>(key: string, parse: (value: unknown) => T): T => { try { return parse(JSON.parse(playerStorage.getItem(key) || 'null')); } catch { return parse(null); } };
 function loadProfile(): CalibrationProfile | null {
   return readStored('moveroom.profile', readCalibrationProfile);
 }
@@ -34,11 +38,14 @@ export default function TVApp() {
   const [activity, setActivity] = useState<Screen>(() => screenAt(window.location.pathname));
   const [pairOpen, setPairOpen] = useState(false), [panel, setPanel] = useState<'setup' | 'settings' | null>(null);
   const [guide, setGuide] = useState<GuideTopic | null>(null);
-  const guideOpen = guide !== null, overlayOpen = pairOpen || panel !== null || guideOpen;
+  const [deviceOpen, setDeviceOpen] = useState(false);
+  const [playersOpen, setPlayersOpen] = useState(false), [progressOpen, setProgressOpen] = useState(false);
+  const [playerId, setPlayerId] = useState(() => playerStorage.active().id);
+  const guideOpen = guide !== null, overlayOpen = pairOpen || panel !== null || guideOpen || playersOpen || progressOpen || deviceOpen;
   const [intent, setIntent] = useState<Screen>('home');
   const [trainingPair, setTrainingPair] = useState(false), [trainingBlock, setTrainingBlock] = useState<TrainingBlock | null>(null);
   const [trainingSave, setTrainingSave] = useState(() => readStored(TRAINING_KEY, readTrainingSave));
-  const saveTraining = useCallback((next: TrainingSave) => { setTrainingSave(next); try { localStorage.setItem(TRAINING_KEY, JSON.stringify(next)); } catch { /* Keep session progress. */ } }, []);
+  const saveTraining = useCallback((next: TrainingSave) => { setTrainingSave(next); try { playerStorage.setItem(TRAINING_KEY, JSON.stringify(next)); } catch { /* Keep session progress. */ } }, []);
   const [afterCalibration, setAfterCalibration] = useState<Screen>('home');
   const [profile, setProfile] = useState<CalibrationProfile | null>(loadProfile);
   const [preview, setPreview] = useState(false), [previewProfile, setPreviewProfile] = useState<CalibrationProfile>(DEFAULT_PROFILE);
@@ -55,7 +62,7 @@ export default function TVApp() {
   const points = preview ? previewPoints : fresh ? room.frame!.packet.landmarks : EMPTY_POSE;
   const worldPoints = !preview && fresh ? room.frame!.packet.worldLandmarks || EMPTY_POSE : EMPTY_POSE;
   const analyzed = useMemo(() => engine.update(points, performance.now()), [engine, points]), tracking = analyzed.tracked;
-  const menuProgress = useMemo(() => readStored('moveroom.story.v2', readStoryProgress), [activity]);
+  const menuProgress = useMemo(() => readStored('moveroom.story.v2', readStoryProgress), [activity, playerId]);
   useEffect(() => { const id = setInterval(() => setClock(performance.now()), 160); return () => clearInterval(id); }, []);
   useEffect(() => {
     if (!preview) return;
@@ -104,8 +111,7 @@ export default function TVApp() {
   const continuePairing = () => {
     setPairOpen(false); setPreview(false);
     if (trainingPair) { setTrainingPair(false); navigate(intent === 'training' ? 'training' : 'chapter'); return; }
-    if (intent === 'home') navigate('home');
-    else if (intent === 'calibrate' || !profile) { setAfterCalibration(intent === 'calibrate' ? 'home' : intent); navigate('calibrate'); }
+    if (intent === 'calibrate' || !profile) { setAfterCalibration(intent === 'calibrate' ? 'home' : intent); navigate('calibrate'); }
     else navigate(intent);
   };
   useEffect(() => {
@@ -122,7 +128,7 @@ export default function TVApp() {
         return;
       }
       if (!overlayOpen && document.querySelector('.training-hall') && ['Escape', 'Backspace'].includes(event.key)) return;
-      if (event.key === 'Escape' || event.key === 'Backspace') { if (activity === 'home' && !overlayOpen) return; event.preventDefault(); if (pairOpen) { setPairOpen(false); setTrainingPair(false); } else if (panel) setPanel(null); else navigate('home'); return; }
+      if (event.key === 'Escape' || event.key === 'Backspace') { if (activity === 'home' && !overlayOpen) return; event.preventDefault(); if (pairOpen) { setPairOpen(false); setTrainingPair(false); } else if (panel) setPanel(null); else if (playersOpen) setPlayersOpen(false); else if (progressOpen) setProgressOpen(false); else if (deviceOpen) setDeviceOpen(false); else navigate('home'); return; }
       if (event.key === ' ' && ['chapter', 'arena', 'training'].includes(activity) && !overlayOpen) { event.preventDefault(); window.dispatchEvent(new Event('moveroom:pause')); return; }
       if (event.key.startsWith('Arrow')) {
         event.preventDefault();
@@ -133,13 +139,13 @@ export default function TVApp() {
     const up = (event: KeyboardEvent) => { keys.current.delete(event.key); keys.current.delete(event.key.toLowerCase()); }, blur = () => keys.current.clear();
     window.addEventListener('keydown', down); window.addEventListener('keyup', up); window.addEventListener('blur', blur);
     return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); window.removeEventListener('blur', blur); };
-  }, [activity, preview, pairOpen, panel, guideOpen, overlayOpen, navigate]);
-  useEffect(() => {
+  }, [activity, preview, pairOpen, panel, guideOpen, playersOpen, progressOpen, deviceOpen, overlayOpen, navigate]);
+  useLayoutEffect(() => {
     if (guideOpen) return;
-    const timer = setTimeout(() => { const scope = focusScope(); (scope.querySelector<HTMLElement>('[data-autofocus]:not(:disabled)') || scope.querySelector<HTMLElement>('button:not(:disabled)'))?.focus({ preventScroll: true }); }, 100);
-    return () => clearTimeout(timer);
-  }, [activity, pairOpen, panel, guideOpen]);
-  const onCalibration = (saved: CalibrationProfile) => { if (preview) setPreviewProfile(saved); else { setProfile(saved); try { localStorage.setItem('moveroom.profile', JSON.stringify(saved)); } catch { /* Keep session calibration. */ } } navigate(afterCalibration); };
+    const scope = focusScope();
+    (scope.querySelector<HTMLElement>('[data-autofocus]:not(:disabled)') || scope.querySelector<HTMLElement>('button:not(:disabled)'))?.focus({ preventScroll: true });
+  }, [activity, pairOpen, panel, guideOpen, playersOpen, progressOpen, deviceOpen]);
+  const onCalibration = (saved: CalibrationProfile) => { if (preview) setPreviewProfile(saved); else { setProfile(saved); try { playerStorage.setItem('moveroom.profile', JSON.stringify(saved)); } catch { /* Keep session calibration. */ } } navigate(afterCalibration); };
   const openGuide = useCallback((topic: GuideTopic) => { keys.current.clear(); setPanel(null); setGuide(topic); }, []);
   const closeGuide = useCallback(() => { rememberGuide(); keys.current.clear(); setGuide(null); }, []);
   useEffect(() => { if ((activity === 'chapter' || activity === 'arena') && !hasSeenGuide()) setGuide(activity === 'arena' ? 'clans' : 'setup'); }, [activity]);
@@ -147,14 +153,17 @@ export default function TVApp() {
   return <div className={`tv-app ashen-app ${preview ? 'preview-mode' : ''} ${activity === 'chapter' || activity === 'arena' ? 'chapter-active' : ''}`}><div className="tv-main" inert={overlayOpen} aria-hidden={overlayOpen || undefined}>
     {preview && <div className="preview-banner"><Keyboard size={15}/><span>Desktop preview · Camera tracking is off</span><button onClick={() => { setPreview(false); keys.current.clear(); navigate('home'); }}>Exit preview <X size={14}/></button></div>}
     {room.error && <div className="ashen-network-error" role="alert"><span>{room.error}</span><button onClick={room.renew}>Reconnect</button></div>}
-    {activity === 'home' && <MainMenu progress={menuProgress} training={trainingSave} preview={preview} connected={room.phoneConnected} tracking={tracking} sound={sound} onStory={() => navigate('chapter')} onTraining={() => navigate('training')} onClans={() => navigate('arena')} onSetup={() => setPanel('setup')} onSettings={() => setPanel('settings')} onGuide={() => openGuide('setup')} onToggleSound={toggleSound}/>}
+    {activity === 'home' && <MainMenu progress={menuProgress} training={trainingSave} preview={preview} connected={room.phoneConnected} tracking={tracking} sound={sound} playerName={playerStorage.active().name} calibrated={Boolean(profile)} onPlayers={() => setPlayersOpen(true)} onProgress={() => setProgressOpen(true)} onStory={() => preview || profile && room.phoneConnected ? navigate('chapter') : pair('chapter')} onTraining={() => preview || room.phoneConnected ? navigate('training') : pair('training', true)} onClans={() => navigate('arena')} onSetup={() => setPanel('setup')} onSettings={() => setPanel('settings')} onGuide={() => openGuide('setup')} onToggleSound={toggleSound}/>}
     {activity === 'chapter' && <Suspense fallback={<div className="loading-screen">Opening Alden’s courtyard…</div>}><ChapterPage resolution={preferences.resolution} trainingSave={trainingSave} onTrainingSave={saveTraining} autoDialogue={preferences.autoDialogue} onAutoDialogueChange={setAutoDialogue} guideOpen={overlayOpen} onGuide={openGuide} points={points} worldPoints={worldPoints} imageAspect={room.frame?.packet.imageAspect} profile={activeProfile} frameTime={preview ? undefined : room.frame?.packet.t} tracking={tracking} controllerReady={preview || Boolean(profile && room.phoneConnected)} preview={preview} sound={sound} onPreviewMove={movePreviewBlade} onBack={() => navigate('home')} onPair={() => pair('chapter')} onTrainingPair={() => pair('chapter', true)} onArena={() => navigate('arena')} onInstruction={chapterInstruction} onTrainingExercise={trainingExercise} onToggleSound={toggleSound}/></Suspense>}
     {activity === 'training' && <div className="standalone-training"><TrainingHall returnLabel="Main menu" guideOpen={overlayOpen} onGuide={() => openGuide('training')} points={points} frameTime={preview ? undefined : room.frame?.packet.t} aspect={room.frame?.packet.imageAspect || 4 / 3} preview={preview} sound={sound} save={trainingSave} onSave={saveTraining} onClose={() => navigate('home')} onPair={() => pair('training', true)} onInstruction={chapterInstruction} onExercise={trainingExercise} onToggleSound={toggleSound}/></div>}
     {activity === 'arena' && <Suspense fallback={<div className="loading-screen">Opening the war hall…</div>}><ClanWarsPage resolution={preferences.resolution} guideOpen={overlayOpen} onGuide={() => openGuide('clans')} points={points} worldPoints={worldPoints} frameTime={preview ? undefined : room.frame?.packet.t} profile={activeProfile} tracking={tracking} preview={preview} controllerReady={preview || Boolean(profile && room.phoneConnected)} sound={sound} state={room.arena} error={room.arenaError} connected={room.connected} send={room.arenaCommand} onPair={() => pair('arena')} onBack={() => navigate('home')} onPreviewMove={movePreviewBlade} onToggleSound={toggleSound}/></Suspense>}
     {activity === 'calibrate' && <><header className="ashen-utility-header"><button onClick={() => navigate('home')}><ArrowLeft size={17}/> Main menu</button><span>CONTROLLER CALIBRATION</span><button onClick={() => pair('calibrate')}><Smartphone size={17}/> Connect phone</button></header><div className="ashen-controller-page"><Calibration points={points} tracking={tracking && !overlayOpen} preview={preview} onBack={() => navigate('home')} onComplete={onCalibration} onInstruction={speak}/></div></>}
     </div>
-    {panel && <MenuPanel panel={panel} preferences={preferences} profile={profile} preview={preview} connected={room.phoneConnected} onClose={() => setPanel(null)} onPair={() => pair('home')} onCalibrate={calibrate} onPreview={() => { setPanel(null); setPreview(true); keys.current.clear(); }} onExitPreview={() => { setPanel(null); setPreview(false); keys.current.clear(); }} onGuide={() => openGuide('setup')} onSound={toggleSound} onAutoDialogue={() => setAutoDialogue(!preferences.autoDialogue)} onResolution={() => setPreferences(previous => ({ ...previous, resolution: previous.resolution === 1080 ? 720 : 1080 }))}/>}
+    {panel && <MenuPanel panel={panel} preferences={preferences} profile={profile} preview={preview} connected={room.phoneConnected} onClose={() => setPanel(null)} onPair={() => pair('home')} onCalibrate={calibrate} onPreview={() => { setPanel(null); setPreview(true); keys.current.clear(); }} onExitPreview={() => { setPanel(null); setPreview(false); keys.current.clear(); }} onDeviceCheck={() => { setPanel(null); setDeviceOpen(true); }} onGuide={() => openGuide('setup')} onSound={toggleSound} onAutoDialogue={() => setAutoDialogue(!preferences.autoDialogue)} onResolution={() => setPreferences(previous => ({ ...previous, resolution: previous.resolution === 'auto' ? 1080 : previous.resolution === 1080 ? 720 : 'auto' }))} tracking={tracking}/>}
+    {deviceOpen && <DeviceCheck frame={room.frame} latency={room.latency} training={trainingSave} onClose={() => setDeviceOpen(false)}/>}
+    {playersOpen && <PlayerProfiles onClose={() => setPlayersOpen(false)} onSelect={() => { setPlayerId(playerStorage.active().id); setProfile(loadProfile()); setTrainingSave(readStored(TRAINING_KEY, readTrainingSave)); setPlayersOpen(false); navigate('home'); }}/>}
+    {progressOpen && <TrainingProgress save={trainingSave} name={playerStorage.active().name} onClose={() => setProgressOpen(false)}/>}
     {guide && <PlayerGuide topic={guide} preview={preview} phoneConnected={room.phoneConnected} tracking={tracking} calibrated={Boolean(profile)} liveDuel={activity === 'arena' && room.arena.war?.phase === 'fighting' && Boolean(room.arena.match && !room.arena.match.winner)} onClose={closeGuide} onPair={() => { closeGuide(); pair(activity === 'training' ? 'training' : activity === 'arena' ? 'arena' : activity === 'chapter' ? 'chapter' : 'home', Boolean(trainingBlock)); }}/>}
-    {pairOpen && <PairDialog session={room.session} phoneConnected={room.phoneConnected} tracking={Boolean(fresh && room.frame && (trainingPair && trainingBlock ? measureExercise(room.frame.packet.landmarks, trainingBlock, room.frame.packet.imageAspect).measurement : measureBody(room.frame.packet.landmarks)))} error={room.error} onClose={() => { setPairOpen(false); setTrainingPair(false); }} onContinue={continuePairing} onPreview={startPreview} onRenew={room.renew}/>}
+    {pairOpen && <PairDialog calibrated={Boolean(profile)} exercise={trainingPair} session={room.session} phoneConnected={room.phoneConnected} tracking={Boolean(fresh && room.frame && (trainingPair && trainingBlock ? measureExercise(room.frame.packet.landmarks, trainingBlock, room.frame.packet.imageAspect).measurement : measureBody(room.frame.packet.landmarks)))} error={room.error} onClose={() => { setPairOpen(false); setTrainingPair(false); }} onContinue={continuePairing} onPreview={startPreview} onRenew={room.renew}/>}
   </div>;
 }

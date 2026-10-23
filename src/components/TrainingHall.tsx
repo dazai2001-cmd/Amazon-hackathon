@@ -4,6 +4,8 @@ import { completeTraining, exerciseName, makeTrainingPlan, measureExercise, Trai
 import type { Landmark } from '../../shared/protocol';
 import { ChapterAudio, type VoiceState } from '../lib/chapterAudio';
 import PoseView from './PoseView';
+import TrainingProgress from './TrainingProgress';
+import { playerStorage } from '../lib/playerStorage';
 import './training.css';
 
 type Props = { returnLabel?: string; guideOpen: boolean; onGuide: () => void; points: Landmark[]; frameTime?: number; aspect: number; preview: boolean; sound: boolean; save: TrainingSave;
@@ -11,6 +13,7 @@ type Props = { returnLabel?: string; guideOpen: boolean; onGuide: () => void; po
 const localDay = () => { const date = new Date(); return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; };
 
 export default function TrainingHall({ returnLabel = 'Return to adventure', guideOpen, onGuide, points, frameTime, aspect, preview, sound, save, onSave, onClose, onPair, onInstruction, onExercise, onToggleSound }: Props) {
+  const [progressOpen, setProgressOpen] = useState(false);
   const [preference, setPreference] = useState<TrainingPreference>({ ...save.preference });
   const [coach, setCoach] = useState<TrainingCoach | null>(null), [state, setState] = useState<TrainingSnapshot | null>(null);
   const [userPaused, setPaused] = useState(false), [lowered, setLowered] = useState(false), [previewPoints, setPreviewPoints] = useState<Landmark[]>([]);
@@ -18,7 +21,7 @@ export default function TrainingHall({ returnLabel = 'Return to adventure', guid
   const audio = useRef<ChapterAudio | null>(null), lastVoice = useRef(''), lastVoiceAt = useRef(-10000), finished = useRef(false), lastRep = useRef(0), lastRejected = useRef(0);
   const sessionId = useRef(''), lowerTarget = useRef(false), currentLower = useRef(0), preferenceRef = useRef(preference), mounted = useRef(true);
   preferenceRef.current = preference;
-  const paused = userPaused || guideOpen;
+  const paused = userPaused || guideOpen || progressOpen;
   const latest = useRef({ points, frameTime, aspect, preview, paused }); latest.current = { points, frameTime, aspect, preview, paused };
   const lastCompleted = save.history.some(h => !h.preview);
   const plan = makeTrainingPlan(preference, lastCompleted), stats = trainingStats(save);
@@ -100,6 +103,7 @@ export default function TrainingHall({ returnLabel = 'Return to adventure', guid
   useEffect(() => {
     const pause = () => { if (coach && coach.state.phase !== 'complete') setPaused(p => !p); };
     const down = (event: KeyboardEvent) => {
+      if (progressOpen) { if (event.key === 'Escape' || event.key === 'Backspace') { event.preventDefault(); event.stopImmediatePropagation(); setProgressOpen(false); } return; }
       if (guideOpen) return;
       const key = event.key.toLowerCase();
       if (['escape', 'backspace', 'q'].includes(key)) { event.preventDefault(); event.stopImmediatePropagation(); if (key !== 'q') { if (coach && coach.state.phase !== 'complete') setPaused(p => !p); else onClose(); } }
@@ -109,9 +113,9 @@ export default function TrainingHall({ returnLabel = 'Return to adventure', guid
     const blur = () => { lowerTarget.current = false; setLowered(false); if (coach) setPaused(true); };
     window.addEventListener('keydown', down, true); window.addEventListener('keyup', up); window.addEventListener('moveroom:pause', pause); window.addEventListener('blur', blur);
     return () => { window.removeEventListener('keydown', down, true); window.removeEventListener('keyup', up); window.removeEventListener('moveroom:pause', pause); window.removeEventListener('blur', blur); };
-  }, [coach, preview, onClose, guideOpen]);
+  }, [coach, preview, onClose, guideOpen, progressOpen]);
   const begin = () => {
-    onSave({ ...save, preference }); sessionId.current = crypto.randomUUID(); finished.current = false; lastRep.current = 0; lastRejected.current = 0;
+    onSave({ ...save, preference }); sessionId.current = crypto.randomUUID?.() || Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(16)).join('-'); finished.current = false; lastRep.current = 0; lastRejected.current = 0;
     lastVoice.current = ''; currentLower.current = 0; lowerTarget.current = false; setLowered(false); setPaused(false); setReceipt(null);
     const next = new TrainingCoach(makeTrainingPlan(preference, lastCompleted)); setCoach(next); setState({ ...next.state });
   };
@@ -120,8 +124,8 @@ export default function TrainingHall({ returnLabel = 'Return to adventure', guid
   const changeRoutine = () => { audio.current?.stopVoice(); setCoach(null); setState(null); setPaused(false); lowerTarget.current = false; setLowered(false); };
   const complete = state?.phase === 'complete';
   return <section className="training-hall" role="dialog" aria-modal="true" aria-label="Alden’s training hall" data-training-phase={state?.phase || 'plan'} data-voice-state={voiceState}>
-    <header className="training-header"><button className="chapter-text-button" onClick={onClose}><ArrowLeft size={17}/> {returnLabel}</button><span><Dumbbell size={18}/> ALDEN’S TRAINING HALL</span><button className="chapter-text-button" onClick={onGuide}><CircleHelp size={17}/> Training guide</button><button className="chapter-text-button" aria-label={sound ? 'Turn training sound off' : 'Turn training sound on'} onClick={onToggleSound}>{sound ? <Volume2 size={19}/> : <VolumeX size={19}/>}</button></header>
-    <div className="training-body"><aside className="training-mentor"><img src="/assets/medieval/characters/instructor.png" alt="Sir Alden Vale"/><span className="chapter-eyebrow">YOUR INSTRUCTOR</span><h2>Discipline<br/><em>before glory.</em></h2><p>“An honest repetition earns its place. Reset the movement, and we begin again.”</p><div className="training-stats"><div><b>{stats.level}</b><span>Squire level</span></div><div><b>{stats.strength}</b><span>Strength</span></div><div><b>{stats.endurance}</b><span>Endurance</span></div></div><small>{save.xp} training XP · Story damage +{Math.round(stats.damageBonus * 100)}% · Stamina recovery +{Math.round(stats.recoveryBonus * 100)}%</small></aside>
+    <header className="training-header" inert={progressOpen}><button className="chapter-text-button" onClick={onClose}><ArrowLeft size={17}/> {returnLabel}</button><span><Dumbbell size={18}/> ALDEN’S TRAINING HALL</span><button className="chapter-text-button" onClick={() => setProgressOpen(true)}>Your progress</button><button className="chapter-text-button" onClick={onGuide}><CircleHelp size={17}/> Training guide</button><button className="chapter-text-button" aria-label={sound ? 'Turn training sound off' : 'Turn training sound on'} onClick={onToggleSound}>{sound ? <Volume2 size={19}/> : <VolumeX size={19}/>}</button></header>
+    <div className="training-body" inert={progressOpen}><aside className="training-mentor"><img src="/assets/medieval/characters/instructor.png" alt="Sir Alden Vale"/><span className="chapter-eyebrow">YOUR INSTRUCTOR</span><h2>Discipline<br/><em>before glory.</em></h2><p>“An honest repetition earns its place. Reset the movement, and we begin again.”</p><div className="training-stats"><div><b>{stats.level}</b><span>Squire level</span></div><div><b>{stats.strength}</b><span>Strength</span></div><div><b>{stats.endurance}</b><span>Endurance</span></div></div><small>{save.xp} training XP · Story damage +{Math.round(stats.damageBonus * 100)}% · Stamina recovery +{Math.round(stats.recoveryBonus * 100)}%</small></aside>
     {!coach ? <div className="training-plan"><span className="chapter-eyebrow">A ROUTINE FOR TODAY</span><h1>Build your squire.</h1><p>Choose a starting pace and comfortable variations. Alden sets the reps, sets and rest, using your last completed routine and effort feedback.</p>
       <fieldset><legend>Today’s pace</legend><div>{(['start', 'steady'] as const).map(value => <button data-autofocus={value === 'start' || undefined} className={preference.pace === value ? 'selected' : ''} aria-pressed={preference.pace === value} key={value} onClick={() => choose('pace', value)}>{value === 'start' ? 'Starting out' : 'Steady practice'}</button>)}</div></fieldset>
       <fieldset><legend>Squat variation</legend><div>{(['shallow', 'regular'] as const).map(value => <button className={preference.squat === value ? 'selected' : ''} aria-pressed={preference.squat === value} key={value} onClick={() => choose('squat', value)}>{value === 'shallow' ? 'Shallow' : 'Regular'}</button>)}</div></fieldset>
@@ -135,5 +139,6 @@ export default function TrainingHall({ returnLabel = 'Return to adventure', guid
       <p className="training-setup">{block.exercise === 'squat' ? 'Phone at hip height, to your side. Keep shoulders, hips, knees and ankles visible.' : block.variation === 'wall' ? 'Phone to your side. Use a stable wall; keep elbows, wrists, hips and ankles visible.' : 'Place the phone low, to your side. Keep shoulders, elbows, wrists, hips and your support point visible.'}</p><p className="training-note">{preview ? 'Hold B to lower; release B to return. Calibration starts counting automatically after your return.' : 'Hold the starting pose, show one comfortable lower pose, then return. Counting begins automatically.'} {sound ? voiceState === 'blocked' || voiceState === 'unavailable' ? 'Voice unavailable; follow the captions.' : voiceState === 'playing' ? 'Alden is speaking.' : 'Alden’s voice guidance is on.' : 'Voice guidance is off.'}</p>
     </div>}</div>
     {!coach && !preview && !view.measurement && <div className="training-view-note">{trainingCues[view.cue]}</div>}
+    {progressOpen && <TrainingProgress save={save} name={playerStorage.active().name} onClose={() => setProgressOpen(false)}/>}
   </section>;
 }

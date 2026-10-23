@@ -12,6 +12,8 @@
     "build": "tsc --noEmit && vite build",
     "start": "tsx server/index.ts --production",
     "test": "tsx --test tests/*.test.ts",
+    "test:browser": "playwright test",
+    "check": "npm test && npm run build && npm run test:browser",
     "test:vision:fixtures": "node scripts/prepare-vision-tests.mjs",
     "assets": "node scripts/prepare-vision.mjs",
     "android:build": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-android.ps1",
@@ -31,6 +33,7 @@
     "ws": "8.22.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.64.0",
     "@types/node": "26.6.5",
     "@types/qrcode": "1.5.6",
     "@types/react": "19.3.0",

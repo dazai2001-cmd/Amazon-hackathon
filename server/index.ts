@@ -7,17 +7,20 @@ import { resolve, extname } from 'node:path';
 import { generate } from 'selfsigned';
 import { SessionRelay } from './relay';
 import { ClanWars } from './multiplayer';
+import { ClanArchive } from './clanArchive';
 
 if (existsSync('.env')) process.loadEnvFile('.env');
 
 const production = process.argv.includes('--production');
 const port = Number(process.env.PORT || 8787);
 const tlsPort = Number(process.env.TLS_PORT || 8788);
+const tlsEnabled = process.env.TLS_ENABLED !== 'false';
 const localAddresses = Object.values(networkInterfaces()).flat().filter(a => a?.family === 'IPv4' && !a.internal).map(a => a!.address);
 const lan = localAddresses.find(ip => ip.startsWith('192.168.')) || localAddresses.find(ip => ip.startsWith('10.')) || localAddresses[0] || 'localhost';
-const phoneBase = (process.env.PHONE_BASE_URL || `https://${lan}:${tlsPort}`).replace(/\/$/, '');
+const phoneBase = (process.env.PHONE_BASE_URL || (tlsEnabled ? `https://${lan}:${tlsPort}` : `http://${lan}:${port}`)).replace(/\/$/, '');
 const relay = new SessionRelay(phoneBase);
-const clanWars = new ClanWars((room, message) => relay.sendToTV(room, message));
+const archive = await ClanArchive.open(resolve(process.env.DATA_DIR || '.local/data', 'clans.json'));
+const clanWars = new ClanWars((room, message) => relay.sendToTV(room, message), () => Date.now(), true, archive);
 relay.onTVMessage = (room, message) => clanWars.command(room, message);
 relay.onTVPresence = (room, connected) => clanWars.connected(room, connected);
 const joinAttempts = new Map<string, { count: number; startedAt: number }>();
@@ -45,6 +48,7 @@ async function handle(request: IncomingMessage, response: ServerResponse) {
   }
   try {
     if (pathname === '/api/health') return json(response, 200, { ok: true, name: 'Earned Valor', version: '0.1.0' });
+    if (pathname === '/api/clans' && request.method === 'GET') return json(response, 200, { ...archive.snapshot(), warning: archive.error });
     if (pathname === '/api/config') return json(response, 200, { phoneBase, httpPort: port, httpsPort: tlsPort, lan });
     if (pathname === '/api/sessions' && request.method === 'POST') return json(response, 201, relay.create());
     if (pathname === '/api/join' && request.method === 'POST') {
@@ -68,11 +72,15 @@ async function handle(request: IncomingMessage, response: ServerResponse) {
       if (extname(pathname)) return json(response, 404, { error: 'Asset not found.' });
       path = resolve(distRoot, 'index.html');
     }
-    response.writeHead(200, { 'Content-Type': `${mime[extname(path)] || 'application/octet-stream'}${['.html', '.js', '.css'].includes(extname(path)) ? '; charset=utf-8' : ''}` });
+    const cache = extname(path) === '.html' || pathname.startsWith('/vision/') ? 'no-cache' : /-[\w-]{8}\.(js|css|woff2)$/.test(pathname) ? 'public, max-age=31536000, immutable' : 'public, max-age=3600';
+    response.writeHead(200, { 'Cache-Control': cache, 'Content-Type': `${mime[extname(path)] || 'application/octet-stream'}${['.html', '.js', '.css'].includes(extname(path)) ? '; charset=utf-8' : ''}` });
     response.end(await readFile(path));
   } catch (error) { json(response, 400, { error: error instanceof Error ? error.message : 'Request failed.' }); }
 }
 
+const server = http.createServer((req, res) => { void handle(req, res); });
+let secure: https.Server | null = null;
+if (tlsEnabled) {
 const tlsRoot = resolve('.local/tls');
 await mkdir(tlsRoot, { recursive: true });
 const certFile = resolve(tlsRoot, 'cert.pem'), keyFile = resolve(tlsRoot, 'key.pem');
@@ -85,12 +93,12 @@ if (!existsSync(certFile) || !existsSync(keyFile)) {
   });
   await writeFile(certFile, cert.cert); await writeFile(keyFile, cert.private, { mode: 0o600 });
 }
-const server = http.createServer((req, res) => { void handle(req, res); });
-const secure = https.createServer({ cert: await readFile(certFile), key: await readFile(keyFile) }, (req, res) => { void handle(req, res); });
-relay.attach(server); relay.attach(secure);
+secure = https.createServer({ cert: await readFile(certFile), key: await readFile(keyFile) }, (req, res) => { void handle(req, res); });
+}
+relay.attach(server); if (secure) relay.attach(secure);
 server.listen(port, '0.0.0.0', () => {
   console.log(`\nEarned Valor is ready.\n  Desktop TV preview: http://localhost:${port}\n  Android emulator:   http://10.0.2.2:${port}\n  Phone over Wi-Fi:   ${phoneBase}/phone\n  Phone over USB:     http://localhost:${port}/phone\n\nWi-Fi uses a local development certificate. USB localhost requires adb reverse; run npm run phone:usb.\n`);
 });
-secure.listen(tlsPort, '0.0.0.0');
-const shutdown = async () => { clanWars.close(); relay.close(); await vite?.close(); server.close(); secure.close(); process.exit(0); };
+secure?.listen(tlsPort, '0.0.0.0');
+const shutdown = async () => { clanWars.close(); relay.close(); await archive.flush(); await vite?.close(); server.close(); secure?.close(); process.exit(0); };
 process.once('SIGINT', shutdown); process.once('SIGTERM', shutdown);

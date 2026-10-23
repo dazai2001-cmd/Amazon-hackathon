@@ -36,3 +36,7 @@ Fifteen focused tests cover framing, portrait/landscape image aspect, all variat
 - [MediaPipe Pose Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker): joint positions and visibility support movement analysis. Monocular estimated landmarks are not an anatomical assessment.
 - [NHS strength exercises](https://www.nhs.uk/live-well/exercise/strength-exercises/): gradual repetition increases, comfortable squat ranges and controlled wall press-ups inform the exercise choices. Our short demo targets differ from its exercise routines.
 - [CDC adult activity guidance](https://www.cdc.gov/physical-activity-basics/guidelines/adults.html): regular strengthening is one part of physical activity. This two-exercise routine does not cover all major muscle groups or replace broader activity.
+
+## Progress and family profiles
+
+Choose a squire from the main-menu header. Up to six local profiles retain independent training, story, gear and movement calibration; original saves migrate to the first Squire. View progress from the main menu or Training header for a three-day weekly goal, recent real circuits, rank milestones and the actual damage/recovery bonuses. Preview routines never contribute to the weekly goal or earn XP. Up to 62 practice days survive truncation of the detailed 20-session history. XP remains capped at 60 per eligible day and bonuses remain bounded.

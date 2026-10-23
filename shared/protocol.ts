@@ -1,6 +1,6 @@
 export type Landmark = { x: number; y: number; z: number; visibility: number };
 export type TrackingModel = 'lite' | 'full';
-export type PoseFrame = { type: 'pose'; seq: number; t: number; landmarks: Landmark[]; fps: number; imageAspect?: number; worldLandmarks?: Landmark[]; tracking?: { model: TrackingModel; delegate: 'GPU' | 'CPU'; inferenceMs: number } };
+export type PoseFrame = { type: 'pose'; seq: number; t: number; landmarks: Landmark[]; fps: number; imageAspect?: number; worldLandmarks?: Landmark[]; tracking?: { model: TrackingModel; delegate: 'GPU' | 'CPU'; inferenceMs: number; execution?: 'worker' | 'main' } };
 export type MovementMode = 'standing' | 'seated';
 import type { ArenaError, ArenaState } from './multiplayer';
 export type Activity = 'home' | 'play' | 'coach' | 'calibrate' | 'chapter' | 'arena' | 'training';
@@ -11,6 +11,7 @@ export type ServerMessage =
   | { type: 'presence'; phoneConnected: boolean; tvConnected: boolean }
   | { type: 'error'; message: string }
   | { type: 'pong'; t: number }
+  | { type: 'pose-ack'; seq: number; t: number }
   | Command
   | ArenaState
   | ArenaError
@@ -34,7 +35,8 @@ export function isPoseFrame(value: unknown): value is PoseFrame {
         && Number.isFinite(p.visibility) && p.visibility >= 0 && p.visibility <= 1))
     && (frame.tracking === undefined || Boolean(frame.tracking && ['lite', 'full'].includes(frame.tracking.model)
       && ['GPU', 'CPU'].includes(frame.tracking.delegate) && Number.isFinite(frame.tracking.inferenceMs)
-      && frame.tracking.inferenceMs >= 0 && frame.tracking.inferenceMs <= 2000));
+      && frame.tracking.inferenceMs >= 0 && frame.tracking.inferenceMs <= 2000
+      && (frame.tracking.execution === undefined || ['worker', 'main'].includes(frame.tracking.execution))));
 }
 
 export function isCommand(value: unknown): value is Command {

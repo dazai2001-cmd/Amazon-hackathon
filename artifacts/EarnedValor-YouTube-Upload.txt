@@ -1,0 +1,29 @@
+TITLE
+Earned Valor | Fire TV Fitness Adventure — Skeleton-Controlled Demo
+
+DESCRIPTION
+Train your body. Forge your legend.
+
+Earned Valor is a medieval fitness adventure designed for Fire TV. Meet Sir Alden in Chapter I: The First Oath, practise sword-and-shield combat, complete guided squat and push-up routines, and compete in local clan matches.
+
+This demonstration records the native Android TV APK running in an emulator. A synthetic skeleton sends pose landmarks through the real relay and game rules. No live phone camera or human exercise accuracy is demonstrated. The skeleton panel is drawn from the same recorded pose stream supplied to the game. Clan Wars uses two scripted controllers; the server resolves the health, result and clan score. Training and rest are shortened in the edit. Progress shown belongs to an isolated test profile.
+
+Live phone-camera accuracy and physical Fire TV performance remain to be validated. The prototype uses a local Node server; this is not a public internet matchmaking demonstration.
+
+The video includes offline synthetic narration and the project's original music. See THIRD_PARTY.md in the repository for asset and tool attribution.
+
+Source and setup: https://github.com/dazai2001-cmd/Amazon-hackathon
+
+CHAPTERS
+00:00 Earned Valor
+00:12 Synthetic skeleton demo
+00:22 The First Oath
+00:33 Sword and shield controls
+00:46 Timing, guard and stamina
+00:58 Tracking interruption recovery
+01:08 Alden's training hall
+01:19 Rejected and counted repetitions
+01:33 Push-up calibration and reps
+01:45 Local progression
+01:56 Clan Wars
+02:09 What comes next

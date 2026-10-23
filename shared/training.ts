@@ -193,7 +193,7 @@ export class TrainingCoach {
 }
 
 export type TrainingLog = { id: string; day: string; reps: number; sets: number; rejected: number; preview: boolean; rewarded: boolean };
-export type TrainingSave = { version: 1; xp: number; lastRewardDay: string | null; preference: TrainingPreference; history: TrainingLog[] };
+export type TrainingSave = { version: 1; xp: number; lastRewardDay: string | null; preference: TrainingPreference; history: TrainingLog[]; practiceDays?: string[] };
 export const newTrainingSave = (): TrainingSave => ({ version: 1, xp: 0, lastRewardDay: null, preference: { ...DEFAULT_PREFERENCE }, history: [] });
 export function readTrainingSave(value: unknown): TrainingSave {
   const fallback = newTrainingSave();
@@ -202,20 +202,38 @@ export function readTrainingSave(value: unknown): TrainingSave {
   if (s.version !== 1 || !Number.isInteger(s.xp) || s.xp < 0 || s.xp > 1140 || !p || !['start', 'steady'].includes(p.pace)
     || !['shallow', 'regular'].includes(p.squat) || !['wall', 'knees', 'floor'].includes(p.pushup) || !['same', 'lighter', 'ready'].includes(p.effort)
     || s.lastRewardDay !== null && (typeof s.lastRewardDay !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s.lastRewardDay))
+    || s.practiceDays !== undefined && (!Array.isArray(s.practiceDays) || s.practiceDays.length > 62 || s.practiceDays.some(day => typeof day !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(day)))
     || !Array.isArray(s.history) || s.history.length > 20 || s.history.some(h => !h || typeof h.id !== 'string' || h.id.length > 80 || !/^\d{4}-\d{2}-\d{2}$/.test(h.day)
       || !Number.isInteger(h.reps) || h.reps < 0 || h.reps > 60 || !Number.isInteger(h.sets) || h.sets < 0 || h.sets > 6
       || !Number.isInteger(h.rejected) || h.rejected < 0 || h.rejected > 10000 || typeof h.preview !== 'boolean' || typeof h.rewarded !== 'boolean')) return fallback;
-  return { ...s, preference: { ...p }, history: s.history.map(h => ({ ...h })) };
+  return { ...s, preference: { ...p }, history: s.history.map(h => ({ ...h })), practiceDays: [...new Set(s.practiceDays || s.history.filter(h => !h.preview).map(h => h.day))].sort().slice(-62) };
 }
 export function trainingStats(save: TrainingSave) {
   const strength = 1 + Math.min(4, Math.floor(save.xp / 60));
   return { level: 1 + Math.floor(save.xp / 60), strength, endurance: strength, damageBonus: (strength - 1) * .02, recoveryBonus: (strength - 1) * .025 };
 }
+/** Calendar days come from the player's browser, never from the server's timezone. */
+export function trainingProgress(save: TrainingSave, day: string) {
+  const date = new Date(`${day}T12:00:00Z`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || !Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== day) throw new Error('Choose a valid calendar day.');
+  date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 6) % 7);
+  const weekStart = date.toISOString().slice(0, 10);
+  const history = save.history.filter(h => !h.preview && h.day <= day);
+  const days = new Set([...(save.practiceDays || []), ...history.map(h => h.day)].filter(practicedDay => practicedDay >= weekStart && practicedDay <= day));
+  const stats = trainingStats(save);
+  return { weekStart, days: days.size, goal: 3, reps: history.reduce((sum, h) => sum + h.reps, 0),
+    recent: history.slice(-7).reverse(), xpToNext: save.xp >= 1140 ? 0 : 60 - save.xp % 60,
+    rank: save.xp >= 600 ? 'Order champion' : save.xp >= 180 ? 'Oathkeeper' : 'Squire',
+    nextRank: save.xp < 180 ? 'Oathkeeper' : save.xp < 600 ? 'Order champion' : null,
+    xpToRank: save.xp < 180 ? 180 - save.xp : save.xp < 600 ? 600 - save.xp : 0,
+    damagePercent: Math.round(stats.damageBonus * 100), recoveryPercent: Math.round(stats.recoveryBonus * 100) };
+}
 export function completeTraining(save: TrainingSave, coach: TrainingCoach, id: string, day: string, preview: boolean): TrainingSave {
   if (coach.state.phase !== 'complete' || save.history.some(h => h.id === id) || !/^\d{4}-\d{2}-\d{2}$/.test(day)) return save;
   const rewarded = !preview && (save.lastRewardDay === null || day > save.lastRewardDay) && save.xp < 1140;
   const log: TrainingLog = { id, day, preview, rewarded, reps: coach.state.totalReps, sets: coach.state.completedSets, rejected: Math.min(10000, coach.state.rejected) };
-  return { ...save, xp: Math.min(1140, save.xp + (rewarded ? 60 : 0)), lastRewardDay: rewarded ? day : save.lastRewardDay, history: [...save.history, log].slice(-20) };
+  const practiceDays = [...new Set([...(save.practiceDays || save.history.filter(h => !h.preview).map(h => h.day)), ...(!preview ? [day] : [])])].sort().slice(-62);
+  return { ...save, xp: Math.min(1140, save.xp + (rewarded ? 60 : 0)), lastRewardDay: rewarded ? day : save.lastRewardDay, history: [...save.history, log].slice(-20), practiceDays };
 }
 
 // A synthetic side view for the labelled desktop preview and deterministic

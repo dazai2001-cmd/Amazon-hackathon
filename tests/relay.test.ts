@@ -46,6 +46,11 @@ test('relay enforces tokens, origins, device roles, sequence order, and one phon
   assert.deepEqual(tv.messages.filter(m => m.type === 'pose').map(m => m.seq), [0, 1]);
   assert.deepEqual(tv.messages.find(m => m.type === 'pose').worldLandmarks, pose.worldLandmarks);
   assert.equal(tv.messages.find(m => m.type === 'pose').imageAspect, pose.imageAspect);
+  tv.ws.send(JSON.stringify({ type: 'pose-ack', seq: 1, t: 100, injected: 'not forwarded' }));
+  const ack = await phone.until(m => m.type === 'pose-ack');
+  assert.deepEqual(ack, { type: 'pose-ack', seq: 1, t: 100 });
+  phone.ws.send(JSON.stringify({ type: 'pose-ack', seq: 1, t: 100 }));
+  await phone.until(m => m.type === 'error' && m.message.includes('Unsupported'));
   tv.ws.send(JSON.stringify(pose)); await tv.until(m => m.type === 'error' && m.message.includes('Unsupported'));
   tv.ws.send(JSON.stringify({ type: 'command', action: 'activity', value: 'play' }));
   await phone.until(m => m.type === 'command' && m.value === 'play');

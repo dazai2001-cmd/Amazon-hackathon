@@ -77,6 +77,9 @@ export class SessionRelay {
       } else if (role === 'phone' && isPoseFrame(message)) {
         if (message.seq <= lastSequence) return;
         lastSequence = message.seq; this.send(room.tv, message);
+      } else if (role === 'tv' && message && typeof message === 'object' && (message as { type?: string }).type === 'pose-ack') {
+        const ack = message as { seq: number; t: number };
+        if (Number.isSafeInteger(ack.seq) && ack.seq >= 0 && Number.isFinite(ack.t) && ack.t >= 0) this.send(room.phone, { type: 'pose-ack', seq: ack.seq, t: ack.t });
       } else if (role === 'tv' && isCommand(message)) this.send(room.phone, message);
       else if (role === 'tv' && this.onTVMessage?.(room.code, message)) { /* Authenticated game commands. */ }
       else this.send(ws, { type: 'error', message: 'Unsupported message for this device.' });

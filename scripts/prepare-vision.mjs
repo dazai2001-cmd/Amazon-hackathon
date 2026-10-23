@@ -9,6 +9,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const source = join(root, 'node_modules/@mediapipe/tasks-vision/wasm');
 const destination = join(root, 'public/vision/wasm');
 await mkdir(destination, { recursive: true });
+await copyFile(join(root, 'node_modules/@mediapipe/tasks-vision/vision_bundle.js'), join(root, 'public/vision/runtime.js'));
 if (existsSync(source)) {
   for (const file of await readdir(source)) {
     if ((await stat(join(source, file))).isFile()) await copyFile(join(source, file), join(destination, file));

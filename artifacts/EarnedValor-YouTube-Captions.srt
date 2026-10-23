@@ -1,0 +1,119 @@
+1
+00:00:00,150 --> 00:00:04,005
+This is Earned Valor: train your body, forge your legend.
+
+2
+00:00:04,005 --> 00:00:10,945
+A medieval fitness adventure for Fire TV, with a voiced story, sword and shield combat, and clan competition.
+
+3
+00:00:12,217 --> 00:00:16,196
+This video uses a synthetic skeleton instead of a live camera.
+
+4
+00:00:16,196 --> 00:00:21,262
+The game footage is recorded from the native Android TV app in an emulator.
+
+5
+00:00:22,517 --> 00:00:26,525
+Chapter One, The First Oath, introduces Sir Alden and Mara.
+
+6
+00:00:26,525 --> 00:00:32,138
+Explore the courtyard, follow objectives, and choose how your squire responds in the story.
+
+7
+00:00:33,417 --> 00:00:38,774
+The skeleton on the right sends the same movement landmarks used by the phone controller.
+
+8
+00:00:38,774 --> 00:00:42,703
+The right hand guides the sword; the left places the shield.
+
+9
+00:00:42,703 --> 00:00:44,489
+Menus support the TV remote.
+
+10
+00:00:45,750 --> 00:00:46,998
+Combat rewards timing.
+
+11
+00:00:46,998 --> 00:00:52,406
+Cover the incoming attack line, watch stamina, and counter when an opening appears.
+
+12
+00:00:52,406 --> 00:00:56,566
+Health and sword reach determine whether a deliberate sweep lands.
+
+13
+00:00:57,817 --> 00:01:00,661
+When movement tracking disappears, both fighters wait.
+
+14
+00:01:00,661 --> 00:01:06,756
+Reacquiring the skeleton resumes the duel without turning the missing interval into an extra strike.
+
+15
+00:01:08,017 --> 00:01:13,303
+Alden's training hall builds a routine around squat and push up variations.
+
+16
+00:01:13,303 --> 00:01:18,150
+Each exercise calibrates its starting and lower positions before counting begins.
+
+17
+00:01:19,417 --> 00:01:21,561
+A partial movement is rejected.
+
+18
+00:01:21,561 --> 00:01:25,420
+A controlled lower and full return count one repetition.
+
+19
+00:01:25,420 --> 00:01:32,281
+These are synthetic test poses exercising the real counting rules, rather than measurements of a person.
+
+20
+00:01:33,550 --> 00:01:37,127
+After the prescribed rest, the next exercise calibrates separately.
+
+21
+00:01:37,127 --> 00:01:44,281
+This recording shortens the routine and rest, while the app keeps the required sets and full movement cycles.
+
+22
+00:01:45,550 --> 00:01:49,222
+The completed test circuit appears in this demo profile.
+
+23
+00:01:49,222 --> 00:01:55,342
+Local squires keep separate story and training saves, with weekly practice goals and bounded progression.
+
+24
+00:01:56,617 --> 00:02:00,114
+Clan Wars pairs one to three fighters per side.
+
+25
+00:02:00,114 --> 00:02:03,611
+Here, two scripted skeleton controllers demonstrate the shared match.
+
+26
+00:02:03,611 --> 00:02:07,497
+The server resolves health, the result, and the clan score.
+
+27
+00:02:08,750 --> 00:02:12,879
+Earned Valor connects practice with an adventure worth returning to.
+
+28
+00:02:12,879 --> 00:02:20,310
+The current prototype runs locally, with live camera accuracy and physical Fire TV performance still to be validated.
+
+29
+00:02:20,310 --> 00:02:21,548
+Train your body.
+
+30
+00:02:21,548 --> 00:02:22,787
+Forge your legend.

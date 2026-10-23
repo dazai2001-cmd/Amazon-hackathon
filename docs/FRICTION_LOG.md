@@ -12,7 +12,7 @@ Prepared 13 October 2026 for the Fire TV submission. This log records observed e
 - **Workaround/fix:** intercept media keys in `dispatchKeyEvent` and forward the pause action to the web interface. Native verification confirmed the overlay opened with keycode 85.
 - **Actionable suggestion:** provide a Fire TV WebView starter example that handles D-pad, Select, Back and media keys, including key-up, focused controls and modal navigation.
 - **Status:** resolved in the application.
-- **Evidence:** [initial native checks](../artifacts/test-report.md), [current remote controls checks](../artifacts/remote-controls-test-report.md).
+- **Evidence:** [native remote controls checks](../artifacts/remote-controls-test-report.md).
 
 ## 2. Remote text entry needed explicit focus ownership
 
@@ -53,3 +53,7 @@ Prepared 13 October 2026 for the Fire TV submission. This log records observed e
 ## Validation boundary
 
 The regular suite currently passes 112 tests. The additional camera fault-injection cases above are outside that suite and still identify outstanding work. Emulator and recorded-input evidence does not establish human exercise accuracy, live phone latency or physical Fire TV performance.
+
+## 14 October follow-up
+
+The inference-invalidation and replacement-camera cleanup issues in entry 4 are resolved and included in the regular camera regressions. A real-browser test verifies cancellation/replacement lifecycle. Testing also exposed a delayed-focus race during rapid remote profile entry and an abandoned WebSocket during React development remounts; both are fixed. These are application integration issues. Physical-phone accuracy and hardware performance remain pending.

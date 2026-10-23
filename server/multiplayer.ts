@@ -1,5 +1,6 @@
 import { randomBytes, randomInt } from 'node:crypto';
 import { HumanDuel, readArenaInput, type ArenaCommand, type ArenaState, type ClanMember } from '../shared/multiplayer';
+import type { ClanArchive } from './clanArchive';
 
 type Member = ClanMember & { room: string; lastSeen: number; pauseAt: number | null };
 type Pairing = { members: [string, string]; duel: HumanDuel; scored: boolean; missingSince: [number | null, number | null] };
@@ -13,7 +14,7 @@ export class ClanWars {
   private timer: ReturnType<typeof setInterval> | null = null;
   private lastTick: number;
   private broadcastAt = 0;
-  constructor(private send: (room: string, message: object) => void, private clock = () => Date.now(), autoTick = true) {
+  constructor(private send: (room: string, message: object) => void, private clock = () => Date.now(), autoTick = true, private archive?: ClanArchive) {
     this.lastTick = clock();
     if (autoTick) { this.timer = setInterval(() => this.tick(clock()), 1000 / 30); this.timer.unref(); }
   }
@@ -40,7 +41,7 @@ export class ClanWars {
       if (!alias || !clan || ![1, 2, 3].includes(message.size) || this.wars.size >= 100) { this.error(room, 'Choose a fighter name, clan name and one to three fighters per clan.'); return true; }
       let code: string; do { code = Array.from({ length: 6 }, () => alphabet[randomInt(alphabet.length)]).join(''); } while (this.wars.has(code));
       const member = this.member(room, alias, 0), war: War = { code, leader: member.id, size: message.size, phase: 'lobby', clans: [clan, 'Challengers'], members: [member], pairs: [], score: [0, 0], winner: null, createdAt: this.clock() };
-      this.wars.set(code, war); this.membership.set(room, { war, member }); this.publish(war); return true;
+      this.wars.set(code, war); this.membership.set(room, { war, member }); this.archive?.register(clan, [alias], this.clock()); this.publish(war); return true;
     }
     if (message.action === 'join') {
       if (found) { this.error(room, 'Leave your current war before joining another.'); return true; }
@@ -48,7 +49,7 @@ export class ClanWars {
       if (!alias || !clan || !war || war.phase !== 'lobby' || ![0, 1].includes(message.team)) { this.error(room, 'That war is unavailable. Check the invite code and names.'); return true; }
       if (war.members.filter(m => m.team === message.team).length >= war.size) { this.error(room, 'That clan roster is full.'); return true; }
       if (message.team === 1 && !war.members.some(m => m.team === 1)) war.clans[1] = clan;
-      const member = this.member(room, alias, message.team); war.members.push(member); if (!war.leader && message.team === 0) war.leader = member.id; this.membership.set(room, { war, member }); this.publish(war); return true;
+      const member = this.member(room, alias, message.team); war.members.push(member); this.archive?.register(war.clans[message.team], [alias], this.clock()); if (!war.leader && message.team === 0) war.leader = member.id; this.membership.set(room, { war, member }); this.publish(war); return true;
     }
     if (!found) { this.error(room, 'Create or join a clan war first.'); return true; }
     const { war, member } = found; member.lastSeen = this.clock();
@@ -119,7 +120,11 @@ export class ClanWars {
             else war.score[war.members.find(m => m.id === pair.duel.winner)!.team]++;
           }
         }
-        if (war.pairs.every(pair => pair.scored)) { war.phase = 'complete'; war.winner = war.score[0] === war.score[1] ? 'draw' : war.score[0] > war.score[1] ? 0 : 1; }
+        if (war.pairs.every(pair => pair.scored)) {
+          war.phase = 'complete'; war.winner = war.score[0] === war.score[1] ? 'draw' : war.score[0] > war.score[1] ? 0 : 1;
+          this.archive?.record({ id: `${war.code.toLowerCase()}-${war.createdAt}`, completedAt: now, clans: [...war.clans], score: [...war.score], size: war.size,
+            winner: war.winner, fighters: ([0, 1] as const).flatMap(team => war.members.filter(m => m.team === team).map(m => m.name)) });
+        }
       }
       if (now - this.broadcastAt >= 65) this.publish(war);
     }

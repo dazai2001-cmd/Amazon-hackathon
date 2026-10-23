@@ -1,5 +1,8 @@
 import type { PoseLandmarker } from '@mediapipe/tasks-vision';
-import type { TrackingModel } from '../../shared/protocol';
+import type { Landmark, TrackingModel } from '../../shared/protocol';
+
+export const normalizeLandmarks = (points: { x: number; y: number; z: number; visibility?: number }[]): Landmark[] =>
+  points.map(p => ({ x: p.x, y: p.y, z: p.z, visibility: Math.max(0, Math.min(1, p.visibility ?? 0)) }));
 
 /** Shared by the phone and the recorded-input diagnostic. */
 export async function loadPoseTracker(runningMode: 'IMAGE' | 'VIDEO' = 'VIDEO', delegate: 'GPU' | 'CPU' = 'GPU', model: TrackingModel = 'full'): Promise<{ tracker: PoseLandmarker; delegate: 'GPU' | 'CPU'; model: TrackingModel }> {

@@ -1,5 +1,7 @@
 # Movement stream audit — 13 October 2026
 
+**Follow-up, 14 October 2026:** both reproduced risks below are now fixed. `tests/camera.test.ts` covers invalidation, CPU recovery, bounded failure, late model/media completion, replacement ownership and hidden pages. Browser checks mount PhoneApp and exercise cancelling one pending camera request before starting its replacement. This document preserves the original observations; its old line numbers and isolated synchronous helper describe the earlier implementation. Live phone accuracy remains unverified.
+
 Requested scope: inspect reasons a paired phone might fail to reproduce movement. The entrant clarified that no current camera failure was being reported. This was an audit and fault-injection check; application source was unchanged.
 
 The movement path is phone video → local MediaPipe inference → filtered landmarks → authenticated WebSocket room → fresh TV landmarks → calibration/body checks → game state. Pairing establishes the room connection; it does not establish that fresh, usable poses are reaching an active game.

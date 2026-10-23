@@ -1,6 +1,6 @@
 # Earned Valor — product feedback draft for review
 
-Prepared 13 October 2026 from repository implementation and test reports. This is a local draft, not feedback already entered in Devpost. Review the suggested reuse decisions and add your own account setup and phone rehearsal experience before submission.
+Updated 23 October 2026 from implementation and test evidence. The public Devpost project is associated with the hackathon, but saved private feedback cannot be verified from its public page. Use these answers to check the submitted form. Phone testing is treated complete at Rahul's instruction; device-specific measurements and personal reuse decisions must reflect his actual experience.
 
 The five form answers, optional challenge selections, feature requests and AI disclosure are collected in [DEVPOST_ADDITIONAL_FIELDS.md](DEVPOST_ADDITIONAL_FIELDS.md). The optional URL field can point to [FRICTION_LOG.md](FRICTION_LOG.md), which contains reproduction steps and supporting evidence.
 
@@ -26,7 +26,7 @@ The [official submission requirements](https://amazonappdev2026.devpost.com/rule
 
 **Needs work / limitations:** framing and joint visibility directly affect the game. Estimated monocular depth is not a precise physical sword measurement. Exercise coaching needs a calibrated side view and separate visibility/range/timing rules; pose output alone cannot certify form. Actual phone inference speed, exercise accuracy and full camera-to-display latency still need measurement.
 
-Separate fault-injection checks also found application integration defects in runtime inference recovery and camera-session cleanup. Those fixes remain outstanding; they are documented in [the camera audit](../artifacts/camera-stream-audit.md), rather than attributed to a demonstrated MediaPipe defect.
+Separate fault-injection checks also found application integration defects in runtime inference recovery and camera-session cleanup. Those fixes were implemented on 14 October and are covered by regular and browser regressions; they are documented in [the camera audit](../artifacts/camera-stream-audit.md), rather than attributed to a demonstrated MediaPipe defect.
 
 **Onboarding:** prepare the model and WASM assets, obtain camera permission in a secure context, choose the delegate and feed video frames into the task. USB localhost is a useful development route; Wi-Fi requires HTTPS. First-load camera/model setup needs a clear user guide.
 
@@ -38,7 +38,7 @@ Separate fault-injection checks also found application integration defects in ru
 
 **Worked well:** the native renderer reached a verified Full HD buffer and the scene runs in both browser and emulator. Reusable geometry and model loading let combat, exploration and multiplayer use a common view.
 
-**Needs work / limitations:** visual fidelity and device performance depend on our asset budget, rigging, animation and renderer settings. The opponent uses a temporary model. Projected sword-tip hit checks are application logic; they are not full physical weapon contact. Physical Fire TV profiling remains outstanding.
+**Needs work / limitations:** visual fidelity and device performance depend on our asset budget, rigging, animation and renderer settings. The opponent now uses an original lightweight articulated model. Projected sword-tip hit checks are application logic; they are not full physical weapon contact. Physical Fire TV profiling remains outstanding.
 
 **Onboarding:** begin with the scene/camera/renderer, load model assets and connect the simulation snapshots. The project separately handles drawing-buffer density, resize and a 720p performance option.
 
@@ -62,7 +62,7 @@ Separate fault-injection checks also found application integration defects in ru
 
 **Worked well:** real two-client relay tests verify shared health and results. Malformed messages, device replacement, excessive traffic and oversized packets are handled without crashing the other participant's room. The local/LAN route supports the laptop-and-monitor demo.
 
-**Needs work / limitations:** this prototype keeps rooms and clans in server memory, with expiry and reconnection behavior. Hosted matchmaking, persistent accounts and durable results are additional product work. A development HTTPS certificate adds Wi-Fi setup friction; the USB localhost route simplifies the local camera demo. These are deployment/design limitations, not evidence of a ws defect.
+**Needs work / limitations:** active rooms and wars remain in server memory with expiry and reconnection behavior; clan names, members and completed results now persist on disk. Hosted matchmaking and account-backed membership remain additional product work. A development HTTPS certificate adds Wi-Fi setup friction; USB localhost is an optional way to simplify local camera setup. These are deployment/design limitations, not evidence of a ws defect.
 
 **Onboarding:** start the server, pair the phone, join the war with its separate invite and send bounded control packets. The project supplies scripts and documented local ports. Tests need loopback network access.
 
@@ -72,7 +72,7 @@ Separate fault-injection checks also found application integration defects in ru
 
 **Use:** typed shared protocols and simulations, browser builds, server execution and automated tests.
 
-**Worked well:** the production build and type checking pass. The suite has 112 passing tests, including real relay integration and deterministic training/combat interruption cases. Shared logic can be exercised independently of the 3D view.
+**Worked well:** the production build and type checking pass. The suite has 128 passing tests, including real relay integration and deterministic training/combat interruption cases. Shared logic can be exercised independently of the 3D view.
 
 **Needs work / limitations:** automated synthetic cases do not establish human exercise accuracy or hardware latency. The build emits Lucide module-directive warnings; the production build completes. Recorded and live device checks remain separate evidence.
 
@@ -81,6 +81,8 @@ Separate fault-injection checks also found application integration defects in ru
 **Suggested reuse answer:** Yes, because type checking and fast simulation tests helped catch errors during iteration.
 
 ## Kokoro-82M and kokoro-onnx
+
+The same local stock-voice tooling also supplies the clearly synthetic narration for the uploaded native-emulator demonstration.
 
 **Use:** build-time generation of prerecorded story dialogue and trainer/counting cues using stock synthetic voice presets. The running game plays audio assets and does not call a speech model or language model.
 
@@ -91,6 +93,18 @@ Separate fault-injection checks also found application integration defects in ru
 **Onboarding:** the local model and build-time Python tooling produce files that are then included in the web assets. License notices and cast presets are documented. Runtime setup does not download the speech model.
 
 **Suggested reuse answer:** Yes, for licensed, scripted prototype dialogue; review voice quality during the final recording.
+
+## Browser verification, CI and video preparation
+
+**Use:** Playwright runs 10 browser checks covering navigation, pairing, camera lifecycle, profiles and rendering. GitHub Actions is configured for software/browser checks and an Android APK build. FFmpeg and Python/Pillow prepare the narrated demo and visualize its recorded synthetic pose stream.
+
+**Worked well:** browser checks reproduced camera replacement and cancellation behavior in a real browser. The final video exports as a 143.961-second 1080p H.264/AAC file with captions and original project music. Signed-out YouTube playback and the Devpost embed work.
+
+**Needs work:** automated and synthetic inputs cannot quantify human exercise accuracy or physical TV performance. Emulator WebView updates can interrupt recording takes; the affected take was repeated after its update. The uploaded video's Unlisted setting should be changed to Public for the final requirement check.
+
+**Onboarding:** install Playwright's browser on other machines, run the supplied verification commands, and configure the Android toolchain for the APK job. Video preparation uses installed local tools and stock offline speech assets, with no runtime speech dependency in the game.
+
+**Suggested reuse:** Yes, for reproducible browser regressions, automated build checks and clear demonstrations, while preserving separate real-device validation.
 
 ## Supporting interface libraries
 
@@ -112,4 +126,4 @@ Generated artwork, the temporary Sentinel model and original synthesized effects
 
 ## Entrant review still needed
 
-Add your completed Amazon account/identity onboarding experience; actual Android phone framing, model startup and exercise results after rehearsal; any measured end-to-end latency; and your own decision on which tools you would use again. Update the status of the two camera fixes when implemented and retested. Keep physical Fire TV claims limited to tests actually performed. Submit the reviewed feedback as part of the Devpost entry.
+Add your completed Amazon account/identity onboarding experience; actual Android phone framing, model startup and exercise results after rehearsal; any measured end-to-end latency; and your own decision on which tools you would use again. Both camera fixes are now implemented and covered by regression checks; retain the real-phone rehearsal results as separate evidence. Keep physical Fire TV claims limited to tests actually performed. Submit the reviewed feedback as part of the Devpost entry.

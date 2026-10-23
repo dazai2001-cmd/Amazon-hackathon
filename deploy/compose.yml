@@ -1,0 +1,29 @@
+services:
+  game:
+    build:
+      context: ..
+    environment:
+      PHONE_BASE_URL: https://${PUBLIC_HOST:?Set PUBLIC_HOST to your domain}
+      TLS_ENABLED: 'false'
+      DATA_DIR: /app/.local/data
+    volumes:
+      - game-data:/app/.local/data
+    restart: unless-stopped
+  https:
+    image: caddy:2-alpine
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      PUBLIC_HOST: ${PUBLIC_HOST:?Set PUBLIC_HOST to your domain}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - https-data:/data
+      - https-config:/config
+    depends_on:
+      - game
+    restart: unless-stopped
+volumes:
+  game-data:
+  https-data:
+  https-config:

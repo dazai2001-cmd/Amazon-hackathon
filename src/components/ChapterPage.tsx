@@ -6,12 +6,14 @@ import { conversations, dialogueLine, newStoryProgress, questText, readStoryProg
 import { spawn, type WorldState } from '../../shared/courtyard';
 import type { CalibrationProfile } from '../../shared/motion';
 import type { Landmark } from '../../shared/protocol';
+import CombatFeedback from './CombatFeedback';
 import FirstPersonArena, { type ArenaFrame, type ArenaStatus } from './FirstPersonArena';
 import { ChapterAudio, type AudioMix, type VoiceState } from '../lib/chapterAudio';
 import TrainingHall from './TrainingHall';
 import type { GuideTopic } from '../lib/playerGuide';
 import type { RenderResolution } from '../lib/renderResolution';
 import { trainingStats, type TrainingBlock, type TrainingSave } from '../../shared/training';
+import { playerStorage } from '../lib/playerStorage';
 import './chapter.css';
 import './adventure.css';
 
@@ -20,7 +22,7 @@ type Stage = 'title' | 'memory' | 'explore' | 'dialogue' | 'lesson' | 'briefing'
 type Lesson = 'shield' | 'cut' | 'evade';
 const EMPTY_POSE: Landmark[] = [];
 const art = '/assets/medieval/';
-const readStored = <T,>(key: string, parse: (value: unknown) => T): T => { try { return parse(JSON.parse(localStorage.getItem(key) || 'null')); } catch { return parse(null); } };
+const readStored = <T,>(key: string, parse: (value: unknown) => T): T => { try { return parse(JSON.parse(playerStorage.getItem(key) || 'null')); } catch { return parse(null); } };
 const speakerName = (speaker: string) => ({ ALDEN: 'Sir Alden Vale', MARA: 'Mara Venn', TOMAS: 'Tomas', HERALD: 'The royal herald', 'REMEMBERED VOICE': 'At the Ashen Gate', YOU: 'You' }[speaker] || speaker);
 const portraitFor = (speaker: string) => speaker === 'MARA' ? 'rival' : speaker === 'ALDEN' ? 'instructor' : speaker === 'YOU' ? 'squire' : null;
 function Crest({ small = false }: { small?: boolean }) { return <svg className={`ashen-crest ${small ? 'small' : ''}`} viewBox="0 0 48 58" aria-hidden="true"><path d="M5 5H43V31Q39 44 24 53Q9 44 5 31Z"/><path d="M24 15V40M24 30L15 22M24 26L34 17"/></svg>; }
@@ -67,11 +69,11 @@ export default function ChapterPage({ resolution, trainingSave, onTrainingSave: 
   const pointer = useCallback((x: number, y: number) => { if (preview && (stage === 'duel' || stage === 'lesson') && !paused && !journal && !settings && !guideOpen) onPreviewMove({ x, y }); }, [preview, stage, paused, journal, settings, guideOpen, onPreviewMove]);
   const updateSave = useCallback((update: (previous: ChapterSave) => ChapterSave) => {
     const next = update(saveRef.current); saveRef.current = next; setSave(next);
-    try { localStorage.setItem('moveroom.chapter-one.v1', JSON.stringify(next)); } catch { /* Retain session progress. */ }
+    try { playerStorage.setItem('moveroom.chapter-one.v1', JSON.stringify(next)); } catch { /* Retain session progress. */ }
   }, []);
   const updateProgress = useCallback((update: Partial<StoryProgress>) => {
     const next = { ...progressRef.current, ...update }; progressRef.current = next; setProgress(next);
-    try { localStorage.setItem('moveroom.story.v2', JSON.stringify(next)); } catch { /* Retain session progress. */ }
+    try { playerStorage.setItem('moveroom.story.v2', JSON.stringify(next)); } catch { /* Retain session progress. */ }
   }, []);
   const beginConversation = (id: ConversationId) => { audio.current?.stopVoice(); setConversation(id); setNodeKey(conversations[id].nodes[0].key); setSelectedChoice(0); setGuided(0); setStage('dialogue'); };
   const explore = (quest: Quest) => { updateProgress({ quest }); setGuided(0); setStage('explore'); document.querySelector<HTMLCanvasElement>('.first-person-canvas')?.focus(); };
@@ -316,10 +318,11 @@ export default function ChapterPage({ resolution, trainingSave, onTrainingSave: 
     {stage === 'briefing' && <section className="trial-briefing adventure-panel"><span className="chapter-eyebrow">MARA VENN · YOUR FIRST TRIAL</span><h1>Earn the opening.</h1><p>Both fighters have 100 health. Make Mara yield.<br/>Cover her attack line. Time your guard. Answer with a measured cut.</p><div><span><Swords size={18}/>{preview ? 'Mouse / J K L' : 'Right hand + forearm'}<b>BLADE</b></span><span><Shield size={18}/>{preview ? 'Shift + Z / X / C' : 'Left hand'}<b>SHIELD</b></span><span><Footprints size={18}/>{preview ? 'A / D' : 'Late lean'}<b>EVADE</b></span></div><p className="briefing-footwork">{preview ? 'Z left · X high · C right while guarding. J / K / L simulate cuts. W / S control distance. Hold V to crouch.' : 'Your hands place the sword and shield. Step closer or back for bounded footwork. Duck late under a high cut, or lean after she commits. Her attacks come high, left or right. Move your shield into that line, or evade after she commits.'}<br/>A late guard earns a riposte. Swing into a covered line and she will parry. Lower your shield to recover stamina.</p><button data-autofocus className="chapter-button" onClick={startDuel} disabled={!status.ready}>{controllerReady ? 'Begin the trial' : 'Connect your phone'}<ArrowRight size={17}/></button><button className="chapter-text-button" onClick={() => explore('mara')}>Return to the courtyard</button></section>}
 
     {stage === 'duel' && <>
+      <CombatFeedback key={snapshot.event?.id} kind={snapshot.event?.kind} age={eventAge} text={snapshot.feedback}/>
       <div className="rival-hud"><span>ORDER OF THE RED HEARTH</span><h2>Mara Venn</h2><Health name="Mara" value={snapshot.rivalHealth}/><small>GUARD {snapshot.guardLane.toUpperCase()} · {Math.round(snapshot.rivalStamina * 100)}%</small></div>
       <div className="duel-reticle" aria-hidden="true"><i/><i/></div>
       <div className={`duel-telegraph phase-${snapshot.phase}`}><span>{snapshot.phase === 'windup' ? `INCOMING ${snapshot.attackLane.toUpperCase()}` : snapshot.phase === 'recover' ? 'COUNTER NOW' : snapshot.phase === 'strike' ? `COVER ${snapshot.attackLane.toUpperCase()}` : 'READ HER BLADE'}</span><div><i style={{ width: `${snapshot.phase === 'windup' ? snapshot.phaseTime / snapshot.phaseDuration * 100 : snapshot.phase === 'recover' ? (1 - snapshot.phaseTime / snapshot.phaseDuration) * 100 : 0}%` }}/></div></div>
-      <div className="combat-lines" aria-label={`Attack line ${snapshot.attackLane}; shield position ${snapshot.shielding ? 'raised' : 'lowered'}`}><span className={snapshot.attackLane === 'high' ? 'incoming' : ''}>HIGH</span><span className={snapshot.attackLane === 'left' ? 'incoming' : ''}>LEFT</span><span className={snapshot.attackLane === 'right' ? 'incoming' : ''}>RIGHT</span><i className={snapshot.shielding ? 'raised' : ''} style={{left:`${snapshot.shieldPoint.x*100}%`,top:`${snapshot.shieldPoint.y*100}%`}}/><small>SHIELD POSITION</small></div>
+      <div className="combat-lines" aria-label={`Attack line ${snapshot.attackLane}; shield position ${snapshot.shielding ? 'raised' : 'lowered'}`}><span className={['windup', 'strike'].includes(snapshot.phase) && snapshot.attackLane === 'high' ? 'incoming' : ''}>HIGH</span><span className={['windup', 'strike'].includes(snapshot.phase) && snapshot.attackLane === 'left' ? 'incoming' : ''}>LEFT</span><span className={['windup', 'strike'].includes(snapshot.phase) && snapshot.attackLane === 'right' ? 'incoming' : ''}>RIGHT</span><i className={snapshot.shielding ? 'raised' : ''} style={{left:`${snapshot.shieldPoint.x*100}%`,top:`${snapshot.shieldPoint.y*100}%`}}/><small>SHIELD POSITION</small></div>
       <div className="duel-caption"><span>SIR ALDEN VALE</span><p>{snapshot.feedback}</p></div>
       <div className="squire-hud"><div><Crest small/><span>ALDEN’S SQUIRE</span></div><Health name="You" value={snapshot.health}/><div className="stamina-label"><span>STAMINA</span><b>{Math.round(snapshot.stamina * 100)}</b></div><div className={`duel-stamina ${snapshot.stamina < .25 ? 'low' : ''}`}><i style={{ width: `${snapshot.stamina * 100}%` }}/></div><p>{snapshot.shielding ? 'Match your shield to her line' : 'Guard lowered · recovering'}</p><small className="body-stance">{snapshot.body.crouch > .4 ? 'CROUCHING' : 'UPRIGHT'} · {snapshot.body.forward > .15 ? 'FORWARD STANCE' : snapshot.body.forward < -.15 ? 'BACK STANCE' : 'CENTRED'}</small></div>
       <div className="duel-controls"><span><Swords size={14}/>{preview ? 'Mouse / J K L' : 'Right forearm'} <b>BLADE</b></span><span><Shield size={14}/>{preview ? 'Shift + Z X C' : 'Left hand'} <b>GUARD</b></span><span><Footprints size={14}/>{preview ? 'A / D · W / S' : 'Late lean'} <b>FOOTWORK</b></span><span className="duel-distance">{snapshot.distance.toFixed(1)} m · {snapshot.distance <= 2.35 ? 'IN REACH' : 'OUT OF REACH'}</span></div>

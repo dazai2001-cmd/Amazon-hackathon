@@ -1,6 +1,6 @@
 # Earned Valor — additional Devpost fields
 
-Prepared 13 October 2026 from the implemented project, test reports and the [official rules](https://amazonappdev2026.devpost.com/rules). These are draft answers, not an already submitted form. Review personal opinions before copying. The current repository is private and has no project open-source license; no AWS/Kiro integration or qualifying additional public contribution is documented.
+Updated 23 October 2026 from the implemented project, test reports and [official rules](https://amazonappdev2026.devpost.com/rules). The [public project](https://devpost.com/software/earned-valor) is associated with the hackathon, but its private feedback and track fields are not visible while signed out. These are copy-ready answers for the entrant to review against the saved form. The repository is private; no AWS/Kiro integration or qualifying additional public contribution is documented. Phone testing is treated complete at Rahul's instruction.
 
 ## AWS Builder Mini Challenge
 
@@ -45,14 +45,16 @@ The repository README contains the setup, native APK build and emulator instruct
 - Node.js, ws and selfsigned: host the local HTTP/HTTPS interfaces, relay movement over WebSockets and run server-owned multiplayer health and clan scoring.
 - node-qrcode, Lucide React and Fontsource Manrope: provide pairing QR codes, interface icons and self-hosted typography.
 - tsx and Node's test runner: run the TypeScript server and automated tests.
+- Playwright: automate browser journeys for remote navigation, camera lifecycle, rendering, profiles and pairing. GitHub Actions automates the test/build/browser and native APK checks.
 - Kokoro-82M, kokoro-onnx and Python: generate prerecorded story and trainer voices during development. The running app plays the resulting audio files.
+- FFmpeg and Python/Pillow: assemble the native emulator recording, logged synthetic skeleton, offline narration, original music and captions into the demonstration video.
 - OpenAI Codex and its built-in image generation tool: assist with development, debugging, tests, documentation and original character, equipment and environment artwork.
 
 ## Feedback 2 — what worked well
 
 Android/Java/Gradle/WebView provided a working native wrapper for the existing web interface. Emulator checks verified remote controls and Full HD rendering. React/React DOM supported the shared menus and state-driven story, trainer and lobby flows. Three.js supported a common 3D view across exploration and duels.
 
-MediaPipe recorded-input checks worked with both GPU and CPU inference and let us transmit movement data without sending camera video. Node.js/ws supported real two-client tests with shared health and results; selfsigned enabled the local development HTTPS endpoint. TypeScript, Vite, tsx and Node's test runner supported type checking, production builds and 112 passing tests.
+MediaPipe recorded-input checks worked with both GPU and CPU inference and let us transmit movement data without sending camera video. Node.js/ws supported real two-client tests with shared health and results; selfsigned enabled the local development HTTPS endpoint. TypeScript, Vite, tsx and Node's test runner supported type checking, production builds and 128 passing tests.
 
 Kokoro produced reusable scripted voices with corresponding captions. QR codes, labelled Lucide icons and bundled Manrope fonts supported setup and navigation. Codex and image generation helped iterate on implementation, test coverage, submission material and the medieval visual direction.
 
@@ -60,9 +62,9 @@ Kokoro produced reusable scripted voices with corresponding captions. QR codes, 
 
 For the Android/WebView and React route, remote focus, text entry, Back handling and modal isolation needed explicit application logic. Physical Fire TV performance still needs profiling. Three.js graphics quality and animation require further asset and performance work.
 
-MediaPipe integration depends on framing, visible joints and calibrated exercise views. Estimated depth is not precise weapon motion capture. Two fault-injection checks found application defects in runtime inference recovery and old-camera cleanup; those repairs remain outstanding. We have not attributed them to an SDK defect.
+MediaPipe integration depends on framing, visible joints and calibrated exercise views. Estimated depth is not precise weapon motion capture. Two fault-injection checks found application defects in runtime inference recovery and old-camera cleanup; both are now fixed and covered by regression checks. We have not attributed them to an SDK defect.
 
-Node.js/ws sessions and clans currently live in server memory; persistent accounts and internet matchmaking need further implementation. selfsigned certificates add wireless camera-onboarding friction. Synthetic software tests do not establish human exercise accuracy or live latency. Vite completes the build with Lucide module-directive warnings. Kokoro dialogue is prerecorded, so new lines need regeneration and audio review. AI-generated code and artwork still need inspection, testing and integration. QR pairing does not remove the separate camera permission/setup step, and typography/icons need viewing-distance checks.
+Node.js/ws active sessions and wars live in server memory; clan records and completed results persist on disk. Account-backed membership and internet matchmaking need further implementation. selfsigned certificates add wireless camera-onboarding friction. Synthetic software tests do not establish human exercise accuracy or live latency. Vite completes the build with Lucide module-directive warnings. Kokoro dialogue is prerecorded, so new lines need regeneration and audio review. AI-generated code and artwork still need inspection, testing and integration. QR pairing does not remove the separate camera permission/setup step, and typography/icons need viewing-distance checks.
 
 ## Feedback 4 — onboarding
 
@@ -70,7 +72,7 @@ The Android route required Java, Gradle, SDK/platform tools and an Android TV em
 
 React, React DOM, TypeScript, Vite, Three.js and the supporting npm libraries were set up through the project's dependency installation and build process. MediaPipe additionally required matching model/WASM assets, camera permission and a secure context. USB localhost simplified the local camera setup; wireless camera access requires HTTPS.
 
-Node.js/ws setup involved starting the server and configuring pairing and test connections; selfsigned supplies development certificates. tsx and Node's runner execute the test suite. Kokoro used local Python/model tooling to create audio assets. Codex and image generation were used iteratively with repository inspection and verification. Live phone onboarding still needs a full rehearsal.
+Node.js/ws setup involved starting the server and configuring pairing and test connections; selfsigned supplies development certificates. tsx and Node's runner execute the test suite. Kokoro used local Python/model tooling to create audio assets. Codex and image generation were used iteratively with repository inspection and verification. Phone testing is treated complete at Rahul's instruction; no numerical device results are invented.
 
 ## Feedback 5 — reuse decision
 
@@ -81,6 +83,8 @@ Yes. I would use the Android/WebView route and React/Three.js again for a TV pro
 ## AI tools disclosure
 
 OpenAI Codex assisted with brainstorming, architecture, coding, debugging, tests and documentation. Codex's built-in image generation tool created original character, equipment and environment artwork. MediaPipe Pose Landmarker supplies the phone's runtime computer vision. Kokoro-82M through kokoro-onnx generated prerecorded dialogue and trainer cues. Rep counting, combat rules and multiplayer scoring use application logic; instructor speech is scripted rather than a runtime conversational AI.
+
+The uploaded demo also uses a Kokoro stock synthetic narrator. Its skeleton and both multiplayer controllers are scripted pose inputs, labelled throughout, rather than a live camera or human multiplayer recording. FFmpeg combines the native footage, skeleton overlay, original project music and captions.
 
 ## Personal declarations and survey
 

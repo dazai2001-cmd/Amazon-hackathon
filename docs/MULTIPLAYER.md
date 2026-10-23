@@ -27,7 +27,7 @@ The opponent is another participant’s pose, rather than the story rival’s AI
 
 ## Prototype limits
 
-Wars, guest identities, rosters and results are held in server memory. They end when the server restarts and expire after an hour. Permanent clan membership, accounts, ranked matchmaking, seasons, clan chat, saved PvP coins and a competitive gear shop are not implemented. Internet play needs a reachable deployment of the WebSocket server; this build supplies a local/LAN server.
+Active wars, pairing identities and rosters are held in server memory and expire after an hour. Clan records and the latest 100 server-declared completed results persist in `.local/data/clans.json`, with an atomic write and previous-file backup. The war hall displays standings and recent results after a restart. No movement, raw poses or pairing tokens are saved. Account-backed permanent membership, accounts, ranked matchmaking, seasons, clan chat, saved PvP coins and a competitive gear shop are not implemented. Internet play needs a reachable deployment of the WebSocket server; this build supplies a local/LAN server.
 
 All PvP fighters use the same starter sword and shield. Local exercise XP and story purchases do not alter competitive damage. Bounded client controls are not proof of a human body or tamper-resistant exercise verification, so the prototype does not claim ranked anti-cheat.
 

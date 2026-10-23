@@ -21,7 +21,11 @@ export function useRoom() {
       setSession(info); setError('');
       const connection = new RoomSocket('tv', info.code, info.tvToken, message => {
         if (stopped) return;
-        if (message.type === 'pose') setFrame({ packet: message, receivedAt: performance.now() });
+        if (message.type === 'pose') {
+          setFrame({ packet: message, receivedAt: performance.now() });
+          // Acknowledges TV receipt, not rendering or physical motion latency.
+          if (message.seq % 5 === 0) connection.send({ type: 'pose-ack', seq: message.seq, t: message.t });
+        }
         if (message.type === 'presence' || message.type === 'connected') {
           setPhoneConnected(message.phoneConnected);
           if (!message.phoneConnected) setFrame(null);
