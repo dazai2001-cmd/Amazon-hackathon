@@ -75,8 +75,18 @@ test('late rejected camera startup cannot stop its replacement or leave a stale 
     let calls = 0;
     Object.defineProperty(navigator.mediaDevices, 'getUserMedia', { value: () => {
       if (++calls === 1) return new Promise((_resolve, reject) => { (window as unknown as { rejectOldCamera: () => void }).rejectOldCamera = () => reject(new Error('superseded request')); });
-      const canvas = document.createElement('canvas'); canvas.width = 640; canvas.height = 480; canvas.getContext('2d')!.fillRect(0, 0, 640, 480);
-      return Promise.resolve(canvas.captureStream(15));
+      const canvas = document.createElement('canvas'); canvas.width = 640; canvas.height = 480;
+      const context = canvas.getContext('2d')!; context.fillRect(0, 0, 640, 480);
+      const stream = canvas.captureStream(15);
+      // Canvas capture only produces frames after a repaint. Keep this fake
+      // camera advancing while the real tracker initializes and processes it.
+      let frame = 0;
+      const timer = window.setInterval(() => {
+        context.fillStyle = ++frame % 2 ? '#000' : '#010101'; context.fillRect(0, 0, 640, 480);
+      }, 1000 / 15);
+      const track = stream.getVideoTracks()[0], stop = track.stop.bind(track);
+      track.stop = () => { clearInterval(timer); stop(); };
+      return Promise.resolve(stream);
     } });
   });
   try {
@@ -89,7 +99,9 @@ test('late rejected camera startup cannot stop its replacement or leave a stale 
     await page.evaluate(() => (window as unknown as { rejectOldCamera: () => void }).rejectOldCamera());
     await expect(page.locator('.camera-running')).toBeVisible(); await expect(page.getByRole('alert')).toHaveCount(0);
     const live = await page.locator('video').evaluate(video => Boolean(((video as HTMLVideoElement).srcObject as MediaStream)?.getVideoTracks().some(track => track.readyState === 'live'))); expect(live).toBe(true);
-    await expect(page.getByText('TV receipt confirmed', { exact: false })).toBeVisible();
+    // Allow first-frame shader compilation or the 12-second worker recovery.
+    // The UI still requires a fresh acknowledgement within the last second.
+    await expect(page.getByText('TV receipt confirmed', { exact: false })).toBeVisible({ timeout: 20000 });
     await page.getByRole('button', { name: 'Pause camera' }).click(); await expect(page.locator('.camera-running')).toHaveCount(0);
   } finally { tv.close(); }
 });
