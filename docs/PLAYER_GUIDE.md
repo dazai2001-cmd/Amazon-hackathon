@@ -14,4 +14,6 @@ Normal TV play uses the Fire TV remote for navigation and the Android phone came
 
 In Clan Wars, highlight a name or invite-code field and press Select to open the on-screen keyboard. Use D-pad to highlight letters, Select to type, Clear/Delete/Space/Aa to edit, Done to save, or Back to cancel. Focus returns to the field; use D-pad to continue through the form. Audio sliders use left/right for five-percent steps and up/down to leave the slider. Play/Pause and Menu pause the current activity. Back at the native main menu exits the app.
 
-The main menu's **Settings → 3D resolution** defaults to **1080p**. Select toggles the saved preference to **720p** for lower GPU load, and back to Full HD. The interface uses the screen's available output resolution in both modes.
+The main menu's **Settings → 3D resolution** defaults to **Auto**, beginning at Full HD and reducing to a 720p cap after sustained low frame rate. Select cycles Auto, fixed 1080p and fixed 720p. The interface uses the screen's available output resolution in all modes.
+
+For installation requirements, a clean repository setup, emulator configuration and troubleshooting, see [the reviewer guide](REVIEWER_GUIDE.md). Normal camera play needs the running server, a TV/browser screen and an Android phone with Chrome and camera permission; the TV does not need a camera. Wi-Fi camera access requires trusted HTTPS; USB localhost is the alternative development route.

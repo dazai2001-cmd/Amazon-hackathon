@@ -1,5 +1,7 @@
 # Earned Valor — The First Oath demonstration
 
+Install and start the project using [the reviewer guide](REVIEWER_GUIDE.md), which lists software/hardware requirements, clean-clone commands, native TV setup and phone pairing. The [uploaded video](https://youtu.be/gmJccY-Ejcs) records the native emulator with clearly labelled synthetic input; the following steps are a suggested interactive walkthrough.
+
 1. Launch the native APK in the Android TV emulator with the local server running. Open **Controller Setup** on the main menu and pair/calibrate the Android phone over USB, then choose **Story**.
 2. Set **Game sound** on in Settings and begin the story. Show the opening memory, walk to Alden, and choose a reason for becoming his squire. Voice playback advances conversations; dialogue choices wait for the player.
 3. Complete the shield, cut and evasion lessons. The right wrist places the sword and the forearm aims it; the left wrist places the shield. Keep the relevant joints visible.
@@ -18,7 +20,7 @@ Desktop preview uses explicitly simulated landmarks: **J / K / L** cut, mouse mo
 - Avoid showing pairing tokens or private phone notifications in a public recording.
 - Check the room code and camera before beginning; the first model load can take a few seconds.
 - Use uncluttered framing and adequate light. Both hands and hips must remain visible.
-- For the hackathon, record the actual emulator APK and actual Android phone camera path.
+- For native platform proof, use the actual emulator APK. Label synthetic or desktop-preview input when demonstrating software; only live camera footage supports a camera-tracking demonstration claim.
 - Report measured latency only after a hardware test. The footer's relay round trip is not end-to-end camera latency.
 
 ## Honest presentation
@@ -45,4 +47,4 @@ For the available laptop, extended monitor and one Android phone, follow [the tw
 5. Open **War guide** briefly during the fight: both players pause and the guide explains the 30-second return window. Close it promptly and resume.
 6. Complete the health-based fight. Show the shared clan point and result. Explain that 2 vs 2 and 3 vs 3 wars consist of paired duels; the final total waits for every pairing.
 
-Guests and war results currently expire with the server session. Permanent clans, PvP economy, seasons and internet matchmaking should be presented as future scope. Actual phone-camera input and the accepted native emulator workflow still need to be recorded for submission.
+Guest sessions and active wars expire with the server session. Clan records and completed scores persist on disk. Account-backed membership, PvP economy, seasons and internet matchmaking remain future scope. The submitted video already demonstrates the accepted native emulator workflow with labelled synthetic inputs.

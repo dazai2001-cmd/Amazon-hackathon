@@ -44,7 +44,7 @@ test('remote profile creation and switching preserve original progress', async (
 test('the new courtyard model renders at TV density and exposes its quality measurements', async ({ page }) => {
   await page.addInitScript(profile => {
     localStorage.setItem('moveroom.profile', JSON.stringify(profile)); localStorage.setItem('moveroom.player-guide.v1', 'seen');
-    localStorage.setItem('moveroom.settings.v1', JSON.stringify({ resolution: 1080 }));
+    localStorage.setItem('moveroom.settings.v1', JSON.stringify({ sound: true, autoDialogue: true, resolution: 1080 }));
   }, DEFAULT_PROFILE);
   await page.goto('/chapter?platform=firetv');
   const guide = page.getByRole('dialog', { name: /Player guide/ });

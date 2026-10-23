@@ -15,6 +15,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - run: npm run test:production
       - name: Use the runner's installed Chrome
         run: |
           chrome_path="$(command -v google-chrome)"

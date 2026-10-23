@@ -4,6 +4,8 @@
 
 [Devpost submission](https://devpost.com/software/earned-valor) · [Demo video](https://youtu.be/gmJccY-Ejcs) · [Submission audit](docs/HACKATHON_READINESS.md)
 
+**Reviewers: start with [the repository setup and testing guide](docs/REVIEWER_GUIDE.md)** for exact requirements, a clean-clone walkthrough, expected results, Windows/macOS/Linux commands, TV emulator setup, phone pairing and troubleshooting.
+
 The demo records the native APK in an Android TV emulator with clearly labelled synthetic skeleton input. Phone testing is treated as complete for the submission audit at the entrant's instruction; the recording itself is not live-camera footage.
 
 A medieval fitness adventure for Fire TV, powered by an Android phone camera. **Earned Valor** includes **Chapter I: The First Oath**, a complete story path in a first-person 3D courtyard: a stormy opening memory, staged conversations and choices, three weapon lessons, Mara's trial, Tomas's forge, the Orders board and a letter that sends you toward Ironbridge. Six local squire profiles keep separate story, gear, calibration and training saves. A progress view shows weekly practice, earned ranks and story bonuses. Five synthetic cast voices, original music, ambience and effects play from local audio assets. **Alden’s training hall** is available directly from the main menu, chapter title, header and pause menu, with calibrated squat/push-up routines, counted reps and sets, rest, voice cues and exercise-driven story stats. **The Orders** now supports live clan wars with 1–3 champions per clan, human-versus-human duels and a shared clan score. An illustrated first-visit tutorial explains setup, combat, story, training and multiplayer, with contextual replay buttons. The root page is now the medieval main menu: Story, Training, Clan Wars, Controller Setup, Settings and Player Guide. The older Orbit Arena and Reach & Reset demo screens have been removed.
@@ -12,17 +14,21 @@ The TV runs a native Android/Fire OS APK with a landscape WebView, D-pad navigat
 
 ![Earned Valor main menu with Story, Training and Clan Wars](artifacts/earned-valor-main-menu.png)
 
-## Run on this computer
+## Quick start from a fresh clone
 
-Node 22.12+ is required. Install dependencies with npm; the phone pose model is included and the matching MediaPipe runtime is prepared during installation. Android SDK and Java setup is described below.
+For the browser game, install **Node 22.12+ with npm**, Git and a recent Chrome with WebGL 2. No API key, Python or paid service is needed. The APK additionally needs **JDK 17**, Android SDK **Platform 35 / Build-Tools 34.0.0**, Platform-Tools and a TV emulator/device. The [full requirements](docs/REVIEWER_GUIDE.md#requirements) explain the tested emulator and phone setup. Reviewers need their authorized GitHub account to access this private repository.
 
 ~~~powershell
-cd D:\ALEXA+
-npm install
-npm run dev
+git clone https://github.com/dazai2001-cmd/Amazon-hackathon.git
+cd Amazon-hackathon
+npm ci
+npm run build
+npm start
 ~~~
 
 Open **http://localhost:8787/** for the main menu. Choose **Story** for Chapter I, **Training** for Alden’s routines, or **Clan Wars** for multiplayer. **Controller Setup** contains Android pairing, movement calibration and the labelled desktop preview. **Settings** saves sound and auto-dialogue preferences. Story, training and multiplayer can also open directly at `/chapter`, `/training` and `/arena`; navigation and browser Back keep the URL in sync. **Continue** resumes the saved quest checkpoint.
+
+For a phone-free software check, first select **Controller Setup → Try desktop preview**, then choose an activity. The banner identifies synthetic input and preview training earns no XP. Leave the server terminal running. **http://localhost:8787/api/health** should report `ok: true`. Development mode is available with `npm run dev` after stopping the production server.
 
 In the courtyard, **WASD** walks, **Left/Right arrows** turn, mouse dragging looks around, and **E** interacts. Each objective also offers a guided walk. During weapon lessons and the trial, **J / K / L** simulate cuts in different directions; mouse movement also places the sword hand. Hold **Shift + Z / X / C** to cover the left / high / right line, and **A / D** to lean. **W / S** advance or retreat in combat; hold **V** to crouch in the preview. **Space** pauses, **Q** opens the journal, and **Escape/Back** opens or closes menus. Camera tracking is off in desktop preview. On the phone controller, raise the left hand for a second to walk/interact/continue; lean to select a dialogue choice and return to centre before another selection.
 
@@ -30,18 +36,11 @@ Both duelists have **100 health**. The sword hilt follows the right wrist and it
 
 Conversations advance when the voice finishes; choices always wait. Turn **Auto dialogue** off to read at your own pace. Audio settings provide separate voice, music and effects levels. Pausing or opening a menu stops dialogue, music and movement. Captions remain usable with sound off.
 
-Production mode:
-
-~~~powershell
-npm run build
-npm start
-~~~
-
 Do not run production and development servers on the same ports simultaneously. Configuration is optional: copy .env.example to .env to override ports or PHONE_BASE_URL.
 
 ## Run the Fire TV app
 
-The current debug APK is **artifacts/EarnedValor-debug.apk**.
+Build the debug APK first; **artifacts/EarnedValor-debug.apk** is generated and is not included in a fresh clone. The following npm shortcuts use Windows PowerShell. See [the reviewer guide](docs/REVIEWER_GUIDE.md#4-build-and-run-the-native-tv-apk) for SDK/AVD creation and macOS/Linux native commands.
 
 ~~~powershell
 npm run android:build
@@ -83,11 +82,12 @@ Neither the server nor the TV receives camera video or audio. Only 33 pose landm
 ~~~powershell
 npm test
 npm run build
+npm run test:production
 npm run test:browser
 npm run android:build
 ~~~
 
-The 10 browser checks use installed Chrome on this Windows computer. CI uses Chrome already supplied on GitHub's Ubuntu 24.04 runner; elsewhere run `npx playwright install chromium` first or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to an installed browser. GitHub Actions runs game/camera/persistence tests, the browser journey and an Android debug build on every push/PR. Its run status is linked from the submission audit. See [the improvement verification report](artifacts/improvements-report.md) for current results and native screenshots.
+The 10 browser checks use installed Chrome on Windows. CI uses Chrome already supplied on GitHub's Ubuntu 24.04 runner; elsewhere run `npx playwright install chromium` first or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to an installed browser. Linux may need `npx playwright install --with-deps chromium`. Stop the development server before browser checks to free Vite's HMR port. `npm run check` runs tests, build, the production smoke check and browser checks together. The production check verifies built routes/assets, both pose models, HTTPS and authenticated HTTP/WSS relay delivery using isolated synthetic input. GitHub Actions also builds the native APK. See [the reviewer guide](docs/REVIEWER_GUIDE.md#3-run-the-automated-verification) and [improvement verification report](artifacts/improvements-report.md).
 
 Open **Controller Setup → Device check** to record a bounded timing report and compare your latest camera circuit with manually counted reps. See [the real-device playtest](docs/DEVICE_PLAYTEST.md). A domain/hosting is optional for this hackathon; [deployment files](docs/DEPLOYMENT.md) are prepared for later use.
 
@@ -107,7 +107,7 @@ The project includes the Gradle 8.9 wrapper. From android, run ./gradlew assembl
 
 For the supplied Windows emulator helper, create a MoveRoomTV AVD using the Android 30 Android TV x86 image. It looks in .local/avd first and otherwise uses your standard Android AVD directory. Hardware virtualization/WHPX is needed for practical emulator performance.
 
-npm install copies the MediaPipe WASM into public/vision and downloads the official lite pose model once. Run npm run assets if that download was interrupted. Model assets are served locally during play.
+npm ci copies the pinned MediaPipe runtime/WASM into public/vision. Both pose models are included; a missing or incomplete model is downloaded from Google's official model host. Run npm run assets if asset preparation was interrupted. Rebuild afterward so the production app receives the prepared assets. Tracking assets are served locally during play.
 
 ## Project map
 
@@ -176,7 +176,7 @@ Open **Clan war hall** from the chapter, or `/arena`. Create a 1 vs 1, 2 vs 2 or
 
 The first-visit **Player guide** explains phone framing, hands-free setup, weapon controls, quest/dialogue controls, strict rep/set training and clan lobbies. Reopen it from the chapter, pause menu, training header or multiplayer header. Reading pauses the relevant activity; multiplayer retains its 30-second return/forfeit rule.
 
-Clan names, member names and the latest 100 completed war results persist under `.local/data/clans.json` (override with `DATA_DIR`). Rooms, active rosters and duels remain temporary. Internet matchmaking, account-backed membership, rankings and saved PvP rewards still need implementation. See [multiplayer details](docs/MULTIPLAYER.md), [tutorial behavior](docs/PLAYER_GUIDE.md), and [browser validation](artifacts/multiplayer-tutorial-test-report.md). The two-screen browser proof uses labelled synthetic controls; actual Android phones and Fire TV hardware remain to be validated.
+Clan names, member names and the latest 100 completed war results persist under `.local/data/clans.json` (override with `DATA_DIR`). Rooms, active rosters and duels remain temporary. Internet matchmaking, account-backed membership, rankings and saved PvP rewards still need implementation. See [multiplayer details](docs/MULTIPLAYER.md), [tutorial behavior](docs/PLAYER_GUIDE.md), and [browser validation](artifacts/multiplayer-tutorial-test-report.md). The two-screen browser proof uses labelled synthetic controls; it does not establish physical Fire TV performance or two-camera human multiplayer accuracy.
 
 For one laptop, an extended monitor and one Android phone, use [the two-screen demo setup](docs/TWO_SCREEN_DEMO.md): one person controls a fighter with the camera and another uses the labelled keyboard preview in a second visible browser window.
 

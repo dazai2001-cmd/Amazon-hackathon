@@ -7,7 +7,7 @@ export const guidePages: { topic: GuideTopic; label: string; title: string; summ
       ['Pair your own phone', 'Open Connect controller, scan the QR code, then start the camera on your Android phone. Keep both screens on the same game server.'],
       ['Step into the frame', 'Prop the phone facing you. Keep shoulders, elbows, hands and hips visible. Leave space to move your arms with empty hands.'],
       ['Let setup come to you', 'Stay in view for three seconds to continue automatically. Follow the neutral, lean and reach calibration prompts. No reaching back to click is needed.'],
-    ], note: 'If tracking stops, step back into view and check the light and phone angle. Desktop preview uses simulated movements and has no camera.' },
+    ], note: 'You need a running game server, a TV/browser screen and an Android phone with Chrome and camera permission. Wi-Fi needs trusted HTTPS; USB localhost is another setup route. Desktop preview uses simulated movements and has no camera.' },
   { topic: 'combat', label: 'Sword & shield', title: 'Move the hands. Read the blade.',
     summary: 'Your right hand places the sword. Your left hand places the shield.',
     steps: [
@@ -35,7 +35,7 @@ export const guidePages: { topic: GuideTopic; label: string; title: string; summ
       ['Create or join a war', 'One captain creates a 1 vs 1, 2 vs 2 or 3 vs 3 war. Share the war invite with the other players. They choose Join host clan or Opposing clan.'],
       ['Bring your own controller', 'Every fighter uses their own TV/browser screen and paired phone, or a labelled preview. The war invite joins the lobby; the phone QR code pairs your camera. These are different codes.'],
       ['Ready, duel, score', 'Fill both rosters and choose I’m ready. The captain starts. Pairing 01 fights pairing 01, and so on. A win earns one clan point; a draw earns half a point each.'],
-    ], note: 'Everyone uses starter gear in this prototype. Clans and results last for the server session. A paused or missing fighter has 30 seconds to return before forfeiting.' },
+    ], note: 'Everyone uses starter gear. Clan records and completed scores are saved on this server; active wars and guest sessions are temporary. A paused or missing fighter has 30 seconds to return before forfeiting.' },
 ];
 export function hasSeenGuide() {
   try { return localStorage.getItem(GUIDE_KEY) === 'seen'; } catch { return false; }
